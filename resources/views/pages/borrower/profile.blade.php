@@ -26,7 +26,7 @@
                                     <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="experience" aria-selected="false">Akun Bank</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="experience" aria-selected="false">Produk</a>
+                                    <a class="nav-link" id="tab-4" data-toggle="tab" href="#service4" role="tab" aria-controls="experience" aria-selected="false">Faktur</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-5" data-toggle="tab" href="#service5" role="tab" aria-controls="tab-5" aria-selected="false">Transaksi</a>
@@ -46,7 +46,7 @@
                                     @include('pages.borrower.information.bank_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service4">
-                                    @include('pages.borrower.information.bank_information')
+                                    @include('pages.borrower.information.invoice_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service5">
                                     @include('pages.borrower.information.finance_information')
@@ -59,38 +59,6 @@
         </div>
 
 
-
-    <!-- Modal -->
-    @if ($get_user === null)
-    <div class="modal fade" id="input_identity_number" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Masukkan Nomor KTP Anda</h5>
-                </div>
-                <form id="check_identity_form">
-                    <div class="modal-body">
-                        <input type="text" class="form-control" id="identity_number" name="identity_number">
-                        <div class="alert result-message" role="alert"></div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <a href="/"><button type="button" class="btn btn-secondary">Batal</button></a>
-                        <button type="submit" class="btn btn-primary">Cek Keanggotaan</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    @endif
-
-    <div id="responses-ajax" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content responses-ajax-messages">
-            </div>
-        </div>
-    </div>
 
 @section('js')
 

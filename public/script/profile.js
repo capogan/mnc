@@ -1,10 +1,3 @@
-$(window).on('load', function() {
-
-    setTimeout(function(){
-        $('#input_identity_number').modal({backdrop: 'static', keyboard: false})
-    }, 500);
-});
-
 $(document).on('change', '.btn-file :file', function() {
     var input = $(this),
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -23,21 +16,7 @@ $('.btn-file :file').on('fileselect', function(event, label) {
     }
 
 });
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#img-upload').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp").change(function(){
-    readURL(this);
-});
 
 $('#check_identity_form').on('submit', function(event){
     event.preventDefault();
@@ -184,39 +163,41 @@ $('#file_upload_image').on('submit', function(event){
     })
 });
 
+//check_invoice_form
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+$('#check_invoice_form').on('submit', function(event){
+    event.preventDefault();
 
-        reader.onload = function (e) {
-            $('#preview_image').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+    var btn = $("#btn_update_voucher");
+    btn.attr("disabled", "disabled");
 
-function readURL2(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+    var token = $('meta[name="csrf-token"]').attr('content');
 
-        reader.onload = function (e) {
-            $('#preview_image2').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+    $.ajax({
+        url:'/api/get/invoice',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
 
-function readURL3(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        data:new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType:'json',
+        beforeSend:function(){
+            $("#btn_submit").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
+        },
+        success:function(response)
+        {
+            $(".input-invoice").hide();
+            $("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
+            $(".table-invoice").html(response.data).fadeIn('slow');
 
-        reader.onload = function (e) {
-            $('#preview_image3').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+        }
+    })
+});
+
 
 
 

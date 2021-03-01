@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '998f4e24b55434d423c9aa1a8dfff98be9cdeb4c',
+    'reference' => 'b7c4e5e0dc0a76bdeea32d02fdafef58f8a43455',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -68,6 +68,15 @@ private static $installed = array (
         0 => '*',
       ),
     ),
+    'darkaonline/l5-swagger' => 
+    array (
+      'pretty_version' => '8.0.4',
+      'version' => '8.0.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3477e7013daf8b6fc142c45fdcb9fe6c74d7398d',
+    ),
     'davedevelopment/hamcrest-php' => 
     array (
       'replaced' => 
@@ -83,6 +92,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd',
+    ),
+    'doctrine/annotations' => 
+    array (
+      'pretty_version' => '1.12.1',
+      'version' => '1.12.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b17c5014ef81d212ac539f07a1001832df1b6d3b',
     ),
     'doctrine/inflector' => 
     array (
@@ -454,7 +472,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '998f4e24b55434d423c9aa1a8dfff98be9cdeb4c',
+      'reference' => 'b7c4e5e0dc0a76bdeea32d02fdafef58f8a43455',
     ),
     'laravel/tinker' => 
     array (
@@ -971,6 +989,15 @@ private static $installed = array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
     ),
+    'swagger-api/swagger-ui' => 
+    array (
+      'pretty_version' => 'v3.44.0',
+      'version' => '3.44.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd525cc820d3d8a2092bdce270bf2dd08e6e6b5b7',
+    ),
     'swiftmailer/swiftmailer' => 
     array (
       'pretty_version' => 'v6.2.5',
@@ -1237,6 +1264,15 @@ private static $installed = array (
       ),
       'reference' => '72ca213014a92223a5d18651ce79ef441c12b694',
     ),
+    'symfony/yaml' => 
+    array (
+      'pretty_version' => 'v5.2.3',
+      'version' => '5.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '338cddc6d74929f6adf19ca5682ac4b8e109cdb0',
+    ),
     'theseer/tokenizer' => 
     array (
       'pretty_version' => '1.2.0',
@@ -1281,6 +1317,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
+    ),
+    'zircote/swagger-php' => 
+    array (
+      'pretty_version' => '3.1.0',
+      'version' => '3.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9d172471e56433b5c7061006b9a766f262a3edfd',
     ),
   ),
 );
