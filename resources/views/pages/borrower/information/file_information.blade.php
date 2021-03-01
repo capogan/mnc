@@ -28,12 +28,12 @@
                                 <div class="col">
                                     <div class="upload-file">
                                         <div class="file-input">
-                                            <input type="file" id="identity_image" name="identity_image" class="form-control">
+                                            <input type="file" id="identity_image" name="identity_image" class="form-control" onchange="readURL(this);">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <img id="preview_image" src="http://placehold.it/180" alt="your image" />
                             <div class="row mt-2">
                                 <div class="col">
                                     <p>Unggah Foto Diri</p>
@@ -44,12 +44,12 @@
                                 <div class="col">
                                     <div class="upload-file">
                                         <div class="file-input">
-                                            <input type="file" id="self_image" name="self_image" class="form-control">
+                                            <input type="file" id="self_image" name="self_image" class="form-control" onchange="readURL2(this);">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <img id="preview_image2" src="http://placehold.it/180" alt="your image" />
                             <div class="row mt-2">
                                 <div class="col">
                                     <p>Unggah Foto NPWP</p>
@@ -60,12 +60,12 @@
                                 <div class="col">
                                     <div class="upload-file">
                                         <div class="file-input">
-                                            <input type="file" id="npwp_image" name="npwp_image" class="form-control">
+                                            <input type="file" id="npwp_image" name="npwp_image" class="form-control"onchange="readURL3(this);" >
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                            <img id="preview_image3" src="http://placehold.it/180" alt="your image" />
 
 
                             <div class="form-group mt-5">
