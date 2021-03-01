@@ -28,6 +28,7 @@ Route::get('/borrower/personal/profile', 'BorrowerController@my_profile')->name(
 
 //Users
 Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('add.personal.info');
+Route::post('/upload/file', 'UsersController@upload_file')->name('upload.file.post');
 
 
 

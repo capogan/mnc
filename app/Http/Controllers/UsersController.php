@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\PersonalInfo;
+use App\UsersFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class UsersController extends Controller
 {
@@ -98,7 +100,101 @@ class UsersController extends Controller
            ];
        }
 
+       return response()->json($json);
+   }
 
+   public function upload_file(Request $request){
+
+        $uid = Auth::id();
+       $validation = Validator::make($request->all(), [
+           'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+           'self_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           'npwp_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       ],
+           [
+               'identity_image.required' => 'Foto ktp wajib di unggah',
+               'self_image.required' => 'Foto diri wajib di unggah',
+               'npwp_image.required' => 'Foto npwp wajib di unggah',
+               'identity_image.mimes' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
+               'self_image.image' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
+               'npwp_image.image' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
+
+           ]
+       );
+
+       if($validation->fails()) {
+           $json = [
+               "status"=> false,
+               "message"=> $validation->messages(),
+           ];
+       }else{
+           $path = public_path(). '/upload/';
+
+           //image ktp
+
+           if($request->hasFile('identity_image')) {
+               $identity_image= $request->file('identity_image');
+               $filename_identity = 'ktp_'.$uid.'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+               $identity_image->move($path, $filename_identity);
+           }
+
+           if($request->hasFile('self_image')) {
+               $self_image = $request->file('self_image');
+               $filename_self_image = 'self_'.$uid.'_'.time(). '.' . $self_image->getClientOriginalExtension();
+               $self_image->move($path, $filename_self_image);
+           }
+           if($request->hasFile('npwp_image')) {
+               $npwp_image = $request->file('npwp_image');
+               $filename_npwp_image = 'npwp_'.$uid.'_'.time(). '.' . $npwp_image->getClientOriginalExtension();
+               $npwp_image->move($path, $filename_npwp_image);
+           }
+
+            $get_user = UsersFile::where('uid',$uid)->first();
+           if($get_user){
+
+               DB::beginTransaction();
+               try{
+                   UsersFile::where([
+                       ['uid',$uid],
+                   ])->update
+                   ([
+                       'identity_photo'=> $path.$filename_identity,
+                       'self_photo'=> $path.$filename_self_image,
+                       'npwp_photo'=>$path.$filename_self_image
+                   ]);
+
+                   DB::commit();
+               }
+               catch (Exception $e) {
+                   DB::rollback();
+               }
+
+
+           }else{
+               DB::beginTransaction();
+               try{
+                   UsersFile::create([
+                       'uid' => Auth::id(),
+                       'identity_photo'=> $path.$filename_identity,
+                       'self_photo'=> $path.$filename_self_image,
+                       'npwp_photo'=>$path.$filename_self_image
+                   ]);
+                   DB::commit();
+               } catch (Exception $e) {
+                   DB::rollback();
+               }
+
+           }
+
+
+
+           $json = [
+               "status"=> true,
+               "message"=> 'Berkas berhasil di unggah',
+           ];
+
+
+       }
 
        return response()->json($json);
 
