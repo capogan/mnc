@@ -43,46 +43,8 @@
                                         <span class="bg-light">Atau</span>
                                     </p>
                                     <div class="text-center d-flex justify-content-between mt-3">
-                                        <p> <a href="register.html" class="font-italic text-muted"> <u>Belum Punya
+                                        <p> <a href="/register" class="font-italic text-muted"> <u>Belum Punya
                                                     Akun?</u></a></p>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-sm-6">
-                                            <a href="#">
-
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <img src="{{asset('images/user.svg')}}" class="users" alt="prof" />
-                                                            </div>
-
-                                                            <div class="col" style="font-size: x-small;">
-                                                                <span>Daftar Sebagai</span>
-                                                                <span>Lender</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <a href="#">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <img src="{{asset('images/user.svg')}}" class="users" alt="prof" />
-                                                            </div>
-                                                            <div class="col" style="font-size: x-small;">
-                                                                <span>Daftar Sebagai</span>
-                                                                <span>Borrowe</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
