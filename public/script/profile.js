@@ -1,0 +1,102 @@
+$(window).on('load', function() {
+
+    setTimeout(function(){
+        $('#input_identity_number').modal({backdrop: 'static', keyboard: false})
+    }, 500);
+});
+
+$('#check_identity_form').on('submit', function(event){
+    event.preventDefault();
+
+    var btn = $("#btn_update_voucher");
+    btn.attr("disabled", "disabled");
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        url:'/api/get/user',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        async:true,
+        data:new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        dataType:'json',
+        success:function(response)
+        {
+            if(response.status){
+
+                $("#identity_number").val(response.data.identity_id);
+                $("#first_name").val(response.data.name);
+                $("#address").val(response.data.address);
+                $("#phone_number").val(response.data.phone_number);
+                $("#member").val('yes');
+                $("input[name=gender][value=" + response.data.gender + "]").attr('checked', 'checked');
+                $(".result-message").removeClass('alert-danger').addClass('alert-success').html(response.message);
+            }
+            else{
+                $(".result-message").removeClass('alert-success').addClass('alert-danger').html(response.message);
+            }
+            setTimeout(function(){
+                $('#input_identity_number').modal('hide')
+            }, 800);
+
+        }
+    })
+});
+
+
+$('#personal_info_form').on('submit', function(event){
+    event.preventDefault();
+
+    var btn = $("#btn_update_voucher");
+    btn.attr("disabled", "disabled");
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        url:'/add/personal/info',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        async:true,
+        data:new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        dataType:'json',
+        success:function(response)
+        {
+            var text ='';
+            var title = '';
+            if(response.status){
+                text = 'Data berhasil ditambahkan'
+                var title = 'Sukses';
+
+            }else{
+
+                $.each(response.message, function( index, value ) {
+                    text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                });
+                var title = 'Terjadi Kesalahan';
+            }
+            bootbox.alert({
+                title: title,
+                message: text,
+                centerVertical:true,
+                onShow: function(e) {
+                    feather.replace();
+                },
+                callback: function() {
+                    btn.removeAttr("disabled");
+                }
+            });
+
+
+        }
+    })
+});
