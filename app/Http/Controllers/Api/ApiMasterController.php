@@ -5,9 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Controllers\Api\ApiController;
 
-
-class ApiMasterController extends Controller
+class ApiMasterController extends ApiController
 {
     //
     public function get_user(Request $request){

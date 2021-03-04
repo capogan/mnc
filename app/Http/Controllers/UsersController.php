@@ -68,7 +68,6 @@ class UsersController extends Controller
            ];
        }else{
            PersonalInfo::create([
-
                'uid'                    => Auth::id(),
                'identity_number'        => $request->identity_number,
                'first_name'             => $request->first_name,

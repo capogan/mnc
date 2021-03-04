@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/get/user', 'Api\ApiMasterController@get_user')->name('api.get.user');
+Route::get('/get/user', 'Api\ApiMasterController@get_user')->name('api.get.user');
 Route::post('/get/invoice', 'Api\ApiMasterController@get_invoice')->name('api.get.invoice');
+Route::get('/user/credit-limit', 'Api\ApiCreditScoringController@limit_credit')->name('api.get.user');
