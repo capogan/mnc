@@ -40,12 +40,13 @@ class ApiMasterController extends Controller
         $table = "<table class='table table-striped table-bordered'><tr class='table-head'><th>No</th><th>Nama Barang</th><th>Harga Barang</th><th>Jumlah Barang</th></tr><tbody>";
 
         $num = 1;
+        
         foreach ($invoice_detail as $key=> $val){
             $table .= "<tr><td>".$num."</td><td>".$val->item_name."</td><td>".$val->item_price."</td><td>".$val->quantity."</td></tr>";
             $num ++;
         }
         $table .= "</table>";
-
+ 
         if($invoice){
             $json = [
                 "status"=> true,

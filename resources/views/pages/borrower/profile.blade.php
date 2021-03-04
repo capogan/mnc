@@ -8,14 +8,16 @@
     </style>
 
 
+
         <!-- content start -->
         <div class="container">
 
                 <div class="row">
-                    <div class="">
-                        <div class="st-tabs">
+                    <div class="col">
+                    
+                        <div class="sub-nav">
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="tab-1" data-toggle="tab" href="#service1" role="tab" aria-controls="responsibilities" aria-selected="true">Data Pribadi</a>
                                 </li>
@@ -53,6 +55,7 @@
                                 </div>
                             </div>
                         </div>
+                    
                     </div>
                 </div>
 
@@ -63,6 +66,6 @@
 @section('js')
 
         <script src="{{ asset('/script/profile.js') }}"></script>
-
+    
 @endsection
 @endsection
