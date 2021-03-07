@@ -11,11 +11,11 @@
                                 </hr>
                             </div>
                         </div>
-
                         <form id="check_invoice_form">
                             <div class="form-group">
                                 <div class="input-invoice">
                                     <input type="text" name="invoice_number" id="invoice_number" class="form-control" placeholder="Masukkan Nomor Faktur dari PCG">
+                                    <input type="text" name="identity_numbers_invoice" id="identity_numbers_invoice" class="form-control" value="{{ isset($get_user->identity_number) ? $get_user->identity_number : ''}}" />
                                 </div>
                                             <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

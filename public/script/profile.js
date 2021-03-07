@@ -174,12 +174,11 @@ $('#check_invoice_form').on('submit', function(event){
     var token = $('meta[name="csrf-token"]').attr('content');
 
     $.ajax({
-        url:'/api/get/invoice',
+        url:'/api/pcg/invoice/check',
         method:"POST",
         headers: {
             'X-CSRF-TOKEN': token
         },
-
         data:new FormData(this),
         cache:false,
         contentType: false,

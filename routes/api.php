@@ -23,3 +23,4 @@ Route::get('/get/user', 'Api\ApiMasterController@get_user')->name('api.get.user'
 Route::post('/get/invoice', 'Api\ApiMasterController@get_invoice')->name('api.get.invoice');
 Route::get('/user/credit-limit', 'Api\ApiCreditScoringController@limit_credit')->name('api.get.user');
 Route::post('/pcg/registration', 'Api\ApiPCGController@auto_register')->name('api.pcg.register');
+Route::post('/pcg/invoice/check/dummi', 'Api\ApiPCGController@get_data_from_invoice')->name('api.pcg.register');

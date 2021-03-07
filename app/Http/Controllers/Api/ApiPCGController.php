@@ -155,4 +155,23 @@ class ApiPCGController extends ApiController
     protected function register_without_password($data){
 
     }
+
+
+    public function get_data_from_invoice(Request $request){
+        $data = json_decode($data , TRUE);
+        /*$data = [
+            'id' => '123123',
+            'invoice_id' => 'PCG123XDER',
+            'user_id' => '43522',
+            'no_faktur' => 'NOXX1231OSWMW',
+            'full_name' => 'Susilo Bambang Pamungkas',
+            'id_number' => '1920199801289101', 
+            'items' => [
+                'product' => 'KIPAS ANGIN',
+                'qty' => 10000,
+                'price' => 20000,
+            ]
+        ];*/
+       
+    }
 }
