@@ -14,24 +14,27 @@ class ApiCreditScoringController extends ApiController
 {
     public function limit_credit(Request $request){
         //$data = ['usia' => 12 , 'income'=> 3000000 , 'education' => 'SMA' ,'established'=> '2' , 'pcg_transaction' => 3000000];
-        $data = '{
-            "usia": 22,
-            "income": 3000000,
-            "education": 3,
-            "established": "4",
-            "pcg_transaction": 3000000,
-            "profit_per_month": "50.000.001 - 100.000.000",
-            "business_legal": "Usaha Dagang",
-            "income_per_month": "10.000.001 - 30.000.000",
-            "business_placa_status": "Milik Pribadi",
-            "established_business": ">= 5 tahun",
-            "pcg_transaction" : "Rp. 30.000.001-50.000.000",
-            "location": "Diluar Jabodetek"
-          }';
+        if($request->data){
 
+        }else{
+            $data = '{
+                "usia": 22,
+                "income": 3000000,
+                "education": 3,
+                "established": "4",
+                "pcg_transaction": 3000000,
+                "profit_per_month": "50.000.001 - 100.000.000",
+                "business_legal": "Usaha Dagang",
+                "income_per_month": "10.000.001 - 30.000.000",
+                "business_placa_status": "Milik Pribadi",
+                "established_business": ">= 5 tahun",
+                "pcg_transaction_limit" : "Rp. 30.000.001-50.000.000",
+                "location": "Diluar Jabodetek"
+            }';
+        }
         $approval = HelpCreditScoring::approval_decision($data);
-        if(!$approval){
-            
+        if($approval['status'] == 'false'){
+            return $this->errorResponse($approval['message'], 500);
         }
         $scoring = HelpCreditScoring::credit_limit($data);
         $credit_limit = ScoreDecision::where(function ($query) use ($scoring) {
@@ -41,12 +44,12 @@ class ApiCreditScoringController extends ApiController
         
         if($credit_limit){
             $response = [
-                'message' => 'Selamat, Kredit Limit kamu di aplikasi siap ',
+                'message' => 'Selamat, Kamu dapat mengajukan pinjaman dengan limit hingga '. $credit_limit->s_d_limit_credit,
                 'limit' => $credit_limit->s_d_limit_credit
             ];
             return $this->successResponse($response);
         }
-        return $this->errorResponse(static::ERROR_OUT_OF_STOCK, static::OUT_OF_STOCK);
+        return $this->errorResponse("Server Error", 500);
     }
     
 }

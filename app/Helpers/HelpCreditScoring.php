@@ -40,14 +40,14 @@ class HelpCreditScoring {
                       $result = false;
                   }
                     if(!$result){
-                        return 'Tidak dapat diberikan pinjaman karena '.$key.' Tidak memenuhi syarat';
+                        return ['status' => 'false' , 'message' => 'Tidak dapat diberikan pinjaman karena '.$key.' Tidak memenuhi syarat'];
                     }
             }else{
-                return 'data tidak lengkap! , Silahkan Lengkapi Data';
+                 return ['status' => 'false' , 'message' => 'data tidak lengkap! , Silahkan Lengkapi Data'];
             }
             
         }
-        return 'data lengkap data sesuai prosedur';
+        return ['status' => 'true' , 'message' => 'data lengkap data sesuai prosedur'];
     }
 
     public static function check_range_type($min , $max , $value){
