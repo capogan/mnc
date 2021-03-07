@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use function GuzzleHttp\json_encode;
@@ -12,6 +11,8 @@ use App\UsersFile;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\HelpCreditScoring;
+use App\FeeConfig;
 
 class ApiPCGController extends ApiController
 {
@@ -155,23 +156,103 @@ class ApiPCGController extends ApiController
     protected function register_without_password($data){
 
     }
+    
+    public function check_pcg_invoice_number(Request $request){
+        $validation = Validator::make($request->all(), [
+            'invoice_number' => 'required',
+            'identity_numbers_invoice'=> 'required'
+        ]);
+        
+        $loan_period_req = $request->period ? $request->period : 14 ;
+        
+        if($validation->fails()) {
+            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+        }
+        $user_data = [
+            'invoice_number' => $request->invoice_number,
+            'identity_numbers_invoice' => $request->identity_numbers_invoice
+        ];
+        
+        //$data_pcg_account =  Capi::connect_with_thirt_part_api('http://127.0.0.1:8001/api/pcg/invoice/responce/dummi' ,$user_data );
+        $data_pcg_account =  $this->get_data_from_invoice($user_data);
+        $credit_score = HelpCreditScoring::credit_score('{
+            "usia": 22,
+            "income": 3000000,
+            "education": 3,
+            "established": "4",
+            "pcg_transaction": 3000000,
+            "profit_per_month": "50.000.001 - 100.000.000",
+            "business_legal": "Usaha Dagang",
+            "income_per_month": "10.000.001 - 30.000.000",
+            "business_placa_status": "Milik Pribadi",
+            "established_business": ">= 5 tahun",
+            "pcg_transaction_limit" : "Rp. 30.000.001-50.000.000",
+            "location": "Diluar Jabodetek"
+        }');
+        $credit_limit = HelpCreditScoring::credit_limit($credit_score);
+        $config_admin_fee = FeeConfig::where('code_fee' , 'admin_fee')->first();
+        if(array_key_exists('total_invoice' , $data_pcg_account)){
+            $interest_loan = HelpCreditScoring::interest_loan($data_pcg_account['total_invoice'] , $loan_period_req);
+            $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $data_pcg_account['total_invoice']) : 0;
+            if($data_pcg_account['total_invoice'] > $credit_limit){
+                $response = [
+                    'status_loan' => 'not-approve',
+                    'loan_limit' => 'Rp '.number_format($credit_limit , 0 , '.' ,','),
+                    'loan_request_status' => false,
+                    'loan_interest' => 'Rp '.number_format($interest_loan , 0 , '.' ,','),
+                    'admin_fee' => 'Rp '.number_format($admin_fee , 0 , '.' ,','),
+                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account['total_invoice']) , 0 , '.' ,','),
+                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account['total_invoice'])),
+                    'loan_request_message' => 'Maaf , Invoice Kamu melebihi Kredit limit.',
+                    'profile_pcg' => $data_pcg_account
+                ];
+            }else{
+                $response = [
+                    'status_loan' => 'approve',
+                    'loan_limit' => 'Rp '.number_format($credit_limit , 0 , '.' ,','),
+                    'loan_request_status' => true,
+                    'loan_interest' => 'Rp '.number_format($interest_loan , 0 , '.' ,','),
+                    'admin_fee' => 'Rp '.number_format($admin_fee , 0 , '.' ,','),
+                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account['total_invoice']) , 0 , '.' ,','),
+                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account['total_invoice'])),
+                    'loan_request_message' => 'Klik tombol ajukan pinjaman untuk melanjutkan proses.',
+                    'profile_pcg' => $data_pcg_account
+                ];
+            }
+        }else{
+            $this->errorResponse("Data Not Found", 500);
+        }
+        return $this->successResponse($response);
 
+    }
 
-    public function get_data_from_invoice(Request $request){
-        $data = json_decode($data , TRUE);
-        /*$data = [
+    public function monthly_repayment($period , $repayment){
+        if($period > 14){
+            return '4 X '.'Rp '.number_format(($repayment / 4) , 0 , '.' ,',');
+        }else{
+            return '2 X '.'Rp '.number_format(($repayment / 2) , 0 , '.' ,',');
+        }
+    }
+
+    public function get_data_from_invoice($user_data = []){
+        //$data = json_decode($data , TRUE);
+        $data = [
             'id' => '123123',
             'invoice_id' => 'PCG123XDER',
             'user_id' => '43522',
             'no_faktur' => 'NOXX1231OSWMW',
             'full_name' => 'Susilo Bambang Pamungkas',
             'id_number' => '1920199801289101', 
+            'total_invoice' => 100*20000,
             'items' => [
+                [
                 'product' => 'KIPAS ANGIN',
-                'qty' => 10000,
-                'price' => 20000,
+                'qty' => 100,
+                'price' => 20000
+                ]
             ]
-        ];*/
+        ];
+        return $data;
        
     }
 }

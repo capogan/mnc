@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         App\Providers\CreditScoringServiceProvider::class,
+        App\Providers\CapiServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
+        'RequestConnection' => App\Helpers\Capi::class,
     ],
 
 ];

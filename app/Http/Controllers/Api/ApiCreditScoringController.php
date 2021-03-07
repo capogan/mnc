@@ -36,7 +36,8 @@ class ApiCreditScoringController extends ApiController
         if($approval['status'] == 'false'){
             return $this->errorResponse($approval['message'], 500);
         }
-        $scoring = HelpCreditScoring::credit_limit($data);
+        $scoring = HelpCreditScoring::credit_score($data);
+        
         $credit_limit = ScoreDecision::where(function ($query) use ($scoring) {
             $query->where('s_d_score_min', '<=', $scoring);
             $query->where('s_d_score_max', '>=', $scoring);

@@ -165,7 +165,39 @@ $('#file_upload_image').on('submit', function(event){
 
 //check_invoice_form
 
-$('#check_invoice_form').on('submit', function(event){
+$("#loan_period").bind(
+    "slider:changed", function (event, data) {              
+        $("#loan_period_value").html(data.value.toFixed(0));
+        check_interest(data.value.toFixed(0));
+    }
+);
+
+function check_interest(period){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/api/pcg/invoice/check',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        data: {period : period, invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        dataType:'json',
+        success:function(response)
+        {
+            var res = response;
+            if(res.status == 'success'){
+                $('#interest_fee').text(res.data.loan_interest);
+                $('#monthly_invoice').text(res.data.period_loan);
+                $('#total_repayment').text(res.data.repayment);
+            }else{
+                //window.location.href = '/login'
+            }
+
+        }
+    })
+}
+
+$('#check_invoice_form').on('click', function(event){
     event.preventDefault();
 
     var btn = $("#btn_update_voucher");
@@ -179,24 +211,130 @@ $('#check_invoice_form').on('submit', function(event){
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data:new FormData(this),
-        cache:false,
-        contentType: false,
-        processData: false,
+        data: {invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
         dataType:'json',
         beforeSend:function(){
             $("#btn_submit").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
         },
         success:function(response)
         {
-            $(".input-invoice").hide();
-            $("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
-            $(".table-invoice").html(response.data).fadeIn('slow');
-
+            $('.load-load').text('');
+            $('#body-pcg-item').html('');
+            $('#error_response_from_limit').html('');
+            var res = response;
+            if(res.status == 'success'){
+                $('.succes_respose_api_pcg').show()
+                $('.error_response_from_limit').hide()
+                $('.error_respose_api_pcg').show();
+                if(res.data.status_loan != 'approve'){
+                    $('#error_response_from_limit').html('<div class="alert alert-danger load-load" role="alert">'+res.data.loan_request_message+'</div>');
+                }else{
+                    $('#error_response_from_limit').html('<div class="alert alert-success load-load" role="alert">'+res.data.loan_request_message+'</div>');
+                    $('#request_loan_').attr("disabled",true)
+                }
+                if(res.data.status_loan == 'approve'){
+                   $('#request_loan_').attr("disabled",false)
+                }
+                $('#name_of_pcg').text(res.data.profile_pcg.full_name);
+                $('#id_number_of_pcg').text(res.data.profile_pcg.id_number);
+                $('#invoice_number_of_pcg').text(res.data.profile_pcg.invoice_id);
+                $('#total_purchase_of_pcg').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
+                $('#total_purchase_loan').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
+                $('#admin_fee').text(res.data.admin_fee);
+                $('#la_value').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
+                $('#interest_fee').text(res.data.loan_interest);
+                //$('#repayment_loan').text(res.data.repayment);
+                $('#total_repayment').text(res.data.repayment);
+                $('#monthly_invoice').text(res.data.period_loan);
+                $.each(res.data.profile_pcg.items, function( index, value ) {
+                    $('#body-pcg-item').append('<tr><td>'+value.product+'</td><td>'+value.qty+'</td><td>'+value.price+'</td></tr>');
+                });
+            }else{
+                $('.succes_respose_api_pcg').hide()
+                $('.error_respose_api_pcg').hide()
+                var text = '';
+                $.each(response.message, function( index, value ) {
+                    text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                });
+                var title = 'Terjadi Kesalahan';
+                    bootbox.alert({
+                    title: title,
+                    message: text,
+                    centerVertical:true,
+                    onShow: function(e) {
+                        feather.replace();
+                    },
+                    callback: function() {
+                        btn.removeAttr("disabled");
+                    }
+                });
+            }
+            //$("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
+            //$(".table-invoice").html(response.data).fadeIn('slow');
         }
     })
 });
 
+
+$(document).on('click' , '#request_loan_' , function(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var btn = $(this);
+    $.ajax({
+        url:'/borrower/submit/loan',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        data: {period : $("#loan_period_value").text(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        dataType:'json',
+        beforeSend:function(){
+            //$("#request_loan_").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
+        },
+        success:function(response)
+        {
+            $('.load-load').text('');
+            $('#body-pcg-item').html('');
+            $('#error_response_from_limit').html('');
+            var res = response;
+            if(res.status == 'success'){
+                
+            }else{
+                    var title = res.status;
+                    bootbox.alert({
+                    title: title,
+                    message: res.message,
+                    centerVertical:true,
+                    onShow: function(e) {
+                        
+                    },
+                    callback: function() {
+                        btn.removeAttr("disabled");
+                    }
+                });
+            }
+            //$("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
+            //$(".table-invoice").html(response.data).fadeIn('slow');
+        }
+    })
+});
+
+
+function formatRupiah(angka, prefix){
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split   = number_string.split(','),
+    sisa     = split[0].length % 3,
+    rupiah     = split[0].substr(0, sisa),
+    ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan){
+    separator = sisa ? '.' : '';
+    rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
 
 
 

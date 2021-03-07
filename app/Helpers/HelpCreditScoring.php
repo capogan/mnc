@@ -3,9 +3,11 @@ namespace App\Helpers;
 
 use function GuzzleHttp\json_encode;
 use App\CreditScore;
+use App\ScoreDecision;
+use App\FeeConfig;
 
 class HelpCreditScoring {
-    protected const DEF_ENC_KEY = "MODOCFIRSTMOBILCOMMUNITYINTHEWORLD";
+    protected const DEF_ENC_KEY = "CREDISCORINGFORPCG";
     protected const DECISION_APPROVAL = [
         'usia' => [
                 'type' => 'range' , 'component' => ['min' => 21 , 'max' => 50]
@@ -63,7 +65,7 @@ class HelpCreditScoring {
         return false;
     }
 
-    public static function credit_limit($data){
+    public static function credit_score($data){
         $data = json_decode($data , TRUE);
         $score_entity = CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
                         ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
@@ -78,6 +80,45 @@ class HelpCreditScoring {
             }
         }
         return $score;
+    }
+
+    public static function credit_limit_siap($user_id){
+        $data = json_decode($data , TRUE);
+        $score_entity = CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
+                        ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
+                        ->orderBy('id_category_score' , 'DESC')->get();
+        $score = 0;
+        foreach($score_entity as $value){
+            if(array_key_exists($value->code , $data)){
+                if($data[$value->code] == $value->name_score){
+                    $score +=  $value->score;
+                    //echo $value->code.''.$value->score.''.$data[$value->code].'<br>';
+                }
+            }
+        }
+        return $score;
+    }
+
+    public static function credit_limit($scoring){
+        $limit_loan = ScoreDecision::where(function ($query) use ($scoring) {
+            $query->where('s_d_score_min', '<=', $scoring);
+            $query->where('s_d_score_max', '>=', $scoring);
+        })->first();
+        return $limit_loan ? $limit_loan->s_d_nominal_limit : 0;
+    }
+
+    public static function interest_loan($limit , $period = 14){
+        $period = FeeConfig::where('code_fee' , 'interest_fee')
+        ->where(function ($query) use ($period) {
+            $query->where('min', '<=', $period);
+            $query->where('max', '>=', $period);
+        })
+        ->first();
+        return $period ? (($period->value / 100) * $limit) : 0;
+    }
+
+    public static function calculate_admin_fee($fee , $limit){
+        return (($fee / 100)* $limit);//($limit - ($fee / 100 * $limit));
     }
 
 

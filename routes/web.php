@@ -25,7 +25,7 @@ Auth::routes();
 
 //Borrower
 Route::get('/borrower/personal/profile', 'BorrowerController@my_profile')->name('borrower.personal.profile');
-
+Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('submit.loan');
 //Users
 Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('add.personal.info');
 Route::post('/upload/file', 'UsersController@upload_file')->name('upload.file.post');
