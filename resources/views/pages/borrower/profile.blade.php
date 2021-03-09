@@ -14,7 +14,7 @@
 
                 <div class="row">
                     <div class="col">
-                    
+
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
 
@@ -66,6 +66,8 @@
 @section('js')
 
         <script src="{{ asset('/script/profile.js') }}"></script>
-    
+        <script src="{{asset('/js/calculator.js')}}"></script>
+        <script src="{{asset('/js/simple-slider.js')}}"></script>
+
 @endsection
 @endsection

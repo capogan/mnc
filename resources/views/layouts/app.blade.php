@@ -22,7 +22,7 @@
     <link href="{{asset('css/owl.theme.css')}}" rel="stylesheet">
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/simple-slider.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
     <title>SIAP</title>
 
 </head>
@@ -33,9 +33,6 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
-<script src="{{asset('/js/calculator.js')}}"></script>
-<script src="{{asset('/js/simple-slider.js')}}"></script>
-
 @yield('js')
 </body>
 </html>
