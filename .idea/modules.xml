@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/laravel-1.iml" filepath="$PROJECT_DIR$/.idea/laravel-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Siap-Admin/.idea/siap-admin.iml" filepath="$PROJECT_DIR$/../Siap-Admin/.idea/siap-admin.iml" />
     </modules>
   </component>
 </project>

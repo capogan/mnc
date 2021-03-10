@@ -124,6 +124,14 @@
 
                         <div class="row mt-4">
                             <div class="col">
+                                <h6>Jumlah Tanggungan<span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="Jumlah Tanggungan" id="number_of_dependents" name="number_of_dependents" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
                                 <h6>Nomor NPWP <span>*</span></h6>
                                 <input type="text" class="form-control" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
                             </div>
@@ -170,26 +178,6 @@
                                 <input type="text" class="form-control" placeholder="Nama ibu kandung" id="mother_name" name="mother_name" value="{{ isset($get_user->mother_name ) ? $get_user->mother_name :'' }}">
                             </div>
                         </div>
-
-                        <hr>
-                        <h4>Informasi Usaha</h4>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <h6>Nama <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nama Saudara" id="siblings_name" name="siblings_name" value="{{isset($get_user->whatsapp_number ) ? $get_user->whatsapp_number : '' }}" >
-                            </div>
-                            <div class="col">
-                                <h6>Hubungan <span>*</span></h6>
-                                <select class="form-control" name="relationship_as" id="relationship_as">
-                                    <option value="">Pilih Hubungan</option>
-                                    @foreach($siblings as $val)
-                                        <option value="{{$val->id}}" {{ isset($val->relationship_as ) == $val->id ? "selected" : "" }} >{{$val->sibling_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-
                         <hr>
                         <h4>Saudara tidak serumah</h4>
                         <div class="row mt-4">

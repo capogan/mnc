@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\BussinessCriteria;
 use App\Education;
+use App\IncomeFactory;
 use App\MarriedStatus;
 use App\Models\Province;
 use App\Models\Regency;
@@ -39,6 +41,8 @@ class BorrowerController extends Controller
         $married_status = MarriedStatus::get();
         $education = Education::get();
         $siblings = Siblings::get();
+        $industry = IncomeFactory::get();
+        $criteria = BussinessCriteria::get();
 
         $data = [
             'provinces' => $provinces,
@@ -47,7 +51,9 @@ class BorrowerController extends Controller
             'get_user' =>$get_user,
             'get_email' =>$get_email,
             'education' =>$education,
-            'siblings' =>$siblings
+            'siblings' =>$siblings,
+            'industry' =>$industry,
+            'criteria' =>$criteria
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }
