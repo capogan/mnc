@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,8 +13,9 @@ class ApiCreditScoringController extends ApiController
 {
     public function limit_credit(Request $request){
         //$data = ['usia' => 12 , 'income'=> 3000000 , 'education' => 'SMA' ,'established'=> '2' , 'pcg_transaction' => 3000000];
-        if($request->data){
-
+        
+        if($request->all()){
+            $data = json_encode($request->all());
         }else{
             $data = '{
                 "usia": 22,

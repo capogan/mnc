@@ -55,7 +55,7 @@ class ApiPCGController extends ApiController
     ];
 
     public function auto_register(Request $request){
-        //print_r($request->all()['data']);
+        //print_r($request->all());exit;
         //exit;
         /*$base = ['data' =>[
             'bio_email'=>'richard@gmail.com',
@@ -172,11 +172,8 @@ class ApiPCGController extends ApiController
             'invoice_number' => $request->invoice_number,
             'identity_numbers_invoice' => $request->identity_numbers_invoice
         ];
-        
-        //$data_pcg_account =  Capi::connect_with_thirt_part_api('http://127.0.0.1:8001/api/pcg/invoice/responce/dummi' ,$user_data );
-        $data_pcg_account =  $this->get_data_from_invoice($user_data);
-        $credit_score = HelpCreditScoring::credit_score('{
-            "usia": 22,
+        $user_json_data = '{
+            "usia": 12,
             "income": 3000000,
             "education": 3,
             "established": "4",
@@ -188,7 +185,17 @@ class ApiPCGController extends ApiController
             "established_business": ">= 5 tahun",
             "pcg_transaction_limit" : "Rp. 30.000.001-50.000.000",
             "location": "Diluar Jabodetek"
-        }');
+        }';
+        
+        //$data_pcg_account =  Capi::connect_with_thirt_part_api('http://127.0.0.1:8001/api/pcg/invoice/responce/dummi' ,$user_data );
+        $data_pcg_account =  $this->get_data_from_invoice($user_data);
+        $credit_score = HelpCreditScoring::credit_score($user_json_data);
+        $approval_decision = HelpCreditScoring::approval_decision($user_json_data);
+
+        if($approval_decision['status'] == false){
+
+        }
+        
         $credit_limit = HelpCreditScoring::credit_limit($credit_score);
         $config_admin_fee = FeeConfig::where('code_fee' , 'admin_fee')->first();
         if(array_key_exists('total_invoice' , $data_pcg_account)){
