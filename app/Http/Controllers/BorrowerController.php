@@ -151,7 +151,7 @@ class BorrowerController extends Controller
     }
 
     public function add_personal_info(Request $request){
-        
+
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
             'business_province' => 'required',
@@ -192,7 +192,7 @@ class BorrowerController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
-            BusinessInfo::create([
+            BusinessInfo::updateOrCreate([
                 'uid' => Auth::id(),
                 'business_name' => $request->name_of_bussiness,
                 'id_cap_of_business' => $request->business_partner,
@@ -209,7 +209,11 @@ class BorrowerController extends Controller
                 'business_phone_number' => $request->phone_number_business,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
-            ]);
+            ],
+            [
+                'uid' => Auth::id()
+            ]
+        );
  
             $json = [
                 "status"=> true,
