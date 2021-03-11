@@ -20,6 +20,7 @@ use App\FeeConfig;
 use function GuzzleHttp\json_encode;
 use App\LogRequestInvoice;
 use App\UsersFile;
+use App\BusinessInfo;
 
 class BorrowerController extends Controller
 {
@@ -149,6 +150,75 @@ class BorrowerController extends Controller
 
     }
 
+    public function add_personal_info(Request $request){
+        
+        $validation = Validator::make($request->all(), [
+            'name_of_bussiness' => 'required',
+            'business_province' => 'required',
+            'business_partner' => 'required',
+            'business_category' => 'required',
+            'operation_date' => 'required',
+            'number_of_employee' => 'required',
+            'business_description' => 'required',
+            'address_of_business' => 'required',
+            'province_business' => 'required',
+            'city_business' => 'required',
+            'postal_code_business' => 'required|numeric',
+            'phone_number_business' => 'required|numeric',
+            'business_kelurahan' => 'required',
+            'business_kecamatan' => 'required'
+        ],
+            [
+                'name_of_bussiness.required' => 'required',
+                'business_province.required' => 'required',
+                'business_partner.required' => 'required',
+                'business_category.required' => 'required',
+                'operation_date.required' => 'required',
+                'number_of_employee.required' => 'required',
+                'business_description.required' => 'required',
+                'address_of_business.required' => 'required',
+                'province_business.required' => 'required',
+                'city_business.required' => 'required',
+                'postal_code_business.required' => 'required|numeric',
+                'phone_number_business.required' => 'required|numeric',
+                'business_kelurahan.required' => 'required',
+                'business_kecamatan.required' => 'required'
+ 
+            ]);
+ 
+        if($validation->fails()) {
+            $json = [
+                "status"=> false,
+                "message"=> $validation->messages(),
+            ];
+        }else{
+            BusinessInfo::create([
+                'uid' => Auth::id(),
+                'business_name' => $request->name_of_bussiness,
+                'id_cap_of_business' => $request->business_partner,
+                'id_credit_score_income_factor' => $request->business_category,
+                'business_established_since' => $request->operation_date,
+                'total_employees' => $request->number_of_employee,
+                'business_description' => $request->business_description,
+                'business_full_address' => $request->address_of_business,
+                'business_province' => $request->province_business,
+                'business_city' => $request->city_business,
+                'business_sub_kecamatan' => $request->business_kecamatan,
+                'business_sub_kelurahan' => $request->business_kelurahan,
+                'business_zip_code' => $request->postal_code_business,
+                'business_phone_number' => $request->phone_number_business,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+ 
+            $json = [
+                "status"=> true,
+                "message"=> 'Data bisnis berhasil ditambahkan.',
+            ];
+        }
+ 
+        return response()->json($json);
+    }
 
 
 
