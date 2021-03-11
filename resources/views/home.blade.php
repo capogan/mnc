@@ -24,6 +24,8 @@
                                                             <option value="borrower/personal/profile">Pribadi</option>
                                                             <option value="borrower/bussiness/profile">Bisnis</option>
                                                         </select>
+
+
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mt30 nopl nopr">
@@ -384,11 +386,10 @@
 {{--    </div>--}}
 @section('js')
     <script src="js/jquery.nice-select.min.js"></script>
-
-
     <script>
         $(document).ready(function() {
-            $('select').niceSelect();
+
+            $('.wide').niceSelect();
 
         });
     </script>

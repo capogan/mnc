@@ -48,3 +48,30 @@ input:focus + label {
   width: 30px;
   height: 30px;
 }
+
+.btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.btn-danger {
+  font-family: 'Poppins';
+  font-size: 13px;
+  color: rgba(253, 250, 250, 0.75);
+  letter-spacing: 1px;
+  line-height: 5px;
+  border: 2px solid rgba(250, 250, 250, 0.75);
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-danger:hover {
+  color: #FFF;
+  background: #f51f8a;
+  border: 2px solid #f51f8a;
+}
+.btn-danger:focus {
+  color: #FFF;
+  background: #f51f8a;
+  border: 2px solid #f51f8a;
+}

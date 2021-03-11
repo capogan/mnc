@@ -11,10 +11,21 @@
 
         <!-- content start -->
         <div class="container">
-
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
+                <div class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active text-light">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container">
                 <div class="row">
                     <div class="col">
-                    
+
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -22,11 +33,13 @@
                                     <a class="nav-link active" id="tab-1" data-toggle="tab" href="#service1" role="tab" aria-controls="responsibilities" aria-selected="true">Data Pribadi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-2" data-toggle="tab" href="#service2" role="tab" aria-controls="education" aria-selected="false">Berkas</a>
+                                    <a class="nav-link" id="tab-2" data-toggle="tab" href="#service2" role="tab" aria-controls="experience" aria-selected="false">Usaha</a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="experience" aria-selected="false">Akun Bank</a>
+                                    <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="education" aria-selected="false">Berkas</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-4" data-toggle="tab" href="#service4" role="tab" aria-controls="experience" aria-selected="false">Faktur</a>
                                 </li>
@@ -37,15 +50,16 @@
                             </ul>
 
                             <!-- Tab panes -->
+
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="service1">
                                     @include('pages.borrower.information.profile_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service2">
-                                    @include('pages.borrower.information.file_information')
+                                    @include('pages.borrower.information.bussiness_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service3">
-                                    @include('pages.borrower.information.bank_information')
+                                    @include('pages.borrower.information.file_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service4">
                                     @include('pages.borrower.information.invoice_information')
@@ -55,17 +69,15 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
-
         </div>
-
-
-
 @section('js')
 
         <script src="{{ asset('/script/profile.js') }}"></script>
-    
+        <script src="{{asset('/js/calculator.js')}}"></script>
+        <script src="{{asset('/js/simple-slider.js')}}"></script>
+
 @endsection
 @endsection

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\BussinessCriteria;
 use App\Education;
+use App\IncomeFactory;
 use App\MarriedStatus;
 use App\Models\Province;
 use App\Models\Regency;
 use App\PersonalInfo;
+use App\Siblings;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -37,6 +40,9 @@ class BorrowerController extends Controller
         $regency = Regency::get();
         $married_status = MarriedStatus::get();
         $education = Education::get();
+        $siblings = Siblings::get();
+        $industry = IncomeFactory::get();
+        $criteria = BussinessCriteria::get();
 
         $data = [
             'provinces' => $provinces,
@@ -44,7 +50,10 @@ class BorrowerController extends Controller
             'married_status' => $married_status,
             'get_user' =>$get_user,
             'get_email' =>$get_email,
-            'education' =>$education
+            'education' =>$education,
+            'siblings' =>$siblings,
+            'industry' =>$industry,
+            'criteria' =>$criteria
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }
@@ -80,8 +89,8 @@ class BorrowerController extends Controller
         ->first();
         $interest_loan = HelpCreditScoring::interest_loan($invoice_id['total_invoice'] , $period);
         $data_loan = [
-            'invoice_number' => $request->invoice_number, 
-            'uid' => Auth::id(), 
+            'invoice_number' => $request->invoice_number,
+            'uid' => Auth::id(),
             'loan_amount' => $invoice_id['total_invoice'],
             'loan_period' => $request->period,
             'admin_fee_percentage' => $config_admin_fee->value,
@@ -124,7 +133,7 @@ class BorrowerController extends Controller
             'user_id' => '43522',
             'no_faktur' => 'NOXX1231OSWMW',
             'full_name' => 'Susilo Bambang Pamungkas',
-            'id_number' => '1920199801289101', 
+            'id_number' => '1920199801289101',
             'total_invoice' => 100*20000,
             'items' => [
                 [
@@ -135,7 +144,7 @@ class BorrowerController extends Controller
             ]
         ];
         return $data;
-       
+
     }
 
 
