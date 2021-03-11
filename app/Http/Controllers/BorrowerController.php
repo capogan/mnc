@@ -19,6 +19,7 @@ use App\Helpers\HelpCreditScoring;
 use App\FeeConfig;
 use function GuzzleHttp\json_encode;
 use App\LogRequestInvoice;
+use App\UsersFile;
 
 class BorrowerController extends Controller
 {
@@ -43,7 +44,7 @@ class BorrowerController extends Controller
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
-
+        $file = UsersFile::where('uid',$uid)->first();
         $data = [
             'provinces' => $provinces,
             'regency' => $regency,
@@ -53,7 +54,8 @@ class BorrowerController extends Controller
             'education' =>$education,
             'siblings' =>$siblings,
             'industry' =>$industry,
-            'criteria' =>$criteria
+            'criteria' =>$criteria,
+            'file' => $file
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }

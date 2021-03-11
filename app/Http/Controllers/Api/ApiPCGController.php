@@ -159,15 +159,18 @@ class ApiPCGController extends ApiController
     
     public function check_pcg_invoice_number(Request $request){
         $validation = Validator::make($request->all(), [
-            'invoice_number' => 'required',
-            'identity_numbers_invoice'=> 'required'
+            'identity_numbers_invoice'=> 'required',
+            'total_invoice' => 'required'
         ]);
-        
         $loan_period_req = $request->period ? $request->period : 14 ;
-        
         if($validation->fails()) {
             return json_encode(['status'=> false, 'message'=> $validation->messages()]);
         }
+        $request->total_invoice = str_replace('Rp' ,'' , $request->total_invoice);
+        $request->total_invoice = str_replace('.' ,'' , $request->total_invoice);
+        $request->total_invoice = (int)( $request->total_invoice);
+        //echo $request->total_invoice;
+        //exit;
         $user_data = [
             'invoice_number' => $request->invoice_number,
             'identity_numbers_invoice' => $request->identity_numbers_invoice
@@ -186,30 +189,31 @@ class ApiPCGController extends ApiController
             "pcg_transaction_limit" : "Rp. 30.000.001-50.000.000",
             "location": "Diluar Jabodetek"
         }';
-        
         //$data_pcg_account =  Capi::connect_with_thirt_part_api('http://127.0.0.1:8001/api/pcg/invoice/responce/dummi' ,$user_data );
-        $data_pcg_account =  $this->get_data_from_invoice($user_data);
+        //$data_pcg_account =  $this->get_data_from_invoice($user_data);
+        // Ganti menjadi inputan
+        $data_pcg_account =  $request->total_invoice;
+        
         $credit_score = HelpCreditScoring::credit_score($user_json_data);
         $approval_decision = HelpCreditScoring::approval_decision($user_json_data);
 
         if($approval_decision['status'] == false){
 
         }
-        
         $credit_limit = HelpCreditScoring::credit_limit($credit_score);
         $config_admin_fee = FeeConfig::where('code_fee' , 'admin_fee')->first();
-        if(array_key_exists('total_invoice' , $data_pcg_account)){
-            $interest_loan = HelpCreditScoring::interest_loan($data_pcg_account['total_invoice'] , $loan_period_req);
-            $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $data_pcg_account['total_invoice']) : 0;
-            if($data_pcg_account['total_invoice'] > $credit_limit){
+        if($data_pcg_account > 0){
+            $interest_loan = HelpCreditScoring::interest_loan($data_pcg_account , $loan_period_req);
+            $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $data_pcg_account) : 0;
+            if($data_pcg_account > $credit_limit){
                 $response = [
                     'status_loan' => 'not-approve',
                     'loan_limit' => 'Rp '.number_format($credit_limit , 0 , '.' ,','),
                     'loan_request_status' => false,
                     'loan_interest' => 'Rp '.number_format($interest_loan , 0 , '.' ,','),
                     'admin_fee' => 'Rp '.number_format($admin_fee , 0 , '.' ,','),
-                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account['total_invoice']) , 0 , '.' ,','),
-                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account['total_invoice'])),
+                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account) , 0 , '.' ,','),
+                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account)),
                     'loan_request_message' => 'Maaf , Invoice Kamu melebihi Kredit limit.',
                     'profile_pcg' => $data_pcg_account
                 ];
@@ -220,8 +224,8 @@ class ApiPCGController extends ApiController
                     'loan_request_status' => true,
                     'loan_interest' => 'Rp '.number_format($interest_loan , 0 , '.' ,','),
                     'admin_fee' => 'Rp '.number_format($admin_fee , 0 , '.' ,','),
-                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account['total_invoice']) , 0 , '.' ,','),
-                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account['total_invoice'])),
+                    'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account) , 0 , '.' ,','),
+                    'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account)),
                     'loan_request_message' => 'Klik tombol ajukan pinjaman untuk melanjutkan proses.',
                     'profile_pcg' => $data_pcg_account
                 ];

@@ -16,15 +16,16 @@
                                 <div class="input-invoice">
                                     <input type="text" name="invoice_number" id="invoice_number" class="form-control" placeholder="Masukkan Nomor Faktur dari PCG">
                                     <input type="text" name="identity_numbers_invoice" id="identity_numbers_invoice" class="form-control" value="{{ isset($get_user->identity_number) ? $get_user->identity_number : ''}}">
+                                    <input type="text" name="request_loan_borrower" id="request_loan_borrower" class="form-control"  placeholder="Jumlah Pinjaman">
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block" id="check_invoice_form">
+                                <!--<button type="button" class="btn btn-primary btn-block" id="check_invoice_form">
                                    Check Nomor Faktur
                                 </button>
                                 <br/>
                                 <br/>
-                                <br/>
+                                <br/>-->
                                 
-                                <div class="row succes_respose_api_pcg"  style="display:none">
+                                <!--<div class="row succes_respose_api_pcg"  style="display:none">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h6>Informasi Invoice</h6>
                                         <hr>
@@ -68,7 +69,7 @@
                                 <div class="row error_respose_api_pcg" style="display:none">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="error_response_from_limit">
                                     </div>
-                                </div>
+                                </div>-->
                             
                                 <!--<div class="row">
                                     <table class="table table-bordered"> 
@@ -106,18 +107,18 @@
                                                             <span>Peride Pinjaman<strong>
                                                                 <span class="pull-right"  id="loan_period_value">14</span> </strong>
                                                             </span>
-                                                            <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
+                                                                <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
                                                             <hr>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                         <div class="row">
-                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                            <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
                                                                     Total Tagihan 
                                                                     <h2 class="pull-right load-load" id="total_purchase_loan">0</h2>
                                                                 </div>
-                                                            </div>
+                                                            </div>-->
 
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">

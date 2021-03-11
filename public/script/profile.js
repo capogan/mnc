@@ -41,7 +41,6 @@ $('#check_identity_form').on('submit', function(event){
         success:function(response)
         {
             if(response.status){
-
                 $("#identity_number").val(response.data.identity_id);
                 $("#first_name").val(response.data.name);
                 $("#address").val(response.data.address);
@@ -61,6 +60,12 @@ $('#check_identity_form').on('submit', function(event){
     })
 });
 
+$(document).on('keyup' , '#request_loan_borrower' , function(){
+    var number = $(this).val();
+    var rupiah = formatRupiah(number , '');
+    $(this).val(rupiah);
+    check_interest();
+});
 
 $('#personal_info_form').on('submit', function(event){
     event.preventDefault();
@@ -172,6 +177,20 @@ $("#loan_period").bind(
     }
 );
 
+$(document).on('change' , 'input[type="file"]' , function(){
+    readURL(this , $(this).attr('id'));
+});
+
+function readURL(input , imagetarget) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+imagetarget+'_preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+}
+
 function check_interest(period){
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
@@ -180,15 +199,17 @@ function check_interest(period){
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data: {period : period, invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        data: {period : period, total_invoice:$('#request_loan_borrower').val(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
         dataType:'json',
         success:function(response)
         {
             var res = response;
             if(res.status == 'success'){
+                //$('#total_purchase_loan').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
                 $('#interest_fee').text(res.data.loan_interest);
                 $('#monthly_invoice').text(res.data.period_loan);
                 $('#total_repayment').text(res.data.repayment);
+                $('#admin_fee').text(res.data.admin_fee);
             }else{
                 //window.location.href = '/login'
             }
@@ -239,7 +260,7 @@ $('#check_invoice_form').on('click', function(event){
                 $('#id_number_of_pcg').text(res.data.profile_pcg.id_number);
                 $('#invoice_number_of_pcg').text(res.data.profile_pcg.invoice_id);
                 $('#total_purchase_of_pcg').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
-                $('#total_purchase_loan').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
+                //$('#total_purchase_loan').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
                 $('#admin_fee').text(res.data.admin_fee);
                 $('#la_value').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
                 $('#interest_fee').text(res.data.loan_interest);
