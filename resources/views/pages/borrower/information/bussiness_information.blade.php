@@ -10,7 +10,7 @@
                             <p>Isi Informasi Anda mengenai data Informasi Bisnis.</p>
                         </div>
                     </div>
-                    <form>
+                    <form id="form_borrower_business_information">
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Nama Perusahan<span>*</span></h6>
@@ -19,7 +19,7 @@
 
                             <div class="col">
                                 <h6>Kriteria Perusahan<span>*</span></h6>
-                                <select class="form-control ">
+                                <select class="form-control " name="business_province">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
                                         <option value="{{$val->id}}">{{$val->title_bussiness}}</option>
@@ -28,11 +28,17 @@
                             </div>
 
                         </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <h6>Lama Bekerja sama<span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="contoh (6 tahun)" id="business_partner" name="business_partner">
+                            </div>
+                        </div>
 
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Industri<span>*</span></h6>
-                                <select class="form-control ">
+                                <select class="form-control " name="business_category">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($industry as $key => $val)
                                         <option value="{{$val->id}}">{{$val->industry_sectore}}</option>
@@ -44,11 +50,11 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Tanggal Berdiri</h6>
-                                <input class="form-control" type="date"  name="dob" id="example-date-input" value="{">
+                                <input class="form-control" type="date"  name="operation_date" id="example-date-input" value="{">
                             </div>
                             <div class="col">
                                 <h6>Jumlah Pegawai</h6>
-                                <select class="form-control">
+                                <select class="form-control" name="number_of_employee">
                                     <option selected=""> Pilih Pegawai</option>
                                     <option>5</option>
                                     <option>dst</option>
@@ -59,7 +65,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Deskripsi perusahaan</h6>
-                                <textarea class="form-control" id="dekripsipt" rows="2"></textarea>
+                                <textarea class="form-control" name="business_description" id="business_description" rows="2"></textarea>
                             </div>
                         </div>
 
@@ -67,27 +73,28 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Alamat perusahaan</h6>
-                                <textarea class="form-control" id="alamatpt" rows="2"></textarea>
+                                <textarea class="form-control" name="address_of_business" id="alamatpt" rows="2"></textarea>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Propinsi</h6>
-                                <select class="form-control">
-                                    <option selected=""> Pilih Propinsi</option>
-                                    <option>DKI Jakarta</option>
-                                    <option>dst</option>
+                                <select class="form-control" id="province" name="province_business">
+                                    <option value="">Pilih Propinsi</option>
+                                    @foreach($provinces as $key => $val)
+                                        <option value="{{$val->id}}"  {{  isset($get_user->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                    @endforeach
                                 </select>
 
                             </div>
                             <div class="col">
                                 <h6>Kota</h6>
-                                <select class="form-control">
-                                    <option selected=""> Pilih Kota</option>
-                                    <option>Jakarta</option>
-                                    <option>dst</option>
-
+                                <select class="form-control" id="city" name="city_business">
+                                    <option value="">Pilih Kota</option>
+                                    @foreach($regency as $key => $val)
+                                        <option value="{{$val->id}}"  {{ isset($get_user->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -95,7 +102,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan</h6>
-                                <select class="form-control">
+                                <select class="form-control" name="business_kecamatan">
                                     <option selected=""> Pilih Kecamatan</option>
                                     <option>Gambir</option>
                                     <option>dst</option>
@@ -103,7 +110,7 @@
                             </div>
                             <div class="col">
                                 <h6>Kelurahan</h6>
-                                <select class="form-control">
+                                <select class="form-control" name="business_kelurahan">
                                     <option selected=""> Pilih Kelurahan</option>
                                     <option>Cideng</option>
                                     <option>dst</option>
@@ -114,15 +121,13 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kode Pos</h6>
-                                <input type="text" class="form-control" placeholder="Kode Pos">
+                                <input type="text" class="form-control" name="postal_code_business" placeholder="Kode Pos">
                             </div>
                             <div class="col">
                                 <h6>Nomor telepon kantor</h6>
-                                <input type="text" class="form-control" placeholder="Nomor telepon kantor">
+                                <input type="text" name="phone_number_business" class="form-control" placeholder="Nomor telepon kantor">
                             </div>
                         </div>
-
-
                         <div class="form-group mt-5">
                             <button type="submit" class="btn btn-primary btn-block"> Update Informasi Bisnis </button>
                         </div>

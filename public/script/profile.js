@@ -118,6 +118,58 @@ $('#personal_info_form').on('submit', function(event){
 });
 
 
+$('#form_borrower_business_information').on('submit', function(event){
+    event.preventDefault();
+    var btn = $("#btn_update_voucher");
+    btn.attr("disabled", "disabled");
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        url:'/add/personal/business',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        async:true,
+        data:new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        dataType:'json',
+        success:function(response)
+        {
+            var text ='';
+            var title = '';
+            if(response.status){
+                text = 'Data berhasil ditambahkan'
+                var title = 'Sukses';
+
+            }else{
+
+                $.each(response.message, function( index, value ) {
+                    text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                });
+                var title = 'Terjadi Kesalahan';
+            }
+            bootbox.alert({
+                title: title,
+                message: text,
+                centerVertical:true,
+                onShow: function(e) {
+                    feather.replace();
+                },
+                callback: function() {
+                    btn.removeAttr("disabled");
+                }
+            });
+        }
+    })
+});
+
+
+
+
 $('#file_upload_image').on('submit', function(event){
     event.preventDefault();
 
