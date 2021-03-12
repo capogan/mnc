@@ -91,7 +91,7 @@
                                 <select class="form-control" id="province" name="province">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  isset($get_user->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{  $get_user->province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -100,7 +100,7 @@
                                 <select class="form-control" id="city" name="city">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ isset($get_user->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{ $get_user->city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -116,7 +116,7 @@
                                 <select class="form-control" id="education" name="education">
                                     <option>Pilih Pendidikan</option>
                                     @foreach($education as $val)
-                                        <option value="{{$val->id}}" {{ isset($get_user->education) == $val->id ? "selected" : "" }} >{{$val->level}}</option>
+                                        <option value="{{$val->id}}" {{ $get_user->education == $val->id ? "selected" : "" }} >{{$val->level}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -183,14 +183,14 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nama <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nama Saudara" id="siblings_name" name="siblings_name" value="{{isset($get_user->whatsapp_number ) ? $get_user->whatsapp_number : '' }}" >
+                                <input type="text" class="form-control" placeholder="Nama Saudara" id="emergency_name" name="emergency_name" value="{{isset($get_user->emergency_name ) ? $get_user->emergency_name : '' }}" >
                             </div>
                             <div class="col">
                                 <h6>Hubungan <span>*</span></h6>
                                 <select class="form-control" name="relationship_as" id="relationship_as">
                                     <option value="">Pilih Hubungan</option>
                                     @foreach($siblings as $val)
-                                        <option value="{{$val->id}}" {{ isset($val->relationship_as ) == $val->id ? "selected" : "" }} >{{$val->sibling_name}}</option>
+                                        <option value="{{$val->id}}" {{ isset($val->id_siblings_master ) == $val->id ? "selected" : "" }} >{{$val->sibling_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -199,11 +199,47 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nomor Telepon Saudara<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nomor Telepon Saudara" id="siblings_phone" name="siblings_phone" value="{{isset($get_user->whatsapp_number ) ? $get_user->whatsapp_number : '' }}" >
+                                <input type="text" class="form-control" placeholder="Nomor Telepon Saudara" id="emergency_phone" name="emergency_phone" value="{{isset($get_user->emergency_phone ) ? $get_user->emergency_phone : '' }}" >
                             </div>
                             <div class="col">
                                 <h6>Alamat <span>*</span></h6>
-                                   <textarea class="form-control" name="siblings_address"></textarea>
+                                   <textarea class="form-control" name="emergency_full_addreess" id="emergency_full_addreess"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h6>Propinsi<span>*</span></h6>
+                                <select class="form-control" id="emergency_province" name="emergency_province">
+                                    <option value="">Pilih Propinsi</option>
+                                    @foreach($provinces as $key => $val)
+                                        <option value="{{$val->id}}"  {{  $get_user->emergency_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <h6>Kota <span>*</span></h6>
+                                <select class="form-control" id="emergency_city" name="emergency_city">
+                                    <option value="">Pilih Kota</option>
+                                    @foreach($regency as $key => $val)
+                                        <option value="{{$val->id}}"  {{ $get_user->emergency_city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h6>Kecamatan<span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="Kecamatan" id="emergency_sub_kecamatan" name="emergency_sub_kecamatan" value="{{isset($get_user->emergency_sub_kecamatan ) ? $get_user->emergency_sub_kecamatan : '' }}" >
+                            </div>
+                            <div class="col">
+                                <h6>Kelurahan <span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="Kelurahan" id="emergency_sub_kelurahan" name="emergency_sub_kelurahan" value="{{isset($get_user->emergency_sub_kelurahan ) ? $get_user->emergency_sub_kelurahan : '' }}" >
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h6>Kodepos<span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="Kodepos" id="emergency_zip_code" name="emergency_zip_code" value="{{isset($get_user->emergency_zip_code ) ? $get_user->emergency_zip_code : '' }}" >
                             </div>
                         </div>
 
