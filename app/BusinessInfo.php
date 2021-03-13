@@ -22,6 +22,8 @@ class BusinessInfo extends Model
         'business_sub_kelurahan',
         'business_zip_code',
         'business_phone_number',
+        'business_place_status',
+        'partnership_since',
         'created_at','updated_at'
     ];
 }

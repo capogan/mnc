@@ -34,7 +34,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->identity_photo)}}" id="identity_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->identity_photo}}" id="identity_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->self_photo)}}" id="self_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->self_photo}}" id="self_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->npwp_photo)}}" id="npwp_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->npwp_photo}}" id="npwp_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->bussiness_build_photo)}}" id="business_location_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->bussiness_build_photo}}" id="business_location_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->bussiness_owner_photo)}}" id="business_owner_file_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->bussiness_owner_photo}}" id="business_owner_file_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->siup_photo)}}" id="business_document_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->siup_photo}}" id="business_document_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -155,12 +155,11 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->business_activity_photo)}}" id="business_activity_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->business_activity_photo}}" id="business_activity_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="col-xl-6">
                                     <div class="row mt-2">
                                         <div class="col">
@@ -176,7 +175,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->npwp_bussiness_photo)}}" id="business_npwp_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->npwp_bussiness_photo}}" id="business_npwp_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>

@@ -11,4 +11,15 @@ class PersonalInfo extends Model
         'uid','identity_number','first_name','last_name','gender','place_of_birth','date_of_birth','address','province','city','zip_code','education','npwp_number',
         'total_cc','bpjs_employee_number','bpjs_health_number','phone_number','whatsapp_number','married_status','mother_name','created_at','updated_at'
     ];
+
+    public function business()
+    {
+        return $this->belongsTo(BusinessInfo::class, 'uid' , 'uid');
+    }
+
+    public function file()
+    {
+        return $this->belongsTo(UsersFile::class, 'uid' , 'uid');
+    }
+
 }

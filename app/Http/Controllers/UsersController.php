@@ -205,8 +205,7 @@ class UsersController extends Controller
             }
 
             $get_user = UsersFile::where('uid',$uid)->first();
-            
-            
+            $data_insert['uid'] = Auth::id();
             if(isset($request->identity_image)){
                 $data_insert['identity_photo'] = 'upload/'.$filename_identity;
             }

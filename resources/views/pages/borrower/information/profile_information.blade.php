@@ -125,6 +125,13 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Jumlah Tanggungan<span>*</span></h6>
+                                    <select class="form-control" id="education" name="education">
+                                        <option>Pilih Jumlah Tanggungan</option>
+                                        <option value="1">0</option>
+                                        <option value="2">1 Orang</option>
+                                        <option value="3">2 Orang</option>
+                                        <option value="4"> 2 Orang</option>
+                                    </select>
                                 <input type="text" class="form-control" placeholder="Jumlah Tanggungan" id="number_of_dependents" name="number_of_dependents" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
                             </div>
 

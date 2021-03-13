@@ -81,6 +81,22 @@ class HelpCreditScoring {
         }
         return $score;
     }
+    public static function credit_score_siap($data){
+        $score_entity = CreditScore::select('name_score','id_category_score','category_score.code' ,'siap_score')
+                        ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
+                        ->where('category_score.status' , true)
+                        ->orderBy('id_category_score' , 'DESC')->get();
+        $score = 0;
+        foreach($score_entity as $value){
+            if(array_key_exists($value->code , $data)){
+                if($data[$value->code] == $value->name_score){
+                    $score +=  $value->score;
+                    //echo $value->code.''.$value->score.''.$data[$value->code].'<br>';
+                }
+            }
+        }
+        return $score;
+    }
 
     public static function credit_limit_siap($user_id){
         $data = json_decode($data , TRUE);
