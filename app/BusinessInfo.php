@@ -24,6 +24,7 @@ class BusinessInfo extends Model
         'business_phone_number',
         'business_place_status',
         'partnership_since',
+        'business_legality_status_id',
         'created_at','updated_at'
     ];
 }

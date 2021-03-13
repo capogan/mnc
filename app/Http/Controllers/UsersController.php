@@ -89,33 +89,31 @@ class UsersController extends Controller
 
            DB::beginTransaction();
            try{
-
-               PersonalInfo::create([
-                   'uid'                    => Auth::id(),
-                   'identity_number'        => $request->identity_number,
-                   'first_name'             => $request->first_name,
-                   'last_name'              => $request->last_name,
-                   'gender'                 => $request->gender,
-                   'place_of_birth'         => $request->pob,
-                   'date_of_birth'          => date("Y-m-d", strtotime($request->dob)),
-                   'address'                => $request->address,
-                   'province'               => $request->province,
-                   'city'                   => $request->city,
-                   'zip_code'               => $request->zip_code,
-                   'education'              => $request->education,
-                   'npwp_number'            => $request->npwp_number,
-                   'total_cc'               => $request->total_cc,
-                   'bpjs_employee_number'   => $request->bpjs_employee_number,
-                   'bpjs_health_number'     => $request->bpjs_employee_number,
-                   'phone_number'           => $request->phone_number,
-                   'whatsapp_number'        => $request->whatsapp_number,
-                   'married_status'         => $request->married_status,
-                   'mother_name'            => $request->mother_name,
-                   'created_at'             => date('Y-m-d H:i:s'),
-                   'updated_at'             =>date('Y-m-d H:i:s'),
-               ]);
-
-               EmergencyContact::create([
+            PersonalInfo::updateOrCreate(['uid' => Auth::id()] , [
+                'uid'                    => Auth::id(),
+                'identity_number'        => $request->identity_number,
+                'first_name'             => $request->first_name,
+                'last_name'              => $request->last_name,
+                'gender'                 => $request->gender,
+                'place_of_birth'         => $request->pob,
+                'date_of_birth'          => date("Y-m-d", strtotime($request->dob)),
+                'address'                => $request->address,
+                'province'               => $request->province,
+                'city'                   => $request->city,
+                'zip_code'               => $request->zip_code,
+                'education'              => $request->education,
+                'npwp_number'            => $request->npwp_number,
+                'total_cc'               => $request->total_cc,
+                'bpjs_employee_number'   => $request->bpjs_employee_number,
+                'bpjs_health_number'     => $request->bpjs_employee_number,
+                'phone_number'           => $request->phone_number,
+                'whatsapp_number'        => $request->whatsapp_number,
+                'married_status'         => $request->married_status,
+                'mother_name'            => $request->mother_name,
+                'created_at'             => date('Y-m-d H:i:s'),
+                'updated_at'             =>date('Y-m-d H:i:s'),
+            ] );
+               EmergencyContact::updateOrCreate(['uid' => Auth::id()],[
                    'uid'                            => Auth::id(),
                    'emergency_name'                 => $request->emergency_name,
                    'id_siblings_master'             => $request->relationship_as,
@@ -247,6 +245,7 @@ class UsersController extends Controller
                 $filename_npwp_imagebusiness_document = 'business_document'.$uid.'_'.time(). '.' . $npwp_imagebusiness_document->getClientOriginalExtension();
                 $npwp_imagebusiness_document->move($path, $filename_npwp_imagebusiness_document);
             }
+            
             $get_user = UsersFile::where('uid',$uid)->first();
             $data_insert['uid'] = Auth::id();
             if(isset($request->identity_image)){

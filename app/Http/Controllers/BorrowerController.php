@@ -37,7 +37,11 @@ class BorrowerController extends Controller
     public function my_profile(Request $request){
 
         $uid = Auth::id();
-        $get_user = PersonalInfo::where('uid',$uid)->first();
+        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
+                    ->rightJoin('users' , 'users.id' , 'personal_info.uid')
+                    ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
+                    ->where('users.id',$uid)->first();
+        
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
