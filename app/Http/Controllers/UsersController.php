@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmergencyContact;
 use App\PersonalInfo;
 use App\UsersFile;
 use Illuminate\Http\Request;
@@ -38,6 +39,15 @@ class UsersController extends Controller
            'whatsapp_number' => 'required',
            'married_status' => 'required',
            'mother_name' => 'required',
+           'emergency_name' => 'required',
+           'relationship_as' => 'required',
+           'emergency_phone' => 'required',
+           'emergency_full_address' => 'required',
+           'emergency_province' => 'required',
+           'emergency_city' => 'required',
+           'emergency_sub_kecamatan' => 'required',
+           'emergency_sub_kelurahan' => 'required',
+           'emergency_zip_code' => 'required',
        ],
            [
                'identity_number.required' => 'Nomor KTP harus diisi',
@@ -58,6 +68,15 @@ class UsersController extends Controller
                'whatsapp_number.required' => 'Nomor Whatsapp harus diisi',
                'married_status.required' => 'Status pernikahan harus diisi',
                'mother_name.required' => 'Nama ibu kandung harus diisi',
+               'emergency_name.required' => 'Nama Saudara tidak serumah harus diisi',
+               'relationship_as.required' => 'Pilih status hubungan',
+               'emergency_phone.required' => 'Nomor telepon saudara tidak serumah harus diisi',
+               'emergency_full_address.required' => 'Alamat saudara tidak serumah harus diisi',
+               'emergency_province.required' => 'Propinsi saudara tidak serumah harus diisi',
+               'emergency_city.required' => 'Kota saudara tidak serumah harus diisi',
+               'emergency_sub_kecamatan.required' => 'Kecamatan saudara tidak serumah harus diisi',
+               'emergency_sub_kelurahan.required' => 'Kelurahan saudara tidak serumah harus diisi',
+               'emergency_zip_code.required' => 'Kodepos saudara tidak serumah harus diisi',
 
            ]);
 
@@ -67,31 +86,56 @@ class UsersController extends Controller
                "message"=> $validation->messages(),
            ];
        }else{
-           PersonalInfo::create([
-               'uid'                    => Auth::id(),
-               'identity_number'        => $request->identity_number,
-               'first_name'             => $request->first_name,
-               'last_name'              => $request->last_name,
-               'gender'                 => $request->gender,
-               'place_of_birth'         => $request->pob,
-               'date_of_birth'          => date("Y-m-d", strtotime($request->dob)),
-               'address'                => $request->address,
-               'province'               => $request->province,
-               'city'                   => $request->city,
-               'zip_code'               => $request->zip_code,
-               'education'              => $request->education,
-               'npwp_number'            => $request->npwp_number,
-               'total_cc'               => $request->total_cc,
-               'bpjs_employee_number'   => $request->bpjs_employee_number,
-               'bpjs_health_number'     => $request->bpjs_employee_number,
-               'phone_number'           => $request->phone_number,
-               'whatsapp_number'        => $request->whatsapp_number,
-               'married_status'         => $request->married_status,
-               'mother_name'            => $request->mother_name,
-               'created_at'             => date('Y-m-d H:i:s'),
-               'updated_at'             =>date('Y-m-d H:i:s'),
 
-           ]);
+           DB::beginTransaction();
+           try{
+
+               PersonalInfo::create([
+                   'uid'                    => Auth::id(),
+                   'identity_number'        => $request->identity_number,
+                   'first_name'             => $request->first_name,
+                   'last_name'              => $request->last_name,
+                   'gender'                 => $request->gender,
+                   'place_of_birth'         => $request->pob,
+                   'date_of_birth'          => date("Y-m-d", strtotime($request->dob)),
+                   'address'                => $request->address,
+                   'province'               => $request->province,
+                   'city'                   => $request->city,
+                   'zip_code'               => $request->zip_code,
+                   'education'              => $request->education,
+                   'npwp_number'            => $request->npwp_number,
+                   'total_cc'               => $request->total_cc,
+                   'bpjs_employee_number'   => $request->bpjs_employee_number,
+                   'bpjs_health_number'     => $request->bpjs_employee_number,
+                   'phone_number'           => $request->phone_number,
+                   'whatsapp_number'        => $request->whatsapp_number,
+                   'married_status'         => $request->married_status,
+                   'mother_name'            => $request->mother_name,
+                   'created_at'             => date('Y-m-d H:i:s'),
+                   'updated_at'             =>date('Y-m-d H:i:s'),
+               ]);
+
+               EmergencyContact::create([
+                   'uid'                            => Auth::id(),
+                   'emergency_name'                 => $request->emergency_name,
+                   'id_siblings_master'             => $request->relationship_as,
+                   'emergency_phone'                => $request->emergency_phone,
+                   'emergency_full_address'         => $request->emergency_full_address,
+                   'emergency_province'             => $request->emergency_province,
+                   'emergency_city'                 => $request->emergency_city,
+                   'emergency_sub_kecamatan'        => $request->emergency_sub_kecamatan,
+                   'emergency_sub_kelurahan'        => $request->emergency_sub_kelurahan,
+                   'emergency_zip_code'             => $request->emergency_zip_code,
+                   'created_at'                     => date('Y-m-d H:i:s'),
+                   'updated_at'                     => date('Y-m-d H:i:s'),
+               ]);
+
+               DB::commit();
+           }
+           catch (Exception $e) {
+               DB::rollback();
+           }
+
 
            $json = [
                "status"=> true,
@@ -175,7 +219,7 @@ class UsersController extends Controller
                $filename_npwp_image = 'npwp_'.$uid.'_'.time(). '.' . $npwp_image->getClientOriginalExtension();
                $npwp_image->move($path, $filename_npwp_image);
            }
-           
+
            if($request->hasFile('business_npwp')) {
             $npwp_imagebusiness_npwp = $request->file('business_npwp');
             $filename_npwp_imagebusiness_npwp = 'npwp_'.$uid.'_'.time(). '.' . $npwp_imagebusiness_npwp->getClientOriginalExtension();
@@ -203,7 +247,6 @@ class UsersController extends Controller
                 $filename_npwp_imagebusiness_document = 'business_document'.$uid.'_'.time(). '.' . $npwp_imagebusiness_document->getClientOriginalExtension();
                 $npwp_imagebusiness_document->move($path, $filename_npwp_imagebusiness_document);
             }
-
             $get_user = UsersFile::where('uid',$uid)->first();
             $data_insert['uid'] = Auth::id();
             if(isset($request->identity_image)){
