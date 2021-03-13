@@ -14,12 +14,12 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Nama Perusahan<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness">
+                                <input type="text" value="{{$business->business_name ?? ''}}" class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness">
                             </div>
 
                             <div class="col">
                                 <h6>Kriteria Perusahan<span>*</span></h6>
-                                <select class="form-control " name="business_province">
+                                <select class="form-control" name="business_province">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
                                         <option value="{{$val->id}}">{{$val->title_bussiness}}</option>
@@ -31,7 +31,41 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Lama Bekerja sama<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="contoh (6 tahun)" id="business_partner" name="business_partner">
+                                <select class="form-control" name="business_partner">
+                                    <option value="1" > 0 - 24 month</option>
+                                    <option value="2" > 25 - 59 month</option>
+                                    <option value="3" > > 60</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <h6>Sewa Tempat Usaha<span>*</span></h6>
+                                <select class="form-control" name="business_location_status">
+                                    <option value="1" > Sewa Bulanan </option>
+                                    <option value="2" > Sewa Tahunan</option>
+                                    <option value="3" > Milik Pribadi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <h6>Lama Usaha<span>*</span></h6>
+                                <select class="form-control" name="lenght_of_business">
+                                    <option value="1" > 0 - 12 month</option>
+                                    <option value="2" > 13 - 24 month</option>
+                                    <option value="3" > 25 - 47 month</option>
+                                    <option value="4" > 48 - 59 month</option>
+                                    <option value="5" > > 60</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <h6>Status badan Usaha<span>*</span></h6>
+                                <select class="form-control" name="business_status">
+                                    <option value="1" > Tidak Berbadan Hukum / UD </option>
+                                    <option value="2" > Perusahaan Perseorangan (PO)</option>
+                                    <option value="3" > Firma</option>
+                                    <option value="4" > Persekutuan Komanditer (CV)</option>
+                                    <option value="5" > Perseroan Terbatas</option>
+                                </select>
                             </div>
                         </div>
 

@@ -348,6 +348,12 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
+$(document).ready(function () {
+    $('select').selectize({
+        sortField: 'text'
+    });
+});
+
 
 $(document).on('click' , '#request_loan_' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -358,7 +364,7 @@ $(document).on('click' , '#request_loan_' , function(){
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data: {period : $("#loan_period_value").text(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        data: {total_invoice:$('#request_loan_borrower').val(), period : $("#loan_period_value").text(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
         dataType:'json',
         beforeSend:function(){
             //$("#request_loan_").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);

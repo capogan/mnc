@@ -21,6 +21,7 @@ use function GuzzleHttp\json_encode;
 use App\LogRequestInvoice;
 use App\UsersFile;
 use App\BusinessInfo;
+use App\CreditScore;
 
 class BorrowerController extends Controller
 {
@@ -36,7 +37,11 @@ class BorrowerController extends Controller
     public function my_profile(Request $request){
 
         $uid = Auth::id();
-        $get_user = PersonalInfo::where('uid',$uid)->first();
+        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
+                    ->rightJoin('users' , 'users.id' , 'personal_info.uid')
+                    ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
+                    ->where('users.id',$uid)->first();
+        
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
@@ -45,27 +50,43 @@ class BorrowerController extends Controller
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
-        $file = UsersFile::where('uid',$uid)->first();
+        $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         $data = [
             'provinces' => $provinces,
             'regency' => $regency,
             'married_status' => $married_status,
             'get_user' =>$get_user,
             'get_email' =>$get_email,
+            /*'tanggungan' => CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
+                            ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
+                            ->where('category_score.status' , true)
+                            ->where('siap_code' , 'dependents_number')
+                            ->orderBy('id_category_score' , 'DESC')->get(),*/
             'education' =>$education,
             'siblings' =>$siblings,
             'industry' =>$industry,
             'criteria' =>$criteria,
-            'file' => $file
+            'file' => $file,
+            'business' => $business
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }
+
+    public function my_business(Request $request){
+        $uid = Auth::uid();
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
+    }
+
+    
+
 
     public function sumbit_loan(Request $request){
         $validation = Validator::make($request->all(), [
             'invoice_number' => 'required',
             'identity_numbers_invoice'=> 'required',
-            'period' => 'required'
+            'period' => 'required',
+            'total_invoice' => 'required'
         ]);
 
 
@@ -81,27 +102,34 @@ class BorrowerController extends Controller
             return json_encode(['status' => false , 'message' => 'Nomor invoice sudah diproses']);
         }
         $period = $request->period;
-        $invoice_id = $this->get_data_from_invoice($user_data);
+
+        //$invoice_id = $this->get_data_from_invoice($user_data);
+        $request->total_invoice = str_replace('Rp' ,'' , $request->total_invoice);
+        $request->total_invoice = str_replace('.' ,'' , $request->total_invoice);
+        $request->total_invoice = (int)( $request->total_invoice);
+
+        $invoice_id = $request->total_invoice;
+
         $config_admin_fee = FeeConfig::where('code_fee' , 'admin_fee')->first();
-        $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $invoice_id['total_invoice']) : 0;
+        $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $invoice_id) : 0;
         $interest_fee = FeeConfig::where('code_fee' , 'interest_fee')
         ->where(function ($query) use ($period) {
             $query->where('min', '<=', $period);
             $query->where('max', '>=', $period);
         })
         ->first();
-        $interest_loan = HelpCreditScoring::interest_loan($invoice_id['total_invoice'] , $period);
+        $interest_loan = HelpCreditScoring::interest_loan($invoice_id , $period);
         $data_loan = [
             'invoice_number' => $request->invoice_number,
             'uid' => Auth::id(),
-            'loan_amount' => $invoice_id['total_invoice'],
+            'loan_amount' => $invoice_id,
             'loan_period' => $request->period,
             'admin_fee_percentage' => $config_admin_fee->value,
             'admin_fee_amount' => $admin_fee,
             'interest_fee_percentage' => $interest_fee->value,
             'interest_fee_amount' => $interest_loan,
-            'disbrusement' => ($invoice_id['total_invoice'] - $admin_fee),
-            'repayment' => (($invoice_id['total_invoice'] + $admin_fee) + $interest_loan),
+            'disbrusement' => ($invoice_id - $admin_fee),
+            'repayment' => (($invoice_id + $admin_fee) + $interest_loan),
             'penalty_percentage' => 0,
             'penalty_max_percentage' => 45,
             'penalty_max_amount' => 45,
@@ -166,23 +194,27 @@ class BorrowerController extends Controller
             'postal_code_business' => 'required|numeric',
             'phone_number_business' => 'required|numeric',
             'business_kelurahan' => 'required',
-            'business_kecamatan' => 'required'
+            'business_kecamatan' => 'required',
+            'business_location_status' =>'required',
+            'lenght_of_business' =>'required'
         ],
             [
-                'name_of_bussiness.required' => 'required',
-                'business_province.required' => 'required',
-                'business_partner.required' => 'required',
-                'business_category.required' => 'required',
-                'operation_date.required' => 'required',
-                'number_of_employee.required' => 'required',
-                'business_description.required' => 'required',
-                'address_of_business.required' => 'required',
-                'province_business.required' => 'required',
-                'city_business.required' => 'required',
-                'postal_code_business.required' => 'required|numeric',
-                'phone_number_business.required' => 'required|numeric',
-                'business_kelurahan.required' => 'required',
-                'business_kecamatan.required' => 'required'
+                'name_of_bussiness.required' => 'Nama usaha harus diisi',
+                'business_province.required' => 'Provinsi harus diisi',
+                'business_partner.required' => 'Lama menjadi partner harus diisi',
+                'business_category.required' => 'Bisnis harus diisi',
+                'operation_date.required' => 'Lama operasi harus diisi',
+                'number_of_employee.required' => 'Jumlah karyawan harus diisi',
+                'business_description.required' => 'Deskripsi usaha harus diisi',
+                'address_of_business.required' => 'Alamat usaha harus diisi',
+                'province_business.required' => 'Provinsi tidak boleh kosong',
+                'city_business.required' => 'Kota tidak boleh kosong',
+                'postal_code_business.required' => 'Kode pos tidak boleh kosong',
+                'phone_number_business.required' => 'Nomor telepon harus diisi',
+                'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
+                'business_kecamatan.required' => 'Kecamatan tidak boleh kosong',
+                'business_location_status.required' => 'Pilih status tempat usaha',
+                'lenght_of_business.required' => 'Pilih lama kerja sama dengan supplier'
  
             ]);
  
@@ -207,6 +239,8 @@ class BorrowerController extends Controller
                 'business_sub_kelurahan' => $request->business_kelurahan,
                 'business_zip_code' => $request->postal_code_business,
                 'business_phone_number' => $request->phone_number_business,
+                'business_place_status' => $request->business_location_status,
+                'partnership_since' => $request->lenght_of_business,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],

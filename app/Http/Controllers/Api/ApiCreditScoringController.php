@@ -7,7 +7,10 @@ use App\CreditScore;
 use App\Helpers\HelpCreditScoring;
 use function GuzzleHttp\json_encode;
 use App\ScoreDecision;
+use App\User;
 use App\Http\Controllers\Api\ApiController;
+use App\PersonalInfo;
+use App\BusinessInfo;
 
 class ApiCreditScoringController extends ApiController
 {
@@ -51,6 +54,23 @@ class ApiCreditScoringController extends ApiController
             return $this->successResponse($response);
         }
         return $this->errorResponse("Server Error", 500);
+    }
+
+    public function check_my_credit_score(Request $request){    
+        $personal_info = PersonalInfo::select('personal_info.date_of_birth','personal_info.number_of_dependents','personal_business.*')
+                        ->leftJoin('personal_business' ,'personal_business.uid' , 'personal_info.uid')
+                        ->leftJoin('users_file' , 'users_file.uid' ,'personal_info.uid' )
+                        ->where('personal_info.uid' , $request->id)->first();
+        
+        $scoring = HelpCreditScoring::credit_score_siap($personal_info);
+        
+        print_r($scoring);
+        exit;
+        if($user_data){
+
+        }
+        // check decision
+        $credit_score = HelpCreditScoring::credit_score($user_data);
     }
     
 }
