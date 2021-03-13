@@ -30,10 +30,18 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="identity_image" name="identity_image" class="form-control">
+                                                <input type="file" id="identity_image" name="identity_image" class="file">
+		                                            <label for="identity_image">
+			                                           <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                         <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
-                                            <div class="file_preview">
+                                             <div class="file_preview">
                                                 <img src="{{url('/')}}/{{isset($file->identity_photo)}}" id="identity_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
@@ -50,8 +58,16 @@
                                     <div class="row mt-2">
                                         <div class="col">
                                             <div class="upload-file">
-                                                <div class="file-input">
-                                                    <input type="file" id="self_image" name="self_image" class="form-control">
+                                                 <div class="file-input">
+	                                                <input type="file" id="self_image" name="self_image" class="file">
+		                                            <label for="self_image">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
@@ -71,11 +87,21 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="npwp_image" name="npwp_image" class="form-control">
+                                                   
+                                                    <input type="file" id="npwp_image" name="npwp_image" class="file">
+		                                            <label for="npwp_image">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
                                                 <img src="{{url('/')}}/{{isset($file->npwp_photo)}}" id="npwp_image_preview" alt="" style="width:100%">
+                                           
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +117,16 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="business_location_image" name="business_location_image" class="form-control">
+                                                   
+                                                     <input type="file" id="business_location_image" name="business_location_image" class="file">
+		                                            <label for="business_location_image">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
@@ -111,11 +146,21 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="business_owner_file" name="business_owner_file" class="form-control">
+                                                  
+                                                    <input type="file" id="business_owner_file" name="business_owner_file" class="file">
+		                                            <label for="business_owner_file">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
                                                 <img src="{{url('/')}}/{{isset($file->bussiness_owner_photo)}}" id="business_owner_file_preview" alt="" style="width:100%">
+                                          
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +176,16 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="business_document" name="business_document" class="form-control">
+                                                   
+                                                 <input type="file" id="business_document" name="business_document" class="file">
+		                                            <label for="business_document">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
@@ -151,7 +205,16 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="business_activity_image" name="business_activity_image" class="form-control">
+                                                   
+                                                <input type="file" id="business_activity_image" name="business_activity_image" class="file">
+		                                            <label for="business_activity_image">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">
@@ -172,7 +235,16 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    <input type="file" id="business_npwp" name="business_npwp" class="form-control">
+                                                    
+                                                <input type="file" id="business_npwp" name="business_npwp" class="file">
+		                                            <label for="business_npwp">
+			                                            <svg
+				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                        viewBox="0 0 16 16">
+				                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+			                                            </svg>
+                                                            <span>Pilih Foto</span>
+		                                            </label>
                                                 </div>
                                             </div>
                                             <div class="file_preview">

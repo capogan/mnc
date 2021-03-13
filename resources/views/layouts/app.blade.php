@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
      <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+   
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
@@ -24,6 +24,7 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
+  
     <title>SIAP</title>
 
 </head>
