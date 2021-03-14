@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->bussiness_build_photo)}}" id="business_location_image_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->business_build_photo}}" id="business_location_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +121,11 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
+<<<<<<< HEAD
                                                 <img src="{{url('/')}}/{{isset($file->bussiness_owner_photo)}}" id="business_owner_file_preview" alt="" style="width:100%">
+=======
+                                                <img src="{{url('/')}}/{{$file->business_owner_photo}}" id="business_owner_file_preview" alt="" style="width:100%">
+>>>>>>> c3abcd18b9f463f6824affaa38cd958a5e08da87
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +186,7 @@
                                                 </div>
                                             </div>
                                             <div class="file_preview">
-                                                <img src="{{url('/')}}/{{isset($file->npwp_bussiness_photo)}}" id="business_npwp_preview" alt="" style="width:100%">
+                                                <img src="{{url('/')}}/{{$file->npwp_business_photo}}" id="business_npwp_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
                                     </div>

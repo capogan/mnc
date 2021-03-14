@@ -22,7 +22,11 @@
                                 <select class="form-control" name="business_province">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
-                                        <option value="{{$val->id}}">{{$val->title_bussiness}}</option>
+                                        @if(isset($business->id_cap_of_business))
+                                            <option value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{$val->title_business}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->title_business}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -32,39 +36,55 @@
                             <div class="col">
                                 <h6>Lama Bekerja sama<span>*</span></h6>
                                 <select class="form-control" name="business_partner">
-                                    <option value="1" > 0 - 24 month</option>
-                                    <option value="2" > 25 - 59 month</option>
-                                    <option value="3" > > 60</option>
+                                    <option >--Pilih--</option>
+                                    @foreach($partner_since as $key => $val)
+                                        @if(isset($business->partnership_since))
+                                            <option value="{{$val->id}}" {{  $business->partnership_since == $val->id ? "selected" : "" }} >{{$val->title}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->title}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col">
                                 <h6>Sewa Tempat Usaha<span>*</span></h6>
                                 <select class="form-control" name="business_location_status">
-                                    <option value="1" > Sewa Bulanan </option>
-                                    <option value="2" > Sewa Tahunan</option>
-                                    <option value="3" > Milik Pribadi</option>
+                                    <option >--Pilih--</option>
+                                    @foreach($building_status as $key => $val)
+                                        @if(isset($business->business_place_status))
+                                            <option value="{{$val->id}}" {{  $business->business_place_status== $val->id ? "selected" : "" }} >{{$val->place_status_name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->place_status_name}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Lama Usaha<span>*</span></h6>
-                                <select class="form-control" name="lenght_of_business">
-                                    <option value="1" > 0 - 12 month</option>
-                                    <option value="2" > 13 - 24 month</option>
-                                    <option value="3" > 25 - 47 month</option>
-                                    <option value="4" > 48 - 59 month</option>
-                                    <option value="5" > > 60</option>
+                                <select class="form-control" name="business_established_since">
+                                    <option >--Pilih--</option>
+                                    @foreach($estabilished as $key => $val)
+                                        @if(isset($business->business_established_since))
+                                            <option value="{{$val->id}}" {{  $business->business_established_since == $val->id ? "selected" : "" }} >{{$val->title}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->title}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col">
                                 <h6>Status badan Usaha<span>*</span></h6>
-                                <select class="form-control" name="business_status">
-                                    <option value="1" > Tidak Berbadan Hukum / UD </option>
-                                    <option value="2" > Perusahaan Perseorangan (PO)</option>
-                                    <option value="3" > Firma</option>
-                                    <option value="4" > Persekutuan Komanditer (CV)</option>
-                                    <option value="5" > Perseroan Terbatas</option>
+                                <select class="form-control" name="legality_status">
+                                <option >--Pilih--</option>
+                                    @foreach($legality as $key => $val)
+                                        @if(isset($business->legality_status))
+                                            <option value="{{$val->id}}" {{  $business->legality_status == $val->id ? "selected" : "" }} >{{$val->legality_name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->legality_name}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -75,31 +95,32 @@
                                 <select class="form-control " name="business_category">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($industry as $key => $val)
-                                        <option value="{{$val->id}}">{{$val->industry_sectore}}</option>
+                                        @if(isset($business->id_credit_score_income_factor))
+                                            <option value="{{$val->id}}" {{  $business->id_credit_score_income_factor == $val->id ? "selected" : "" }} >{{$val->industry_sectore}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->industry_sectore}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col">
-                                <h6>Tanggal Berdiri</h6>
-                                <input class="form-control" type="date"  name="operation_date" id="example-date-input" value="{">
                             </div>
                             <div class="col">
                                 <h6>Jumlah Pegawai</h6>
                                 <select class="form-control" name="number_of_employee">
-                                    <option selected=""> Pilih Pegawai</option>
-                                    <option>5</option>
-                                    <option>dst</option>
+                                <option selected=""> --Pilih--</option>
+                                    @foreach($employee as $key => $val)
+                                        @if(isset($business->total_employees))
+                                            <option value="{{$val->id}}" {{  $business->total_employees == $val->id ? "selected" : "" }} >{{$val->title}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->title}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Deskripsi perusahaan</h6>
-                                <textarea class="form-control" name="business_description" id="business_description" rows="2"></textarea>
+                                <textarea class="form-control" name="business_description" id="business_description" rows="2">{{$business->business_description ?? ''}}</textarea>
                             </div>
                         </div>
 
@@ -107,7 +128,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Alamat perusahaan</h6>
-                                <textarea class="form-control" name="address_of_business" id="alamatpt" rows="2"></textarea>
+                                <textarea class="form-control" name="address_of_business" id="alamatpt" rows="2">{{$business->business_full_address ?? ''}}</textarea>
                             </div>
                         </div>
 
@@ -117,7 +138,7 @@
                                 <select class="form-control" id="province" name="province_business">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  isset($get_user->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{  isset($business->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -127,7 +148,7 @@
                                 <select class="form-control" id="city" name="city_business">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ isset($get_user->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{ isset($business->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -155,11 +176,11 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kode Pos</h6>
-                                <input type="text" class="form-control" name="postal_code_business" placeholder="Kode Pos">
+                                <input type="text" class="form-control" value="{{$business->business_zip_code ?? ''}}" name="postal_code_business" placeholder="Kode Pos">
                             </div>
                             <div class="col">
                                 <h6>Nomor telepon kantor</h6>
-                                <input type="text" name="phone_number_business" class="form-control" placeholder="Nomor telepon kantor">
+                                <input type="text" name="phone_number_business"  value="{{$business->business_phone_number ?? ''}}" class="form-control" placeholder="Nomor telepon kantor">
                             </div>
                         </div>
                         <div class="form-group mt-5">
