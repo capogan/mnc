@@ -22,6 +22,12 @@ use App\LogRequestInvoice;
 use App\UsersFile;
 use App\BusinessInfo;
 use App\CreditScore;
+use App\Dependents;
+use App\BecomePartner;
+use App\BuildingStatus;
+use App\Estabilished;
+use App\Legality;
+use App\TotalEmployee;
 
 class BorrowerController extends Controller
 {
@@ -48,10 +54,20 @@ class BorrowerController extends Controller
         $married_status = MarriedStatus::get();
         $education = Education::get();
         $siblings = Siblings::get();
+        
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
+        $partner_since = BecomePartner::get();
+        $building_status = BuildingStatus::get();
+        $estabilished = Estabilished::get();
+        $legality = Legality::get();
+        $employee = TotalEmployee::get();
+        
+
+       
         $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*','personal_business.business_established_since')->where('users.id',$uid)->first();
+        //echo $business->business_established_since; exit;
         $data = [
             'provinces' => $provinces,
             'regency' => $regency,
@@ -64,9 +80,15 @@ class BorrowerController extends Controller
                             ->where('siap_code' , 'dependents_number')
                             ->orderBy('id_category_score' , 'DESC')->get(),*/
             'education' =>$education,
+            'dependents' => Dependents::get(),
             'siblings' =>$siblings,
             'industry' =>$industry,
             'criteria' =>$criteria,
+            'legality' => $legality,
+            'employee' => $employee,
+            'partner_since' => $partner_since,
+            'building_status' => $building_status,
+            'estabilished' => $estabilished,
             'file' => $file,
             'business' => $business
         ];
@@ -179,13 +201,12 @@ class BorrowerController extends Controller
     }
 
     public function add_personal_info(Request $request){
-
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
             'business_province' => 'required',
             'business_partner' => 'required',
             'business_category' => 'required',
-            'operation_date' => 'required',
+            'business_established_since' => 'required',
             'number_of_employee' => 'required',
             'business_description' => 'required',
             'address_of_business' => 'required',
@@ -196,14 +217,14 @@ class BorrowerController extends Controller
             'business_kelurahan' => 'required',
             'business_kecamatan' => 'required',
             'business_location_status' =>'required',
-            'lenght_of_business' =>'required'
+            'legality_status' =>'required'
         ],
             [
                 'name_of_bussiness.required' => 'Nama usaha harus diisi',
                 'business_province.required' => 'Provinsi harus diisi',
                 'business_partner.required' => 'Lama menjadi partner harus diisi',
                 'business_category.required' => 'Bisnis harus diisi',
-                'operation_date.required' => 'Lama operasi harus diisi',
+                'business_established_since.required' => 'Lama operasi harus diisi',
                 'number_of_employee.required' => 'Jumlah karyawan harus diisi',
                 'business_description.required' => 'Deskripsi usaha harus diisi',
                 'address_of_business.required' => 'Alamat usaha harus diisi',
@@ -214,7 +235,7 @@ class BorrowerController extends Controller
                 'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
                 'business_kecamatan.required' => 'Kecamatan tidak boleh kosong',
                 'business_location_status.required' => 'Pilih status tempat usaha',
-                'lenght_of_business.required' => 'Pilih lama kerja sama dengan supplier'
+                'legality_status.required' => 'Pilih status bisnis'
  
             ]);
  
@@ -224,12 +245,15 @@ class BorrowerController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
-            BusinessInfo::updateOrCreate([
+            BusinessInfo::updateOrCreate(
+            [
+                'uid' => Auth::id()
+            ],[
                 'uid' => Auth::id(),
                 'business_name' => $request->name_of_bussiness,
                 'id_cap_of_business' => $request->business_partner,
                 'id_credit_score_income_factor' => $request->business_category,
-                'business_established_since' => $request->operation_date,
+                'business_established_since' => $request->business_established_since,
                 'total_employees' => $request->number_of_employee,
                 'business_description' => $request->business_description,
                 'business_full_address' => $request->address_of_business,
@@ -240,12 +264,10 @@ class BorrowerController extends Controller
                 'business_zip_code' => $request->postal_code_business,
                 'business_phone_number' => $request->phone_number_business,
                 'business_place_status' => $request->business_location_status,
-                'partnership_since' => $request->lenght_of_business,
+                'partnership_since' => $request->business_partner,
+                'legality_status' => $request->legality_status,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'uid' => Auth::id()
             ]
         );
  
