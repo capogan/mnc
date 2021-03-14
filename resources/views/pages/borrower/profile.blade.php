@@ -53,7 +53,7 @@
 
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="service1">
-                                
+                                @include('pages.borrower.information.profile_information')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="service2">
                                     @include('pages.borrower.information.bussiness_information')
