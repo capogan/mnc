@@ -8,7 +8,7 @@ class UsersFile extends Model
 {
     protected $table = 'users_file';
     protected $fillable = [
-       'uid','identity_photo','self_photo','npwp_photo','bussiness_build_photo','siup_photo','bussiness_owner_photo','business_documents_photo',
-        'business_activity_photo','npwp_bussiness_photo','created_at','updated_at'
+       'uid','identity_photo','self_photo','npwp_photo','business_build_photo','siup_photo','business_owner_photo','business_documents_photo',
+        'business_activity_photo','npwp_business_photo','created_at','updated_at'
     ];
 }

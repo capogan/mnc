@@ -48,6 +48,7 @@ class UsersController extends Controller
            'emergency_sub_kecamatan' => 'required',
            'emergency_sub_kelurahan' => 'required',
            'emergency_zip_code' => 'required',
+           'dependents' => 'required',
        ],
            [
                'identity_number.required' => 'Nomor KTP harus diisi',
@@ -77,6 +78,7 @@ class UsersController extends Controller
                'emergency_sub_kecamatan.required' => 'Kecamatan saudara tidak serumah harus diisi',
                'emergency_sub_kelurahan.required' => 'Kelurahan saudara tidak serumah harus diisi',
                'emergency_zip_code.required' => 'Kodepos saudara tidak serumah harus diisi',
+               'dependents.required' => 'Jumlah tanggungan harus diisi',
 
            ]);
 
@@ -110,6 +112,7 @@ class UsersController extends Controller
                 'whatsapp_number'        => $request->whatsapp_number,
                 'married_status'         => $request->married_status,
                 'mother_name'            => $request->mother_name,
+                'number_of_dependents'   => $request->dependents,
                 'created_at'             => date('Y-m-d H:i:s'),
                 'updated_at'             =>date('Y-m-d H:i:s'),
             ] );
@@ -258,10 +261,10 @@ class UsersController extends Controller
                 $data_insert['npwp_photo'] = 'upload/'.$filename_self_image;
             }
             if(isset($request->business_location_image)){
-                $data_insert['bussiness_build_photo'] = 'upload/'.$filename_npwp_imagebusiness_location_image;
+                $data_insert['business_build_photo'] = 'upload/'.$filename_npwp_imagebusiness_location_image;
             }
             if(isset($request->business_owner_file)){
-                $data_insert['bussiness_owner_photo'] = 'upload/'.$filename_npwp_imagebusiness_owner_file;
+                $data_insert['business_owner_photo'] = 'upload/'.$filename_npwp_imagebusiness_owner_file;
             }
             if(isset($request->business_document)){
                 $data_insert['siup_photo'] = 'upload/'.$filename_npwp_imagebusiness_document;
@@ -270,7 +273,7 @@ class UsersController extends Controller
                 $data_insert['business_activity_photo'] = 'upload/'.$filename_npwp_imagebusiness_activity_image;
             }
             if(isset($request->business_npwp)){
-                $data_insert['npwp_bussiness_photo'] = 'upload/'.$filename_npwp_imagebusiness_npwp;
+                $data_insert['npwp_business_photo'] = 'upload/'.$filename_npwp_imagebusiness_npwp;
             }
            if($get_user){
                DB::beginTransaction();

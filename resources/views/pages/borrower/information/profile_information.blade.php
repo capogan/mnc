@@ -89,11 +89,15 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Status Pernikahan <span>*</span></h6>
-                                <select class="form-control" id="married_status" name="married_status">
-                                    <option value="">Pilih Status Pernikahan</option>
-                                    @foreach($married_status as $val)
-                                        <option value="{{$val->id}}" {{ isset($get_user->married_status ) == $val->id ? "selected" : "" }} >{{$val->status}}</option>
+                                <h6>Pendidikan Terakhir <span>*</span></h6>
+                                <select class="form-control" id="education" name="education">
+                                    <option>Pilih Pendidikan</option>
+                                    @foreach($education as $val)
+                                        @if(isset($get_user->education))
+                                            <option value="{{$val->id}}" {{ $get_user->education == $val->id ? "selected" : "" }} >{{$val->level}}</option>
+                                        @else
+                                            <option value="{{$val->id}}" >{{$val->level}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -104,21 +108,38 @@
                         </div>
 
                         <div class="row mt-4">
-                            <div class="col">
-                                <h6>Pendidikan Terakhir <span>*</span></h6>
-                                <select class="form-control" id="education" name="education">
-                                    <option>Pilih Pendidikan</option>
-                                    @foreach($education as $val)
-                                        <option value="{{$val->id}}" {{ isset($get_user->education) == $val->id ? "selected" : "" }} >{{$val->level}}</option>
+                        <div class="col">
+                                <h6>Status Pernikahan <span>*</span></h6>
+                                <select class="form-control" id="married_status" name="married_status">
+                                    <option value="">Pilih Status Pernikahan</option>
+                                    @foreach($married_status as $val)
+                                        @if(isset($get_user->married_status ))
+                                            <option value="{{$val->id}}" {{ $get_user->married_status == $val->id ? "selected" : "" }} >{{$val->status}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->status}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col">
+                                <h6>Jumlah Tanggungan<span>*</span></h6>
+                                    <select class="form-control" id="dependents" name="dependents">
+                                        <option> - </option>
+                                        @foreach($dependents as $val)
+                                            @if(isset($get_user->number_of_dependents ))
+                                                <option value="{{$val->id}}" {{ $get_user->number_of_dependents == $val->id ? "selected" : "" }} >{{$val->title}}</option>
+                                            @else
+                                                <option value="{{$val->id}}">{{$val->title}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Alamat <span>*</span></h6>
-                                <textarea class="form-control" name="address" id="address"> {{ isset($get_user->address) ? $get_user->address : '' }}"</textarea>
+                                <textarea class="form-control" name="address" id="address"> {{ isset($get_user->address) ? $get_user->address : '' }}</textarea>
                             </div>
                         </div>
 
@@ -128,7 +149,11 @@
                                 <select class="form-control" id="province" name="province">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  isset($get_user->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($get_user->province))
+                                        <option value="{{$val->id}}"  {{  $get_user->province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @else
+                                        <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -137,7 +162,11 @@
                                 <select class="form-control" id="city" name="city">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ isset($get_user->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($get_user->city))
+                                            <option value="{{$val->id}}"  {{ $get_user->city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -175,25 +204,6 @@
                                 <input type="text" class="form-control" placeholder="No BPJS Kesehatan" id="bpjs_health_number" name="bpjs_health_number" value="{{ isset($get_user->bpjs_health_number ) ? $get_user->bpjs_health_number : '' }}">
                             </div>
                         </div>
-
-                        
-
-                        
-
-                        <div class="row mt-4">
-                            <div class="col">
-                                <h6>Jumlah Tanggungan<span>*</span></h6>
-                                    <select class="form-control" id="dependents" name="dependents">
-                                        <option> - </option>
-                                        <option value="1">0</option>
-                                        <option value="2">1 Orang</option>
-                                        <option value="3">2 Orang</option>
-                                        <option value="4"> 2 Orang</option>
-                                    </select>
-                            </div>
-                        </div>
-
-
                         <hr>
                         <h4>Saudara tidak serumah</h4>
                         <div class="row mt-4">
@@ -206,7 +216,11 @@
                                 <select class="form-control" name="relationship_as" id="relationship_as">
                                     <option value="">Pilih Hubungan</option>
                                     @foreach($siblings as $val)
-                                        <option value="{{$val->id}}" {{ isset($get_user->id_siblings_master) == $val->id ? "selected" : "" }} >{{$val->sibling_name}}</option>
+                                        @if(isset($get_user->id_siblings_master))
+                                        <option value="{{$val->id}}" {{  $get_user->id_siblings_master== $val->id ? "selected" : "" }} >{{$val->sibling_name}}</option>
+                                        @else
+                                        <option value="{{$val->id}}" >{{$val->sibling_name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -228,7 +242,11 @@
                                 <select class="form-control" id="emergency_province" name="emergency_province">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  isset($get_user->emergency_province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($get_user->emergency_province))
+                                            <option value="{{$val->id}}"  {{ $get_user->emergency_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -237,7 +255,11 @@
                                 <select class="form-control" id="emergency_city" name="emergency_city">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ isset($get_user->emergency_city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($get_user->emergency_city))
+                                            <option value="{{$val->id}}"  {{ $get_user->emergency_city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}" >{{$val->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
