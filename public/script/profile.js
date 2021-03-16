@@ -348,11 +348,11 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
-$(document).ready(function () {
-    $('select').selectize({
-        sortField: 'text'
-    });
-});
+//$(document).ready(function () {
+    //$('select').selectize({
+       // sortField: 'text'
+    //});
+//});
 
 
 $(document).on('click' , '#request_loan_' , function(){
