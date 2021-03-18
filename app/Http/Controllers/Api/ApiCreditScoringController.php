@@ -62,7 +62,7 @@ class ApiCreditScoringController extends ApiController
                         ->leftJoin('users_file' , 'users_file.uid' ,'personal_info.uid' )
                         ->where('personal_info.uid' , $request->id)->first();
         
-        $scoring = HelpCreditScoring::credit_score_siap($personal_info);
+        $scoring = HelpCreditScoring::credit_score_siap($personal_info , $request->loan_id);
         
         print_r($scoring);
         exit;

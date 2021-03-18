@@ -7,6 +7,8 @@ use App\ScoreDecision;
 use App\FeeConfig;
 use function PHPUnit\Framework\exactly;
 use Illuminate\Support\Facades\DB;
+use App\ShortFall;
+use function GuzzleHttp\json_decode;
 
 class HelpCreditScoring {
     protected const DEF_ENC_KEY = "CREDISCORINGFORPCG";
@@ -83,7 +85,7 @@ class HelpCreditScoring {
         }
         return $score;
     }
-    public static function credit_score_siap($data){
+    public static function credit_score_siap($data , $loan_id){
         $score_entity = CreditScore::select('score', 'siap_code' ,'siap_master_id')
                         ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
                         ->where('category_score.status' , true)
@@ -92,23 +94,26 @@ class HelpCreditScoring {
         if($score_entity){
             foreach($score_entity as $item => $val){
                 if($val->siap_code == 'short_fall'){
-                    //self::shortfall_formula();
+                    $score += self::shortfall_formula($loan_id);
                 }
                 if($val->siap_code == 'date_of_birth'){
+                    
                     $usia = self::check_age(\Carbon\Carbon::parse($data->date_of_birth)->diff(\Carbon\Carbon::now())->format('%y'));
                     $score += $usia;
+                    //echo $val->siap_code.'-->'.$usia.'<br>';
                 }
                
                 $code = $val->siap_code;
                 if($val->siap_code != 'short_fall' && $val->siap_code != 'date_of_birth'){
                     if($data->$code == $val->siap_master_id){
                        $score += $val->score;
+                       //echo $val->siap_code.'-->'.$val->score.'<br>';
                     }
                 }
             }
         }
-        
-        
+        //echo $score; exit;
+        //exit;
         $min_credit_score_approve = DB::table('tb_config_credit_score')->where('code' , 'min_credit_score_approve')->first();
         $max_credit_score = DB::table('tb_config_credit_score')->where('code' , 'max_credit_score')->first();
 
@@ -117,17 +122,26 @@ class HelpCreditScoring {
         if($score_first_step < $min_credit_score_approve->value){
             return ['status' => false , 'message' => 'Tidak dapat diapprove. Credit score '.$score_first_step];
         }
+        //echo $score_first_step;
+
         $credibility_check = DB::table('credibility_score')->whereRaw($score_first_step.' BETWEEN min AND max')->first();
-        
+    
         $if_business = DB::table('credit_score_income_factory')->where('id' , $data->id_credit_score_income_factor)->first();
         
         $seconds_step = 0;
+        
+
+        //echo $credibility_check->max.'--'.$if_business->value;
 
         if($if_business){
             $seconds_step = $credibility_check->max - $if_business->value;
         }
+        //echo $seconds_step;
+
         $limit_of_loan = $credibility_check = DB::table('credibility_score')->whereRaw($seconds_step.' BETWEEN min AND max')->first();
         
+        //print_r($limit_of_loan);
+        //exit;
         $credibility_check = DB::table('cap_limit_credit')
                             ->where('cap_of_business_criteria_id' ,$data->id_cap_of_business)
                             ->where('credibility_score_id' ,$credibility_check->id)
@@ -137,6 +151,12 @@ class HelpCreditScoring {
             return ['status' => false , 'message' => 'Limit tidak ditemukan, silahkan lengkapi data.'];
         }  
         return ['status' => true , 'message' => ['credit_limit' => $credibility_check->maximal_loan , 'credibiliti_status' =>$limit_of_loan->title, 'credibiliti_percentage' =>$limit_of_loan->max .' %']];
+    }
+
+    public static function shortfall_formula($id_loan){
+        $ShortFall = ShortFall::where('id_loan' , $id_loan)->first();
+        $ShortFall = json_decode($ShortFall->shortfall , true);
+        echo $ShortFall['shortfall'];
     }
 
     public static function check_age($age){

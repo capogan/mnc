@@ -260,8 +260,11 @@ function check_interest(period){
                 //$('#total_purchase_loan').text(formatRupiah(res.data.profile_pcg.total_invoice.toString() , ','));
                 $('#interest_fee').text(res.data.loan_interest);
                 $('#monthly_invoice').text(res.data.period_loan);
+                $('#invoice_loan_').text(res.data.profile_pcg);
                 $('#total_repayment').text(res.data.repayment);
                 $('#admin_fee').text(res.data.admin_fee);
+                $('#invoice_loan_').text(res.data.loan_by_invoice);
+                $('#invoice_loan_requested').text(res.data.invoice_plus_admin_fee);
             }else{
                 //window.location.href = '/login'
             }
@@ -347,6 +350,13 @@ $('#check_invoice_form').on('click', function(event){
         }
     })
 });
+
+
+/*$(document).ready(function () {
+    $('select').selectize({
+        sortField: 'text'
+    });
+});*/
 
 
 

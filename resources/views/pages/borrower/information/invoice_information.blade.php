@@ -119,32 +119,45 @@
                                                                     <h2 class="pull-right load-load" id="total_purchase_loan">0</h2>
                                                                 </div>
                                                             </div>-->
-
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <div class="bg-light pinside30 outline">
+                                                                   Nilai Pembayaran Pembelian</span>
+                                                                    <h4 class="pull-right load-load" id="invoice_loan_">0</h4>
+                                                                </div>
+                                                            </div>
+                
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
                                                                     Admin Fee <span style="font-size: 10px !important;">(2,5%)</span>
-                                                                    <h2 class="pull-right load-load" id="admin_fee">0</h2>
+                                                                    <h4 class="pull-right load-load" id="admin_fee">0</h4>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <div class="bg-light pinside30 outline">
+                                                                   Pinjaman Diajukan</span>
+                                                                    <h2 class="pull-right load-load" id="invoice_loan_requested">0</h2>
                                                                 </div>
                                                             </div>
                                                             
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
-                                                                    INTEREST FEE TOTAL <span style="font-size: 10px !important;">(2%)</span>
-                                                                    <h2 class="pull-right load-load" id="interest_fee">0</h2>
+                                                                    Bunga <span style="font-size: 10px !important;">(2%)</span>
+                                                                    <h4 class="pull-right load-load" id="interest_fee">0</h4>
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                                <div class="bg-light pinside30 outline">
-                                                                    Tagihan Pembayaran
-                                                                    <h2 class="pull-right" id="monthly_invoice"></h2>
-                                                                </div>
-                                                            </div>
+                                                            </div>  
 
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
                                                                     Total Pembayaran
-                                                                    <h2 class="pull-right" id="total_repayment"></h2>
+                                                                    <h2 class="pull-right" id="total_repayment">0</h2>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <div class="bg-light pinside30 outline">
+                                                                    Detail Cicilan
+                                                                    <h4 class="pull-right" id="monthly_invoice"></h4>
                                                                 </div>
                                                             </div>
 

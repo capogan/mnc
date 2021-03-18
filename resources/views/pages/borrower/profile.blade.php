@@ -78,7 +78,9 @@
         <script src="{{ asset('/script/profile.js') }}"></script>
         <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/selectize.min.js" integrity="sha512-JiDSvppkBtWM1f9nPRajthdgTCZV3wtyngKUqVHlAs0d5q72n5zpM3QMOLmuNws2vkYmmLn4r1KfnPzgC/73Mw==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap2.css" integrity="sha512-NkKdMfG7MzwPkAqUdt+Vu3Ogx6NDda/P1N6dIGiQcGCtZuA22wIreJYP7I7G06yQAfomG3+8qZwUjKfhR1p/+Q==" crossorigin="anonymous" />
+
         <script>
   var inputs = document.querySelectorAll( '.file' );
 

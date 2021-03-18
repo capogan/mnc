@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ShortFall.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/business_location_image40_1615740369.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/ktp_40_1615740156.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/ktp_40_1615740369.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/npwp_40_1615740369.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/self_40_1615740369.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" afterDir="false" />
@@ -18,122 +25,15 @@
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/HelpCreditScoring.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/HelpCreditScoring.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiCreditScoringController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiCreditScoringController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiPCGController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiPCGController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/script/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image18_1615464231.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image18_1615464660.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image18_1615465573.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_activity_image40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document18_1615462393.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document18_1615482079.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_document40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image18_1615462393.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731672.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731684.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731722.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731736.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615731757.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_location_image40_1615732090.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file18_1615462393.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731684.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731722.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731736.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731757.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731791.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/business_owner_file40_1615731888.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615462393.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615481865.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615481872.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615482174.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615482214.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_18_1615483701.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_36_1615648749.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/ktp_40_1615731654.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_18_1615462393.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_18_1615462393.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731736.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731757.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731776.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/npwp_40_1615731888.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_18_1615462393.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_18_1615462603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_18_1615464686.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_18_1615465515.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_18_1615482079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_37_1615569115.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_37_1615569128.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731537.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731540.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/self_40_1615731596.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/file_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/file_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +55,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Siap-Admin" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>

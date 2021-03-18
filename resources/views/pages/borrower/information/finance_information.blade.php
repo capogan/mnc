@@ -6,14 +6,41 @@
                     <div class=" ">
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Informasi Transaksi berjalan</h6>
+                                <h6>Pengajuan Pinjaman</h6>
                                 <hr>
                                 </hr>
                             </div>
                         </div>
             
                         <div class="row mt-2">
-                            <table class="table table-bordered"> <thead> <tr> <th>#</th> <th>First Name</th> <th>Last Name</th> <th>Username</th> </tr> </thead> <tbody> <tr> <th scope="row">1</th> <td>Mark</td> <td>Otto</td> <td>@mdo</td> </tr> <tr> <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr> <tr> <th scope="row">3</th> <td>Larry</td> <td>the Bird</td> <td>@twitter</td> </tr> </tbody> </table>
+                            <table class="table table-bordered"> 
+                                <thead> 
+                                    <tr> 
+                                        <th>No</th> 
+                                        <th>Nomor Invoice</th> 
+                                        <th>Pinjaman diajukan</th> 
+                                        <th>Status Pinjaman</th> 
+                                        <th>Tanggal Permintaan</th> 
+                                        <th>Tanggal disetujui</th> 
+                                        <th></th> 
+                                    </tr> 
+                                </thead> 
+                                <tbody> 
+                                    @if($request_loan)
+                                    @foreach($request_loan as $item)
+                                        <tr> 
+                                            <th scope="row">1</th> 
+                                            <td>{{$item->invoice_number}}</td> 
+                                            <td>Rp {{ number_format(($item->loan_amount + $item->admin_fee_amount) ,0,',','.') }}</td> 
+                                            <td><span class="label label-warning">{{$item->request_loan_status ?? 'pending'}}</span></td> 
+                                            <td>{{date('Y-m-d' , strtotime($item->created_at))}}</td> 
+                                            <td></td> 
+                                            <td><a href="#" class="btn btn-default btn-xs"> Detail </a></td> 
+                                        </tr>
+                                        @endforeach 
+                                    @endif
+                                </tbody> 
+                            </table>
                         </div>
                         
 
@@ -24,4 +51,22 @@
 
         </div>
     </div>
-</div><?php
+</div>
+
+<style>
+    .label{
+        display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    }
+    .label-warning {
+    background-color: #f0ad4e;
+}
+    </style>
