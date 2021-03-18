@@ -17,7 +17,7 @@
 
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-
+                                    <input type="hidden" name="group" id="group" value="{{$group}}">
                                     <div class="form-group input-group">
                                         <input name="name" id="name" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" type="text">
                                         @error('name')
@@ -50,7 +50,7 @@
                                     </div> <!-- form-group// -->
 
                                     <div class="form-group  input-group">
-                                        <select class="form-control">
+                                        <select class="form-control" name="level" id="level">
                                             <option>--Pilih Salah Satu--</option>
                                             <option value="individu">Individu</option>
                                             <option value="bisnis">Bisnis</option>
