@@ -7,17 +7,13 @@
                         <div class="col">
                             <div class="section-title ">
                                 <!-- section title start-->
-                                <p>Isi Informasi Anda mengenai data Informasi Bisnis.</p>
+
 
                             </div>
                         </div>
                         <form id="file_upload_image" enctype="multipart/form-data">
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <h6>Berkas Personal </h6>
-                                    <hr></hr>
-                                </div>
-                            </div>
+                            <h3>Unggah Berkas</h3>
+                            <hr>
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="row mt-2">
@@ -46,7 +42,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="row mt-2">
@@ -54,7 +50,7 @@
                                             <p>Unggah Foto Diri *</p>
                                         </div>
                                     </div>
-        
+
                                     <div class="row mt-2">
                                         <div class="col">
                                             <div class="upload-file">
@@ -87,7 +83,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                   
+
                                                     <input type="file" id="npwp_image" name="npwp_image" class="file">
 		                                            <label for="npwp_image">
 			                                            <svg
@@ -101,7 +97,7 @@
                                             </div>
                                             <div class="file_preview">
                                                 <img src="{{url('/')}}/{{$file->npwp_photo ?? ''}}" id="npwp_image_preview" alt="" style="width:100%">
-                                           
+
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +113,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                   
+
                                                      <input type="file" id="business_location_image" name="business_location_image" class="file">
 		                                            <label for="business_location_image">
 			                                            <svg
@@ -146,7 +142,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                  
+
                                                     <input type="file" id="business_owner_file" name="business_owner_file" class="file">
 		                                            <label for="business_owner_file">
 			                                            <svg
@@ -175,7 +171,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                   
+
                                                  <input type="file" id="business_document" name="business_document" class="file">
 		                                            <label for="business_document">
 			                                            <svg
@@ -204,7 +200,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                   
+
                                                 <input type="file" id="business_activity_image" name="business_activity_image" class="file">
 		                                            <label for="business_activity_image">
 			                                            <svg
@@ -222,7 +218,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-xl-6">
                                     <div class="row mt-2">
                                         <div class="col">
@@ -234,7 +230,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                    
+
                                                 <input type="file" id="business_npwp" name="business_npwp" class="file">
 		                                            <label for="business_npwp">
 			                                            <svg

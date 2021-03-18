@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ShortFall.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/business_location_image40_1615740369.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/ktp_40_1615740156.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/ktp_40_1615740369.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/npwp_40_1615740369.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/self_40_1615740369.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Helpers/Utils.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/register_lender.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/app_auth.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/LoanRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/LoanRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_04_164127_create_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_04_164127_create_request_loan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home.blade.php" afterDir="false" />
@@ -25,15 +24,32 @@
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/HelpCreditScoring.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/HelpCreditScoring.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiCreditScoringController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiCreditScoringController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiPCGController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiPCGController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/BusinessInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/BusinessInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2017_05_02_140432_create_provinces_tables.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2017_05_02_140444_create_regencies_tables.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_28_155508_create_personal_info.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_28_183100_create_married_status.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_28_191113_create_education.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_01_075311_create_users_file.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/script/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/file_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/file_information.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

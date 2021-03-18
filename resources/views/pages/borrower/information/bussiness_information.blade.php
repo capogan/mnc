@@ -4,14 +4,10 @@
         <div class=" bg-white ">
             <div class="contact-form mb60">
                 <div class=" ">
-                    <div class="col">
-                        <div class="mb60  section-title  ">
-                            <!-- section title start-->
-                            <h3>Informasi Bisnis</h3>
-                            <hr>
-                        </div>
-                    </div>
+
                     <form id="form_borrower_business_information">
+                        <h3>Informasi Bisnis</h3>
+                        <hr>
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Nama Perusahan<span>*</span></h6>
@@ -139,7 +135,7 @@
                                 <select class="form-control" id="province" name="province_business">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  isset($business->province) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{  $business->business_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -149,7 +145,7 @@
                                 <select class="form-control" id="city" name="city_business">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ isset($business->city) == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        <option value="{{$val->id}}"  {{ $business->business_city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -158,19 +154,11 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan <span>*</span></h6>
-                                <select class="form-control" name="business_kecamatan">
-                                    <option selected=""> Pilih Kecamatan</option>
-                                    <option>Gambir</option>
-                                    <option>dst</option>
-                                </select>
+                               <input type="text" name="business_kecamatan"class="form-control" value="{{$business->business_sub_kecamatan ?? ''}}">
                             </div>
                             <div class="col">
                                 <h6>Kelurahan <span>*</span></h6>
-                                <select class="form-control" name="business_kelurahan">
-                                    <option selected=""> Pilih Kelurahan</option>
-                                    <option>Cideng</option>
-                                    <option>dst</option>
-                                </select>
+                                <input type="text" name="business_kelurahan"class="form-control" value="{{$business->business_sub_kelurahan ?? ''}}">
                             </div>
                         </div>
 
@@ -192,21 +180,21 @@
                                 <h6>Rata-rata Pendapatan 6 bulan terakhir</h6>
                                 <select class="form-control" name="revenue"id="revenue">
                                     <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus">Minus</option>
-                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
-                                    <option value="> Rp. 30.000.000">> Rp. 30.000.000</option>
+                                    <option value="minus" {{ $business->average_sales_revenue_six_month == 'minus' ? "selected" : "" }}>Minus</option>
+                                    <option value="< Rp. 10.000.000" {{ $business->average_sales_revenue_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
+                                    <option value="> Rp. 30.000.000" {{ $business->average_sales_revenue_six_month == '> Rp. 30.000.000' ? "selected" : "" }}>> Rp. 30.000.000</option>
                                 </select>
                             </div>
                             <div class="col">
                                 <h6>Rata-rata Keuntungan 6 bulan terakhir</h6>
                                 <select class="form-control" name="profit"id="profit">
                                     <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus">Minus</option>
-                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
-                                    <option value="Rp. 10.000.001 - Rp. 30.000.000">Rp. 10.000.001 - Rp. 30.000.000</option>
-                                    <option value="Rp. 30.000.001 - 50.000.000">Rp. 30.000.001 - 50.000.000</option>
-                                    <option value="Rp. 50.000.001 - 100.000.000">Rp.50.000.001 - 100.000.000</option>
-                                    <option value="> Rp. 100.000.000">> Rp. 100.000.000</option>
+                                    <option value="minus" {{ $business->average_monthly_profit_six_month == 'minus' ? "selected" : "" }}>Minus</option>
+                                    <option value="< Rp. 10.000.000" {{ $business->average_monthly_profit_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.001 - Rp. 30.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 10.000.001 - Rp. 30.000.000' ? "selected" : "" }}>Rp. 10.000.001 - Rp. 30.000.000</option>
+                                    <option value="Rp. 30.000.001 - 50.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 30.000.001 - 50.000.000' ? "selected" : "" }}>Rp. 30.000.001 - 50.000.000</option>
+                                    <option value="Rp. 50.000.001 - 100.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 50.000.001 - 100.000.000' ? "selected" : "" }}>Rp.50.000.001 - 100.000.000</option>
+                                    <option value="> Rp. 100.000.000" {{ $business->average_monthly_profit_six_month == '> Rp. 100.000.000' ? "selected" : "" }}>> Rp. 100.000.000</option>
                                 </select>
                             </div>
                         </div>
@@ -215,12 +203,12 @@
                                 <h6>Rata-rata Pengeluaran 6 bulan terakhir</h6>
                                 <select class="form-control" name="expenditure"id="expenditure">
                                     <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus">Minus</option>
-                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
-                                    <option value="Rp. 10.000.001 - Rp. 30.000.000">Rp. 10.000.001 - Rp. 30.000.000</option>
-                                    <option value="Rp. 30.000.001 - 50.000.000">Rp. 30.000.001 - 50.000.000</option>
-                                    <option value="Rp. 50.000.001 - 100.000.000">Rp.50.000.001 - 100.000.000</option>
-                                    <option value="> Rp. 100.000.000">> Rp. 100.000.000</option>
+                                    <option value="minus" {{ $business->average_monthly_expenditure_six_month == 'minus' ? "selected" : "" }}>Minus</option>
+                                    <option value="< Rp. 10.000.000" {{ $business->average_monthly_expenditure_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.001 - Rp. 30.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 10.000.001 - Rp. 30.000.000' ? "selected" : "" }}>Rp. 10.000.001 - Rp. 30.000.000</option>
+                                    <option value="Rp. 30.000.001 - 50.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 30.000.001 - 50.000.000' ? "selected" : "" }}>Rp. 30.000.001 - 50.000.000</option>
+                                    <option value="Rp. 50.000.001 - 100.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 50.000.001 - 100.000.000' ? "selected" : "" }}>Rp.50.000.001 - 100.000.000</option>
+                                    <option value="> Rp. 100.000.000" {{ $business->average_monthly_expenditure_six_month == '> Rp. 100.000.000' ? "selected" : "" }}>> Rp. 100.000.000</option>
                                 </select>
                             </div>
                         </div>

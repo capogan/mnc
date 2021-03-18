@@ -66,7 +66,7 @@ class BorrowerController extends Controller
 
 
         $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*','personal_business.business_established_since')->where('users.id',$uid)->first();
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         //echo $business->business_established_since; exit;
         $data = [
             'provinces' => $provinces,

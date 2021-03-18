@@ -4,45 +4,41 @@
             <div class=" bg-white ">
                 <div class="contact-form mb60">
                     <div class=" ">
-                        <div class="row mt-4">
-                            <div class="col">
-                                <h6>Pengajuan Pinjaman</h6>
-                                <hr>
-                                </hr>
-                            </div>
-                        </div>
-            
+
                         <div class="row mt-2">
-                            <table class="table table-bordered"> 
-                                <thead> 
-                                    <tr> 
-                                        <th>No</th> 
-                                        <th>Nomor Invoice</th> 
-                                        <th>Pinjaman diajukan</th> 
-                                        <th>Status Pinjaman</th> 
-                                        <th>Tanggal Permintaan</th> 
-                                        <th>Tanggal disetujui</th> 
-                                        <th></th> 
-                                    </tr> 
-                                </thead> 
-                                <tbody> 
+                            <h3>Pengajuan Pinjaman</h3>
+                            <hr>
+
+                            <table class="table table-bordered mt-4">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nomor Invoice</th>
+                                        <th>Pinjaman diajukan</th>
+                                        <th>Status Pinjaman</th>
+                                        <th>Tanggal Permintaan</th>
+                                        <th>Tanggal disetujui</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @if($request_loan)
                                     @foreach($request_loan as $item)
-                                        <tr> 
-                                            <th scope="row">1</th> 
-                                            <td>{{$item->invoice_number}}</td> 
-                                            <td>Rp {{ number_format(($item->loan_amount + $item->admin_fee_amount) ,0,',','.') }}</td> 
-                                            <td><span class="label label-warning">{{$item->request_loan_status ?? 'pending'}}</span></td> 
-                                            <td>{{date('Y-m-d' , strtotime($item->created_at))}}</td> 
-                                            <td></td> 
-                                            <td><a href="#" class="btn btn-default btn-xs"> Detail </a></td> 
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>{{$item->invoice_number}}</td>
+                                            <td>Rp {{ number_format(($item->loan_amount + $item->admin_fee_amount) ,0,',','.') }}</td>
+                                            <td><span class="label label-warning">{{Utils::convert_status($item->status) }}</span></td>
+                                            <td>{{date('Y-m-d' , strtotime($item->created_at))}}</td>
+                                            <td></td>
+                                            <td><a href="#" class="btn btn-default btn-xs"> Detail </a></td>
                                         </tr>
-                                        @endforeach 
+                                        @endforeach
                                     @endif
-                                </tbody> 
+                                </tbody>
                             </table>
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -52,21 +48,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .label{
-        display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    }
-    .label-warning {
-    background-color: #f0ad4e;
-}
-    </style>

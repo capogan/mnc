@@ -29,10 +29,10 @@ Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('su
 //Users
 Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('add.personal.info');
 Route::post('/add/personal/business', 'UsersController@add_personal_business')->name('add.personal.info');
-
 Route::post('/upload/file', 'UsersController@upload_file')->name('upload.file.post');
 
-
+//Route::get('/pendanaan/{level}', 'BorrowerController@my_profile')->name('borrower.personal.profile');
+Route::get('register/{group_id}', 'Auth\RegisterController@showRegistrationForm');
 
 
 Route::get('/logout', function () {

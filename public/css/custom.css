@@ -7,10 +7,10 @@
     align-items: center;
     justify-items: center;
     border: 1px solid #BCBCBC;
-  
+
     box-sizing: border-box;
     color: #ffffff;
-  
+
     box-sizing: border-box;
 }
 
@@ -26,7 +26,7 @@
     font-size: 0.8em;
     font-weight: 700;
     color: #f51f8a;
-    
+
     background-color: #15549a;
     display: inline-block;
 }
@@ -79,8 +79,33 @@
   border: 2px solid #f51f8a;
 }
 
+.mt-4, .my-4 {
+    margin-top: 1.5rem!important;
+}
+.selectize-input {
+    min-height: 50px !important;
+}
+.selectize-input>* {
+    margin-top: 10px !important;
+}
 
- 
+.label{
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.label-warning {
+    background-color: #f0ad4e;
+}
 
 
-  
+
+
+

@@ -72,4 +72,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    protected  function showRegistrationForm(){
+        return view('auth.register_lender');
+    }
 }

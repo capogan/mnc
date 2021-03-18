@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_auth')
 
 @section('content')
     <div class="container-fluid" style="height: 100vh; display: block;">
@@ -39,7 +39,7 @@
                                     <div class="form-group input-group">
                                         <input name="password" id="password" class="form-control  @error('password') is-invalid @enderror" placeholder="Buat Password" type="password">
                                         @error('password')
-                                             <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                         @enderror
@@ -52,8 +52,8 @@
                                     <div class="form-group  input-group">
                                         <select class="form-control">
                                             <option>--Pilih Salah Satu--</option>
-                                            <option value="1">Borrower</option>
-                                            <option value="2">Lender</option>
+                                            <option value="individu">Individu</option>
+                                            <option value="bisnis">Bisnis</option>
                                         </select>
                                     </div> <!-- form-group// -->
 
@@ -96,9 +96,9 @@
                 </div>
             </div>
         </div>
-{{--@section('js')--}}
-{{--    <script src="{{ asset('/script/register.js') }}"></script>--}}
-{{--    --}}
-{{--@endsection--}}
+    {{--@section('js')--}}
+    {{--    <script src="{{ asset('/script/register.js') }}"></script>--}}
+    {{--    --}}
+    {{--@endsection--}}
 
 @endsection

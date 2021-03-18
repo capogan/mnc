@@ -295,14 +295,4 @@
 
     </div>
 </div>
-<style>
-    .mt-4, .my-4 {
-        margin-top: 1.5rem!important;
-    }
-    .selectize-input {
-    min-height: 50px !important;
-    }
-    .selectize-input>* {
-        margin-top: 10px !important;
-    }
-    </style>
+
