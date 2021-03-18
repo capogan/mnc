@@ -90,7 +90,8 @@ class BorrowerController extends Controller
             'building_status' => $building_status,
             'estabilished' => $estabilished,
             'file' => $file,
-            'business' => $business
+            'business' => $business,
+            'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }

@@ -215,7 +215,9 @@ class ApiPCGController extends ApiController
                     'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account) , 0 , '.' ,','),
                     'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account)),
                     'loan_request_message' => 'Maaf , Invoice Kamu melebihi Kredit limit.',
-                    'profile_pcg' => $data_pcg_account
+                    'profile_pcg' => $data_pcg_account,
+                    'loan_by_invoice' =>'Rp '.number_format($data_pcg_account , 0 , '.' ,','),
+                    'invoice_plus_admin_fee' => 'Rp '.number_format(($data_pcg_account + $admin_fee) , 0 , '.' ,',')
                 ];
             }else{
                 $response = [
@@ -227,7 +229,9 @@ class ApiPCGController extends ApiController
                     'repayment' => 'Rp '.number_format(($interest_loan + $admin_fee + $data_pcg_account) , 0 , '.' ,','),
                     'period_loan' => self::monthly_repayment($loan_period_req, ($interest_loan + $admin_fee + $data_pcg_account)),
                     'loan_request_message' => 'Klik tombol ajukan pinjaman untuk melanjutkan proses.',
-                    'profile_pcg' => $data_pcg_account
+                    'profile_pcg' => $data_pcg_account,
+                    'loan_by_invoice' =>'Rp '.number_format($data_pcg_account , 0 , '.' ,','),
+                    'invoice_plus_admin_fee' => 'Rp '.number_format(($data_pcg_account + $admin_fee) , 0 , '.' ,',')
                 ];
             }
         }else{
