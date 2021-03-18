@@ -4,11 +4,12 @@
             <div class="contact-form mb60">
                 <div class=" ">
                     <p>
-                        Isi informasi Anda mengenai data pribadi seperti alamat, nomor kontak, dst.</p>
+
                     <form id="personal_info_form">
                         <input type="hidden" name="member" id="member">
+
+                        <h3>Informasi Data Pribadi</h3>
                         <hr>
-                        <h4>Informasi Data Pribadi</h4>
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>No KTP <span>*</span></h6>
@@ -36,7 +37,7 @@
                                 <input type="text" class="form-control" placeholder="Nomor Whatsapp" id="whatsapp_number" name="whatsapp_number" value="{{isset($get_user->whatsapp_number ) ? $get_user->whatsapp_number : '' }}" >
                             </div>
                         </div>
-                        
+
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Email <span>*</span></h6>
@@ -177,7 +178,7 @@
                                 <h6>Kode Pos <span>*</span></h6>
                                 <input type="text" class="form-control" placeholder="Kode Pos" id="zip_code" name="zip_code" value="{{ isset($get_user->zip_code) ? $get_user->zip_code : '' }}">
                             </div>
-                            
+
                         </div>
 
                         <hr>
@@ -194,7 +195,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-4">
+                        <div class="row mt-4 mb-4">
                             <div class="col">
                                 <h6>No BPJS Ketenagakerjaan</h6>
                                 <input type="text" class="form-control" placeholder="No BPJS Ketenagakerjaan" id="bpjs_employee_number" name="bpjs_employee_number" value="{{ isset($get_user->bpjs_employee_number) ? $get_user->bpjs_employee_number : '' }}">
@@ -204,8 +205,9 @@
                                 <input type="text" class="form-control" placeholder="No BPJS Kesehatan" id="bpjs_health_number" name="bpjs_health_number" value="{{ isset($get_user->bpjs_health_number ) ? $get_user->bpjs_health_number : '' }}">
                             </div>
                         </div>
+
+                        <h3>Informasi Kerabat</h3>
                         <hr>
-                        <h4>Saudara tidak serumah</h4>
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nama <span>*</span></h6>

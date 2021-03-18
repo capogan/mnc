@@ -223,7 +223,7 @@ $('#file_upload_image').on('submit', function(event){
 //check_invoice_form
 
 $("#loan_period").bind(
-    "slider:changed", function (event, data) {              
+    "slider:changed", function (event, data) {
         $("#loan_period_value").html(data.value.toFixed(0));
         check_interest(data.value.toFixed(0));
     }
@@ -348,11 +348,6 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
-//$(document).ready(function () {
-    //$('select').selectize({
-       // sortField: 'text'
-    //});
-//});
 
 
 $(document).on('click' , '#request_loan_' , function(){
@@ -376,7 +371,7 @@ $(document).on('click' , '#request_loan_' , function(){
             $('#error_response_from_limit').html('');
             var res = response;
             if(res.status == 'success'){
-                
+
             }else{
                     var title = res.status;
                     bootbox.alert({
@@ -384,7 +379,7 @@ $(document).on('click' , '#request_loan_' , function(){
                     message: res.message,
                     centerVertical:true,
                     onShow: function(e) {
-                        
+
                     },
                     callback: function() {
                         btn.removeAttr("disabled");
@@ -395,6 +390,9 @@ $(document).on('click' , '#request_loan_' , function(){
             //$(".table-invoice").html(response.data).fadeIn('slow');
         }
     })
+    $('select').selectize({
+        sortField: 'text'
+    });
 });
 
 

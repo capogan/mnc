@@ -7,7 +7,8 @@
                     <div class="col">
                         <div class="mb60  section-title  ">
                             <!-- section title start-->
-                            <p>Isi Informasi Anda mengenai data Informasi Bisnis.</p>
+                            <h3>Informasi Bisnis</h3>
+                            <hr>
                         </div>
                     </div>
                     <form id="form_borrower_business_information">
@@ -127,14 +128,14 @@
 
                         <div class="row mt-5">
                             <div class="col">
-                                <h6>Alamat perusahaan</h6>
+                                <h6>Alamat perusahaan <span>*</span></h6>
                                 <textarea class="form-control" name="address_of_business" id="alamatpt" rows="2">{{$business->business_full_address ?? ''}}</textarea>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Propinsi</h6>
+                                <h6>Propinsi <span>*</span></h6>
                                 <select class="form-control" id="province" name="province_business">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
@@ -144,7 +145,7 @@
 
                             </div>
                             <div class="col">
-                                <h6>Kota</h6>
+                                <h6>Kota <span>*</span></h6>
                                 <select class="form-control" id="city" name="city_business">
                                     <option value="">Pilih Kota</option>
                                     @foreach($regency as $key => $val)
@@ -156,7 +157,7 @@
 
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Kecamatan</h6>
+                                <h6>Kecamatan <span>*</span></h6>
                                 <select class="form-control" name="business_kecamatan">
                                     <option selected=""> Pilih Kecamatan</option>
                                     <option>Gambir</option>
@@ -164,7 +165,7 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <h6>Kelurahan</h6>
+                                <h6>Kelurahan <span>*</span></h6>
                                 <select class="form-control" name="business_kelurahan">
                                     <option selected=""> Pilih Kelurahan</option>
                                     <option>Cideng</option>
@@ -173,19 +174,60 @@
                             </div>
                         </div>
 
-                        <div class="row mt-4">
+                        <div class="row mt-4 mb-4">
                             <div class="col">
-                                <h6>Kode Pos</h6>
+                                <h6>Kode Pos <span>*</span></h6>
                                 <input type="text" class="form-control" value="{{$business->business_zip_code ?? ''}}" name="postal_code_business" placeholder="Kode Pos">
                             </div>
                             <div class="col">
-                                <h6>Nomor telepon kantor</h6>
+                                <h6>Nomor telepon kantor <span>*</span></h6>
                                 <input type="text" name="phone_number_business"  value="{{$business->business_phone_number ?? ''}}" class="form-control" placeholder="Nomor telepon kantor">
+                            </div>
+                        </div>
+
+                        <h3>Informasi Keuangan</h3>
+                        <hr>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h6>Rata-rata Pendapatan 6 bulan terakhir</h6>
+                                <select class="form-control" name="revenue"id="revenue">
+                                    <option value="">--Pilih Salah Satu--</option>
+                                    <option value="minus">Minus</option>
+                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
+                                    <option value="> Rp. 30.000.000">> Rp. 30.000.000</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <h6>Rata-rata Keuntungan 6 bulan terakhir</h6>
+                                <select class="form-control" name="profit"id="profit">
+                                    <option value="">--Pilih Salah Satu--</option>
+                                    <option value="minus">Minus</option>
+                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.001 - Rp. 30.000.000">Rp. 10.000.001 - Rp. 30.000.000</option>
+                                    <option value="Rp. 30.000.001 - 50.000.000">Rp. 30.000.001 - 50.000.000</option>
+                                    <option value="Rp. 50.000.001 - 100.000.000">Rp.50.000.001 - 100.000.000</option>
+                                    <option value="> Rp. 100.000.000">> Rp. 100.000.000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h6>Rata-rata Pengeluaran 6 bulan terakhir</h6>
+                                <select class="form-control" name="expenditure"id="expenditure">
+                                    <option value="">--Pilih Salah Satu--</option>
+                                    <option value="minus">Minus</option>
+                                    <option value="< Rp. 10.000.000">< Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.001 - Rp. 30.000.000">Rp. 10.000.001 - Rp. 30.000.000</option>
+                                    <option value="Rp. 30.000.001 - 50.000.000">Rp. 30.000.001 - 50.000.000</option>
+                                    <option value="Rp. 50.000.001 - 100.000.000">Rp.50.000.001 - 100.000.000</option>
+                                    <option value="> Rp. 100.000.000">> Rp. 100.000.000</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group mt-5">
                             <button type="submit" class="btn btn-primary btn-block"> Update Informasi Bisnis </button>
                         </div>
+
                     </form>
                 </div>
             </div>
