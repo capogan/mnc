@@ -13,7 +13,7 @@
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    
+
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.css')}}">
     <!-- Google Fonts -->
@@ -62,7 +62,12 @@
                     <!-- /.navigation start-->
                 </div>
                 <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
+                    @if (Auth::check())
                     <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                    @else
+                    <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                    @endif
+
                 </div>
             </div>
         </div>
