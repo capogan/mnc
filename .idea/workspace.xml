@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
