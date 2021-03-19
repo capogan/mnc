@@ -48,31 +48,11 @@
                   <div id="navigation" class="p-2">
                         <!-- navigation start-->
                         <ul>
-                            <li class="active"><a href="#" class="animsition-link">Home</a>
-
-                            </li>
-
-
-                            <li><a href="#" class="animsition-link">Loan Product</a>
-
-                            </li>
-
-                            <li><a href="about.html" class="animsition-link">About us</a></li>
+                            <li class="active"><a href="/" class="animsition-link">Home</a>
                             <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
                             </li>
                             <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
                             </li>
-
-                            <li><a href="blog-listing.html" class="animsition-link">Blog</a>
-
-                            </li>
-
-                            <li><a href="compare-loan.html" class="animsition-link">Features</a>
-
-                                </li>
-                                <li><a href="compare-loan.html" class="animsition-link">Features</a>
-
-                                </li>
 
 
                         </ul>
