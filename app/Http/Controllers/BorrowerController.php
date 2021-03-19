@@ -54,10 +54,6 @@ class BorrowerController extends Controller
         $married_status = MarriedStatus::get();
         $education = Education::get();
         $siblings = Siblings::get();
-<<<<<<< HEAD
-=======
-
->>>>>>> e3ee7247b62889dfaaee08ddd739a6e98f89d825
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
         $partner_since = BecomePartner::get();
