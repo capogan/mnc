@@ -121,7 +121,7 @@ class HelpCreditScoring {
         $score_first_step = $score / $max_credit_score->value * 100;
 
         if($score_first_step < $min_credit_score_approve->value){
-            return ['status' => false , 'message' => 'Tidak dapat diapprove. Credit score '.$score_first_step];
+            return ['status' => false , 'credit_score' => $score_first_step, 'message' => 'Tidak dapat diapprove. Credit score '.$score_first_step];
         }
         //echo $score_first_step;
 
