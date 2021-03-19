@@ -136,7 +136,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#emergency_city,#emergency_province').select2();
-        $('#city,#province').select2();
+        $('#city').select2();
+        $('#province').select2();
     });
 </script>
 @yield('js')
