@@ -2,31 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/LoanRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/LoanRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_04_164127_create_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_04_164127_create_request_loan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/ekyc.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/ekyc.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/emergency.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/emergency.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/item.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/item.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/vendor/laravel/ui/src/AuthCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/pcg/loan_detail.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/pcg/scoring.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register_lender.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register_group.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +30,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Siap-Admin" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
