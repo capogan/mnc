@@ -69,7 +69,7 @@ h5 { font-size: 14px; }
 h6 { font-size: 14px; }
 p { margin: 0 0 26px; line-height: 1.6; font-weight: 400; }
 ul, ol { }
-ul li, ol li { line-height: 1.8 }
+ul li, ol li { line-height: 1.8;  }
 a { color: #f51f8a; text-decoration: none; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
 a:focus, a:hover { text-decoration: none; color: #15549a; }
 strong { font-weight: 600; }
@@ -328,7 +328,10 @@ top bar
 .searchbar { }
 .search-area { padding: 30px; }
 .header { background-color: #fff; padding-top: 20px; padding-bottom: 20px; position: relative; z-index: 99; -webkit-box-shadow: 0px 5px 9px 1px rgba(144, 161, 180, 0.2); box-shadow: 0px 5px 9px 1px rgba(144, 161, 180, 0.2); -moz-box-shadow: 0px 5px 9px 1px rgba(144, 161, 180, 0.2); }
-.logo { }
+.logo {
+  width: 150px;
+ 
+}
 .navigation-wide { background-color: #15549a }
 .navigation-wide #navigation { margin-top: 0px; float: left; background-color: #15549a; }
 #navigation, #navigation ul, #navigation ul li, #navigation ul li a, #navigation #menu-button { margin: 0; padding: 0; border: 0; list-style: none; line-height: 1; display: block; position: relative; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -340,7 +343,7 @@ top bar
 #navigation.align-center>ul>li { display: inline-block; float: none; }
 #navigation.align-center ul ul { text-align: left; }
 #navigation.align-right>ul>li { float: right; }
-#navigation>ul>li>a { padding: 16px 10px; font-size: 13px; text-decoration: none; color: #66707f; font-weight: 600; text-transform: uppercase; }
+#navigation>ul>li>a { padding: 16px 15px; font-size: 10px; text-decoration: none; color: #66707f; font-weight: 600; text-transform: uppercase; }
 #navigation>ul>li:hover>a { color: #f51f8a; }
 #navigation>ul>li.has-sub>a { padding-right: 26px; }
 
