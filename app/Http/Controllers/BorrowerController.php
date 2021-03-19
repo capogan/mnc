@@ -54,7 +54,6 @@ class BorrowerController extends Controller
         $married_status = MarriedStatus::get();
         $education = Education::get();
         $siblings = Siblings::get();
-        
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
         $partner_since = BecomePartner::get();
@@ -94,6 +93,10 @@ class BorrowerController extends Controller
             'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function profile(){
+        
     }
 
     public function my_business(Request $request){

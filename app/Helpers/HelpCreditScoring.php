@@ -94,7 +94,7 @@ class HelpCreditScoring {
         if($score_entity){
             foreach($score_entity as $item => $val){
                 if($val->siap_code == 'short_fall'){
-                    $score += self::shortfall_formula($loan_id);
+                    //$score += self::shortfall_formula($loan_id);
                 }
                 if($val->siap_code == 'date_of_birth'){
                     
@@ -109,7 +109,7 @@ class HelpCreditScoring {
                        $score += $val->score;
                        //echo $val->siap_code.'-->'.$val->score.'<br>';
                     }
-                }
+                }   
             }
         }
         //echo $score; exit;
@@ -156,7 +156,7 @@ class HelpCreditScoring {
     public static function shortfall_formula($id_loan){
         $ShortFall = ShortFall::where('id_loan' , $id_loan)->first();
         $ShortFall = json_decode($ShortFall->shortfall , true);
-        echo $ShortFall['shortfall'];
+        //echo $ShortFall['shortfall'];
     }
 
     public static function check_age($age){

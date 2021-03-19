@@ -78,31 +78,31 @@
         <script src="{{ asset('/script/profile.js') }}"></script>
         <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/selectize.min.js" integrity="sha512-JiDSvppkBtWM1f9nPRajthdgTCZV3wtyngKUqVHlAs0d5q72n5zpM3QMOLmuNws2vkYmmLn4r1KfnPzgC/73Mw==" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap2.css" integrity="sha512-NkKdMfG7MzwPkAqUdt+Vu3Ogx6NDda/P1N6dIGiQcGCtZuA22wIreJYP7I7G06yQAfomG3+8qZwUjKfhR1p/+Q==" crossorigin="anonymous" />
-
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
-  var inputs = document.querySelectorAll( '.file' );
+            //$('select').select2();
+        var inputs = document.querySelectorAll( '.file' );
 
-Array.prototype.forEach.call( inputs, function( input ) {
-  var label = input.nextElementSibling,
-              labelVal = label.innerHTML;
+        Array.prototype.forEach.call( inputs, function( input ) {
+        var label = input.nextElementSibling,
+                    labelVal = label.innerHTML;
 
-  input.addEventListener( 'change', function( e ) {
-    var fileName = '';
+        input.addEventListener( 'change', function( e ) {
+            var fileName = '';
 
-    if ( this.files && this.files.length > 1 ) {
-      fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-    } else {
-      fileName = e.target.value.split( '\\' ).pop();
-    }
+            if ( this.files && this.files.length > 1 ) {
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            } else {
+            fileName = e.target.value.split( '\\' ).pop();
+            }
 
-    if ( fileName ) {
-      label.querySelector( 'span' ).innerHTML = fileName;
-    } else {
-      label.innerHTML = labelVal;
-    }
-  });
+            if ( fileName ) {
+            label.querySelector( 'span' ).innerHTML = fileName;
+            } else {
+            label.innerHTML = labelVal;
+            }
+        });
 });
     </script>
 

@@ -90,7 +90,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Pendidikan Terakhir <span>*</span></h6>
-                                <select class="form-control" id="education" name="education">
+                                <select class="form-control select2" id="education" name="education">
                                     <option>Pilih Pendidikan</option>
                                     @foreach($education as $val)
                                         @if(isset($get_user->education))
