@@ -40,12 +40,9 @@
 
                                     <button type="submit" id="btnlogin"  class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Masuk</button>
                                     <p class="divider-text">
-                                        <span class="bg-light">Atau</span>
+                                        <span class="bg-light"></span>
                                     </p>
-                                    <div class="text-center d-flex justify-content-between mt-3">
-                                        <p> <a href="/register" class="font-italic text-muted"> <u>Belum Punya
-                                                    Akun?</u></a></p>
-                                    </div>
+
                                 </form>
                             </div>
                         </div>

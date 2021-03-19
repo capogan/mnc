@@ -8,7 +8,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
      <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-   
+
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
@@ -49,8 +49,9 @@
                         <!-- navigation start-->
                         <ul>
                             <li class="active"><a href="#" class="animsition-link">Home</a>
-                               
+
                             </li>
+<<<<<<< HEAD
 
                             
                            
@@ -60,18 +61,25 @@
                             
                             <li><a href="about.html" class="animsition-link">About us</a>
                                
+=======
+                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+
+                            </li>
+                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
+
+>>>>>>> 6a8a4c2caf2c00f2e66d0d80e88dba340be882c4
                             </li>
                             
                             <li><a href="blog-listing.html" class="animsition-link">Blog</a>
-                                
+
                             </li>
                            
                             <li><a href="compare-loan.html" class="animsition-link">Features</a>
-                                
+
                                 </li>
                                 
                                 <li><a href="compare-loan.html" class="animsition-link">Bank Account</a>
-                                    
+
                                 </li>
                               
                         </ul>
@@ -85,7 +93,9 @@
         </div>
     </div>
 @yield('content')
-<div class="footer section-space100 mt-5">
+
+
+    <div class="footer section-space100 mt-5">
         <!-- footer -->
         <div class="container">
             <div class="row">
@@ -97,25 +107,25 @@
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                     <div class="row">
-                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
-                        <h3 class="newsletter-title">Signup Our Newsletter</h3>
-                    </div>
-                    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
-                        <div class="newsletter-form">
-                            <!-- Newsletter Form -->
-                            <form action="https://jituchauhan.com/borrow/bootstrap-4/newsletter.php" method="post">
-                                <div class="input-group">
-                                    <input type="email" class="form-control" id="newsletter" name="newsletter" placeholder="Write E-Mail Address" required>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+                            <h3 class="newsletter-title">Signup Our Newsletter</h3>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                            <div class="newsletter-form">
+                                <!-- Newsletter Form -->
+                                <form action="https://jituchauhan.com/borrow/bootstrap-4/newsletter.php" method="post">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" id="newsletter" name="newsletter" placeholder="Write E-Mail Address" required>
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">Go!</button>
-                                        </span> 
-                                </div>
-                                <!-- /input-group -->
-                            </form>
+                                        </span>
+                                    </div>
+                                    <!-- /input-group -->
+                                </form>
+                            </div>
+                            <!-- /.Newsletter Form -->
                         </div>
-                        <!-- /.Newsletter Form -->
                     </div>
-                </div>
                     <!-- /.col-lg-6 -->
                 </div>
             </div>
@@ -179,7 +189,7 @@
             </div>
         </div>
     </div>
- <div class="tiny-footer">
+    <div class="tiny-footer">
         <!-- tiny footer -->
         <div class="container">
             <div class="row">
@@ -193,6 +203,8 @@
             </div>
         </div>
     </div>
+
+
 <a href="#0" class="cd-top" title="Go to top">Top</a>
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>

@@ -149,7 +149,7 @@ class UsersController extends Controller
    }
 
    public function upload_file(Request $request){
-       $data_validate = [];
+      /* $data_validate = [];
         if(isset($request->identity_image)){
             $data_validate['identity_image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
         }
@@ -176,9 +176,19 @@ class UsersController extends Controller
         }
         if(count($data_validate) < 1){
             exit;
-        }
+        }*/
         $uid = Auth::id();
-        $validation = Validator::make($request->all(), $data_validate,
+        $validation = Validator::make($request->all(),
+            [
+                'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'self_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'npwp_image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_location_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_owner_file'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_document'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_activity_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_npwp'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+            ],
            [
                'identity_image.required' => 'Foto ktp wajib di unggah',
                'self_image.required' => 'Foto diri wajib di unggah',
