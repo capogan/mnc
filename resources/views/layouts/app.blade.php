@@ -13,7 +13,7 @@
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.css')}}">
     <!-- Google Fonts -->
@@ -132,11 +132,14 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
-@yield('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-    $('select').select2();
+    $('#city').select2();
 });
+</script>
+@yield('js')
+
 </script>
 </body>
 </html>
