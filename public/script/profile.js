@@ -223,7 +223,7 @@ $('#file_upload_image').on('submit', function(event){
 //check_invoice_form
 
 $("#loan_period").bind(
-    "slider:changed", function (event, data) {              
+    "slider:changed", function (event, data) {
         $("#loan_period_value").html(data.value.toFixed(0));
         check_interest(data.value.toFixed(0));
     }
@@ -351,11 +351,13 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
+
 /*$(document).ready(function () {
     $('select').selectize({
         sortField: 'text'
     });
 });*/
+
 
 
 $(document).on('click' , '#request_loan_' , function(){
@@ -374,30 +376,35 @@ $(document).on('click' , '#request_loan_' , function(){
         },
         success:function(response)
         {
-            $('.load-load').text('');
-            $('#body-pcg-item').html('');
-            $('#error_response_from_limit').html('');
-            var res = response;
-            if(res.status == 'success'){
-                
+            var text ='';
+            var title = '';
+            if(response.status){
+                text = 'Data berhasil ditambahkan'
+                var title = 'Sukses';
+
             }else{
-                    var title = res.status;
-                    bootbox.alert({
-                    title: title,
-                    message: res.message,
-                    centerVertical:true,
-                    onShow: function(e) {
-                        
-                    },
-                    callback: function() {
-                        btn.removeAttr("disabled");
-                    }
+
+                $.each(response.message, function( index, value ) {
+                    text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
+                var title = 'Terjadi Kesalahan';
             }
-            //$("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
-            //$(".table-invoice").html(response.data).fadeIn('slow');
+            bootbox.alert({
+                title: title,
+                message: text,
+                centerVertical:true,
+                onShow: function(e) {
+                    feather.replace();
+                },
+                callback: function() {
+                    btn.removeAttr("disabled");
+                }
+            });
         }
     })
+    $('select').selectize({
+        sortField: 'text'
+    });
 });
 
 

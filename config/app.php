@@ -231,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
         'RequestConnection' => App\Helpers\Capi::class,
+        'Utils' => App\Helpers\Utils::class,
     ],
 
 ];

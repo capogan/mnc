@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BusinessInfo;
 use App\EmergencyContact;
 use App\PersonalInfo;
 use App\UsersFile;
@@ -148,7 +149,7 @@ class UsersController extends Controller
    }
 
    public function upload_file(Request $request){
-       $data_validate = [];
+      /* $data_validate = [];
         if(isset($request->identity_image)){
             $data_validate['identity_image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
         }
@@ -175,9 +176,19 @@ class UsersController extends Controller
         }
         if(count($data_validate) < 1){
             exit;
-        }
+        }*/
         $uid = Auth::id();
-        $validation = Validator::make($request->all(), $data_validate,
+        $validation = Validator::make($request->all(),
+            [
+                'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'self_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'npwp_image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_location_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_owner_file'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_document'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_activity_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_npwp'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+            ],
            [
                'identity_image.required' => 'Foto ktp wajib di unggah',
                'self_image.required' => 'Foto diri wajib di unggah',
@@ -248,7 +259,7 @@ class UsersController extends Controller
                 $filename_npwp_imagebusiness_document = 'business_document'.$uid.'_'.time(). '.' . $npwp_imagebusiness_document->getClientOriginalExtension();
                 $npwp_imagebusiness_document->move($path, $filename_npwp_imagebusiness_document);
             }
-            
+
             $get_user = UsersFile::where('uid',$uid)->first();
             $data_insert['uid'] = Auth::id();
             if(isset($request->identity_image)){
@@ -302,4 +313,83 @@ class UsersController extends Controller
        }
        return response()->json($json);
    }
+
+    public function add_personal_business(Request $request){
+        $validation = Validator::make($request->all(), [
+            'name_of_bussiness' => 'required',
+            'business_province' => 'required',
+            'business_partner' => 'required',
+            'business_category' => 'required',
+            'business_established_since' => 'required',
+            'address_of_business' => 'required',
+            'province_business' => 'required',
+            'city_business' => 'required',
+            'postal_code_business' => 'required|numeric',
+            'phone_number_business' => 'required|numeric',
+            'business_kelurahan' => 'required',
+            'business_kecamatan' => 'required',
+            'business_location_status' =>'required',
+            'legality_status' =>'required'
+        ],
+            [
+                'name_of_bussiness.required' => 'Nama usaha harus diisi',
+                'business_province.required' => 'Provinsi harus diisi',
+                'business_partner.required' => 'Lama menjadi partner harus diisi',
+                'business_category.required' => 'Bisnis harus diisi',
+                'business_established_since.required' => 'Lama operasi harus diisi',
+                'address_of_business.required' => 'Alamat usaha harus diisi',
+                'province_business.required' => 'Provinsi tidak boleh kosong',
+                'city_business.required' => 'Kota tidak boleh kosong',
+                'postal_code_business.required' => 'Kode pos tidak boleh kosong',
+                'phone_number_business.required' => 'Nomor telepon harus diisi',
+                'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
+                'business_kecamatan.required' => 'Kecamatan tidak boleh kosong',
+                'business_location_status.required' => 'Pilih status tempat usaha',
+                'legality_status.required' => 'Pilih status bisnis'
+
+            ]);
+
+        if($validation->fails()) {
+            $json = [
+                "status"=> false,
+                "message"=> $validation->messages(),
+            ];
+        }else{
+            BusinessInfo::updateOrCreate(
+                [
+                    'uid' => Auth::id()
+                ],[
+                    'uid' => Auth::id(),
+                    'business_name' => $request->name_of_bussiness,
+                    'id_cap_of_business' => $request->business_partner,
+                    'id_credit_score_income_factor' => $request->business_category,
+                    'business_established_since' => $request->business_established_since,
+                    'total_employees' => $request->number_of_employee,
+                    'business_description' => $request->business_description,
+                    'business_full_address' => $request->address_of_business,
+                    'business_province' => $request->province_business,
+                    'business_city' => $request->city_business,
+                    'business_sub_kecamatan' => $request->business_kecamatan,
+                    'business_sub_kelurahan' => $request->business_kelurahan,
+                    'business_zip_code' => $request->postal_code_business,
+                    'business_phone_number' => $request->phone_number_business,
+                    'business_place_status' => $request->business_location_status,
+                    'partnership_since' => $request->business_partner,
+                    'legality_status' => $request->legality_status,
+                    'average_sales_revenue_six_month' => $request->revenue,
+                    'average_monthly_profit_six_month' => $request->profit,
+                    'average_monthly_expenditure_six_month' => $request->expenditure,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]
+            );
+
+            $json = [
+                "status"=> true,
+                "message"=> 'Data bisnis berhasil ditambahkan.',
+            ];
+        }
+
+        return response()->json($json);
+    }
 }

@@ -47,13 +47,17 @@ class BorrowerController extends Controller
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
                     ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
                     ->where('users.id',$uid)->first();
-        
+
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
         $married_status = MarriedStatus::get();
         $education = Education::get();
         $siblings = Siblings::get();
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3ee7247b62889dfaaee08ddd739a6e98f89d825
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
         $partner_since = BecomePartner::get();
@@ -61,11 +65,11 @@ class BorrowerController extends Controller
         $estabilished = Estabilished::get();
         $legality = Legality::get();
         $employee = TotalEmployee::get();
-        
 
-       
+
+
         $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*','personal_business.business_established_since')->where('users.id',$uid)->first();
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         //echo $business->business_established_since; exit;
         $data = [
             'provinces' => $provinces,
@@ -104,7 +108,7 @@ class BorrowerController extends Controller
         $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
     }
 
-    
+
 
 
     public function sumbit_loan(Request $request){
@@ -204,85 +208,7 @@ class BorrowerController extends Controller
 
     }
 
-    public function add_personal_info(Request $request){
-        $validation = Validator::make($request->all(), [
-            'name_of_bussiness' => 'required',
-            'business_province' => 'required',
-            'business_partner' => 'required',
-            'business_category' => 'required',
-            'business_established_since' => 'required',
-            'number_of_employee' => 'required',
-            'business_description' => 'required',
-            'address_of_business' => 'required',
-            'province_business' => 'required',
-            'city_business' => 'required',
-            'postal_code_business' => 'required|numeric',
-            'phone_number_business' => 'required|numeric',
-            'business_kelurahan' => 'required',
-            'business_kecamatan' => 'required',
-            'business_location_status' =>'required',
-            'legality_status' =>'required'
-        ],
-            [
-                'name_of_bussiness.required' => 'Nama usaha harus diisi',
-                'business_province.required' => 'Provinsi harus diisi',
-                'business_partner.required' => 'Lama menjadi partner harus diisi',
-                'business_category.required' => 'Bisnis harus diisi',
-                'business_established_since.required' => 'Lama operasi harus diisi',
-                'number_of_employee.required' => 'Jumlah karyawan harus diisi',
-                'business_description.required' => 'Deskripsi usaha harus diisi',
-                'address_of_business.required' => 'Alamat usaha harus diisi',
-                'province_business.required' => 'Provinsi tidak boleh kosong',
-                'city_business.required' => 'Kota tidak boleh kosong',
-                'postal_code_business.required' => 'Kode pos tidak boleh kosong',
-                'phone_number_business.required' => 'Nomor telepon harus diisi',
-                'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
-                'business_kecamatan.required' => 'Kecamatan tidak boleh kosong',
-                'business_location_status.required' => 'Pilih status tempat usaha',
-                'legality_status.required' => 'Pilih status bisnis'
- 
-            ]);
- 
-        if($validation->fails()) {
-            $json = [
-                "status"=> false,
-                "message"=> $validation->messages(),
-            ];
-        }else{
-            BusinessInfo::updateOrCreate(
-            [
-                'uid' => Auth::id()
-            ],[
-                'uid' => Auth::id(),
-                'business_name' => $request->name_of_bussiness,
-                'id_cap_of_business' => $request->business_partner,
-                'id_credit_score_income_factor' => $request->business_category,
-                'business_established_since' => $request->business_established_since,
-                'total_employees' => $request->number_of_employee,
-                'business_description' => $request->business_description,
-                'business_full_address' => $request->address_of_business,
-                'business_province' => $request->province_business,
-                'business_city' => $request->city_business,
-                'business_sub_kecamatan' => $request->business_kecamatan,
-                'business_sub_kelurahan' => $request->business_kelurahan,
-                'business_zip_code' => $request->postal_code_business,
-                'business_phone_number' => $request->phone_number_business,
-                'business_place_status' => $request->business_location_status,
-                'partnership_since' => $request->business_partner,
-                'legality_status' => $request->legality_status,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
-        );
- 
-            $json = [
-                "status"=> true,
-                "message"=> 'Data bisnis berhasil ditambahkan.',
-            ];
-        }
- 
-        return response()->json($json);
-    }
+
 
 
 

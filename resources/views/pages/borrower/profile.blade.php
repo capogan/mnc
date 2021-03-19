@@ -78,8 +78,14 @@
         <script src="{{ asset('/script/profile.js') }}"></script>
         <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
+<<<<<<< HEAD
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+=======
+{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/selectize.min.js" integrity="sha512-JiDSvppkBtWM1f9nPRajthdgTCZV3wtyngKUqVHlAs0d5q72n5zpM3QMOLmuNws2vkYmmLn4r1KfnPzgC/73Mw==" crossorigin="anonymous"></script>--}}
+{{--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap2.css" integrity="sha512-NkKdMfG7MzwPkAqUdt+Vu3Ogx6NDda/P1N6dIGiQcGCtZuA22wIreJYP7I7G06yQAfomG3+8qZwUjKfhR1p/+Q==" crossorigin="anonymous" />--}}
+
+>>>>>>> e3ee7247b62889dfaaee08ddd739a6e98f89d825
         <script>
             //$('select').select2();
         var inputs = document.querySelectorAll( '.file' );

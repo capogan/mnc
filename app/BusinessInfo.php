@@ -25,6 +25,10 @@ class BusinessInfo extends Model
         'business_place_status',
         'partnership_since',
         'legality_status',
-        'created_at','updated_at'
+        'average_sales_revenue_six_month',
+        'average_monthly_expenditure_six_month',
+        'average_monthly_profit_six_month',
+        'created_at',
+        'updated_at'
     ];
 }
