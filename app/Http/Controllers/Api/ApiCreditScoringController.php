@@ -64,7 +64,8 @@ class ApiCreditScoringController extends ApiController
         
         $scoring = HelpCreditScoring::credit_score_siap($personal_info , $request->loan_id);
         
-        print_r($scoring);
+        echo json_encode($scoring);
+
         exit;
         if($user_data){
 

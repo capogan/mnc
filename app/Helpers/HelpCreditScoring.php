@@ -93,6 +93,7 @@ class HelpCreditScoring {
         $score = 0;
         if($score_entity){
             foreach($score_entity as $item => $val){
+                
                 if($val->siap_code == 'short_fall'){
                     //$score += self::shortfall_formula($loan_id);
                 }
