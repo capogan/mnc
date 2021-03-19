@@ -32,10 +32,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-1.1">
-                    <!-- logo --> 
+                    <!-- logo -->
                     <div class="logo p-2">
                     <a href="#">[LOGO]</a>
-                    
+
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -51,31 +51,30 @@
                             <li class="active"><a href="#" class="animsition-link">Home</a>
 
                             </li>
-                            
-                           
+
+
                             <li><a href="#" class="animsition-link">Loan Product</a>
-                                
+
                             </li>
-                            
+
                             <li><a href="about.html" class="animsition-link">About us</a></li>
                             <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
-
                             </li>
                             <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
                             </li>
-                            
+
                             <li><a href="blog-listing.html" class="animsition-link">Blog</a>
 
                             </li>
-                           
+
                             <li><a href="compare-loan.html" class="animsition-link">Features</a>
 
                                 </li>
                                 <li><a href="compare-loan.html" class="animsition-link">Features</a>
 
                                 </li>
-                                
-                              
+
+
                         </ul>
                     </div>
                     <!-- /.navigation start-->
@@ -96,7 +95,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="logo">
                         <!-- Footer Logo -->
-                       <img src="/images/ojk3.png" alt="Logo"> 
+                       <img src="/images/ojk3.png" alt="Logo">
                         </div>
                     <!-- /.Footer Logo -->
                 </div>
@@ -126,7 +125,7 @@
             </div>
             <hr class="dark-line">
             <div class="row">
-                
+
             </div>
         </div>
     </div>
@@ -135,10 +134,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                   
+
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-right">
-                   
+
 
                 </div>
             </div>

@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +31,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Siap-Admin" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
