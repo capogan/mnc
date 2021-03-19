@@ -31,43 +31,37 @@
 <div class="header header-regular">
         <div class="container">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-1.1">
                     <!-- logo --> 
                     <div class="logo p-2">
+                    <a href="#">[LOGO]</a>
                     
-                        <a href="#">[LOGO]</a>
                     </div>
                 </div>
-                <div class="col-sm-2 ">
+                <div class="col-sm-1">
                    <div class="logo p-2">
                         <img src="/images/ojk3.png" alt="Logo">
                     </div>
                 </div>
                 <!-- logo -->
-                <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
-                  <div id="navigation">
+                <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
+                  <div id="navigation" class="p-2">
                         <!-- navigation start-->
                         <ul>
                             <li class="active"><a href="#" class="animsition-link">Home</a>
 
                             </li>
-<<<<<<< HEAD
-
                             
                            
                             <li><a href="#" class="animsition-link">Loan Product</a>
                                 
                             </li>
                             
-                            <li><a href="about.html" class="animsition-link">About us</a>
-                               
-=======
+                            <li><a href="about.html" class="animsition-link">About us</a></li>
                             <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
 
                             </li>
                             <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
-
->>>>>>> 6a8a4c2caf2c00f2e66d0d80e88dba340be882c4
                             </li>
                             
                             <li><a href="blog-listing.html" class="animsition-link">Blog</a>
@@ -77,16 +71,16 @@
                             <li><a href="compare-loan.html" class="animsition-link">Features</a>
 
                                 </li>
-                                
-                                <li><a href="compare-loan.html" class="animsition-link">Bank Account</a>
+                                <li><a href="compare-loan.html" class="animsition-link">Features</a>
 
                                 </li>
+                                
                               
                         </ul>
                     </div>
                     <!-- /.navigation start-->
                 </div>
-                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block">
+                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
                     <a href="/login" class="btn btn-danger">MASUK</a> </div>
                 </div>
             </div>
