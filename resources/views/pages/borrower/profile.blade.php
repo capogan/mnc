@@ -33,18 +33,18 @@
                                     <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{url('register/business')}}">Usaha</a>
+                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{Auth::user()->step < 2 ? url('register/business') : '' }}">Usaha</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{url('register/file')}}">Berkas</a>
+                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{Auth::user()->step < 3 ? url('register/file') : '' }}">Berkas</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{url('register/faktur')}}">Faktur</a>
+                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{Auth::user()->step < 4 ? url('register/faktur') : '' }}">Faktur</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{url('register/transaction')}}">Transaksi</a>
+                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{Auth::user()->step < 5 ? url('register/transaction') : '' }}">Transaksi</a>
                                 </li>
 
                             </ul>

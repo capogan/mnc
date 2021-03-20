@@ -107,6 +107,11 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
+
+        if(Auth::user()->step <= 2){
+            return Redirect::to('/profile');
+        }
+        
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
@@ -166,6 +171,9 @@ class BorrowerController extends Controller
             if(Auth::user()->otp_verified != true){
                 return Redirect::to('/otp/verified');
             }
+        }
+        if(Auth::user()->step < 3){
+            return Redirect::to('/register/business');
         }
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
