@@ -1,5 +1,6 @@
 <?php
 
+use AzisHapidin\IndoRegion\RawDataGetter;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        $villages = RawDataGetter::getVillages();
+
+        // Insert Data with Chunk
+        DB::transaction(function() use($villages) {
+            $collection = collect($villages);
+            $parts = $collection->chunk(1000);
+            foreach ($parts as $subset) {
+                DB::table('villages')->insert($subset->toArray());
+            }
+        });
     }
 }

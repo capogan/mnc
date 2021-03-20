@@ -44,11 +44,6 @@ class UsersController extends Controller
            'relationship_as' => 'required',
            'emergency_phone' => 'required',
            'emergency_full_address' => 'required',
-           'emergency_province' => 'required',
-           'emergency_city' => 'required',
-           'emergency_sub_kecamatan' => 'required',
-           'emergency_sub_kelurahan' => 'required',
-           'emergency_zip_code' => 'required',
            'dependents' => 'required',
        ],
            [
@@ -74,10 +69,6 @@ class UsersController extends Controller
                'relationship_as.required' => 'Pilih status hubungan',
                'emergency_phone.required' => 'Nomor telepon saudara tidak serumah harus diisi',
                'emergency_full_address.required' => 'Alamat saudara tidak serumah harus diisi',
-               'emergency_province.required' => 'Propinsi saudara tidak serumah harus diisi',
-               'emergency_city.required' => 'Kota saudara tidak serumah harus diisi',
-               'emergency_sub_kecamatan.required' => 'Kecamatan saudara tidak serumah harus diisi',
-               'emergency_sub_kelurahan.required' => 'Kelurahan saudara tidak serumah harus diisi',
                'emergency_zip_code.required' => 'Kodepos saudara tidak serumah harus diisi',
                'dependents.required' => 'Jumlah tanggungan harus diisi',
 
