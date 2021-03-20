@@ -63,9 +63,9 @@
                 </div>
                 <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
                     @if (Auth::check())
-                    <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                        <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                     @else
-                    <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
                     @endif
 
                 </div>

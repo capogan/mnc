@@ -47,6 +47,11 @@ Route::get('/logout', function () {
 });
 
 Route::get('/test', 'UsersController@test');
+//Master
+Route::get('/get/city','MasterController@get_city')->name('city');
+Route::get('/get/district','MasterController@get_district')->name('district');
+Route::get('/get/villages','MasterController@get_villages')->name('get_villages');
+
 
 
 

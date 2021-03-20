@@ -352,13 +352,6 @@ $('#check_invoice_form').on('click', function(event){
 });
 
 
-/*$(document).ready(function () {
-    $('select').selectize({
-        sortField: 'text'
-    });
-});*/
-
-
 
 $(document).on('click' , '#request_loan_' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -424,6 +417,86 @@ function formatRupiah(angka, prefix){
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 }
+
+
+function get_city(province_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/city?province_id='+province_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#city").empty();
+            $("#city").append('<option>Pilih Kota</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#city").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
+function get_district(regency_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/district?regency_id='+regency_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#district").empty();
+            $("#district").append('<option>Pilih Kecamatan</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#district").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
+function get_villages(district_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/villages?district_id='+district_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#vilages").empty();
+            $("#vilages").append('<option>Pilih Kelurahan</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#vilages").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
 
 
 
