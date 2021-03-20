@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use ValueFirst;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +41,8 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
 });
+
+Route::get('/test', 'UsersController@test');
 
 
 

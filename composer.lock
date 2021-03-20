@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72b4ce09c162fc887331163b90e7968c",
+    "content-hash": "4d07020c87d07504cefe2f1fd6427335",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2625,6 +2625,80 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "sevenspan/laravel-value-first",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/7span/laravel-valuefirst.git",
+                "reference": "238bc47595bc42eee60aec963ed52d07d1e9c725"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/7span/laravel-valuefirst/zipball/238bc47595bc42eee60aec963ed52d07d1e9c725",
+                "reference": "238bc47595bc42eee60aec963ed52d07d1e9c725",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2.0",
+                "php": "^7.2.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^8.5",
+                "psalm/plugin-laravel": "^1.2",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SevenSpan\\ValueFirst\\Providers\\ValueFirstServiceProvider"
+                    ],
+                    "aliases": {
+                        "ValueFirst": "SevenSpan\\ValueFirst\\Facades\\ValueFirst"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SevenSpan\\ValueFirst\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hemratna Bhimani",
+                    "email": "hemratna.bhimani@gmail.com",
+                    "homepage": "https://github.com/7span/laravel-valuefirst",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Urvashi Thakar",
+                    "email": "urvashithakar143@gmail.com",
+                    "homepage": "https://github.com/7span/laravel-valuefirst",
+                    "role": "Developer"
+                }
+            ],
+            "description": "It uses ValueFirst API to send whatsapp messages.",
+            "homepage": "https://github.com/7span/laravel-valuefirst",
+            "keywords": [
+                "laravel",
+                "laravel-value-first",
+                "laravel-valuefirst",
+                "value-first",
+                "valuefirst"
+            ],
+            "support": {
+                "issues": "https://github.com/7span/laravel-valuefirst/issues",
+                "source": "https://github.com/7span/laravel-valuefirst/tree/v2.0"
+            },
+            "time": "2020-11-09T07:12:34+00:00"
         },
         {
             "name": "swagger-api/swagger-ui",

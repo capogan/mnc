@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use ValueFirst;
 
 class UsersController extends Controller
 {
@@ -382,5 +383,16 @@ class UsersController extends Controller
         }
 
         return response()->json($json);
+    }
+
+    function test(){
+
+
+            $to ='6285275608369'; // Phone number with country code where we want to send message(Required)
+            $message ='Hello'; // Message that we want to send(Required)
+            $response=ValueFirst::sendMessage($to,$message);
+
+
+
     }
 }

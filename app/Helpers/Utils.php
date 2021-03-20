@@ -67,6 +67,9 @@ class Utils {
         }
     }
 
+
+
+
     public static function request_otp($phone_number){
         $data = [
             'VER' => "1.2",
@@ -113,6 +116,6 @@ class Utils {
         curl_close($ch);
         return true;
     }
-    
+
 
 }

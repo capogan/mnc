@@ -1,5 +1,7 @@
 <?php
 
+use SevenSpan\ValueFirst\ValueFirst;
+
 return [
 
     /*
@@ -164,6 +166,7 @@ return [
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         App\Providers\CreditScoringServiceProvider::class,
         App\Providers\CapiServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
