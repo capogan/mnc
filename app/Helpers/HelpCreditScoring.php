@@ -159,7 +159,7 @@ class HelpCreditScoring {
             return ['status' => false , 'message' => 'Limit tidak ditemukan, silahkan lengkapi data.'];
         }
 
-        return ['status' => true ,'detail' => $detail , 'message' => [ 'credit_limit' => $credibility_check->maximal_loan , 'credibiliti_status' =>$limit_of_loan->title, 'credibiliti_percentage' =>$limit_of_loan->max .' %']];
+        return ['status' => true ,'detail' => $detail ,'credit_score' => $score_first_step, 'message' => [ 'credit_limit' => $credibility_check->maximal_loan , 'credibiliti_status' =>$limit_of_loan->title, 'credibiliti_percentage' =>$limit_of_loan->max .' %']];
     }
 
     public static function shortfall_formula($id_loan){
