@@ -235,6 +235,7 @@ return [
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
         'RequestConnection' => App\Helpers\Capi::class,
         'Utils' => App\Helpers\Utils::class,
+        'ValueFirst' => \SevenSpan\ValueFirst\Facades\ValueFirst::class,
     ],
 
 ];

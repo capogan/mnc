@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'username' =>  env('VALUEFIRST_USERNAME','•	DEMO21NEWXML'),
+    'username' =>  env('VALUEFIRST_USERNAME','DEMO21NEWXML'),
 
      /*
     |--------------------------------------------------------------------------
