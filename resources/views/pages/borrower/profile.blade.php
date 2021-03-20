@@ -29,24 +29,21 @@
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{Auth::user()->step < 2 ? url('register/business') : '' }}">Usaha</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{Auth::user()->step < 3 ? url('register/file') : '' }}">Berkas</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{Auth::user()->step < 4 ? url('register/faktur') : '' }}">Faktur</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{Auth::user()->step < 5 ? url('register/transaction') : '' }}">Transaksi</a>
-                                </li>
-
+                                <?php
+                                    $link = ['','/profile','/register/business','/register/file','/register/faktur','/register/transaction'];
+                                    $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
+                                ?>
+                                @for($i = 1;$i < 6;$i++)
+                                    @if($i <= Auth::user()->step)
+                                        <li class="nav-item">
+                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="{{$link[$i]}}">{{$title_header[$i]}}</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item">
+                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="#">{{$title_header[$i]}}</a>
+                                        </li>
+                                    @endif
+                                @endfor
                             </ul>
 
                             <!-- Tab panes -->

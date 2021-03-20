@@ -108,7 +108,7 @@ class BorrowerController extends Controller
             }
         }
 
-        if(Auth::user()->step <= 2){
+        if(Auth::user()->step < 2){
             return Redirect::to('/profile');
         }
         
