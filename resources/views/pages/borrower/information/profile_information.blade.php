@@ -211,7 +211,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nama <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nama Saudara" id="emergency_name" name="emergency_name" value="{{isset($get_user->emergency_name ) ? $get_user->emergency_name : '' }}" >
+                                <input type="text" class="form-control" placeholder="Nama Kerabat" id="emergency_name" name="emergency_name" value="{{isset($get_user->emergency_name ) ? $get_user->emergency_name : '' }}" >
                             </div>
                             <div class="col">
                                 <h6>Hubungan <span>*</span></h6>
