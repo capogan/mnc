@@ -133,33 +133,32 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Propinsi <span>*</span></h6>
-                                <select class="form-control" id="province" name="province_business">
+                                <select class="form-control" id="province" name="province" onChange="get_city_business(this.value);">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        <option value="{{$val->id}}"  {{  $business->business_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($get_user->province))
+                                            <option value="{{$val->id}}"  {{  $get_user->province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @else
+                                            <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
-
                             </div>
                             <div class="col">
                                 <h6>Kota <span>*</span></h6>
-                                <select class="form-control" id="city" name="city_business">
-                                    <option value="">Pilih Kota</option>
-                                    @foreach($regency as $key => $val)
-                                        <option value="{{$val->id}}"  {{ $business->business_city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
-                                    @endforeach
-                                </select>
+                                <select class="form-control" id="city_business" name="city_business" onchange="get_district_business(this.value)"></select>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan <span>*</span></h6>
-                               <input type="text" name="business_kecamatan"class="form-control" value="{{$business->business_sub_kecamatan ?? ''}}">
+                                <select class="form-control" id="district_business" name="district_business" onchange="get_villages(this.value)" ></select>
                             </div>
                             <div class="col">
                                 <h6>Kelurahan <span>*</span></h6>
-                                <input type="text" name="business_kelurahan"class="form-control" value="{{$business->business_sub_kelurahan ?? ''}}">
+                                <select class="form-control" id="vilages_business" name="vilages_business">
+                                </select>
                             </div>
                         </div>
 
