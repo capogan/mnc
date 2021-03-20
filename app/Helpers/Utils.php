@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use ValueFirst;
 use function GuzzleHttp\json_encode;
 
 class Utils {
@@ -67,10 +68,22 @@ class Utils {
         }
     }
 
-
-
-
     public static function request_otp($phone_number){
+
+
+        $to ='9111111111'; // Phone number with country code where we want to send message(Required)
+        $templateId = "123"; //Approved template ID by ValueFirst
+        $data = []; // Array of data to replace template data with dynamic one
+        $tag = 'Whatsapp Message';  //Tag if you want to assign (Optional)
+
+
+
+        // Without passing tag
+        $response=ValueFirst::sendTemplateMessage($to,$templateId,$data);
+
+        // With passing tag
+        $response=ValueFirst::sendTemplateMessage($to,$templateId,$data,$tag);
+
         $data = [
             'VER' => "1.2",
             'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => md5(microtime())),
@@ -96,8 +109,7 @@ class Utils {
         //$url = 'https://es.sonicurlprotection-tko.com/click?PV=1&MSGID=202103190427360089342&URLID=2&ESV=10.0.6.3447&IV=1BCE6495D2536F40B974CD45B50AC2F6&TT=1616128058161&ESN=1bhwtVUB4JyVU9nEsdDxkgf5c2gR%2BJXAeGzo0g3SIdc%3D&KV=1536961729279&ENCODED_URL=https%3A%2F%2Fapi.myvfirst.com%2Fpsms%2Fservlet%2Fpsms.JsonEservice&HK=E019308D0DF1B9F7860A4E1CB3B38CFA7675C87748FE39ED2ACA8DEBCEE7BC9E';
        $url = 'https://api.myvfirst.com/psms/servlet/psms.JsonEservice';
        $headers = array(
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
+            'Content-Type:application/json',
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -116,6 +128,6 @@ class Utils {
         curl_close($ch);
         return true;
     }
-
+    
 
 }
