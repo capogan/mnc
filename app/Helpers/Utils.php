@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use function GuzzleHttp\json_encode;
 
 class Utils {
     public static function convert_status($status) {
@@ -65,5 +66,52 @@ class Utils {
                 echo "Pemohon meminta reschedule telepon";
         }
     }
+
+    public static function request_otp($phone_number){
+        $data = [
+            'VER' => "1.2",
+            'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => microtime()),
+            'SMS' => [
+                array(
+                    'UDH' => '0',
+                    'CODING' => "1",
+                    'TEXT' => 'Test SMS',
+                    'PROPERTY' => '0',
+                    'ID' => '1',
+                    'ADDRESS' => [
+                        array(
+                            'FROM' => 'telkom109',
+                            'TO' => '081260332838',
+                            'SEQ' => '1',
+                            'TAG' => 'TESTTING OTP'
+                        )
+                    ]
+                )
+            ]
+        ];
+        echo json_encode($data);
+        //$url = 'https://es.sonicurlprotection-tko.com/click?PV=1&MSGID=202103190427360089342&URLID=2&ESV=10.0.6.3447&IV=1BCE6495D2536F40B974CD45B50AC2F6&TT=1616128058161&ESN=1bhwtVUB4JyVU9nEsdDxkgf5c2gR%2BJXAeGzo0g3SIdc%3D&KV=1536961729279&ENCODED_URL=https%3A%2F%2Fapi.myvfirst.com%2Fpsms%2Fservlet%2Fpsms.JsonEservice&HK=E019308D0DF1B9F7860A4E1CB3B38CFA7675C87748FE39ED2ACA8DEBCEE7BC9E';
+       $url = 'https://api.myvfirst.com/psms/servlet/psms.JsonEservice';
+       $headers = array(
+            'Content-Type:application/json',
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        print_r($result);
+        if ($result === FALSE) {
+            curl_close($ch);
+            return false;
+        }
+        curl_close($ch);
+        return true;
+    }
+    
 
 }

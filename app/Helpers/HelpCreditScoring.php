@@ -91,16 +91,19 @@ class HelpCreditScoring {
                         ->where('category_score.status' , true)
                         ->orderBy('id_category_score' , 'DESC')->get();
         $score = 0;
+        $detail = [];
         if($score_entity){
             foreach($score_entity as $item => $val){
-                
+               // echo $val->siap_code;
                 if($val->siap_code == 'short_fall'){
                     //$score += self::shortfall_formula($loan_id);
+                    $detail[$val->siap_code] = 0;
                 }
                 if($val->siap_code == 'date_of_birth'){
                     
                     $usia = self::check_age(\Carbon\Carbon::parse($data->date_of_birth)->diff(\Carbon\Carbon::now())->format('%y'));
                     $score += $usia;
+                    $detail[$val->siap_code] = $usia;
                     //echo $val->siap_code.'-->'.$usia.'<br>';
                 }
                
@@ -108,11 +111,15 @@ class HelpCreditScoring {
                 if($val->siap_code != 'short_fall' && $val->siap_code != 'date_of_birth'){
                     if($data->$code == $val->siap_master_id){
                        $score += $val->score;
+                       $detail[$val->siap_code] = $val->score;
                        //echo $val->siap_code.'-->'.$val->score.'<br>';
                     }
                 }   
+               // $detail_short_fall[$val->siap_code] = $val->score;
             }
         }
+        //print_r($detail_short_fall);
+        //exit;
         //echo $score; exit;
         //exit;
         $min_credit_score_approve = DB::table('tb_config_credit_score')->where('code' , 'min_credit_score_approve')->first();
@@ -121,7 +128,7 @@ class HelpCreditScoring {
         $score_first_step = $score / $max_credit_score->value * 100;
 
         if($score_first_step < $min_credit_score_approve->value){
-            return ['status' => false , 'credit_score' => $score_first_step, 'message' => 'Tidak dapat diapprove. Credit score '.$score_first_step];
+            return ['status' => false , 'credit_score' => $score_first_step, 'detail' => $detail , 'message' => 'Tidak dapat diapprove. Credit score '.$score_first_step];
         }
         //echo $score_first_step;
 
