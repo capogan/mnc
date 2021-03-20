@@ -46,6 +46,8 @@ class UsersController extends Controller
            'emergency_phone' => 'required',
            'emergency_full_address' => 'required',
            'dependents' => 'required',
+           'district' => 'required',
+           'vilages' => 'required',
        ],
            [
                'identity_number.required' => 'Nomor KTP harus diisi',
@@ -72,6 +74,8 @@ class UsersController extends Controller
                'emergency_full_address.required' => 'Alamat saudara tidak serumah harus diisi',
                'emergency_zip_code.required' => 'Kodepos saudara tidak serumah harus diisi',
                'dependents.required' => 'Jumlah tanggungan harus diisi',
+               'district.required' => 'Kecamatan harus diisi',
+               'vilages.required' => 'Kelurahan  harus diisi',
 
            ]);
 
@@ -95,6 +99,8 @@ class UsersController extends Controller
                 'address'                => $request->address,
                 'province'               => $request->province,
                 'city'                   => $request->city,
+                'disctrict'              => $request->disctrict,
+                'villages'              => $request->vilages,
                 'zip_code'               => $request->zip_code,
                 'education'              => $request->education,
                 'npwp_number'            => $request->npwp_number,
@@ -115,11 +121,11 @@ class UsersController extends Controller
                    'id_siblings_master'             => $request->relationship_as,
                    'emergency_phone'                => $request->emergency_phone,
                    'emergency_full_address'         => $request->emergency_full_address,
-                   'emergency_province'             => $request->emergency_province,
-                   'emergency_city'                 => $request->emergency_city,
-                   'emergency_sub_kecamatan'        => $request->emergency_sub_kecamatan,
-                   'emergency_sub_kelurahan'        => $request->emergency_sub_kelurahan,
-                   'emergency_zip_code'             => $request->emergency_zip_code,
+                   'emergency_province'             => '1',
+                   'emergency_city'                 => '1',
+                   'emergency_sub_kecamatan'        => '1',
+                   'emergency_sub_kelurahan'        => '1',
+                   'emergency_zip_code'             => '1',
                    'created_at'                     => date('Y-m-d H:i:s'),
                    'updated_at'                     => date('Y-m-d H:i:s'),
                ]);
