@@ -388,7 +388,7 @@ class UsersController extends Controller
     function test(){
 
 
-            $to ='085275608369'; // Phone number with country code where we want to send message(Required)
+            $to ='081260332838'; // Phone number with country code where we want to send message(Required)
             $message ='Hello'; // Message that we want to send(Required)
             $response=ValueFirst::sendMessage($to,$message);
 
