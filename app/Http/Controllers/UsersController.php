@@ -28,7 +28,7 @@ class UsersController extends Controller
    public function add_personal_info(Request $request){
 
        $validation = Validator::make($request->all(), [
-           'identity_number' => 'required|numeric',
+           'identity_number' => 'required|numeric|max:16',
            'first_name' => 'required',
            'last_name' => 'required',
            'email' => 'required',
@@ -415,9 +415,9 @@ class UsersController extends Controller
     }
 
     public function validate_otp(Request $request){
-        
+
         $code = '';
-        $code = $request->kode_otp_1.$request->kode_otp_2.$request->kode_otp_3.$request->kode_otp_4.$request->kode_otp_5.$request->kode_otp_6;    
+        $code = $request->kode_otp_1.$request->kode_otp_2.$request->kode_otp_3.$request->kode_otp_4.$request->kode_otp_5.$request->kode_otp_6;
         $validate = Utils::check_otp(Auth::user()->phone_number_verified ,$code);
         echo json_encode($validate);
     }

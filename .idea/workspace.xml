@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_153527_create_personal_emergency_contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_153527_create_personal_emergency_contact.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/pcg.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/pcg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/borrower/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/borrower/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_3.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_3.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/vendor/composer/autoload_static.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/bussiness_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
