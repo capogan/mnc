@@ -21,9 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
-//Borrower
 Route::get('/profile', 'BorrowerController@my_profile')->name('borrower.personal.profile');
+Route::get('/register/business', 'BorrowerController@my_profile_business')->name('borrower.personal.profile');
+Route::get('/register/file', 'BorrowerController@my_profile_file')->name('borrower.personal.profile');
+Route::get('/register/faktur', 'BorrowerController@my_profile_faktur')->name('borrower.personal.profile');
+Route::get('/register/transaction', 'BorrowerController@my_profile_transaction')->name('borrower.personal.profile');
+
 Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('submit.loan');
 //Users
 Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('add.personal.info');

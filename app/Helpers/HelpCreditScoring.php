@@ -96,8 +96,8 @@ class HelpCreditScoring {
             foreach($score_entity as $item => $val){
                // echo $val->siap_code;
                 if($val->siap_code == 'short_fall'){
-                    //$score += self::shortfall_formula($loan_id);
-                    $detail[$val->siap_code] = 0;
+                    $score += self::shortfall_formula($loan_id);
+                    $detail[$val->siap_code] = $score;
                 }
                 if($val->siap_code == 'date_of_birth'){
                     
@@ -162,8 +162,16 @@ class HelpCreditScoring {
     }
 
     public static function shortfall_formula($id_loan){
+        //echo $id_loan;
         $ShortFall = ShortFall::where('id_loan' , $id_loan)->first();
+       // print_r($ShortFall); exit;
         $ShortFall = json_decode($ShortFall->shortfall , true);
+        //return 
+        $score = DB::table('master_shortfall')->whereRaw($ShortFall['shortfall'].' BETWEEN min AND max')->first();
+        if($score){
+           return $score->score; 
+        }
+        return 0;
         //echo $ShortFall['shortfall'];
     }
 

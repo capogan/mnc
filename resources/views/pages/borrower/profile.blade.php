@@ -30,21 +30,21 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="tab-1" data-toggle="tab" href="#service1" role="tab" aria-controls="responsibilities" aria-selected="true">Data Pribadi</a>
+                                    <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-2" data-toggle="tab" href="#service2" role="tab" aria-controls="experience" aria-selected="false">Usaha</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="education" aria-selected="false">Berkas</a>
+                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{url('register/business')}}">Usaha</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-4" data-toggle="tab" href="#service4" role="tab" aria-controls="experience" aria-selected="false">Faktur</a>
+                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{url('register/file')}}">Berkas</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{url('register/faktur')}}">Faktur</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-5" data-toggle="tab" href="#service5" role="tab" aria-controls="tab-5" aria-selected="false">Transaksi</a>
+                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{url('register/transaction')}}">Transaksi</a>
                                 </li>
 
                             </ul>
@@ -52,19 +52,19 @@
                             <!-- Tab panes -->
 
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="service1">
+                                <div role="tabpanel" class="tab-pane fade show {{$header_section == 'step1' ? 'active show ' : '' }}" id="service1">
                                 @include('pages.borrower.information.profile_information')
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="service2">
+                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step2' ? 'active show ' : '' }}" id="service2">
                                     @include('pages.borrower.information.bussiness_information')
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="service3">
+                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step3' ? 'active show ' : '' }}" id="service3">
                                     @include('pages.borrower.information.file_information')
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="service4">
+                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step4' ? 'active show ' : '' }}" id="service4">
                                     @include('pages.borrower.information.invoice_information')
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="service5">
+                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step5' ? 'active show ' : '' }}" id="service5">
                                     @include('pages.borrower.information.finance_information')
                                 </div>
                             </div>
@@ -78,9 +78,6 @@
         <script src="{{ asset('/script/profile.js') }}"></script>
         <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
-
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <script>
             //$('select').select2();

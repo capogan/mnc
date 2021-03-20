@@ -16,16 +16,17 @@
 
                             <div class="col">
                                 <h6>Kriteria Perusahan<span>*</span></h6>
-                                <select class="form-control" name="business_province">
+                                <select class="form-control" name="id_cap_of_business">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
                                         @if(isset($business->id_cap_of_business))
-                                            <option value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{$val->title_business}}</option>
+                                            <option attr="{{$val->description}}" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{$val->title_business}}</option>
                                         @else
-                                            <option value="{{$val->id}}">{{$val->title_business}}</option>
+                                            <option attr="{{$val->description}}" value="{{$val->id}}">{{$val->title_business}}</option>
                                         @endif
                                     @endforeach
                                 </select>
+                                <p id="id_cap_of_business_description"></p>
                             </div>
 
                         </div>

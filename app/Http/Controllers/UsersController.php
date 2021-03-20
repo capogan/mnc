@@ -15,6 +15,7 @@ use ValueFirst;
 use Illuminate\View\View;
 use App\Helpers\Utils;
 use function GuzzleHttp\json_encode;
+use Illuminate\Foundation\Auth\User;
 
 class UsersController extends Controller
 {
@@ -88,9 +89,9 @@ class UsersController extends Controller
                "message"=> $validation->messages(),
            ];
        }else{
-
            DB::beginTransaction();
            try{
+            User::where('id' , Auth::id())->update(['step' => 1]);
             PersonalInfo::updateOrCreate(['uid' => Auth::id()] , [
                 'uid'                    => Auth::id(),
                 'identity_number'        => $request->identity_number,
@@ -132,7 +133,6 @@ class UsersController extends Controller
                    'created_at'                     => date('Y-m-d H:i:s'),
                    'updated_at'                     => date('Y-m-d H:i:s'),
                ]);
-
                DB::commit();
            }
            catch (Exception $e) {
@@ -290,6 +290,7 @@ class UsersController extends Controller
            if($get_user){
                DB::beginTransaction();
                try{
+                User::where('id' , Auth::id())->update(['step' => 2]);
                    UsersFile::where([
                        ['uid',$uid],
                    ])->update($data_insert);
@@ -319,6 +320,7 @@ class UsersController extends Controller
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
             'business_province' => 'required',
+            'id_cap_of_business' => 'required',
             'business_partner' => 'required',
             'business_category' => 'required',
             'business_established_since' => 'required',
@@ -356,13 +358,14 @@ class UsersController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
+            User::where('id' , Auth::id())->update(['step' => 3]);
             BusinessInfo::updateOrCreate(
                 [
                     'uid' => Auth::id()
                 ],[
                     'uid' => Auth::id(),
                     'business_name' => $request->name_of_bussiness,
-                    'id_cap_of_business' => $request->business_partner,
+                    'id_cap_of_business' => $request->id_cap_of_business,
                     'id_credit_score_income_factor' => $request->business_category,
                     'business_established_since' => $request->business_established_since,
                     'total_employees' => $request->number_of_employee,
