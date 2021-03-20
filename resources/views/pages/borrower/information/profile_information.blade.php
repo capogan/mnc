@@ -230,60 +230,14 @@
 
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Nomor Telepon Saudara<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nomor Telepon Saudara" id="emergency_phone" name="emergency_phone" value="{{isset($get_user->emergency_phone ) ? $get_user->emergency_phone : '' }}" >
+                                <h6>Nomor Telepon Kerabat<span>*</span></h6>
+                                <input type="text" class="form-control" placeholder="Nomor Telepon Kerabat" id="emergency_phone" name="emergency_phone" value="{{isset($get_user->emergency_phone ) ? $get_user->emergency_phone : '' }}" >
                             </div>
                             <div class="col">
                                 <h6>Alamat <span>*</span></h6>
                                    <textarea class="form-control" name="emergency_full_address" id="emergency_full_address">{{isset($get_user->emergency_full_address ) ? $get_user->emergency_full_address : '' }}</textarea>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <h6>Propinsi<span>*</span></h6>
-                                <select class="form-control" id="emergency_province" name="emergency_province">
-                                    <option value="">Pilih Propinsi</option>
-                                    @foreach($provinces as $key => $val)
-                                        @if(isset($get_user->emergency_province))
-                                            <option value="{{$val->id}}"  {{ $get_user->emergency_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
-                                        @else
-                                            <option value="{{$val->id}}">{{$val->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col">
-                                <h6>Kota <span>*</span></h6>
-                                <select class="form-control" id="emergency_city" name="emergency_city">
-                                    <option value="">Pilih Kota</option>
-                                    @foreach($regency as $key => $val)
-                                        @if(isset($get_user->emergency_city))
-                                            <option value="{{$val->id}}"  {{ $get_user->emergency_city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
-                                        @else
-                                            <option value="{{$val->id}}" >{{$val->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <h6>Kecamatan<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Kecamatan" id="emergency_sub_kecamatan" name="emergency_sub_kecamatan" value="{{isset($get_user->emergency_sub_kecamatan ) ? $get_user->emergency_sub_kecamatan : '' }}" >
-                            </div>
-                            <div class="col">
-                                <h6>Kelurahan <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Kelurahan" id="emergency_sub_kelurahan" name="emergency_sub_kelurahan" value="{{isset($get_user->emergency_sub_kelurahan ) ? $get_user->emergency_sub_kelurahan : '' }}" >
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <h6>Kodepos<span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Kodepos" id="emergency_zip_code" name="emergency_zip_code" value="{{isset($get_user->emergency_zip_code ) ? $get_user->emergency_zip_code : '' }}" >
-                            </div>
-                        </div>
-
-
                         <div class="form-group mt-5">
                             <button type="submit" class="btn btn-primary btn-block"> Tambahkan Data Personal </button>
                         </div>

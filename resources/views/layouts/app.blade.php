@@ -137,16 +137,14 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#emergency_city,#emergency_province').select2();
-        $('#city').select2();
-        $('#province').select2();
+
     });
 </script>
+
 @yield('js')
 
-</script>
 </body>
 </html>

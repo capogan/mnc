@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/pcg/loan_detail.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/pcg/scoring.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_14_172606_create_view_request_loan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_153527_create_personal_emergency_contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_153527_create_personal_emergency_contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/pcg/step_2.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/IndoRegionSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/IndoRegionSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -152,6 +153,7 @@
   <component name="ProjectId" id="1p1SHxzNpZDBIJANIYSKyHdb6hW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
