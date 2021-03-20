@@ -133,7 +133,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Propinsi <span>*</span></h6>
-                                <select class="form-control" id="province" name="province" onChange="get_city_business(this.value);">
+                                <select class="form-control" id="province_business" name="province_business" onChange="get_city_business(this.value);">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
                                         @if(isset($get_user->province))

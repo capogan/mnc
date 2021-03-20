@@ -319,7 +319,6 @@ class UsersController extends Controller
     public function add_personal_business(Request $request){
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
-            'business_province' => 'required',
             'id_cap_of_business' => 'required',
             'business_partner' => 'required',
             'business_category' => 'required',
@@ -327,6 +326,8 @@ class UsersController extends Controller
             'address_of_business' => 'required',
             'province_business' => 'required',
             'city_business' => 'required',
+            'district_business' => 'required',
+            'vilages_business' => 'required',
             'postal_code_business' => 'required|numeric',
             'phone_number_business' => 'required|numeric',
             'business_kelurahan' => 'required',
@@ -336,13 +337,14 @@ class UsersController extends Controller
         ],
             [
                 'name_of_bussiness.required' => 'Nama usaha harus diisi',
-                'business_province.required' => 'Provinsi harus diisi',
                 'business_partner.required' => 'Lama menjadi partner harus diisi',
                 'business_category.required' => 'Bisnis harus diisi',
                 'business_established_since.required' => 'Lama operasi harus diisi',
                 'address_of_business.required' => 'Alamat usaha harus diisi',
                 'province_business.required' => 'Provinsi tidak boleh kosong',
                 'city_business.required' => 'Kota tidak boleh kosong',
+                'district_business.required' => 'Kecamatan tidak boleh kosong',
+                'vilages_business.required' => 'Kelurahan tidak boleh kosong',
                 'postal_code_business.required' => 'Kode pos tidak boleh kosong',
                 'phone_number_business.required' => 'Nomor telepon harus diisi',
                 'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
