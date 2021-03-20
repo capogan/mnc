@@ -330,8 +330,7 @@ class UsersController extends Controller
             'vilages_business' => 'required',
             'postal_code_business' => 'required|numeric',
             'phone_number_business' => 'required|numeric',
-            'business_kelurahan' => 'required',
-            'business_kecamatan' => 'required',
+
             'business_location_status' =>'required',
             'legality_status' =>'required'
         ],
@@ -347,8 +346,6 @@ class UsersController extends Controller
                 'vilages_business.required' => 'Kelurahan tidak boleh kosong',
                 'postal_code_business.required' => 'Kode pos tidak boleh kosong',
                 'phone_number_business.required' => 'Nomor telepon harus diisi',
-                'business_kelurahan.required' => 'Kelurahan tidak boleh kosong',
-                'business_kecamatan.required' => 'Kecamatan tidak boleh kosong',
                 'business_location_status.required' => 'Pilih status tempat usaha',
                 'legality_status.required' => 'Pilih status bisnis'
 
