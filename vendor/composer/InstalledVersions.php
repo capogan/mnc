@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'd4c3a55141822f1c632aa294455cc26c9c77cc8b',
+    'reference' => 'aaad00df08ea13543ca7730ac62b34bef9cbb402',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -472,7 +472,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'd4c3a55141822f1c632aa294455cc26c9c77cc8b',
+      'reference' => 'aaad00df08ea13543ca7730ac62b34bef9cbb402',
     ),
     'laravel/tinker' => 
     array (
@@ -988,6 +988,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'sevenspan/laravel-value-first' => 
+    array (
+      'pretty_version' => 'v2.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '238bc47595bc42eee60aec963ed52d07d1e9c725',
     ),
     'swagger-api/swagger-ui' => 
     array (
