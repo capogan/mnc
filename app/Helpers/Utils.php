@@ -93,7 +93,8 @@ class Utils {
         //$url = 'https://es.sonicurlprotection-tko.com/click?PV=1&MSGID=202103190427360089342&URLID=2&ESV=10.0.6.3447&IV=1BCE6495D2536F40B974CD45B50AC2F6&TT=1616128058161&ESN=1bhwtVUB4JyVU9nEsdDxkgf5c2gR%2BJXAeGzo0g3SIdc%3D&KV=1536961729279&ENCODED_URL=https%3A%2F%2Fapi.myvfirst.com%2Fpsms%2Fservlet%2Fpsms.JsonEservice&HK=E019308D0DF1B9F7860A4E1CB3B38CFA7675C87748FE39ED2ACA8DEBCEE7BC9E';
        $url = 'https://api.myvfirst.com/psms/servlet/psms.JsonEservice';
        $headers = array(
-            'Content-Type:application/json',
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

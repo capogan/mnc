@@ -1,0 +1,68 @@
+{
+    "name": "sevenspan/laravel-value-first",
+    "description": "It uses ValueFirst API to send whatsapp messages.",
+    "keywords": [
+        "laravel",
+        "laravel-valuefirst",
+        "laravel-value-first",
+        "valuefirst",
+        "value-first"
+    ],
+    "homepage": "https://github.com/7span/laravel-valuefirst",
+    "license": "MIT",
+    "authors": [{
+            "name": "Hemratna Bhimani",
+            "email": "hemratna.bhimani@gmail.com",
+            "homepage": "https://github.com/7span/laravel-valuefirst",
+            "role": "Developer"
+        },
+        {
+            "name": "Urvashi Thakar",
+            "email": "urvashithakar143@gmail.com",
+            "homepage": "https://github.com/7span/laravel-valuefirst",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5",
+        "guzzlehttp/guzzle": "^7.2.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^8.5",
+        "psalm/plugin-laravel": "^1.2",
+        "vimeo/psalm": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "SevenSpan\\ValueFirst\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SevenSpan\\ValueFirst\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SevenSpan\\ValueFirst\\Providers\\ValueFirstServiceProvider"
+            ],
+            "aliases": {
+                "ValueFirst": "SevenSpan\\ValueFirst\\Facades\\ValueFirst"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
