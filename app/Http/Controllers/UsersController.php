@@ -28,7 +28,7 @@ class UsersController extends Controller
    public function add_personal_info(Request $request){
 
        $validation = Validator::make($request->all(), [
-           'identity_number' => 'required|numeric|max:16',
+           'identity_number' => 'required|numeric',
            'first_name' => 'required',
            'last_name' => 'required',
            'email' => 'required',
