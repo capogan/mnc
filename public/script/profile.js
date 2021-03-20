@@ -497,6 +497,86 @@ function get_villages(district_id){
     })
 }
 
+function get_city_business(province_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/city?province_id='+province_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#city_business").empty();
+            $("#city_business").append('<option>Pilih Kota</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#city_business").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
+function get_district_business(regency_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/district?regency_id='+regency_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#district_business").empty();
+            $("#district_business").append('<option>Pilih Kecamatan</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#district_business").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
+function get_villages_business(district_id){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/get/villages?district_id='+district_id,
+        type:"GET",
+        dataType:'json',
+
+        success:function(res){
+            // console.log(response);
+            $("#vilages_business").empty();
+            $("#vilages_business").append('<option>Pilih Kelurahan</option>');
+            var index = 0;
+
+            $.each(res,function(key,value){
+                $("#vilages_business").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
+
+
+
 
 
 
