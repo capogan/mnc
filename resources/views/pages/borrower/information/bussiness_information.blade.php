@@ -153,7 +153,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan <span>*</span></h6>
-                                <select class="form-control" id="district_business" name="district_business" onchange="get_villages(this.value)" ></select>
+                                <select class="form-control" id="district_business" name="district_business" onchange="get_villages_business(this.value)" ></select>
                             </div>
                             <div class="col">
                                 <h6>Kelurahan <span>*</span></h6>
