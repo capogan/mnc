@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use function GuzzleHttp\json_encode;
 
 class Utils {
     public static function convert_status($status) {
@@ -66,44 +67,54 @@ class Utils {
         }
     }
 
-    public static function send_sms($num,$msg){
 
-        $curl = curl_init();
 
-        if (preg_match('/^08/', $num)) {
-            $num = '628'.substr($num, 2);
+
+    public static function request_otp($phone_number){
+        $data = [
+            'VER' => "1.2",
+            'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => md5(microtime())),
+            'SMS' => [
+                array(
+                    'UDH' => '0',
+                    'CODING' => "1",
+                    'TEXT' => 'Test SMS',
+                    'PROPERTY' => '0',
+                    'ID' => '1',
+                    'ADDRESS' => [
+                        array(
+                            'FROM' => 'Telkom109',
+                            'TO' => '081260332838',
+                            'SEQ' => '1',
+                            'TAG' => 'TESTTING OTP'
+                        )
+                    ]
+                )
+            ]
+        ];
+        echo json_encode($data);
+        //$url = 'https://es.sonicurlprotection-tko.com/click?PV=1&MSGID=202103190427360089342&URLID=2&ESV=10.0.6.3447&IV=1BCE6495D2536F40B974CD45B50AC2F6&TT=1616128058161&ESN=1bhwtVUB4JyVU9nEsdDxkgf5c2gR%2BJXAeGzo0g3SIdc%3D&KV=1536961729279&ENCODED_URL=https%3A%2F%2Fapi.myvfirst.com%2Fpsms%2Fservlet%2Fpsms.JsonEservice&HK=E019308D0DF1B9F7860A4E1CB3B38CFA7675C87748FE39ED2ACA8DEBCEE7BC9E';
+       $url = 'https://api.myvfirst.com/psms/servlet/psms.JsonEservice';
+       $headers = array(
+            'Content-Type:application/json',
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        print_r($result);
+        if ($result === FALSE) {
+            curl_close($ch);
+            return false;
         }
-
-
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://19vwpd.api.infobip.com/sms/2/text/single",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{ \"from\":\"Cashtree\", \"to\":\"".$num."\", \"text\":\"".$msg."\" }",
-            CURLOPT_HTTPHEADER => array(
-                "accept: application/json",
-                "authorization: Basic Y2FzaHRyZWVfaWQ6R29DdHJlZSNeKDM2OA==",
-                "content-type: application/json"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
-        }
-
-
+        curl_close($ch);
+        return true;
     }
+
 
 }

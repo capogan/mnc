@@ -61,17 +61,13 @@ class ApiCreditScoringController extends ApiController
                         ->leftJoin('personal_business' ,'personal_business.uid' , 'personal_info.uid')
                         ->leftJoin('users_file' , 'users_file.uid' ,'personal_info.uid' )
                         ->where('personal_info.uid' , $request->id)->first();
+        if(!$personal_info){
+            return $this->errorResponse("User Not found", 500);
+        }
         
         $scoring = HelpCreditScoring::credit_score_siap($personal_info , $request->loan_id);
         
-        echo json_encode($scoring);
-
-        exit;
-        if($user_data){
-
-        }
-        // check decision
-        $credit_score = HelpCreditScoring::credit_score($user_data);
+        return $this->successResponse($scoring );
     }
     
 }

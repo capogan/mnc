@@ -4,10 +4,8 @@
             <div class="contact-form mb60">
                 <div class=" ">
                     <p>
-
                     <form id="personal_info_form">
                         <input type="hidden" name="member" id="member">
-
                         <h3>Informasi Data Pribadi</h3>
                         <hr>
                         <div class="row mt-5">
@@ -16,7 +14,6 @@
                                 <input type="text" class="form-control" placeholder="No KTP" name="identity_number" id="identity_number" value="{{ isset($get_user->identity_number) ? $get_user->identity_number : ''}}">
                             </div>
                         </div>
-
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Nama Depan <span>*</span></h6>
