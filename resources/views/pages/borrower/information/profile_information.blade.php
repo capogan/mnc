@@ -144,7 +144,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Propinsi <span>*</span></h6>
-                                <select class="form-control" id="province" name="province">
+                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
                                         @if(isset($get_user->province))
@@ -157,15 +157,18 @@
                             </div>
                             <div class="col">
                                 <h6>Kota <span>*</span></h6>
-                                <select class="form-control" id="city" name="city">
-                                    <option value="">Pilih Kota</option>
-                                    @foreach($regency as $key => $val)
-                                        @if(isset($get_user->city))
-                                            <option value="{{$val->id}}"  {{ $get_user->city == $val->id ? "selected" : "" }}>{{$val->name}}</option>
-                                        @else
-                                            <option value="{{$val->id}}">{{$val->name}}</option>
-                                        @endif
-                                    @endforeach
+                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)"></select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h6>Kecamatan <span>*</span></h6>
+                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" ></select>
+                            </div>
+                            <div class="col">
+                                <h6>Kelurahan <span>*</span></h6>
+                                <select class="form-control" id="vilages" name="vilages">
                                 </select>
                             </div>
                         </div>
