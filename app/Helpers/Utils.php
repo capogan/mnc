@@ -2,8 +2,14 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use ValueFirst;
+use Illuminate\Support\Facades\Http;
+use SevenSpan\ValueFirst\Helpers\TemplateFormatter;
 use function GuzzleHttp\json_encode;
+use App\OtpLog;
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\Psr7\str;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Redirect;
 
 class Utils {
     public static function convert_status($status) {
@@ -69,43 +75,32 @@ class Utils {
     }
 
     public static function request_otp($phone_number){
-
-
-        $to ='9111111111'; // Phone number with country code where we want to send message(Required)
-        $templateId = "123"; //Approved template ID by ValueFirst
-        $data = []; // Array of data to replace template data with dynamic one
-        $tag = 'Whatsapp Message';  //Tag if you want to assign (Optional)
-
-
-
-        // Without passing tag
-        $response=ValueFirst::sendTemplateMessage($to,$templateId,$data);
-
-        // With passing tag
-        $response=ValueFirst::sendTemplateMessage($to,$templateId,$data,$tag);
-
+        OtpLog::where('phone_number' , $phone_number)->update(['status' => false]);
+        if(OtpLog::where('phone_number' , $phone_number)->count() > 5){
+            return ['status' => false , 'message' => 'Terlalu banyak permintaan OTP, Silahkan coba beberapa saat lagi'];
+        }
+        $otp = mt_rand(100000,999999); 
         $data = [
-            'VER' => "1.2",
-            'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => md5(microtime())),
+            '@VER' => "1.2",
+            'USER' => array('@USERNAME' => 'DEMO21NEWXML' , '@PASSWORD' =>'test@2021' , '@UNIXTIMESTAMP' => md5(microtime())),
             'SMS' => [
                 array(
-                    'UDH' => '0',
-                    'CODING' => "1",
-                    'TEXT' => 'Test SMS',
-                    'PROPERTY' => '0',
-                    'ID' => '1',
+                    '@UDH' => '0',
+                    '@CODING' => "1",
+                    '@TEXT' => 'Hi, Kode OTP kamu untuk melengkapi proses registrasi Aplikasi SIAP adalah '.$otp.' ',
+                    '@PROPERTY' => '0',
+                    '@ID' => '1',
                     'ADDRESS' => [
                         array(
-                            'FROM' => 'Telkom109',
-                            'TO' => '081260332838',
-                            'SEQ' => '1',
-                            'TAG' => 'TESTTING OTP'
+                            '@FROM' => 'Telkom109',
+                            '@TO' => '62'.substr($phone_number, 1),
+                            '@SEQ' => '1',
+                            '@TAG' => 'TESTTING OTP'
                         )
                     ]
                 )
             ]
         ];
-        echo json_encode($data);
         //$url = 'https://es.sonicurlprotection-tko.com/click?PV=1&MSGID=202103190427360089342&URLID=2&ESV=10.0.6.3447&IV=1BCE6495D2536F40B974CD45B50AC2F6&TT=1616128058161&ESN=1bhwtVUB4JyVU9nEsdDxkgf5c2gR%2BJXAeGzo0g3SIdc%3D&KV=1536961729279&ENCODED_URL=https%3A%2F%2Fapi.myvfirst.com%2Fpsms%2Fservlet%2Fpsms.JsonEservice&HK=E019308D0DF1B9F7860A4E1CB3B38CFA7675C87748FE39ED2ACA8DEBCEE7BC9E';
        $url = 'https://api.myvfirst.com/psms/servlet/psms.JsonEservice';
        $headers = array(
@@ -120,14 +115,41 @@ class Utils {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $result = curl_exec($ch);
-        print_r($result);
-        if ($result === FALSE) {
-            curl_close($ch);
-            return false;
-        }
-        curl_close($ch);
-        return true;
+        $response = json_decode($result , true);
+        //if(array_key_exists('GUID' , $response['MESSAGEACK'])){
+            OtpLog::create(
+                [
+                    'phone_number' => $phone_number,
+                    'response' => $result,
+                    'crated_at' => date('Y-m-d H:i:s'),
+                    'otp' => $otp,
+                ]
+            );
+            return ['status' => true , 'message' => 'sukses'];
+        //}
+        
     }
-    
+
+    public static function check_otp($phone , $otp){
+        $otpLog = OtpLog::where('otp' , $otp)->where('status' , true)->where('phone_number' , $phone)->orderBy('id' , 'DESC')->first();
+        if(!$otpLog){
+            return ['status' => false , 'message' => 'Kode OTP tidak ditemukan']; 
+        }
+       //echo date('Y-m-d H:i:s') .' < '.date("Y-m-d H:i:s", (strtotime(date($otpLog->created_at)) + 30));
+        if($otp == $otpLog->otp){
+            if(strtotime(date('Y-m-d H:i:s'))  > strtotime(date("Y-m-d H:i:s", (strtotime(date($otpLog->created_at)) + 30)))){
+                return ['status' => false , 'message' => 'Kode OTP sudah expired'];
+            }
+            User::where('phone_number_verified' , $phone)->update(['otp_verified' => true]);
+           return ['status' => true , 'message' => 'Berhasil register'];
+        }else{
+            if($otpLog){
+                return ['status' => false , 'message' => 'Kode OTP sudah expired'];
+            }else{
+                return ['status' => false , 'message' => 'Kode OTP tidak ditemukan'];                
+            }
+        }
+
+    }
 
 }

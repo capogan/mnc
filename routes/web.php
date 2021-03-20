@@ -30,10 +30,15 @@ Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('ad
 Route::post('/add/personal/business', 'UsersController@add_personal_business')->name('add.personal.info');
 Route::post('/upload/file', 'UsersController@upload_file')->name('upload.file.post');
 
+
+Route::get('/otp/verified', 'UsersController@otp_verified')->name('borrower.otp.verified');
+Route::post('/user/verified/otp', 'UsersController@validate_otp')->name('borrower.otp.validate');
+Route::post('/user/send/otp', 'UsersController@send_otp_again')->name('borrower.otp.send');
+
 //Route::get('/register', function(){
 //    return redirect('/');
 //});
-Route::get('register/{group}', 'Auth\RegisterController@showRegistrationForm');
+//Route::get('register/{group}', 'Auth\RegisterController@showRegistrationForm');
 
 
 Route::get('/logout', function () {

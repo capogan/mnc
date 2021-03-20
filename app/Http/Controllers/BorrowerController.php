@@ -28,6 +28,7 @@ use App\BuildingStatus;
 use App\Estabilished;
 use App\Legality;
 use App\TotalEmployee;
+use Illuminate\Support\Facades\Redirect;
 
 class BorrowerController extends Controller
 {
@@ -41,7 +42,11 @@ class BorrowerController extends Controller
     }
 
     public function my_profile(Request $request){
-
+        if(Auth::check()){
+            if(Auth::user()->otp_verified != true){
+                return Redirect::to('/otp/verified');
+            }
+        }
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')

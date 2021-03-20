@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Helpers\Utils;
 
 class RegisterController extends Controller
 {
@@ -57,6 +58,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'term' => ['required'],
             'permission' => ['required'],
+            'level' => ['required'],
+            'phone_number' => ['required' , 'min:11']
         ]);
     }
 
@@ -68,15 +71,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Utils::request_otp($data['phone_number']);
         return User::create([
             'name' => $data['name'],
+            'phone_number_verified' => $data['phone_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'group' => $data['group'],
+            'group' => $data['level'],
             'level' => $data['level'],
-
-
         ]);
+        
     }
 
     protected  function showRegistrationForm(Request $request){
