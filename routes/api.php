@@ -30,4 +30,4 @@ Route::post('/pcg/invoice/responce/dummi', 'Api\ApiPCGController@get_data_from_i
 
 Route::post('/borrower/credit/scoring', 'Api\ApiCreditScoringController@check_my_credit_score')->name('api.pcg.response');
 
-Route::get('/sms/otp', 'Api\FcmController@limit_credit')->name('api.pcg.response');
+Route::post('/sms/otp', 'Api\FcmController@limit_credit')->name('api.pcg.response');

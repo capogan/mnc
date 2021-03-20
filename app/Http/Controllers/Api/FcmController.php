@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Helpers\Utils;
+use App\Http\Controllers\Api\ApiController;
 
 class FcmController extends ApiController
 {

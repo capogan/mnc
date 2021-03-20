@@ -70,7 +70,7 @@ class Utils {
     public static function request_otp($phone_number){
         $data = [
             'VER' => "1.2",
-            'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => microtime()),
+            'USER' => array('USERNAME' => 'DEMO21NEWXML' , 'PASSWORD' =>'test@2021' , 'UNIXTIMESTAMP' => md5(microtime())),
             'SMS' => [
                 array(
                     'UDH' => '0',
@@ -80,7 +80,7 @@ class Utils {
                     'ID' => '1',
                     'ADDRESS' => [
                         array(
-                            'FROM' => 'telkom109',
+                            'FROM' => 'Telkom109',
                             'TO' => '081260332838',
                             'SEQ' => '1',
                             'TAG' => 'TESTTING OTP'
