@@ -48,16 +48,19 @@ class BorrowerController extends Controller
             }
         }
         $uid = Auth::id();
-        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
+        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*','regencies.name as personal_city','districts.name as personal_district','villages.name as personal_villages')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
                     ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
+                    ->rightJoin('regencies' , 'regencies.id' , 'personal_info.city')
+                    ->leftJoin('districts' , 'districts.id' , 'personal_info.district')
+                    ->leftJoin('villages' , 'villages.id' , 'personal_info.villages')
                     ->where('users.id',$uid)->first();
 
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
         $married_status = MarriedStatus::get();
-        $education = Education::get();
+        $education = Education::Orderby('id','ASC')->get();
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
@@ -111,7 +114,7 @@ class BorrowerController extends Controller
         if(Auth::user()->step < 2){
             return Redirect::to('/profile');
         }
-        
+
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
@@ -144,11 +147,6 @@ class BorrowerController extends Controller
             'married_status' => $married_status,
             'get_user' =>$get_user,
             'get_email' =>$get_email,
-            /*'tanggungan' => CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
-                            ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
-                            ->where('category_score.status' , true)
-                            ->where('siap_code' , 'dependents_number')
-                            ->orderBy('id_category_score' , 'DESC')->get(),*/
             'education' =>$education,
             'dependents' => Dependents::get(),
             'siblings' =>$siblings,
@@ -352,7 +350,7 @@ class BorrowerController extends Controller
     }
 
     public function profile(){
-        
+
     }
 
     public function my_business(Request $request){

@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $("#npwp_number").inputmask({"mask": "99.999.999.9-999.999"});
-    $("#province").select2({
-        placeholder: "Pilih Propinsi",
-        allowClear: true,
+//     $("#province").select2({
+//         placeholder: "Pilih Provinsi",
+//         allowClear: true
+//     });
 
-    });
 });
 
 $(document).on('change', '.btn-file :file', function() {
@@ -52,6 +52,7 @@ $('#check_identity_form').on('submit', function(event){
         dataType:'json',
         success:function(response)
         {
+
             if(response.status){
                 $("#identity_number").val(response.data.identity_id);
                 $("#first_name").val(response.data.name);
@@ -99,32 +100,38 @@ $('#personal_info_form').on('submit', function(event){
         cache: false,
         processData: false,
         dataType:'json',
+        beforeSend:function(){
+            loading();
+        },
         success:function(response)
         {
+            close_loading();
             var text ='';
             var title = '';
             if(response.status){
                 text = 'Data berhasil ditambahkan'
                 var title = 'Sukses';
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Anda telah tersimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
 
             }else{
 
                 $.each(response.message, function( index, value ) {
                     text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
-                var title = 'Terjadi Kesalahan';
+                window.scrollTo(500, 0);
+               $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                setTimeout(function() {
+                    $(".result-message").fadeOut("slow");
+                }, 1000);
+
             }
-            bootbox.alert({
-                title: title,
-                message: text,
-                centerVertical:true,
-                onShow: function(e) {
-                    feather.replace();
-                },
-                callback: function() {
-                    btn.removeAttr("disabled");
-                }
-            });
+
         }
     })
 });

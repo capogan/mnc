@@ -28,7 +28,7 @@ class UsersController extends Controller
    public function add_personal_info(Request $request){
 
        $validation = Validator::make($request->all(), [
-           'identity_number' => 'required|numeric|digits:16',
+           'identity_number' => 'required|numeric|digits:16|unique:personal_info',
            'first_name' => 'required',
            'last_name' => 'required',
            'email' => 'required',
@@ -38,10 +38,12 @@ class UsersController extends Controller
            'address' => 'required',
            'province' => 'required',
            'city' => 'required',
+           'district' => 'required',
+           'vilages' => 'required',
            'zip_code' => 'required',
            'education' => 'required',
            'npwp_number' => 'required',
-           'phone_number' => 'required',
+           'phone_number' => 'required|numeric',
            'whatsapp_number' => 'required',
            'married_status' => 'required',
            'mother_name' => 'required',
@@ -50,8 +52,7 @@ class UsersController extends Controller
            'emergency_phone' => 'required',
            'emergency_full_address' => 'required',
            'dependents' => 'required',
-           'district' => 'required',
-           'vilages' => 'required',
+
        ],
            [
                'identity_number.required' => 'Nomor KTP harus diisi',
@@ -65,6 +66,8 @@ class UsersController extends Controller
                'address.required' => 'Alamat harus diisi',
                'province.required' => 'Propinsi harus diisi',
                'city.required' => 'Kota harus diisi',
+               'district.required' => 'Kecamatan harus diisi',
+               'vilages.required' => 'Kelurahan  harus diisi',
                'zip_code.required' => 'Kode Pos harus diisi',
                'education.required' => 'Pendidikan terakhir harus diisi',
                'npwp_number.required' => 'Nomor NPWP harus diisi',
@@ -72,14 +75,13 @@ class UsersController extends Controller
                'whatsapp_number.required' => 'Nomor Whatsapp harus diisi',
                'married_status.required' => 'Status pernikahan harus diisi',
                'mother_name.required' => 'Nama ibu kandung harus diisi',
-               'emergency_name.required' => 'Nama Saudara tidak serumah harus diisi',
+               'emergency_name.required' => 'Nama kerabat tidak serumah harus diisi',
                'relationship_as.required' => 'Pilih status hubungan',
-               'emergency_phone.required' => 'Nomor telepon saudara tidak serumah harus diisi',
-               'emergency_full_address.required' => 'Alamat saudara tidak serumah harus diisi',
-               'emergency_zip_code.required' => 'Kodepos saudara tidak serumah harus diisi',
+               'emergency_phone.required' => 'Nomor telepon kerabat tidak serumah harus diisi',
+               'emergency_full_address.required' => 'Alamat kerabat tidak serumah harus diisi',
+               'emergency_zip_code.required' => 'Kodepos kerabat tidak serumah harus diisi',
                'dependents.required' => 'Jumlah tanggungan harus diisi',
-               'district.required' => 'Kecamatan harus diisi',
-               'vilages.required' => 'Kelurahan  harus diisi',
+
 
            ]);
 
@@ -103,8 +105,8 @@ class UsersController extends Controller
                 'address'                => $request->address,
                 'province'               => $request->province,
                 'city'                   => $request->city,
-                'disctrict'              => $request->disctrict,
-                'villages'              => $request->vilages,
+                'district'               => $request->district,
+                'villages'               => $request->vilages,
                 'zip_code'               => $request->zip_code,
                 'education'              => $request->education,
                 'npwp_number'            => $request->npwp_number,

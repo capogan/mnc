@@ -1,9 +1,3 @@
-<style>
-    .select2-container .select2-selection--single {
-        height: 132px;
-    }
-
-</style>
 <div class="row">
     <div class="col">
         <div class=" bg-white ">
@@ -14,6 +8,7 @@
                         <input type="hidden" name="member" id="member">
                         <h3>Informasi Data Pribadi</h3>
                         <hr>
+                        <div class="result-message"></div>
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>No KTP <span>*</span></h6>
@@ -44,7 +39,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Email <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="{{ isset($get_email->email) ? $get_email->email : '' }}">
+                                <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="{{ isset($get_email->email) ? $get_email->email : '' }}" readonly>
                             </div>
 
                             <div class="col">
@@ -142,15 +137,8 @@
 
                         <div class="row mt-4">
                             <div class="col">
-                                <h6>Alamat <span>*</span></h6>
-                                <textarea class="form-control" name="address" id="address"> {{ isset($get_user->address) ? $get_user->address : '' }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col">
                                 <h6>Propinsi <span>*</span></h6>
-                                <select class="" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">
+                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">
                                     <option></option>
                                     @foreach($provinces as $key => $val)
                                         @if(isset($get_user->province))
@@ -163,18 +151,29 @@
                             </div>
                             <div class="col">
                                 <h6>Kota <span>*</span></h6>
-                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)"></select>
+                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)">
+                                    @if(isset($get_user->city ))
+                                        <option value="{{$get_user->city}}">{{$get_user->personal_city}}</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan <span>*</span></h6>
-                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" ></select>
+                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >
+                                    @if(isset($get_user->district ))
+                                        <option value="{{$get_user->district}}">{{$get_user->personal_district}}</option>
+                                    @endif
+                                </select>
                             </div>
                             <div class="col">
                                 <h6>Kelurahan <span>*</span></h6>
                                 <select class="form-control" id="vilages" name="vilages">
+                                    @if(isset($get_user->villages ))
+                                        <option value="{{$get_user->villages}}">{{$get_user->personal_villages}}</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -184,7 +183,10 @@
                                 <h6>Kode Pos <span>*</span></h6>
                                 <input type="text" class="form-control" placeholder="Kode Pos" id="zip_code" name="zip_code" value="{{ isset($get_user->zip_code) ? $get_user->zip_code : '' }}">
                             </div>
-
+                            <div class="col">
+                                <h6>Alamat <span>*</span></h6>
+                                <textarea class="form-control" name="address" id="address"> {{ isset($get_user->address) ? $get_user->address : '' }}</textarea>
+                            </div>
                         </div>
 
                         <hr>
@@ -240,12 +242,12 @@
                                 <input type="text" class="form-control" placeholder="Nomor Telepon Kerabat" id="emergency_phone" name="emergency_phone" value="{{isset($get_user->emergency_phone ) ? $get_user->emergency_phone : '' }}" >
                             </div>
                             <div class="col">
-                                <h6>Alamat <span>*</span></h6>
+                                <h6>Alamat Kerabat <span>*</span></h6>
                                    <textarea class="form-control" name="emergency_full_address" id="emergency_full_address">{{isset($get_user->emergency_full_address ) ? $get_user->emergency_full_address : '' }}</textarea>
                             </div>
                         </div>
                         <div class="form-group mt-5">
-                            <button type="submit" class="btn btn-primary btn-block"> Tambahkan Data Personal </button>
+                            <button type="submit" data-text="Tambahkan Data Personal" class="btn btn-primary btn-block"> Tambahkan Data Personal </button>
                         </div>
                     </form>
                 </div>

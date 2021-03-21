@@ -139,7 +139,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
 <script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+function loading(){
+    $('.btn-primary').attr('disabled','disabled').html('<i class="fa fa-spinner fa-spin"></i> Mohon Tunggu');
 
+}
+function close_loading(){
+    $(".btn-primary").removeAttr('disabled').html($("button").attr("data-text"));
+}
+</script>
 @yield('js')
 
 </body>
