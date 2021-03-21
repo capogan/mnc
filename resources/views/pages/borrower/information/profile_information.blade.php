@@ -1,3 +1,9 @@
+<style>
+    .select2-container .select2-selection--single {
+        height: 132px;
+    }
+
+</style>
 <div class="row">
     <div class="col">
         <div class=" bg-white ">
@@ -144,8 +150,8 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Propinsi <span>*</span></h6>
-                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);">
-                                    <option value="">Pilih Propinsi</option>
+                                <select class="" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">
+                                    <option></option>
                                     @foreach($provinces as $key => $val)
                                         @if(isset($get_user->province))
                                         <option value="{{$val->id}}"  {{  $get_user->province == $val->id ? "selected" : "" }}>{{$val->name}}</option>

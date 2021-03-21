@@ -1,8 +1,20 @@
+$(document).ready(function() {
+    $("#npwp_number").inputmask({"mask": "99.999.999.9-999.999"});
+    $("#province").select2({
+        placeholder: "Pilih Propinsi",
+        allowClear: true,
+
+    });
+});
+
 $(document).on('change', '.btn-file :file', function() {
     var input = $(this),
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [label]);
+
+
 });
+
 
 $('.btn-file :file').on('fileselect', function(event, label) {
 
@@ -352,7 +364,7 @@ $('#check_invoice_form').on('click', function(event){
 });
 
 $('select[name="id_cap_of_business"]').change(function(){
-    
+
     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
 })
 

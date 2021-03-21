@@ -26,8 +26,8 @@
 
                                     <div class="row mt-2">
                                         <div class="col">
-                                            <h6>Jumlah Pinjaman<span>*</span></h6>
-                                            <input type="text" name="request_loan_borrower" id="request_loan_borrower" class="form-control"  placeholder="Jumlah Pinjaman">
+                                            <h6>Nilai Pembelian<span>*</span></h6>
+                                            <input type="text" name="request_loan_borrower" id="request_loan_borrower" class="form-control"  placeholder="Nilai Pembelian">
                                         </div>
                                     </div>
 

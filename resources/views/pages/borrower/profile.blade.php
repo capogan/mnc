@@ -5,6 +5,7 @@
         select.form-control:not([size]):not([multiple]) {
             height: 50px !important;
         }
+
     </style>
 
 

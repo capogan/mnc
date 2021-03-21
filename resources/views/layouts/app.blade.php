@@ -12,7 +12,7 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.css" rel="stylesheet" />
 
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.css')}}">
@@ -137,12 +137,8 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-    });
-</script>
+<script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
 
 @yield('js')
 
