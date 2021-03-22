@@ -403,17 +403,10 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
-<<<<<<< HEAD
-// $('select[name="id_cap_of_business"]').change(function(){
-    
-//     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
-// })
-=======
 $('select[name="id_cap_of_business"]').change(function(){
 
     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
 })
->>>>>>> 62cb6f69991c02d14a3068f6887f8cf0838f6a79
 
 $(document).on('click' , '#request_loan_' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
