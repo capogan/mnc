@@ -8,6 +8,7 @@
                         <form id="check_invoice_formss">
                             <h3>Informasi Faktur</h3>
                             <hr>
+                            <div class="result-message-i"></div>
                             <div class="form-group">
                                 <div class="input-invoice">
                                     <div class="row mt-5">
@@ -119,4 +120,4 @@
             </div>
         </div>
     </div>
-</div><?php
+</div>

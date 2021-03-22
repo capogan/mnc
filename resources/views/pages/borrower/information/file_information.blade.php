@@ -7,13 +7,12 @@
                         <div class="col">
                             <div class="section-title ">
                                 <!-- section title start-->
-
-
                             </div>
                         </div>
                         <form id="file_upload_image" enctype="multipart/form-data">
                             <h3>Unggah Berkas</h3>
                             <hr>
+                            <div class="result-message-f"></div>
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="row mt-2">
@@ -26,7 +25,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                 <div class="file-input">
-                                                <input type="file" id="identity_image" name="identity_image" class="file">
+                                                <input type="file" id="identity_image" name="identity_image" class="file" >
 		                                            <label for="identity_image">
 			                                           <svg
 				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
@@ -55,7 +54,7 @@
                                         <div class="col">
                                             <div class="upload-file">
                                                  <div class="file-input">
-	                                                <input type="file" id="self_image" name="self_image" class="file">
+	                                                <input type="file" id="self_image" name="self_image" class="file" >
 		                                            <label for="self_image">
 			                                            <svg
 				                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
@@ -250,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="form-group mt-5">
-                                <button type="submit" class="btn btn-primary btn-block"> Unggah Berkas & Lanjutkan </button>
+                                <button type="submit" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
                             </div>
                         </form>
                     </div>

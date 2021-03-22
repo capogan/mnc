@@ -5,7 +5,7 @@
                 <div class=" ">
                     <p>
                     <form id="personal_info_form">
-                        <input type="hidden" name="member" id="member">
+                        <input type="hidden" name="id_personal_info" id="id_personal_info" value="{{ isset($get_user->id_personal) ? $get_user->id_personal : ''}}">
                         <h3>Informasi Data Pribadi</h3>
                         <hr>
                         <div class="result-message"></div>
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                         <div class="form-group mt-5">
-                            <button type="submit" data-text="Tambahkan Data Personal" class="btn btn-primary btn-block"> Tambahkan Data Personal </button>
+                            <button type="submit" data-text="Tambahkan Data" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
                         </div>
                     </form>
                 </div>

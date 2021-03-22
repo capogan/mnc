@@ -22,10 +22,10 @@ Auth::routes();
 
 
 Route::get('/profile', 'BorrowerController@my_profile')->name('borrower.personal.profile');
-Route::get('/register/business', 'BorrowerController@my_profile_business')->name('borrower.personal.profile');
-Route::get('/register/file', 'BorrowerController@my_profile_file')->name('borrower.personal.profile');
-Route::get('/register/faktur', 'BorrowerController@my_profile_faktur')->name('borrower.personal.profile');
-Route::get('/register/transaction', 'BorrowerController@my_profile_transaction')->name('borrower.personal.profile');
+Route::get('/profile/business', 'BorrowerController@my_profile_business')->name('borrower.personal.profile');
+Route::get('/profile/file', 'BorrowerController@my_profile_file')->name('borrower.personal.profile');
+Route::get('/profile/faktur', 'BorrowerController@my_profile_faktur')->name('borrower.personal.profile');
+Route::get('/profile/transaction', 'BorrowerController@my_profile_transaction')->name('borrower.personal.profile');
 
 Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('submit.loan');
 //Users
@@ -41,7 +41,7 @@ Route::post('/user/send/otp', 'UsersController@send_otp_again')->name('borrower.
 //Route::get('/register', function(){
 //    return redirect('/');
 //});
-//Route::get('register/{group}', 'Auth\RegisterController@showRegistrationForm');
+Route::get('register/{group}', 'Auth\RegisterController@showRegistrationForm');
 
 
 Route::get('/logout', function () {

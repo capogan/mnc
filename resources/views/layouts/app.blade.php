@@ -148,6 +148,13 @@ function loading(){
 function close_loading(){
     $(".btn-primary").removeAttr('disabled').html($("button").attr("data-text"));
 }
+function alert_error(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi kesalahan pada pengimputan data!',
+    })
+}
 </script>
 @yield('js')
 

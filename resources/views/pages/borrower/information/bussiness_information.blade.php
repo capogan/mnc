@@ -8,14 +8,15 @@
                     <form id="form_borrower_business_information">
                         <h3>Informasi Bisnis</h3>
                         <hr>
+                        <div class="result-message-b"></div>
                         <div class="row mt-5">
                             <div class="col">
-                                <h6>Nama Perusahan<span>*</span></h6>
-                                <input type="text" value="{{$business->business_name ?? ''}}" class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness">
+                                <h6>Nama Usaha<span>*</span></h6>
+                                <input type="text" value="{{$business->business_name ?? ''}}" class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness">
                             </div>
 
                             <div class="col">
-                                <h6>Kriteria Perusahan<span>*</span></h6>
+                                <h6>Kriteria Usaha<span>*</span></h6>
                                 <select class="form-control" name="id_cap_of_business">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
@@ -90,8 +91,8 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <h6>Industri<span>*</span></h6>
-                                <select class="form-control " name="business_category">
-                                    <option selected=""> Pilih Kategori Industri</option>
+                                <select class="form-control " name="business_category" id="business_category">
+                                    <option selected=""></option>
                                     @foreach($industry as $key => $val)
                                         @if(isset($business->id_credit_score_income_factor))
                                             <option value="{{$val->id}}" {{  $business->id_credit_score_income_factor == $val->id ? "selected" : "" }} >{{$val->industry_sectore}}</option>
@@ -136,8 +137,8 @@
                                 <select class="form-control" id="province_business" name="province_business" onChange="get_city_business(this.value);">
                                     <option value="">Pilih Propinsi</option>
                                     @foreach($provinces as $key => $val)
-                                        @if(isset($get_user->province))
-                                            <option value="{{$val->id}}"  {{  $get_user->province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
+                                        @if(isset($business->business_province))
+                                            <option value="{{$val->id}}"  {{  $business->business_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>
                                         @else
                                             <option value="{{$val->id}}">{{$val->name}}</option>
                                         @endif
@@ -146,18 +147,29 @@
                             </div>
                             <div class="col">
                                 <h6>Kota <span>*</span></h6>
-                                <select class="form-control" id="city_business" name="city_business" onchange="get_district_business(this.value)"></select>
+                                <select class="form-control" id="city_business" name="city_business" onchange="get_district_business(this.value)">
+                                    @if(isset($business->business_city ))
+                                        <option value="{{$business->business_city}}">{{$business->city_name}}</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Kecamatan <span>*</span></h6>
-                                <select class="form-control" id="district_business" name="district_business" onchange="get_villages_business(this.value)" ></select>
+                                <select class="form-control" id="district_business" name="district_business" onchange="get_villages_business(this.value)" >
+                                    @if(isset($business->business_sub_kecamatan ))
+                                        <option value="{{$business->business_sub_kecamatan}}">{{$business->kecamatan}}</option>
+                                    @endif
+                                </select>
                             </div>
                             <div class="col">
                                 <h6>Kelurahan <span>*</span></h6>
                                 <select class="form-control" id="vilages_business" name="vilages_business">
+                                    @if(isset($business->business_sub_kelurahan ))
+                                        <option value="{{$business->business_sub_kelurahan}}">{{$business->kelurahan}}</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -213,7 +225,7 @@
                             </div>
                         </div>
                         <div class="form-group mt-5">
-                            <button type="submit" class="btn btn-primary btn-block"> Update Informasi Bisnis </button>
+                            <button type="submit" data-text="Tambahkan Data" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
                         </div>
 
                     </form>

@@ -31,7 +31,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                                 <?php
-                                    $link = ['','/profile','/register/business','/register/file','/register/faktur','/register/transaction'];
+                                    $link = ['','/profile','/profile/business','/profile/file','/profile/faktur','/profile/transaction'];
                                     $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
                                 ?>
                                 @for($i = 1;$i < 6;$i++)
