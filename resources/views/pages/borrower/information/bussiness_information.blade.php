@@ -20,9 +20,9 @@
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
                                         @if(isset($business->id_cap_of_business))
-                                            <option attr="{{$val->description}}" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{$val->title_business}}</option>
+                                            <option attr="" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{ucfirst($val->description)}}</option>
                                         @else
-                                            <option attr="{{$val->description}}" value="{{$val->id}}">{{$val->title_business}}</option>
+                                            <option attr="" =value="{{$val->id}}">{{ucfirst($val->description)}}</option>
                                         @endif
                                     @endforeach
                                 </select>

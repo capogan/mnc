@@ -187,7 +187,14 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nomor NPWP <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                                <div class="form-group input-group">
+                                <!-- <input type="text" class="form-control group2" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}"><p>.</p>
+                                <input type="text" class="form-control group3" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                                <input type="text" class="form-control group3" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                                <input type="text" class="form-control group1" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                                <input type="text" class="form-control group3" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}"> -->
+                                <input type="text" class="form-control group3" placeholder="Nomor NPWP" id="npwp_number" name="npwp_number" value="{{ isset($get_user->npwp_number) ? $get_user->npwp_number : '' }}">
+                                </div>
                             </div>
                             <div class="col">
                                 <h6>Jumlah Kartu Kredit</h6>
@@ -250,3 +257,8 @@
     </div>
 </div>
 
+<style>
+    .group2 , .group1 , .group3{
+        margin: 10px !important;
+    }
+    </style>

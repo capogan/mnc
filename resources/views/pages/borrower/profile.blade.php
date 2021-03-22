@@ -29,40 +29,32 @@
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                                <?php
-                                    $link = ['','/profile','/register/business','/register/file','/register/faktur','/register/transaction'];
-                                    $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
-                                ?>
-                                @for($i = 1;$i < 6;$i++)
-                                    @if($i <= Auth::user()->step)
-                                        <li class="nav-item">
-                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="{{$link[$i]}}">{{$title_header[$i]}}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item">
-                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="#">{{$title_header[$i]}}</a>
-                                        </li>
-                                    @endif
-                                @endfor
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{Auth::user()->step < 4 ? url('register/business') : '#' }}">Usaha</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/file') : '#' }}">Berkas</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/faktur') : '#' }}">Faktur</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/transaction') : '#' }}">Transaksi</a>
+                                </li>
+
                             </ul>
 
                             <!-- Tab panes -->
 
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show {{$header_section == 'step1' ? 'active show ' : '' }}" id="service1">
-                                @include('pages.borrower.information.profile_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step2' ? 'active show ' : '' }}" id="service2">
-                                    @include('pages.borrower.information.bussiness_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step3' ? 'active show ' : '' }}" id="service3">
-                                    @include('pages.borrower.information.file_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step4' ? 'active show ' : '' }}" id="service4">
-                                    @include('pages.borrower.information.invoice_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step5' ? 'active show ' : '' }}" id="service5">
-                                    @include('pages.borrower.information.finance_information')
+                        
+                                <div role="tabpanel" class="tab-pane fade show active" id="service1">
+                                    @include($page)
                                 </div>
                             </div>
                         </div>

@@ -165,13 +165,14 @@ class HelpCreditScoring {
     public static function shortfall_formula($id_loan){
         //echo $id_loan;
         $ShortFall = ShortFall::where('id_loan' , $id_loan)->first();
-        if(!isset($ShortFall->shortfall)){
+        if(!$ShortFall->shortfall){
             return 0;
         }
        // print_r($ShortFall); exit;
         $ShortFall = json_decode($ShortFall->shortfall , true);
         //return 
         $score = DB::table('master_shortfall')->whereRaw($ShortFall['shortfall'].' BETWEEN min AND max')->first();
+        echo $score; exit;
         if($score){
            return $score->score; 
         }
