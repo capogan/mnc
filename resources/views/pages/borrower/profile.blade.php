@@ -30,26 +30,6 @@
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-<<<<<<< HEAD
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step2' ? 'active ' : '' }}" href="{{Auth::user()->step < 4 ? url('register/business') : '#' }}">Usaha</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step3' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/file') : '#' }}">Berkas</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step4' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/faktur') : '#' }}">Faktur</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/transaction') : '#' }}">Transaksi</a>
-                                </li>
-
-=======
                                 <?php
                                     $link = ['','/profile','/profile/business','/profile/file','/profile/faktur','/profile/transaction'];
                                     $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
@@ -65,7 +45,6 @@
                                         </li>
                                     @endif
                                 @endfor
->>>>>>> 62cb6f69991c02d14a3068f6887f8cf0838f6a79
                             </ul>
 
                             <!-- Tab panes -->
