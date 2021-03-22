@@ -168,11 +168,9 @@ class HelpCreditScoring {
         if(!$ShortFall){
             return 0;
         }
-       // print_r($ShortFall); exit;
         $ShortFall = json_decode($ShortFall->shortfall , true);
         //return 
         $score = DB::table('master_shortfall')->whereRaw($ShortFall['shortfall'].' BETWEEN min AND max')->first();
-        echo $score; exit;
         if($score){
            return $score->score; 
         }
