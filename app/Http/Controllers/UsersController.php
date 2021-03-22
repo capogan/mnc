@@ -431,6 +431,9 @@ class UsersController extends Controller
         echo json_encode($validate);
     }
     public function send_otp_again(){
-        Utils::request_otp(Auth::user()->phone_number_verified);
+        $resend = Utils::request_otp(Auth::user()->phone_number_verified);
+
+        return response()->json($resend);
+
     }
 }

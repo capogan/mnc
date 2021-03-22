@@ -36,7 +36,7 @@
                                     <div class="form-group">
                                         <button type="submit" id="btn_verified_otp" data-text="Verifikasi" class="btn btn-primary btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"> Verifikasi </button>
                                     </div>
-                                    <p class="text-center">Sudah Memiliki Akun? <a href="/login">Masuk</a> </p>
+                                    <p class="text-center">Sudah Memiliki Akun? <a href="/logout">Masuk</a> </p>
                             </div>
                         </div>
 
