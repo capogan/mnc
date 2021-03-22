@@ -28,7 +28,7 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Nomor Telepon <span>*</span></h6>
-                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="{{ isset($get_user->phone_number ) ? $get_user->phone_number : ''}}" >
+                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="{{  Auth::user()->phone_number_verified  }}" readonly >
                             </div>
                             <div class="col">
                                 <h6>Nomor Whatsapp <span>*</span></h6>

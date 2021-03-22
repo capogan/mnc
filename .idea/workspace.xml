@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/otp.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/script/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/PcgController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_10_154104_create_personal_bussiness.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/verified_otp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/verified_otp.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app_auth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app_auth.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register_group.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register_group.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/profile_information.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
