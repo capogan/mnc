@@ -403,10 +403,16 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
-$('select[name="id_cap_of_business"]').change(function(){
+// $('select[name="id_cap_of_business"]').change(function(){
 
-    $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
-})
+//     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
+// })
+
+// $('select[name="id_cap_of_business"]').change(function(){
+//
+//     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
+// })
+
 
 $(document).on('click' , '#request_loan_' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
