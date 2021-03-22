@@ -165,7 +165,7 @@ class HelpCreditScoring {
     public static function shortfall_formula($id_loan){
         //echo $id_loan;
         $ShortFall = ShortFall::where('id_loan' , $id_loan)->first();
-        if(!$ShortFall->shortfall){
+        if(!$ShortFall){
             return 0;
         }
        // print_r($ShortFall); exit;

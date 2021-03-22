@@ -77,10 +77,10 @@ class RegisterController extends Controller
             'phone_number_verified' => $data['phone_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'group' => $data['level'],
+            'group' => $data['group'],
             'level' => $data['level'],
         ]);
-        
+
     }
 
     protected  function showRegistrationForm(Request $request){

@@ -48,15 +48,20 @@ class BorrowerController extends Controller
             }
         }
         $uid = Auth::id();
-        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
+        $get_user = PersonalInfo::select('personal_info.*','personal_info.id as id_personal',
+                    'personal_emergency_contact.*','regencies.name as personal_city','districts.name as personal_district',
+                    'villages.name as personal_villages')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
                     ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
+                    ->rightJoin('regencies' , 'regencies.id' , 'personal_info.city')
+                    ->leftJoin('districts' , 'districts.id' , 'personal_info.district')
+                    ->leftJoin('villages' , 'villages.id' , 'personal_info.villages')
                     ->where('users.id',$uid)->first();
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
         $married_status = MarriedStatus::get();
-        $education = Education::get();
+        $education = Education::Orderby('id','ASC')->get();
         $siblings = Siblings::get();
         $data = [
             'header_section' => 'step1',
@@ -222,7 +227,7 @@ class BorrowerController extends Controller
     }
 
     public function profile(){
-        
+
     }
 
     public function my_business(Request $request){
@@ -235,11 +240,15 @@ class BorrowerController extends Controller
 
     public function sumbit_loan(Request $request){
         $validation = Validator::make($request->all(), [
-            'invoice_number' => 'required',
+            'invoice_number' => 'required|unique:request_loan',
             'identity_numbers_invoice'=> 'required',
             'period' => 'required',
             'total_invoice' => 'required'
-        ]);
+        ],
+            [
+               'invoice_number.unique'=>'Nomor Faktur sudah terdaftar',
+            ]
+        );
 
 
         if($validation->fails()) {
@@ -250,9 +259,7 @@ class BorrowerController extends Controller
             'identity_numbers_invoice' => $request->identity_numbers_invoice,
             'periode' => $request->period
         ];
-        if(LoanRequest::where('invoice_number' , $request->invoice_number)->first()){
-            return json_encode(['status' => false , 'message' => 'Nomor invoice sudah diproses']);
-        }
+
         $period = $request->period;
 
         //$invoice_id = $this->get_data_from_invoice($user_data);
@@ -271,16 +278,17 @@ class BorrowerController extends Controller
         })
         ->first();
         $interest_loan = HelpCreditScoring::interest_loan($invoice_id , $period);
+
         $data_loan = [
             'invoice_number' => $request->invoice_number,
             'uid' => Auth::id(),
-            'loan_amount' => $invoice_id,
+            'loan_amount' => $invoice_id + $admin_fee,
             'loan_period' => $request->period,
             'admin_fee_percentage' => $config_admin_fee->value,
             'admin_fee_amount' => $admin_fee,
             'interest_fee_percentage' => $interest_fee->value,
             'interest_fee_amount' => $interest_loan,
-            'disbrusement' => ($invoice_id - $admin_fee),
+            'disbrusement' => ($invoice_id + $admin_fee),
             'repayment' => (($invoice_id + $admin_fee) + $interest_loan),
             'penalty_percentage' => 0,
             'penalty_max_percentage' => 45,
@@ -292,6 +300,7 @@ class BorrowerController extends Controller
         $id_loan_request = LoanRequest::create(
             $data_loan
         );
+        User::where('id' , Auth::id())->update(['step' => 4]);
         $loanRequest = LogRequestInvoice::create(
             [
                 'request_loan_id' => $id_loan_request->id,

@@ -5,6 +5,7 @@
         select.form-control:not([size]):not([multiple]) {
             height: 50px !important;
         }
+
     </style>
 
 
@@ -29,6 +30,7 @@
                         <div class="sub-nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+<<<<<<< HEAD
                                 <li class="nav-item">
                                     <a class="nav-link {{$header_section == 'step1' ? 'active ' : '' }}" href="{{url('profile')}}">Data Pribadi</a>
                                 </li>
@@ -47,6 +49,23 @@
                                     <a class="nav-link {{$header_section == 'step5' ? 'active ' : '' }}" href="{{Auth::user()->step <= 3 ? url('register/transaction') : '#' }}">Transaksi</a>
                                 </li>
 
+=======
+                                <?php
+                                    $link = ['','/profile','/profile/business','/profile/file','/profile/faktur','/profile/transaction'];
+                                    $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
+                                ?>
+                                @for($i = 1;$i < 6;$i++)
+                                    @if($i <= Auth::user()->step)
+                                        <li class="nav-item">
+                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="{{$link[$i]}}">{{$title_header[$i]}}</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item">
+                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="#">{{$title_header[$i]}}</a>
+                                        </li>
+                                    @endif
+                                @endfor
+>>>>>>> 62cb6f69991c02d14a3068f6887f8cf0838f6a79
                             </ul>
 
                             <!-- Tab panes -->

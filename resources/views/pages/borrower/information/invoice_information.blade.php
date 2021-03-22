@@ -8,6 +8,7 @@
                         <form id="check_invoice_formss">
                             <h3>Informasi Faktur</h3>
                             <hr>
+                            <div class="result-message-i"></div>
                             <div class="form-group">
                                 <div class="input-invoice">
                                     <div class="row mt-5">
@@ -26,8 +27,8 @@
 
                                     <div class="row mt-2">
                                         <div class="col">
-                                            <h6>Jumlah Pinjaman<span>*</span></h6>
-                                            <input type="text" name="request_loan_borrower" id="request_loan_borrower" class="form-control"  placeholder="Jumlah Pinjaman">
+                                            <h6>Nilai Pembelian<span>*</span></h6>
+                                            <input type="text" name="request_loan_borrower" id="request_loan_borrower" class="form-control"  placeholder="Nilai Pembelian">
                                         </div>
                                     </div>
 
@@ -119,4 +120,4 @@
             </div>
         </div>
     </div>
-</div><?php
+</div>

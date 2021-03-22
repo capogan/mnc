@@ -1,8 +1,20 @@
+$(document).ready(function() {
+    $("#npwp_number").inputmask({"mask": "99.999.999.9-999.999"});
+    $("#business_category").select2({
+        placeholder: "Pilih Kategori Industri",
+        allowClear: true
+    });
+
+});
+
 $(document).on('change', '.btn-file :file', function() {
     var input = $(this),
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [label]);
+
+
 });
+
 
 $('.btn-file :file').on('fileselect', function(event, label) {
 
@@ -40,6 +52,7 @@ $('#check_identity_form').on('submit', function(event){
         dataType:'json',
         success:function(response)
         {
+
             if(response.status){
                 $("#identity_number").val(response.data.identity_id);
                 $("#first_name").val(response.data.name);
@@ -87,32 +100,46 @@ $('#personal_info_form').on('submit', function(event){
         cache: false,
         processData: false,
         dataType:'json',
+        beforeSend:function(){
+            loading();
+        },
         success:function(response)
         {
+            close_loading();
             var text ='';
             var title = '';
             if(response.status){
                 text = 'Data berhasil ditambahkan'
                 var title = 'Sukses';
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Anda telah tersimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function() {
+                    window.location.href = '/profile/business';
+                }, 500);
+
 
             }else{
 
                 $.each(response.message, function( index, value ) {
                     text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
-                var title = 'Terjadi Kesalahan';
+                window.scrollTo(500, 0);
+               $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                setTimeout(function() {
+                    $(".result-message").fadeOut("slow");
+                }, 2000);
+
             }
-            bootbox.alert({
-                title: title,
-                message: text,
-                centerVertical:true,
-                onShow: function(e) {
-                    feather.replace();
-                },
-                callback: function() {
-                    btn.removeAttr("disabled");
-                }
-            });
+
+        },
+        error: function() {
+            alert_error();
+            close_loading();
         }
     })
 });
@@ -137,32 +164,45 @@ $('#form_borrower_business_information').on('submit', function(event){
         cache: false,
         processData: false,
         dataType:'json',
+        beforeSend:function(){
+            loading();
+        },
         success:function(response)
         {
+            close_loading();
             var text ='';
             var title = '';
             if(response.status){
                 text = 'Data berhasil ditambahkan'
                 var title = 'Sukses';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Anda telah tersimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function() {
+                    window.location.href = '/profile/file';
+                }, 500);
+
+
             }else{
 
                 $.each(response.message, function( index, value ) {
                     text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
-                var title = 'Terjadi Kesalahan';
+                $(".result-message-b").addClass('alert alert-danger').html(text).fadeIn();
+                window.scrollTo(500, 0);
+                setTimeout(function() {
+                    $(".result-message-b").fadeOut("slow");
+                }, 2000);
             }
-            bootbox.alert({
-                title: title,
-                message: text,
-                centerVertical:true,
-                onShow: function(e) {
-                    feather.replace();
-                },
-                callback: function() {
-                    btn.removeAttr("disabled");
-                }
-            });
+        },
+        error: function() {
+            alert_error();
+            close_loading();
         }
     })
 });
@@ -189,33 +229,44 @@ $('#file_upload_image').on('submit', function(event){
         contentType: false,
         processData: false,
         dataType:'json',
+        beforeSend:function(){
+            loading();
+        },
         success:function(response)
         {
+            close_loading();
             var text ='';
             var title = '';
             if(response.status){
                 text = response.message
-                var title = 'Sukses';
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Anda telah tersimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(function() {
+                    window.location.href = '/profile/faktur';
+                }, 500);
+
 
             }else{
 
                 $.each(response.message, function( index, value ) {
                     text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
-                var title = 'Terjadi Kesalahan';
+                $(".result-message-f").addClass('alert alert-danger').html(text).fadeIn();
+                window.scrollTo(500, 0);
+                setTimeout(function() {
+                    $(".result-message-f").fadeOut("slow");
+                }, 2000);
             }
-            bootbox.alert({
-                title: title,
-                message: text,
-                centerVertical:true,
-                onShow: function(e) {
-                    feather.replace();
-                },
-                callback: function() {
-                    btn.removeAttr("disabled");
-                }
-            });
 
+        },
+        error: function() {
+            alert_error();
+            close_loading();
         }
     })
 });
@@ -290,7 +341,8 @@ $('#check_invoice_form').on('click', function(event){
         data: {invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
         dataType:'json',
         beforeSend:function(){
-            $("#btn_submit").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
+            // $("#btn_submit").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
+            loading();
         },
         success:function(response)
         {
@@ -351,10 +403,17 @@ $('#check_invoice_form').on('click', function(event){
     })
 });
 
+<<<<<<< HEAD
 // $('select[name="id_cap_of_business"]').change(function(){
     
 //     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
 // })
+=======
+$('select[name="id_cap_of_business"]').change(function(){
+
+    $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
+})
+>>>>>>> 62cb6f69991c02d14a3068f6887f8cf0838f6a79
 
 $(document).on('click' , '#request_loan_' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -369,14 +428,26 @@ $(document).on('click' , '#request_loan_' , function(){
         dataType:'json',
         beforeSend:function(){
             //$("#request_loan_").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);
+            loading();
         },
         success:function(response)
         {
+            close_loading('Ajukan pinjaman');
             var text ='';
             var title = '';
             if(response.status){
                 text = 'Data berhasil ditambahkan'
                 var title = 'Sukses';
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Anda telah tersimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function() {
+                    window.location.href = '/profile/transaction';
+                }, 500);
 
             }else{
 
@@ -384,23 +455,20 @@ $(document).on('click' , '#request_loan_' , function(){
                     text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
                 });
                 var title = 'Terjadi Kesalahan';
+                $(".result-message-i").addClass('alert alert-danger').html(text).fadeIn();
+                window.scrollTo(500, 0);
+                setTimeout(function() {
+                    $(".result-message-i").fadeOut("slow");
+                }, 2000);
             }
-            bootbox.alert({
-                title: title,
-                message: text,
-                centerVertical:true,
-                onShow: function(e) {
-                    feather.replace();
-                },
-                callback: function() {
-                    btn.removeAttr("disabled");
-                }
-            });
+
+        },
+        error: function() {
+            alert_error();
+            close_loading();
         }
     })
-    $('select').selectize({
-        sortField: 'text'
-    });
+
 });
 
 

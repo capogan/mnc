@@ -11,15 +11,17 @@ $(document).ready(function() {
             dataType:"json",
             data: $('#form_verified').serialize(),
             beforeSend: function() {
-                $('#btn_verifiec').prop('disabled', true);
+                loading();
             },
             success:function(response){
                 //console.log(response);
+
                 if(response.status == true){
                     window.location.href = '/profile';
                 }else{
                     $('#error_response').text(response.message);
                 }
+                close_loading('Verifikasi');
 
             },
             error:function(response){
@@ -38,15 +40,17 @@ $(document).ready(function() {
              dataType:"json",
              data: $('#form_verified').serialize(),
              beforeSend: function() {
-                 $('#btn_verifiec').prop('disabled', true);
+                 // $('#btn_verifiec').prop('disabled', true);
+                 loading();
              },
              success:function(response){
                 // console.log(response);
+                 close_loading('Verifikasi');
                  if(response.status == true){
                      window.location.href = '/profile';
                  }
              },
- 
+
              error:function(response){
              }
          })

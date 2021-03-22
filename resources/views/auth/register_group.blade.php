@@ -17,7 +17,7 @@
 
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-                                    <input type="hidden" name="group" id="group" value="{{$group}}">
+                                    <input type="hidden" name="group" id="group" value="{{Request::segment(2)}}">
                                     <div class="form-group input-group">
                                         <input name="name" id="name" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" type="text">
                                         @error('name')
@@ -68,7 +68,7 @@
                                         </div>
                                         <label style="font-size: 11px;color: red;">* Kode verifikasi akan kami kirim melalui sms ke nomor telepon yang di input.</label>
                                     </div>
-                                    
+
                                     <!--
                                     <div class="form-group input-group">
                                         <input id="kode_otp" type="text" class="form-control" name="kode_otp" placeholder="Kode OTP" required autocomplete="new-password">
@@ -83,7 +83,7 @@
                                             <label> <input type="checkbox" class="form-check-input @error('permission') is-invalid @enderror" id="permission" name="permission">
                                                 <p class="form-check-label" for="exampleCheck1">Izinkan SIAP untuk mengirimkan saya informasi melalui email</p></label>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <button type="submit" id="btn_register" class="btn btn-primary btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"> Buat Akun </button>
                                     </div>

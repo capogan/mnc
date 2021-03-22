@@ -12,7 +12,7 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.css" rel="stylesheet" />
 
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.css')}}">
@@ -26,6 +26,7 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
+
     <title>SIAP</title>
 
 </head>
@@ -51,10 +52,16 @@
                         <!-- navigation start-->
                         <ul>
                             <li class="active"><a href="/" class="animsition-link">Home</a>
-                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+
+                            @if (Auth::check())
+                            <li><a href="/register/borrower" class="animsition-link">profile</a>
                             </li>
-                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
-                            </li>
+                            @else
+                                <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+                                </li>
+                                <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
+                                </li>
+                            @endif
 
 
                         </ul>
@@ -63,9 +70,14 @@
                 </div>
                 <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
                     @if (Auth::check())
-                        <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                        <div class="btn-action">
+                            <a href="/logout" class="btn btn-default">KELUAR</a> </div>
+                        </div>
                     @else
-                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                        <div class="btn-action">
+                            <a href="/login" class="btn btn-default">MASUK</a> </div>
+                        </div>
+
                     @endif
 
                 </div>
@@ -150,12 +162,11 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
+<script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{asset('script/main.js')}}"></script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-
-    });
-</script>
 
 @yield('js')
 
