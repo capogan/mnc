@@ -1,6 +1,9 @@
 @extends('layouts.app_auth')
-
 @section('content')
+@section('style')
+    <link href="{{asset('css/otp.css')}}" rel="stylesheet">
+@endsection
+
     <div class="container-fluid" style="height: 100vh; display: block;">
         <div class="row no-gutter  h-100">
             <div class="col-md-7 bg-login">
@@ -16,22 +19,22 @@
                                 <form method="POST" id="form_verified">
                                     @csrf
                                     <div class="form-group input-group">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_2">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_3">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_4">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_5">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_6">
-                                    </div> 
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_1" maxlength="1">
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_2" maxlength="1">
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_3" maxlength="1">
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_4" maxlength="1">
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_5" maxlength="1">
+                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_6" maxlength="1">
+                                    </div>
                                     <div class="form-group">
                                         <div class="form-check" style="font-size: small;">
                                             <p class="text-center" >Tidak menerima kode verivikasi? <a href="javascript:void(0)" id="send_otp_">kirim Ulang</a> </p>
                                         </div>
-                                    </div> 
-                                    
+                                    </div>
+
                                 </form>
                                     <div class="form-group">
-                                        <button type="submit" id="btn_verified_otp" class="btn btn-primary btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"> Verifikasi </button>
+                                        <button type="submit" id="btn_verified_otp" data-text="Verifikasi" class="btn btn-primary btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"> Verifikasi </button>
                                     </div>
                                     <p class="text-center">Sudah Memiliki Akun? <a href="/login">Masuk</a> </p>
                             </div>
@@ -41,20 +44,9 @@
                 </div>
             </div>
         </div>
+    </div>
     @section('js')
         <script src="{{ asset('/script/register.js') }}"></script>
     @endsection
-
 @endsection
-<style>
-    .invalid-feedback{
-        display: block!important
-    }
-    .verified{
-        margin: 13px !important;
-        border-radius: 10px !important;
-        text-align: center !important;
-        font-weight: bold !important;
-}
-    }
-    </style>
+

@@ -26,6 +26,7 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
+
     <title>SIAP</title>
 
 </head>
@@ -51,10 +52,16 @@
                         <!-- navigation start-->
                         <ul>
                             <li class="active"><a href="/" class="animsition-link">Home</a>
-                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+
+                            @if (Auth::check())
+                            <li><a href="/register/borrower" class="animsition-link">profile</a>
                             </li>
-                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
-                            </li>
+                            @else
+                                <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+                                </li>
+                                <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
+                                </li>
+                            @endif
 
 
                         </ul>
@@ -63,9 +70,14 @@
                 </div>
                 <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
                     @if (Auth::check())
-                        <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                        <div class="btn-action">
+                            <a href="/logout" class="btn btn-default">KELUAR</a> </div>
+                        </div>
                     @else
-                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                        <div class="btn-action">
+                            <a href="/login" class="btn btn-default">MASUK</a> </div>
+                        </div>
+
                     @endif
 
                 </div>
@@ -140,22 +152,9 @@
 <script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-function loading(){
-    $('.btn-primary').attr('disabled','disabled').html('<i class="fa fa-spinner fa-spin"></i> Mohon Tunggu');
+<script src="{{asset('script/main.js')}}"></script>
 
-}
-function close_loading(){
-    $(".btn-primary").removeAttr('disabled').html($("button").attr("data-text"));
-}
-function alert_error(){
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Terjadi kesalahan pada pengimputan data!',
-    })
-}
-</script>
+
 @yield('js')
 
 </body>
