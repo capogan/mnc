@@ -121,6 +121,6 @@
         </div>
     </div>
 </div>
-<script>
-    <script src="{{asset('/js/calculator.js')}}"></script>
-</script>
+
+<script src="{{asset('/js/calculator.js')}}"></script>
+
