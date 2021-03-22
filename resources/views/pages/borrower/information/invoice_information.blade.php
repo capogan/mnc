@@ -122,5 +122,5 @@
     </div>
 </div>
 
-<script src="{{asset('/js/calculator.js')}}"></script>
+
 
