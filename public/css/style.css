@@ -1450,3 +1450,10 @@ input:focus + label {
   height: 30px;
 }
 
+/* CUSTOM */
+.disclaimer>li {
+    color: white;
+    padding: 0.4rem;
+    font-size: 13px;
+}
+

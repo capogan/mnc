@@ -57,67 +57,23 @@ class BorrowerController extends Controller
                     ->leftJoin('districts' , 'districts.id' , 'personal_info.district')
                     ->leftJoin('villages' , 'villages.id' , 'personal_info.villages')
                     ->where('users.id',$uid)->first();
-
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
         $married_status = MarriedStatus::get();
         $education = Education::Orderby('id','ASC')->get();
         $siblings = Siblings::get();
-        $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::get();
-        $partner_since = BecomePartner::get();
-        $building_status = BuildingStatus::get();
-        $estabilished = Estabilished::get();
-        $legality = Legality::get();
-        $employee = TotalEmployee::get();
-
-
-
-        $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-//        $business = BusinessInfo::
-//
-//             rightJoin('users' , 'users.id' , 'personal_business.uid')
-//            ->rightJoin('users' , 'users.id' , 'users_file.uid')
-//            ->leftJoin('regencies' , 'regencies.id' , 'personal_business.business_city')
-//             ->select('users.*','users.id as user_id','personal_business.*','regencies.name as city_name')
-////            ->leftJoin('districts' , 'districts.id' , 'personal_info.district')
-////            ->leftJoin('villages' , 'villages.id' , 'personal_info.villages')
-//            ->where('users.id',$uid)->first();
-
-        $business = BusinessInfo::
-        rightJoin('users' , 'users.id' , 'personal_business.uid','regencies.name as city_name')
-            ->leftJoin('regencies' , 'regencies.id' , 'personal_business.business_city')
-            ->select('users.id as user_id','personal_business.*')
-            ->where('users.id',$uid)
-            ->first();
-
-
-
         $data = [
             'header_section' => 'step1',
+            'page' => 'pages.borrower.information.profile_information',
             'provinces' => $provinces,
             'regency' => $regency,
             'married_status' => $married_status,
+            'education' =>$education,
             'get_user' =>$get_user,
             'get_email' =>$get_email,
-            /*'tanggungan' => CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
-                            ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
-                            ->where('category_score.status' , true)
-                            ->where('siap_code' , 'dependents_number')
-                            ->orderBy('id_category_score' , 'DESC')->get(),*/
-            'education' =>$education,
             'dependents' => Dependents::get(),
             'siblings' =>$siblings,
-            'industry' =>$industry,
-            'criteria' =>$criteria,
-            'legality' => $legality,
-            'employee' => $employee,
-            'partner_since' => $partner_since,
-            'building_status' => $building_status,
-            'estabilished' => $estabilished,
-            'file' => $file,
-            'business' => $business,
             'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
@@ -129,22 +85,18 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
-
-        if(Auth::user()->step < 2){
-            return Redirect::to('/profile');
-        }
-
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
                     ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
                     ->where('users.id',$uid)->first();
 
+        if(!isset($get_user->identity_number)){
+            return Redirect::to('/profile');
+        }
         $get_email = User::where('id',$uid)->first();
         $provinces = Province::get();
         $regency = Regency::get();
-        $married_status = MarriedStatus::get();
-        $education = Education::get();
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
         $criteria = BussinessCriteria::get();
@@ -153,29 +105,14 @@ class BorrowerController extends Controller
         $estabilished = Estabilished::get();
         $legality = Legality::get();
         $employee = TotalEmployee::get();
-
-
-
-        $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-
-        $business = BusinessInfo::
-             rightJoin('users' , 'users.id' , 'personal_business.uid')
-            ->leftJoin('regencies' , 'regencies.id' , 'personal_business.business_city')
-            ->leftJoin('districts' , 'districts.id' , 'personal_business.business_sub_kecamatan')
-            ->leftJoin('villages' , 'villages.id' , 'personal_business.business_sub_kelurahan')
-            ->select('users.id as user_id','personal_business.*','regencies.name as city_name','districts.name as kecamatan','villages.name as kelurahan')
-            ->where('users.id',$uid)
-            ->first();
-
+        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         $data = [
             'header_section' => 'step2',
+            'page' => 'pages.borrower.information.bussiness_information',
             'provinces' => $provinces,
             'regency' => $regency,
-            'married_status' => $married_status,
             'get_user' =>$get_user,
             'get_email' =>$get_email,
-            'education' =>$education,
-            'dependents' => Dependents::get(),
             'siblings' =>$siblings,
             'industry' =>$industry,
             'criteria' =>$criteria,
@@ -184,9 +121,7 @@ class BorrowerController extends Controller
             'partner_since' => $partner_since,
             'building_status' => $building_status,
             'estabilished' => $estabilished,
-            'file' => $file,
             'business' => $business,
-            'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }
@@ -197,52 +132,17 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
-        if(Auth::user()->step < 3){
-            return Redirect::to('/register/business');
-        }
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
                     ->rightJoin('users' , 'users.id' , 'personal_info.uid')
                     ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
                     ->where('users.id',$uid)->first();
-
-        $get_email = User::where('id',$uid)->first();
-        $provinces = Province::get();
-        $regency = Regency::get();
-        $married_status = MarriedStatus::get();
-        $education = Education::get();
-        $siblings = Siblings::get();
-        $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::get();
-        $partner_since = BecomePartner::get();
-        $building_status = BuildingStatus::get();
-        $estabilished = Estabilished::get();
-        $legality = Legality::get();
-        $employee = TotalEmployee::get();
-
-
-
         $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         $data = [
             'header_section' => 'step3',
-            'provinces' => $provinces,
-            'regency' => $regency,
-            'married_status' => $married_status,
-            'get_user' =>$get_user,
-            'get_email' =>$get_email,
-            'education' =>$education,
+            'page' => 'pages.borrower.information.file_information',
             'dependents' => Dependents::get(),
-            'siblings' =>$siblings,
-            'industry' =>$industry,
-            'criteria' =>$criteria,
-            'legality' => $legality,
-            'employee' => $employee,
-            'partner_since' => $partner_since,
-            'building_status' => $building_status,
-            'estabilished' => $estabilished,
             'file' => $file,
-            'business' => $business,
             'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
@@ -282,6 +182,7 @@ class BorrowerController extends Controller
         //echo $business->business_established_since; exit;
         $data = [
             'header_section' => 'step4',
+            'page' => 'pages.borrower.information.invoice_information',
             'provinces' => $provinces,
             'regency' => $regency,
             'married_status' => $married_status,
@@ -316,55 +217,10 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
-        $uid = Auth::id();
-        $get_user = PersonalInfo::select('personal_info.*','personal_emergency_contact.*')
-                    ->rightJoin('users' , 'users.id' , 'personal_info.uid')
-                    ->rightJoin('personal_emergency_contact' , 'personal_emergency_contact.uid' , 'personal_info.uid')
-                    ->where('users.id',$uid)->first();
-
-        $get_email = User::where('id',$uid)->first();
-        $provinces = Province::get();
-        $regency = Regency::get();
-        $married_status = MarriedStatus::get();
-        $education = Education::get();
-        $siblings = Siblings::get();
-        $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::get();
-        $partner_since = BecomePartner::get();
-        $building_status = BuildingStatus::get();
-        $estabilished = Estabilished::get();
-        $legality = Legality::get();
-        $employee = TotalEmployee::get();
-
-
-
-        $file = UsersFile::rightJoin('users' , 'users.id' , 'users_file.uid')->select('users.id as user_id','users_file.*')->where('users.id',$uid)->first();
-        $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
-        //echo $business->business_established_since; exit;
         $data = [
             'header_section' => 'step5',
-            'provinces' => $provinces,
-            'regency' => $regency,
-            'married_status' => $married_status,
-            'get_user' =>$get_user,
-            'get_email' =>$get_email,
-            /*'tanggungan' => CreditScore::select('name_score','id_category_score','category_score.code' ,'score')
-                            ->leftJoin('category_score' ,'category_score.id','=','credit_score.id_category_score')
-                            ->where('category_score.status' , true)
-                            ->where('siap_code' , 'dependents_number')
-                            ->orderBy('id_category_score' , 'DESC')->get(),*/
-            'education' =>$education,
+            'page' => 'pages.borrower.information.finance_information',
             'dependents' => Dependents::get(),
-            'siblings' =>$siblings,
-            'industry' =>$industry,
-            'criteria' =>$criteria,
-            'legality' => $legality,
-            'employee' => $employee,
-            'partner_since' => $partner_since,
-            'building_status' => $building_status,
-            'estabilished' => $estabilished,
-            'file' => $file,
-            'business' => $business,
             'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));

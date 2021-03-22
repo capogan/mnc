@@ -50,20 +50,9 @@
                             <!-- Tab panes -->
 
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show {{$header_section == 'step1' ? 'active show ' : '' }}" id="service1">
-                                @include('pages.borrower.information.profile_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step2' ? 'active show ' : '' }}" id="service2">
-                                    @include('pages.borrower.information.bussiness_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step3' ? 'active show ' : '' }}" id="service3">
-                                    @include('pages.borrower.information.file_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step4' ? 'active show ' : '' }}" id="service4">
-                                    @include('pages.borrower.information.invoice_information')
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade {{$header_section == 'step5' ? 'active show ' : '' }}" id="service5">
-                                    @include('pages.borrower.information.finance_information')
+                        
+                                <div role="tabpanel" class="tab-pane fade show active" id="service1">
+                                    @include($page)
                                 </div>
                             </div>
                         </div>
