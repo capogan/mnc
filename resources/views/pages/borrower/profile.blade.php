@@ -50,7 +50,7 @@
                             <!-- Tab panes -->
 
                             <div class="tab-content">
-                        
+
                                 <div role="tabpanel" class="tab-pane fade show active" id="service1">
                                     @include($page)
                                 </div>
@@ -63,7 +63,6 @@
 @section('js')
 
         <script src="{{ asset('/script/profile.js') }}"></script>
-        <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
 
         <script>
