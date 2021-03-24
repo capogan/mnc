@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Controllers\Api\ApiController;
 use App\PersonalInfo;
 use App\BusinessInfo;
+use App\RequestLoanCurrentScore;
 
 class ApiCreditScoringController extends ApiController
 {
@@ -57,8 +58,6 @@ class ApiCreditScoringController extends ApiController
     }
 
     public function check_my_credit_score(Request $request){    
-        //print_r($request->all());
-        //echo $request->loan_id; exit;
         $personal_info = PersonalInfo::select('personal_info.date_of_birth','personal_info.number_of_dependents','personal_business.*')
                         ->leftJoin('personal_business' ,'personal_business.uid' , 'personal_info.uid')
                         ->leftJoin('users_file' , 'users_file.uid' ,'personal_info.uid' )
@@ -66,10 +65,17 @@ class ApiCreditScoringController extends ApiController
         if(!$personal_info){
             return $this->errorResponse("Data not complete", 500);
         }
-        
         $scoring = HelpCreditScoring::credit_score_siap($personal_info , $request->loan_id);
-        
-        return $this->successResponse($scoring );
+        self::update_scoring($scoring , $request->loan_id);
+        return $this->successResponse($scoring);
     }
     
+    public static function update_scoring($data , $id){
+        RequestLoanCurrentScore::updateOrCreate(
+            ['id_request_loan' => $id ],
+            ['detail_scoring' => json_encode($data)]
+            
+        );
+    }
+
 }
