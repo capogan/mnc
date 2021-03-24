@@ -169,16 +169,14 @@ class HelpCreditScoring {
         if(!$ShortFall){
             return 0;
         }
-        $ShortFall = json_decode($ShortFall->shortfall , true);
-        //return 
-        //print_r($ShortFall['shortfall']);
-        $score = DB::table('master_shortfall')->whereRaw(abs($ShortFall['shortfall']).' BETWEEN min AND max')->first();
+       $ShortFall = json_decode($ShortFall->shortfall , true);
+       
+        //$score = DB::table('master_shortfall')->whereRaw(abs($ShortFall['shortfall']).' BETWEEN min AND max')->first();
         //print_r($score);
-        if($score){
-           return $score->score; 
-        }
-        return 0;
-        //echo $ShortFall['shortfall'];
+        //if($score){
+        //   return $ShortFall->shortfall_score; 
+        //}
+        return $ShortFall['shortfall_score'];
     }
 
     public static function check_age($age){
