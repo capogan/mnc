@@ -19,12 +19,12 @@
                                 <form method="POST" id="form_verified">
                                     @csrf
                                     <div class="form-group input-group">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_1" maxlength="1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_2" maxlength="1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_3" maxlength="1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_4" maxlength="1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_5" maxlength="1">
-                                        <input id="kode_otp" type="text" class="form-control verified" name="kode_otp_6" maxlength="1">
+                                        <input id="kode_otp1" type="text" class="form-control verified" name="kode_otp_1" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                                        <input id="kode_otp2" type="text" class="form-control verified" name="kode_otp_2" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                                        <input id="kode_otp3" type="text" class="form-control verified" name="kode_otp_3" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                                        <input id="kode_otp4" type="text" class="form-control verified" name="kode_otp_4" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                                        <input id="kode_otp5" type="text" class="form-control verified" name="kode_otp_5" maxlength="1" onkeyup="onKeyUpEvent(5, event)" onfocus="onFocusEvent(5)">
+                                        <input id="kode_otp6" type="text" class="form-control verified" name="kode_otp_6" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check" style="font-size: small;">

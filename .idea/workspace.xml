@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/verification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/document.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/loan/verification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/calculator.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/calculator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/invoice_information.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/verified_otp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/verified_otp.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
