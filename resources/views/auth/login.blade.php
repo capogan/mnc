@@ -39,11 +39,50 @@
                                     </div>
 
                                     <button type="submit" id="btnlogin"  class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Masuk</button>
-                                    <p class="divider-text">
-                                        <span class="bg-light"></span>
-                                    </p>
+                                   
 
                                 </form>
+                                 <p class="divider-text">
+                                        <span class="bg-light">atau</span>
+                                    </p>
+                                <div class="row mt-3">
+                                        <div class="col-sm-6">
+                                            <a href="/register/lender">
+    
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                 <img src="/images/creditor.svg" class="users" alt="prof" />
+                                                            </div>
+    
+                                                            <div class="col" style="font-size: x-small;">
+                                                                <span>Daftar Sebagai</span>
+                                                                <span>Pendana</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="/register/borrower">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <img src="/images/borrow.svg" class="users" alt="prof" />
+                                                            </div>
+                                                            <div class="col" style="font-size: x-small;">
+                                                                <span>Daftar Sebagai</span>
+                                                                <span>Peminjam</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>

@@ -79,6 +79,49 @@
                                     <p class="text-center">Sudah Memiliki Akun? <a href="/login">Masuk</a> </p>
                                 </form>
 
+                                 <p class="divider-text">
+                                        <span class="bg-light">atau</span>
+                                    </p>
+
+                                <div class="row mt-3">
+                                        <div class="col-sm-6">
+                                            <a href="/login">
+    
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <img src="/images/creditor.svg" class="users" alt="prof" />
+                                                            </div>
+    
+                                                            <div class="col" style="font-size: x-small;">
+                                                                <span>Masuk Sebagai</span>
+                                                                <span>Pendana</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="/login">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <img src="/images/borrow.svg" class="users" alt="prof" />
+                                                            </div>
+                                                            <div class="col" style="font-size: x-small;">
+                                                                <span>Masuk Sebagai</span>
+                                                                <span>Peminjam</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
                             </div>
                         </div>
 
