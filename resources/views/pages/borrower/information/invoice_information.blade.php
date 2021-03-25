@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="table-invoice">
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block" id="request_loan_">
+                                <button type="button" data-text="Ajukan Pinjaman" class="btn btn-primary btn-block" id="request_loan_">
                                    Ajukan Pinjaman
                                 </button>
                             </div>

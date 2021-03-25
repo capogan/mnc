@@ -249,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="form-group mt-5">
-                                <button type="submit" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
+                                <button type="submit" data-text="Tambahkan Informasi" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
                             </div>
                         </form>
                     </div>
