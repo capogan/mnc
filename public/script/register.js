@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#btn_verified_otp").click( function() {
        // $(this).prop('disabled', true);
        $('#error_response').text('');
-
+        submit_otp();
     });
     $("#send_otp_").click( function() {
         // $(this).prop('disabled', true);
@@ -30,36 +30,33 @@ $(document).ready(function() {
      });
 
 
-});
+    $('.digit-group').find('input').each(function() {
+        $(this).attr('maxlength', 1);
+        $(this).on('keyup', function(e) {
+            var parent = $($(this).parent());
 
-function getCodeBoxElement(index) {
-    return document.getElementById('kode_otp' + index);
-}
-function onKeyUpEvent(index, event) {
-    const eventCode = event.which || event.keyCode;
-    if (getCodeBoxElement(index).value.length === 1) {
-        if (index !== 6) {
-            getCodeBoxElement(index+ 1).focus();
-        } else {
-            getCodeBoxElement(index).blur();
-            // Submit code
-            console.log('submit code ');
-            submit_otp();
-        }
-    }
-    if (eventCode === 8 && index !== 1) {
-        getCodeBoxElement(index - 1).focus();
-    }
-}
-function onFocusEvent(index) {
-    for (item = 1; item < index; item++) {
-        const currentElement = getCodeBoxElement(item);
-        if (!currentElement.value) {
-            currentElement.focus();
-            break;
-        }
-    }
-}
+            if(e.keyCode === 8 || e.keyCode === 37) {
+                var prev = parent.find('input#' + $(this).data('previous'));
+
+                if(prev.length) {
+                    $(prev).select();
+                }
+            } else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+                var next = parent.find('input#' + $(this).data('next'));
+
+                if(next.length) {
+                    $(next).select();
+                } else {
+                    if(parent.data('autosubmit')) {
+                        submit_otp();
+                    }
+                }
+            }
+        });
+    });
+
+
+});
 
 
 function submit_otp(){

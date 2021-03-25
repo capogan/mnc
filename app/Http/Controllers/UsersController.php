@@ -407,16 +407,11 @@ class UsersController extends Controller
     }
 
     function test(){
-
             $to ='6281260332838'; // Phone number with country code where we want to send message(Required)
             $message ='Hello'; // Message that we want to send(Required)
             $response=ValueFirst::sendMessage($to,$message);
-
             echo "<pre>";
             print_r($response);
-
-
-
     }
 
     public function otp_verified(){
@@ -426,7 +421,9 @@ class UsersController extends Controller
     public function validate_otp(Request $request){
 
         $code = '';
+
         $code = $request->kode_otp_1.$request->kode_otp_2.$request->kode_otp_3.$request->kode_otp_4.$request->kode_otp_5.$request->kode_otp_6;
+
         $validate = Utils::check_otp(Auth::user()->phone_number_verified ,$code);
         echo json_encode($validate);
     }

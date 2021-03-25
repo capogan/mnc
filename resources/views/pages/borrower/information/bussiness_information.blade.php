@@ -16,14 +16,14 @@
                             </div>
 
                             <div class="col">
-                                <h6>Kriteria Usaha<span>*</span></h6>
+                                <h6>Nilai Omset dan Aset<span>*</span></h6>
                                 <select class="form-control" name="id_cap_of_business">
                                     <option selected=""> Pilih Kategori Industri</option>
                                     @foreach($criteria as $key => $val)
                                         @if(isset($business->id_cap_of_business))
                                             <option attr="" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{ucfirst($val->description)}}</option>
                                         @else
-                                            <option attr="" =value="{{$val->id}}">{{ucfirst($val->description)}}</option>
+                                            <option attr="" value="{{$val->id}}">{{ucfirst($val->description)}}</option>
                                         @endif
                                     @endforeach
                                 </select>

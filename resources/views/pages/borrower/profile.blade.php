@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <style>
         select.form-control:not([size]):not([multiple]) {
@@ -11,7 +10,7 @@
 
 
         <!-- content start -->
-        <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
                 <div class="page-breadcrumb">
@@ -23,43 +22,43 @@
             </div>
         </div>
     </div>
-        <div class="container">
-                <div class="row">
-                    <div class="col">
+    <div class="container">
+            <div class="row">
+                <div class="col">
 
-                        <div class="sub-nav">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                                <?php
-                                    $link = ['','/profile','/profile/business','/profile/file','/profile/faktur','/profile/transaction'];
-                                    $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
-                                ?>
-                                @for($i = 1;$i < 6;$i++)
-                                    @if($i <= Auth::user()->step)
-                                        <li class="nav-item">
-                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="{{$link[$i]}}">{{$title_header[$i]}}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item">
-                                            <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="#">{{$title_header[$i]}}</a>
-                                        </li>
-                                    @endif
-                                @endfor
-                            </ul>
+                    <div class="sub-nav">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <?php
+                                $link = ['','/profile','/profile/business','/profile/file','/profile/faktur','/profile/transaction'];
+                                $title_header = ['','Data Pribadi','Usaha','Berkas','Faktur','Transaksi'];
+                            ?>
+                            @for($i = 1;$i < 6;$i++)
+                                @if($i <= Auth::user()->step)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="{{$link[$i]}}">{{$title_header[$i]}}</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link {{$header_section == 'step'.$i ? 'active ' : '' }}" href="#">{{$title_header[$i]}}</a>
+                                    </li>
+                                @endif
+                            @endfor
+                        </ul>
 
-                            <!-- Tab panes -->
+                        <!-- Tab panes -->
 
-                            <div class="tab-content">
+                        <div class="tab-content">
 
-                                <div role="tabpanel" class="tab-pane fade show active" id="service1">
-                                    @include($page)
-                                </div>
+                            <div role="tabpanel" class="tab-pane fade show active" id="service1">
+                                @include($page)
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-        </div>
+            </div>
+    </div>
 @section('js')
 
         <script src="{{ asset('/script/profile.js') }}"></script>
