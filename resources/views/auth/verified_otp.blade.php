@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-lg-10  mx-auto">
                                 <h4 class="card-title text-center">Verifikasi</h4>
-                                <p class="text-center">Masukkan kode verifikasi yang kami kirim ke +62{{substr(Auth::user()->phone_number_verified ,0, 8)}} xxx</p>
+                                <p class="text-center">Masukkan kode verifikasi yang kami kirim ke +62{{substr(Auth::user()->phone_number_verified ,1, 8)}}xxx</p>
                                 <p class="text-center" id="error_response" style="font-size: small; color:red;"></p>
                                 <form method="POST" id="form_verified">
                                     @csrf
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check" style="font-size: small;">
-                                            <p class="text-center" >Tidak menerima kode verivikasi? <a href="javascript:void(0)" id="send_otp_">kirim Ulang</a> </p>
+                                            <p class="text-center" >Tidak menerima kode verifikasi? <a href="javascript:void(0)" id="send_otp_">Kirim Ulang</a> </p>
                                         </div>
                                     </div>
 
