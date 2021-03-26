@@ -58,5 +58,3 @@ Route::get('/get/villages','MasterController@get_villages')->name('get_villages'
 
 
 
-
-
