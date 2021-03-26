@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\LenderBusiness;
 use App\Models\Province;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\LenderBusiness;
 
 class LenderController extends Controller
 {
@@ -22,21 +23,22 @@ class LenderController extends Controller
     public function index(Request $request){
         $data = array(
             'provinces' => Province::get(),
+            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
+            ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
+            ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
+            ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
+            ->leftJoin('villages' ,'lender_business.id_village' , 'villages.id')
+            ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
+            ->where('users.id', Auth::id())->first(),
         );
+
+      
+        //print_r(User::with('business_lender')->where('id', Auth::id())->first()); exit;
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
     }
 
     public function information_business_add(Request $request){
         $arr_request = $request->all();
-
-        //amount_setoran_modal
-        $amount_setoran_modal = isset($arr_request['amount_setoran_modal']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['amount_setoran_modal']) : $arr_request['amount_setoran_modal'];
-        strlen($amount_setoran_modal) == 0 ? $arr_request['amount_setoran_modal'] = null : $arr_request['amount_setoran_modal'] ;
-
-        //taxpayer
-        $taxpayer = isset($arr_request['taxpayer']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['taxpayer']) : $arr_request['taxpayer'];
-        strlen($taxpayer) == 0 ? $arr_request['taxpayer'] = null : $arr_request['taxpayer'] ;
-
 
         //Asset Value
         $asset_value = isset($arr_request['asset_value']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['asset_value']) : $arr_request['asset_value'];
@@ -79,8 +81,6 @@ class LenderController extends Controller
             'nib_of_bussiness'          => 'required',
             'tdp_number'                => 'required',
             'akta_pendirian'            => 'required',
-            'amount_setoran_modal'      => 'required',
-            'taxpayer'                  => 'required',
             'asset_value'               => 'required',
             'equity_value'              => 'required',
             'short_term_liabilities'    => 'required',
@@ -102,8 +102,6 @@ class LenderController extends Controller
             'nib_of_bussiness.required'     => 'Nomor Induk Berusaha tidak boleh kosong',
             'tdp_number.required'           => 'Nomor Tanda Terdaftar Usaha tidak boleh kosong',
             'akta_pendirian.required'       => 'Akta Usaha tidak boleh kosong',
-            'amount_setoran_modal.required' => 'Jumlah setoran modal tidak boleh kosong',
-            'taxpayer.required'             => 'Wajib Pajak tidak boleh kosong',
             'asset_value.required'          => 'Nilai Aset tidak boleh kosong',
             'equity_value.required'         => 'Nilai Ekuitas tidak boleh kosong',
             'short_term_liabilities.required'=> 'Kewajiban Jangka Pendek tidak boleh kosong',
@@ -111,6 +109,7 @@ class LenderController extends Controller
             'operating_expenses.required'   => 'Beban Operasional tahun berjalan tidak boleh kosong',
             'profit_loss.required'          => 'Laba - Rugi periode Tahun tidak boleh kosong',
         ]);
+        
 
         if($validation->fails()) {
             $json = [
@@ -118,7 +117,6 @@ class LenderController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
-
                 LenderBusiness::create([
                     'uid'=>Auth::user()->id ,
                     'business_name'=>$request->name_of_bussiness,
@@ -147,9 +145,7 @@ class LenderController extends Controller
                     'profit_and_loss'=>str_replace(array(',', 'Rp', ' '), '',  $request->profit_loss),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
-
                 ]);
-
             $json = [
                 "status"=> true,
                 "message"=> 'Data Personal berhasil di tambahkan',

@@ -12,4 +12,9 @@ class LenderBusiness extends Model
         'phone_number','website','email','induk_berusaha_number','tdp_number','akta_pendirian','letter_register_pengesahan_kemenkunham','letter_change_pengesahan_kemenkunham','last_akta_perubahan','amount_setoran_modal',
         'taxpayer','asset_value','equity_value','short_term_obligations','annual_income','operating_expenses','profit_and_loss', 'created_at','updated_at'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

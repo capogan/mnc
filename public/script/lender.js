@@ -41,7 +41,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-
+                    //window.location.href = '/information/director';
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {

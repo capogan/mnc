@@ -37,5 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function business_lender()
+    {
+        return $this->hasOne(LenderBusiness::class , 'uid');
+    }
+
 
 }
