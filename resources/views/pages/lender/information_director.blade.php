@@ -59,8 +59,6 @@
                                                     <form id="form_lender_business_information">
                                                         <div class="section_number_append">
                                                             <h3>Informasi Direktur</h3>
-
-
                                                             <hr>
                                                             <div class="result-message"></div>
 
@@ -141,57 +139,62 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Unggah Foto Diri *</p>
+                                                            <div class="row mt-4 mb-4">
+                                                                <div class="col">
+                                                                    <div class="row mt-2">
+                                                                        <div class="col">
+                                                                            <p>Unggah Foto Identitas *</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-                                                                                <input type="file" id="self_image" name="self_image" class="file" >
-                                                                                <label for="self_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
+                                                                    <div class="row mt-2">
+                                                                        <div class="col">
+                                                                            <div class="upload-file">
+                                                                                <div class="file-input">
+                                                                                    <input type="file" id="identity_image" name="identity_image" class="file" >
+                                                                                    <label for="identity_image">
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                        </svg>
+                                                                                        <span>Pilih Foto</span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="file_preview">
+                                                                                <img src="" id="identity_image_preview" alt="" style="width:100%">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->self_photo ?? '' }}" id="self_image_preview" alt="" style="width:100%">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="row mt-2">
+                                                                        <div class="col">
+                                                                            <p>Unggah Foto Diri *</p>
                                                                         </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Unggah Foto Diri *</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-                                                                                <input type="file" id="self_image" name="self_image" class="file" >
-                                                                                <label for="self_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
+                                                                    <div class="row mt-2">
+                                                                        <div class="col">
+                                                                            <div class="upload-file">
+                                                                                <div class="file-input">
+                                                                                    <input type="file" id="self_image" name="self_image" class="file" >
+                                                                                    <label for="self_image">
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                        </svg>
+                                                                                        <span>Pilih Foto</span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->self_photo ?? '' }}" id="self_image_preview" alt="" style="width:100%">
+                                                                            <div class="file_preview">
+                                                                                <img src="" id="self_image_preview" alt="" style="width:100%">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

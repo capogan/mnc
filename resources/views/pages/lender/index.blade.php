@@ -63,12 +63,12 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nama Perusahaan<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness">
+                                                                <input type="text"  class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness">
                                                             </div>
 
                                                             <div class="col">
                                                                 <h6>Nomor NPWP<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_bussiness" name="npwp_of_bussiness">
+                                                                <input type="text"  class="form-control" placeholder="Nomor Npwp" id="npwp_of_bussiness" name="npwp_of_bussiness">
                                                                 <p id="id_cap_of_business_description"></p>
                                                             </div>
 
@@ -76,11 +76,11 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Email<span>*</span></h6>
-                                                                <input type="email" value="" class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness">
+                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor Telepon<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness">
+                                                                <input type="text"  class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness">
                                                             </div>
                                                         </div>
 
@@ -135,7 +135,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Website</h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nama Website" id="website_of_bussiness" name="website_of_bussiness">
+                                                                <input type="text"  class="form-control" placeholder="Nama Website" id="website_of_bussiness" name="website_of_bussiness">
                                                             </div>
                                                         </div>
 
@@ -145,70 +145,81 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nomor Induk Berusaha (NIB)<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor Induk Berusaha (NIB)" id="nib_of_bussiness" name="nib_of_bussiness">
+                                                                <input type="text" class="form-control" placeholder="Nomor Induk Berusaha (NIB)" id="nib_of_bussiness" name="nib_of_bussiness">
                                                             </div>
 
                                                             <div class="col">
                                                                 <h6>Nomor Tanda Terdaftar Perusahaan (TDP)<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor Tanda Terdaftar Perusahaan (TDP)" id="tdp_number" name="tdp_number">
+                                                                <input type="text" class="form-control" placeholder="Nomor Tanda Terdaftar Perusahaan (TDP)" id="tdp_number" name="tdp_number">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mt-5 mb-4">
                                                             <div class="col">
                                                                 <h6>Akta pendirian & tanggal<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Akta pendirian & tanggal" id="akta_pendirian" name="akta_pendirian">
+                                                                <input type="text" class="form-control" placeholder="Akta pendirian & tanggal" id="akta_pendirian" name="akta_pendirian">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor pengesahaan KEMENKUMHAM AHU<span>*</span> </h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="akta_perubahan" name="akta_perubahan">
+                                                                <input type="text" class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="number_register_kemenkunham" name="number_register_kemenkunham">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mt-5 mb-4">
                                                             <div class="col">
                                                                 <h6>Akta perubahan terakhir & tanggal</h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Akta perubahan terakhir & tanggal" id="akta_pendirian" name="akta_pendirian">
+                                                                <input type="text"  class="form-control" placeholder="Akta perubahan terakhir & tanggal" id="akta_perubahan" name="akta_perubahan">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor pengesahaan KEMENKUMHAM AHU </h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="akta_perubahan" name="akta_perubahan">
+                                                                <input type="text"  class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="letter_change_pengesahan_kemenkunham" name="letter_change_pengesahan_kemenkunham">
                                                             </div>
                                                         </div>
 
                                                         <h3>Informasi Aset</h3>
                                                         <hr>
 
-                                                        <div class="row mt-5 mb-4">
+                                                        <div class="row mt-5">
+                                                            <div class="col">
+                                                                <h6>Jumlah Setoran Modal<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Jumlah Setoran Modal" id="amount_setoran_modal" name="amount_setoran_modal">
+                                                            </div>
+                                                            <div class="col">
+                                                                <h6>Wajib Pajak<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Nilai Aset<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value">
+                                                                <input type="text"  class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nilai Ekuitas<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nilai Ekuitas" id="equity_value" name="equity_value">
+                                                                <input type="text"  class="form-control" placeholder="Nilai Ekuitas" id="equity_value" name="equity_value">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Kewajiban Jangka Pendek<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Kewajiban Jangka Pendek" id="short_term_liabilities" name="short_term_liabilities">
+                                                                <input type="text"  class="form-control" placeholder="Kewajiban Jangka Pendek" id="short_term_liabilities" name="short_term_liabilities">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Pendapatan Tahun berjalan sampai dengan saat ini<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Pendapatan Tahun berjalan sampai dengan saat ini" id="income_year" name="income_year">
+                                                                <input type="text"  class="form-control" placeholder="Pendapatan Tahun berjalan sampai dengan saat ini" id="income_year" name="income_year">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Beban Operasional tahun berjalan sampai dengan saat ini<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Beban Operasional tahun berjalan sampai dengan saat ini" id="operating_expenses" name="operating_expenses">
+                                                                <input type="text"  class="form-control" placeholder="Beban Operasional tahun berjalan sampai dengan saat ini" id="operating_expenses" name="operating_expenses">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Laba - Rugi periode Tahun berjalan sampai dengan saat ini</h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Laba - Rugi periode Tahun berjalan sampai dengan saat ini" id="profit_loss" name="profit_loss">
+                                                                <input type="text"  class="form-control" placeholder="Laba - Rugi periode Tahun berjalan sampai dengan saat ini" id="profit_loss" name="profit_loss">
                                                             </div>
                                                         </div>
 

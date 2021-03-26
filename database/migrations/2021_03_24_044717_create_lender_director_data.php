@@ -23,6 +23,8 @@ class CreateLenderDirectorData extends Migration
             $table->string('director_email');
             $table->string('director_npwp');
             $table->string('director_level');
+            $table->string('identity_photo');
+            $table->string('self_photo');
             $table->timestamps();
         });
     }

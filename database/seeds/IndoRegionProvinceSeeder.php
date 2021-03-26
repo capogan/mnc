@@ -18,7 +18,7 @@ class IndoRegionProvinceSeeder extends Seeder
      * Run the database seeds.
      *
      * @deprecated
-     * 
+     *
      * @return void
      */
     public function run()
@@ -27,6 +27,6 @@ class IndoRegionProvinceSeeder extends Seeder
         $provinces = RawDataGetter::getProvinces();
 
         // Insert Data to Database
-        DB::table('provinces')->insert($provinces);
+        DB::table('provincies')->insert($provinces);
     }
 }

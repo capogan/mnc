@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $("#npwp_of_bussiness,#npwp_of_director").inputmask({"mask": "99.999.999.9-999.999"});
 
-    $('#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
+    $('#amount_setoran_modal,#taxpayer,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
         $(this).val(function (index, value) {
             return 'Rp ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
@@ -70,92 +70,157 @@ $(document).ready(function() {
 
         if( $('.section_number_append').length < max_fields){
             x++;
-            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Direktur </h3>\n' +
+            $(wrapper).append('<div class="section_number_append">\n' +
+                '                                                            <h3>Informasi Direktur</h3>\n' +
+                '                                                            <hr>\n' +
+                '                                                            <div class="result-message"></div>\n' +
                 '\n' +
-                '                                                        <hr>\n' +
-                '                                                        <div class="result-message"></div>\n' +
+                '                                                            <div class="row mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>NIK<span>*</span></h6>\n' +
+                '                                                                    <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number">\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Nama<span>*</span></h6>\n' +
+                '                                                                    <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name">\n' +
+                '                                                                </div>\n' +
+                '                                                            </div>\n' +
                 '\n' +
-                '                                                        <div class="row mb-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>NIK<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number">\n' +
+                '                                                            <div class="row mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Tanggal Lahir<span>*</span></h6>\n' +
+                '                                                                    <input class="form-control" type="date"  name="dob" id="example-date-input" value="">\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Email<span>*</span></h6>\n' +
+                '                                                                    <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="">\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Nama<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name">\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
                 '\n' +
-                '                                                        <div class="row mb-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Tanggal Lahir<span>*</span></h6>\n' +
-                '                                                                <input class="form-control" type="date"  name="dob" id="example-date-input" value="">\n' +
+                '                                                            <div class="row mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Nomor Telepon<span>*</span></h6>\n' +
+                '                                                                    <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="" >\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>NPWP<span>*</span></h6>\n' +
+                '                                                                    <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director">\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Email<span>*</span></h6>\n' +
-                '                                                                <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="">\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
                 '\n' +
-                '                                                        <div class="row mb-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Nomor Telepon<span>*</span></h6>\n' +
-                '                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="" >\n' +
+                '                                                            <div class="row mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Jabatan<span>*</span></h6>\n' +
+                '                                                                    <select class="form-control" id="director_level">\n' +
+                '                                                                        <option value="">--Pilih Jabatan--</option>\n' +
+                '                                                                        <option value="director">Direktur</option>\n' +
+                '                                                                        <option value="president_director">Direktur Utama</option>\n' +
+                '                                                                    </select>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Alamat<span>*</span></h6>\n' +
+                '                                                                    <textarea class="form-control" name="address" id="address"></textarea>\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>NPWP<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director">\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
                 '\n' +
-                '                                                        <div class="row mb-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Jabatan<span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="director_level">\n' +
-                '                                                                    <option value="">--Pilih Jabatan--</option>\n' +
-                '                                                                    <option value="director">Direktur</option>\n' +
-                '                                                                    <option value="president_director">Direktur Utama</option>\n' +
-                '                                                                </select>\n' +
+                '                                                            <div class="row mt-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Propinsi <span>*</span></h6>\n' +
+                '                                                                    <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">\n' +
+                '                                                                        <option></option>\n' +
+                '                                                                        @foreach($provinces as $key => $val)\n' +
+                '                                                                            <option value="{{$val->id}}">{{$val->name}}</option>\n' +
+                '                                                                        @endforeach\n' +
+                '                                                                    </select>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Kota <span>*</span></h6>\n' +
+                '                                                                    <select class="form-control" id="city" name="city" onchange="get_district(this.value)">\n' +
+                '                                                                    </select>\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Alamat<span>*</span></h6>\n' +
-                '                                                                <textarea class="form-control" name="address" id="address"></textarea>\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
                 '\n' +
-                '                                                        <div class="row mt-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Propinsi <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">\n' +
-                '                                                                    <option></option>\n' +
-                '                                                                    @foreach($provinces as $key => $val)\n' +
-                '                                                                        <option value="{{$val->id}}">{{$val->name}}</option>\n' +
-                '                                                                    @endforeach\n' +
-                '                                                                </select>\n' +
+                '                                                            <div class="row mt-4 mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Kecamatan <span>*</span></h6>\n' +
+                '                                                                    <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >\n' +
+                '                                                                    </select>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <h6>Kelurahan <span>*</span></h6>\n' +
+                '                                                                    <select class="form-control" id="vilages" name="vilages">\n' +
+                '                                                                    </select>\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Kota <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)">\n' +
-                '                                                                </select>\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
+                '                                                            <div class="row mt-4 mb-4">\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <div class="row mt-2">\n' +
+                '                                                                        <div class="col">\n' +
+                '                                                                            <p>Unggah Foto Identitas *</p>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
                 '\n' +
-                '                                                        <div class="row mt-4 mb-4">\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Kecamatan <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >\n' +
-                '                                                                </select>\n' +
+                '                                                                    <div class="row mt-2">\n' +
+                '                                                                        <div class="col">\n' +
+                '                                                                            <div class="upload-file">\n' +
+                '                                                                                <div class="file-input">\n' +
+                '                                                                                    <input type="file" id="identity_image" name="identity_image" class="file" >\n' +
+                '                                                                                    <label for="identity_image">\n' +
+                '                                                                                        <svg\n' +
+                '                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"\n' +
+                '                                                                                            viewBox="0 0 16 16">\n' +
+                '                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />\n' +
+                '                                                                                        </svg>\n' +
+                '                                                                                        <span>Pilih Foto</span>\n' +
+                '                                                                                    </label>\n' +
+                '                                                                                </div>\n' +
+                '                                                                            </div>\n' +
+                '                                                                            <div class="file_preview">\n' +
+                '                                                                                <img src="" id="identity_image_preview" alt="" style="width:100%">\n' +
+                '                                                                            </div>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '\n' +
+                '                                                                </div>\n' +
+                '\n' +
+                '                                                                <div class="col">\n' +
+                '                                                                    <div class="row mt-2">\n' +
+                '                                                                        <div class="col">\n' +
+                '                                                                            <p>Unggah Foto Diri *</p>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '\n' +
+                '                                                                    <div class="row mt-2">\n' +
+                '                                                                        <div class="col">\n' +
+                '                                                                            <div class="upload-file">\n' +
+                '                                                                                <div class="file-input">\n' +
+                '                                                                                    <input type="file" id="self_image" name="self_image" class="file" >\n' +
+                '                                                                                    <label for="self_image">\n' +
+                '                                                                                        <svg\n' +
+                '                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"\n' +
+                '                                                                                            viewBox="0 0 16 16">\n' +
+                '                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />\n' +
+                '                                                                                        </svg>\n' +
+                '                                                                                        <span>Pilih Foto</span>\n' +
+                '                                                                                    </label>\n' +
+                '                                                                                </div>\n' +
+                '                                                                            </div>\n' +
+                '                                                                            <div class="file_preview">\n' +
+                '                                                                                <img src="" id="self_image_preview" alt="" style="width:100%">\n' +
+                '                                                                            </div>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="col">\n' +
-                '                                                                <h6>Kelurahan <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="vilages" name="vilages">\n' +
-                '                                                                </select>\n' +
-                '                                                            </div>\n' +
-                '                                                        </div></div>');
+                '\n' +
+                '\n' +
+                '                                                    </div>');
             $('.section_number_append').each(function(index){
                 $(this).find('.klkl').text(index+1)
             })
 
+        }else{
+            Swal.fire('Informasi data direktur hanya dapat dikirim 3 kali')
         }
         $(wrapper).on("click",".remove_field_"+x, function(e){ //user click on remove text
             e.preventDefault(); $(this).parent('div').remove(); x--;
@@ -349,6 +414,21 @@ function get_villages(district_id){
             alert(err);
         }
     })
+}
+
+$(document).on('change' , 'input[type="file"]' , function(){
+    readURL(this , $(this).attr('id'));
+});
+
+
+function readURL(input , imagetarget) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+imagetarget+'_preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
 }
 
 

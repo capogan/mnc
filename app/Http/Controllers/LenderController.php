@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\LenderBusiness;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LenderController extends Controller
@@ -26,6 +28,15 @@ class LenderController extends Controller
 
     public function information_business_add(Request $request){
         $arr_request = $request->all();
+
+        //amount_setoran_modal
+        $amount_setoran_modal = isset($arr_request['amount_setoran_modal']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['amount_setoran_modal']) : $arr_request['amount_setoran_modal'];
+        strlen($amount_setoran_modal) == 0 ? $arr_request['amount_setoran_modal'] = null : $arr_request['amount_setoran_modal'] ;
+
+        //taxpayer
+        $taxpayer = isset($arr_request['taxpayer']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['taxpayer']) : $arr_request['taxpayer'];
+        strlen($taxpayer) == 0 ? $arr_request['taxpayer'] = null : $arr_request['taxpayer'] ;
+
 
         //Asset Value
         $asset_value = isset($arr_request['asset_value']) ? str_replace(array(',', 'Rp', ' '), '',  $arr_request['asset_value']) : $arr_request['asset_value'];
@@ -68,6 +79,8 @@ class LenderController extends Controller
             'nib_of_bussiness'          => 'required',
             'tdp_number'                => 'required',
             'akta_pendirian'            => 'required',
+            'amount_setoran_modal'      => 'required',
+            'taxpayer'                  => 'required',
             'asset_value'               => 'required',
             'equity_value'              => 'required',
             'short_term_liabilities'    => 'required',
@@ -89,6 +102,8 @@ class LenderController extends Controller
             'nib_of_bussiness.required'     => 'Nomor Induk Berusaha tidak boleh kosong',
             'tdp_number.required'           => 'Nomor Tanda Terdaftar Usaha tidak boleh kosong',
             'akta_pendirian.required'       => 'Akta Usaha tidak boleh kosong',
+            'amount_setoran_modal.required' => 'Jumlah setoran modal tidak boleh kosong',
+            'taxpayer.required'             => 'Wajib Pajak tidak boleh kosong',
             'asset_value.required'          => 'Nilai Aset tidak boleh kosong',
             'equity_value.required'         => 'Nilai Ekuitas tidak boleh kosong',
             'short_term_liabilities.required'=> 'Kewajiban Jangka Pendek tidak boleh kosong',
@@ -103,6 +118,37 @@ class LenderController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
+
+                LenderBusiness::create([
+                    'uid'=>Auth::user()->id ,
+                    'business_name'=>$request->name_of_bussiness,
+                    'npwp'=> $request->npwp_of_bussiness,
+                    'address'=>$request->address_of_bussiness,
+                    'id_province'=>$request->province,
+                    'id_regency'=>$request->city,
+                    'id_district'=>$request->district,
+                    'id_village'=>$request->vilages,
+                    'phone_number'=>$request->phone_of_bussiness,
+                    'website'=>$request->website_of_bussiness,
+                    'email'=>$request->email_of_bussiness,
+                    'induk_berusaha_number'=>$request->nib_of_bussiness,
+                    'tdp_number'=>$request->tdp_number,
+                    'akta_pendirian'=>$request->akta_pendirian,
+                    'letter_register_pengesahan_kemenkunham'=>$request->number_register_kemenkunham,
+                    'last_akta_perubahan'=>$request->akta_perubahan,
+                    'letter_change_pengesahan_kemenkunham'=>$request->letter_change_pengesahan_kemenkunham,
+                    'amount_setoran_modal'=> str_replace(array(',', 'Rp', ' '), '',  $request->amount_setoran_modal),
+                    'taxpayer'=> str_replace(array(',', 'Rp', ' '), '',  $request->taxpayer),
+                    'asset_value'=>str_replace(array(',', 'Rp', ' '), '',  $request->asset_value),
+                    'equity_value'=>str_replace(array(',', 'Rp', ' '), '',  $request->equity_value),
+                    'short_term_obligations'=>str_replace(array(',', 'Rp', ' '), '',  $request->short_term_liabilities),
+                    'annual_income'=>str_replace(array(',', 'Rp', ' '), '',  $request->income_year),
+                    'operating_expenses'=>str_replace(array(',', 'Rp', ' '), '',  $request->operating_expenses),
+                    'profit_and_loss'=>str_replace(array(',', 'Rp', ' '), '',  $request->profit_loss),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+
+                ]);
 
             $json = [
                 "status"=> true,
