@@ -76,11 +76,11 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Email<span>*</span></h6>
-                                                                <input type="email" value="" class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness">
+                                                                <input type="email" disabled="disabled"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{Auth::user()->email}}">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor Telepon<span>*</span></h6>
-                                                                <input type="text" value="" class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness">
+                                                                <input type="text" disabled="disabled" class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness" value="{{Auth::user()->phone_number_verified}}">
                                                             </div>
                                                         </div>
 
