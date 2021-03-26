@@ -23,14 +23,16 @@ class CreateLenderBusiness extends Migration
             $table->bigInteger('id_village');
             $table->text('address');
             $table->string('phone_number');
-            $table->string('website');
+            $table->string('website')->nullable();
             $table->string('email');
             $table->string('induk_berusaha_number');
             $table->string('tdp_number');
             $table->string('akta_pendirian');
+            $table->string('letter_register_pengesahan_kemenkunham');
             $table->string('last_akta_perubahan');
+            $table->string('letter_change_pengesahan_kemenkunham');
             $table->float('amount_setoran_modal');
-            $table->string('taxpayer');
+            $table->float('taxpayer');
             $table->float('asset_value');
             $table->float('equity_value');
             $table->float('short_term_obligations');

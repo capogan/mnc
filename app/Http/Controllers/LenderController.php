@@ -6,6 +6,7 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class LenderController extends Controller
 {
@@ -21,7 +22,7 @@ class LenderController extends Controller
     public function index(Request $request){
         $data = array(
             'provinces' => Province::get(),
-            'lender_profile' => User::with('profile')->where('id', Auth::id())->first(),
+            'lender_profile' => User::with('business_lender')->where('id', Auth::id())->first(),
         );
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
     }
@@ -59,6 +60,8 @@ class LenderController extends Controller
 
             'name_of_bussiness'         => 'required',
             'npwp_of_bussiness'         => 'required',
+            'email_of_bussiness'        => 'required',
+            'phone_of_bussiness'        => 'required',
             'address_of_bussiness'      => 'required',
             'province'                  => 'required',
             'city'                      => 'required',
@@ -78,6 +81,8 @@ class LenderController extends Controller
         [
             'name_of_bussiness.required'    => 'Nama Usaha tidak boleh kosong',
             'npwp_of_bussiness.required'    => 'NPWP Usaha tidak boleh kosong',
+            'email_of_bussiness.required'   => 'Email Usaha tidak boleh kosong',
+            'phone_of_bussiness.required'   => 'Nomor telepon Usaha tidak boleh kosong',
             'address_of_bussiness.required' => 'Alamat Usaha tidak boleh kosong',
             'province.required'             => 'Propinsi tidak boleh kosong',
             'city.required'                 => 'Kota tidak boleh kosong',
