@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\LenderBusiness;
 
 class LenderController extends Controller
 {
@@ -22,8 +23,17 @@ class LenderController extends Controller
     public function index(Request $request){
         $data = array(
             'provinces' => Province::get(),
-            'lender_profile' => User::with('business_lender')->where('id', Auth::id())->first(),
+            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
+            ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
+            ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
+            ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
+            ->leftJoin('villages' ,'lender_business.id_village' , 'villages.id')
+            ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
+            ->where('users.id', Auth::id())->first(),
         );
+
+      
+        //print_r(User::with('business_lender')->where('id', Auth::id())->first()); exit;
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
     }
 
@@ -99,6 +109,7 @@ class LenderController extends Controller
             'operating_expenses.required'   => 'Beban Operasional tahun berjalan tidak boleh kosong',
             'profit_loss.required'          => 'Laba - Rugi periode Tahun tidak boleh kosong',
         ]);
+        
 
         if($validation->fails()) {
             $json = [
@@ -106,7 +117,35 @@ class LenderController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
-
+                LenderBusiness::create([
+                    'uid'=>Auth::user()->id ,
+                    'business_name'=>$request->name_of_bussiness,
+                    'npwp'=> $request->npwp_of_bussiness,
+                    'address'=>$request->address_of_bussiness,
+                    'id_province'=>$request->province,
+                    'id_regency'=>$request->city,
+                    'id_district'=>$request->district,
+                    'id_village'=>$request->vilages,
+                    'phone_number'=>$request->phone_of_bussiness,
+                    'website'=>$request->website_of_bussiness,
+                    'email'=>$request->email_of_bussiness,
+                    'induk_berusaha_number'=>$request->nib_of_bussiness,
+                    'tdp_number'=>$request->tdp_number,
+                    'akta_pendirian'=>$request->akta_pendirian,
+                    'letter_register_pengesahan_kemenkunham'=>$request->number_register_kemenkunham,
+                    'last_akta_perubahan'=>$request->akta_perubahan,
+                    'letter_change_pengesahan_kemenkunham'=>$request->letter_change_pengesahan_kemenkunham,
+                    'amount_setoran_modal'=> str_replace(array(',', 'Rp', ' '), '',  $request->amount_setoran_modal),
+                    'taxpayer'=> str_replace(array(',', 'Rp', ' '), '',  $request->taxpayer),
+                    'asset_value'=>str_replace(array(',', 'Rp', ' '), '',  $request->asset_value),
+                    'equity_value'=>str_replace(array(',', 'Rp', ' '), '',  $request->equity_value),
+                    'short_term_obligations'=>str_replace(array(',', 'Rp', ' '), '',  $request->short_term_liabilities),
+                    'annual_income'=>str_replace(array(',', 'Rp', ' '), '',  $request->income_year),
+                    'operating_expenses'=>str_replace(array(',', 'Rp', ' '), '',  $request->operating_expenses),
+                    'profit_and_loss'=>str_replace(array(',', 'Rp', ' '), '',  $request->profit_loss),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ]);
             $json = [
                 "status"=> true,
                 "message"=> 'Data Personal berhasil di tambahkan',
