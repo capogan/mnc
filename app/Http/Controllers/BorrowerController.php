@@ -99,7 +99,7 @@ class BorrowerController extends Controller
         $regency = Regency::get();
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::get();
+        $criteria = BussinessCriteria::where('status',true)->get();
         $partner_since = BecomePartner::get();
         $building_status = BuildingStatus::get();
         $estabilished = Estabilished::get();
