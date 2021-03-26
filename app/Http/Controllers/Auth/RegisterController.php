@@ -84,7 +84,19 @@ class RegisterController extends Controller
     }
 
     protected  function showRegistrationForm(Request $request){
-        $group = $request->group;
-        return view('auth.register_group',compact('group'));
+        abort(404,'Page not found');
     }
+
+
+    protected  function showRegistrationFormLender(Request $request){
+        $group = 'lender';
+        $level = 'business';
+        return view('auth.register_lender',compact('group','level'));
+    }
+    protected  function showRegistrationFormBorrower(Request $request){
+        $group = 'borrower';
+        $level = 'individu';
+        return view('auth.register_borrower',compact('group','level'));
+    }
+
 }

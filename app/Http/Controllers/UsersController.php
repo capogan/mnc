@@ -188,23 +188,23 @@ class UsersController extends Controller
         $uid = Auth::id();
         $validation = Validator::make($request->all(),
             [
-                'identity_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'self_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'npwp_image'     => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'business_location_image'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'self_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'npwp_image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_location_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
                 'business_owner_file'   => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'business_document'   => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'business_activity_image'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'business_document'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'business_activity_image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
                 'business_npwp'   => 'image|mimes:jpeg,png,jpg,gif,svg',
             ],
            [
-               'identity_image.required' => 'Foto ktp wajib di unggah',
-               'self_image.required' => 'Foto diri wajib di unggah',
-               'npwp_image.required' => 'Foto npwp wajib di unggah',
-               'business_owner_file.required' => 'Foto bukti kepemilikan usaha wajib di unggah',
-               'business_location_image.required' => 'Foto lokasi usaha wajib di unggah',
-               'business_document.required' => 'Foto dokumen usaha wajib di unggah',
-               'business_activity_image.required' => 'Foto aktifitas usaha wajib di unggah',
+               'identity_image.required' => 'Foto ktp wajib diunggah',
+               'self_image.required' => 'Foto diri wajib diunggah',
+               'npwp_image.required' => 'Foto npwp wajib diunggah',
+               'business_owner_file.required' => 'Foto bukti kepemilikan usaha wajib diunggah',
+               'business_location_image.required' => 'Foto lokasi usaha wajib diunggah',
+               'business_document.required' => 'Foto dokumen usaha wajib diunggah',
+               'business_activity_image.required' => 'Foto aktifitas usaha wajib diunggah',
                'identity_image.mimes' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
                'self_image.image' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
                'npwp_image.image' => 'Format tidak sesuai. Masukkan format jpeg,png,jpg,gif,svg',
@@ -407,16 +407,11 @@ class UsersController extends Controller
     }
 
     function test(){
-
             $to ='6281260332838'; // Phone number with country code where we want to send message(Required)
             $message ='Hello'; // Message that we want to send(Required)
             $response=ValueFirst::sendMessage($to,$message);
-
             echo "<pre>";
             print_r($response);
-
-
-
     }
 
     public function otp_verified(){
@@ -427,8 +422,6 @@ class UsersController extends Controller
 
         $code = '';
         $code = $request->kode_otp_1.$request->kode_otp_2.$request->kode_otp_3.$request->kode_otp_4.$request->kode_otp_5.$request->kode_otp_6;
-        echo $code;
-        
         $validate = Utils::check_otp(Auth::user()->phone_number_verified ,$code);
         echo json_encode($validate);
     }

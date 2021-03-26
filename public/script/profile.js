@@ -397,21 +397,11 @@ $('#check_invoice_form').on('click', function(event){
                     }
                 });
             }
-            //$("#btn_submit").html("Ajukan Pinjaman").attr("disabled",false);
-            //$(".table-invoice").html(response.data).fadeIn('slow');
+
         }
     })
 });
 
-// $('select[name="id_cap_of_business"]').change(function(){
-
-//     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
-// })
-
-// $('select[name="id_cap_of_business"]').change(function(){
-//
-//     $('#id_cap_of_business_description').text('* '+$('option:selected', this).attr('attr'));
-// })
 
 
 $(document).on('click' , '#request_loan_' , function(){

@@ -1,5 +1,4 @@
 @extends('layouts.app_auth')
-
 @section('content')
     <div class="container-fluid" style="height: 100vh; display: block;">
         <div class="row no-gutter  h-100">
@@ -17,7 +16,8 @@
 
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-                                    <input type="hidden" name="group" id="group" value="{{Request::segment(2)}}">
+                                    <input type="hidden" name="group" id="group" value="{{$group}}">
+                                    <input type="hidden" name="level" id="level" value="{{$level}}">
                                     <div class="form-group input-group">
                                         <input name="name" id="name" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" type="text">
                                         @error('name')
@@ -49,14 +49,6 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password" required autocomplete="new-password">
                                     </div> <!-- form-group// -->
 
-                                    <div class="form-group  input-group">
-                                        <select class="form-control" name="level" id="level">
-                                            <option value="">--Pilih Salah Satu--</option>
-                                            <option value="individu">Individu</option>
-                                            <option value="bisnis">Bisnis</option>
-                                        </select>
-                                    </div> <!-- form-group// -->
-
                                     <div class="form-group input-group">
                                         <div class="input-group mb-3">
                                             <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}"  placeholder="No Telepon" required autocomplete="phone-number">
@@ -66,13 +58,9 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <label style="font-size: 11px;color: red;">* Kode verifikasi akan kami kirim melalui sms ke nomor telepon yang di input.</label>
+                                        <label style="font-size: 11px;color: red;">* Kode verifikasi akan kami kirim melalui sms ke nomor telepon yang di daftarkan.</label>
                                     </div>
 
-                                    <!--
-                                    <div class="form-group input-group">
-                                        <input id="kode_otp" type="text" class="form-control" name="kode_otp" placeholder="Kode OTP" required autocomplete="new-password">
-                                    </div> -->
                                     <div class="form-group">
                                         <h6>Persyaratan</h6>
                                         <div class="form-check" style="font-size: small;">
@@ -141,14 +129,5 @@
                 </div>
             </div>
         </div>
-    {{--@section('js')--}}
-    {{--    <script src="{{ asset('/script/register.js') }}"></script>--}}
-    {{--    --}}
-    {{--@endsection--}}
-
+    </div>
 @endsection
-<style>
-    .invalid-feedback{
-        display: block!important
-    }
-    </style>
