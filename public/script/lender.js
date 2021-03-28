@@ -41,7 +41,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = 'lender/information/commissioner';
+                    window.location.href = '/profile/lender/information/commissioner';
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -91,7 +91,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = 'lender/information/file';
+                    window.location.href = '/profile/lender/information/file';
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -189,7 +189,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                   // window.location.href = '/lender/profile';
+                    window.location.href = '/lender/profiles';
 
                 }else{
                     var text = '';

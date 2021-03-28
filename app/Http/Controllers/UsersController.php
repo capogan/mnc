@@ -222,7 +222,7 @@ class UsersController extends Controller
                "message"=> $validation->messages(),
            ];
        }else{
-           $path =public_path().'/upload/';
+           $path = public_path().'/upload/';
            if($request->hasFile('identity_image')) {
                $identity_image= $request->file('identity_image');
                $filename_identity = 'ktp_'.$uid.'_'.time(). '.' . $identity_image->getClientOriginalExtension();

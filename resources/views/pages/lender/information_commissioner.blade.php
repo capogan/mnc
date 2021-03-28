@@ -51,9 +51,171 @@
                                             <div class="contact-form mb60">
                                                 <div class=" ">
                                                 <form id="form_lender_commisioner_information" method="POST" enctype="multipart/form-data">
-                                                        <div class="section_number_appends director-1">
+                                                <div class="section_number_appends director-1">
+                                                            @if(isset($director))
+                                                                <?php 
+                                                                    $i = 0; 
+                                                                ?>
+                                                                @foreach($director as $item)
+
+                                                                
+                                                                    <div class="section_number_append section_number_append-section1" id="section_number_append">
+                                                                    <?php 
+                                                                        if($i == 0){
+                                                                            $this_val = '';
+                                                                            $image = '0';
+                                                                        }else{
+                                                                            $this_val = $i+1;
+                                                                            $image = $i+1;;
+                                                                        }
+                                                                    ?>
+                                                                        <h3>Informasi Direktur</h3>
+                                                                        <hr>
+                                                                        <div class="result-message"></div>
+
+                                                                        <div class="row mb-4">
+                                                                            <div class="col">
+                                                                                <h6>NIK<span>*</span></h6>
+                                                                                <input type="text" value="{{$item->commissioner_nik}}" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>Nama<span>*</span></h6>
+                                                                                <input type="text" value="{{$item->commissioner_name}}" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name[]">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-4">
+                                                                            <div class="col">
+                                                                                <h6>Tanggal Lahir<span>*</span></h6>
+                                                                                <input class="form-control" type="date"  name="dob[]" id="example-date-input" value="{{$item->commissioner_dob}}">
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>Email<span>*</span></h6>
+                                                                                <input type="text" class="form-control" placeholder="Email" name="email[]" id="email"   value="{{$item->commissioner_email}}">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-4">
+                                                                            <div class="col">
+                                                                                <h6>Nomor Telepon<span>*</span></h6>
+                                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]"  value="{{$item->commissioner_phone_number}}" >
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>NPWP<span>*</span></h6>
+                                                                                <input type="text"  value="{{$item->commissioner_npwp}}" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director[]">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-4">
+                                                                            <div class="col">
+                                                                                <h6>Jabatan<span>*</span></h6>
+                                                                                <select class="form-control" name="director_level[]" id="director_level">
+                                                                                    <option value="">--Pilih Jabatan--</option>
+                                                                                    <option value="commissioner" {{$item->commissioner_level == 'commissioner' ? 'selected' : ''}} >Komisaris</option>
+                                                                                    <option value="president_commissioner" {{$item->commissioner_level == 'president_commissioner' ? 'selected' : ''}}>Komisaris Utama</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>Alamat<span>*</span></h6>
+                                                                                <textarea class="form-control" name="address[]" id="address"> {{$item->address}} </textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mt-4">
+                                                                            <div class="col">
+                                                                                <h6>Propinsi <span>*</span></h6>
+                                                                                <select class="form-control" id="province{{$this_val}}" name="province[]" onchange="get_city(this.value ,'{{$this_val}}');" style="width: 100%;">
+                                                                                    <option></option>
+                                                                                    @foreach($provinces as $key => $val)
+                                                                                        <option value="{{$val->id}}" {{$val->id == $item->province_id ? 'selected' : ''}}>{{$val->name}}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>Kota <span>*</span></h6>
+                                                                                <select class="form-control" id="city{{$this_val}}" name="city[]" onchange="get_district(this.value ,'{{$this_val}}')">
+                                                                                    <option value="{{$item->regency_id}}">{{$item->regency_id}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mt-4 mb-4">
+                                                                            <div class="col">
+                                                                                <h6>Kecamatan <span>*</span></h6>
+                                                                                <select class="form-control" id="district{{$this_val}}" name="district[]" onchange="get_villages(this.value ,'{{$this_val}}')" >
+                                                                                    <option value="{{$item->district_id}}">{{$item->district_id}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <h6>Kelurahan <span>*</span></h6>
+                                                                                <select class="form-control" id="vilages{{$this_val}}" name="vilages[]">
+                                                                                    <option value="{{$item->village_id}}">{{$item->village_id}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mt-4 mb-4">
+                                                                            <div class="col">
+                                                                                <div class="row mt-2">
+                                                                                    <div class="col">
+                                                                                        <p>Unggah Foto Identitas *</p>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row mt-2">
+                                                                                    <div class="col image-of-display">
+                                                                                        <div class="upload-file">
+                                                                                            <div class="file-input">
+                                                                                                <input type="file" id="identity_image{{$this_val}}" name="identity_image{{$this_val}}" class="file" >
+                                                                                                <label for="identity_image{{$this_val}}">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                                        viewBox="0 0 16 16">
+                                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                                    </svg>
+                                                                                                    <span>Pilih Foto</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="file_preview">
+                                                                                            <img src="{{asset('/upload/lender/file/'.$item->identity_photo)}}" id="identity_image{{$this_val}}_preview" alt="" style="width:100%">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="row mt-2">
+                                                                                    <div class="col">
+                                                                                        <p>Unggah Foto Diri *</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row mt-2">
+                                                                                    <div class="col image-of-display">
+                                                                                        <div class="upload-file">
+                                                                                            <div class="file-input">
+                                                                                                <input type="file" id="self_image{{$this_val}}" name="self_image{{$this_val}}" class="file" >
+                                                                                                <label for="self_image{{$this_val}}">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                                        viewBox="0 0 16 16">
+                                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                                    </svg>
+                                                                                                    <span>Pilih Foto</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="file_preview">
+                                                                                            <img src="{{asset('/upload/lender/file/'.$item->self_photo)}}" id="self_image{{$this_val}}_preview" alt="" style="width:100%">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php $i++;?>
+                                                                @endforeach
+                                                            @else
                                                             <div class="section_number_append section_number_append-section1" id="section_number_append">
-                                                                <h3>Informasi Komisioner</h3>
+                                                                <h3>Informasi Direktur</h3>
                                                                 <hr>
                                                                 <div class="result-message"></div>
 
@@ -64,7 +226,7 @@
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>Nama<span>*</span></h6>
-                                                                        <input type="text" value="" class="form-control" placeholder="Nama Komisioner" id="director_name" name="director_name[]">
+                                                                        <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name[]">
                                                                     </div>
                                                                 </div>
 
@@ -195,6 +357,10 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            @endif
+
+
+                                                            
                                                         </div>
                                                         <div class="directors"></div>
                                                         <!-- <div class="section_number_appends director-2"></div>

@@ -79,7 +79,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->npwp ?? ''}}" id="npwp_preview" alt="" style="width:100%">
+                                                                            <img class="img-file" src="{{asset('/upload/lender/file/attachment')}}/{{$attachment->npwp ?? ''}}" id="npwp_preview" alt="" style="width:100%">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -88,11 +88,16 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokument NIB *</h6>
+                                                                    <h6>Dokumen NIB *</h6>
                                                                     </label>
                                                                     <div class="col-12">
-                                                                    <input type="file" id="nib" name="nib" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
+                                                                        <input type="file" id="nib" name="nib" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->nib ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -104,6 +109,11 @@
                                                                     <div class="col-12">
                                                                     <input type="file" id="tdp" name="tdp" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->tdp ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -115,6 +125,11 @@
                                                                     <div class="col-12">
                                                                     <input type="file" id="doc_kta" name="doc_kta" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->akta_pendirian ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -126,6 +141,11 @@
                                                                     <div class="col-12">
                                                                     <input type="file" id="doc_last_ahu" name="doc_last_ahu" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->akta_perubahan ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -137,6 +157,11 @@
                                                                     <div class="col-12">
                                                                     <input type="file" id="organizational_structure" name="organizational_structure" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;"  class="file">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->structure_organization ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -148,6 +173,11 @@
                                                                     <div class="col-12">
                                                                     <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="balance_report" name="balance_report" class="file">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->balance_sheet ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -159,6 +189,12 @@
                                                                     <div class="col-12">
                                                                     <input type="file" id="cash_flow" name="cash_flow" class="file"  style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
                                                                     </div>
+
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->cash_flow_statement ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -170,6 +206,11 @@
                                                                     <div class="col-12">
                                                                         <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="loss_profit" name="loss_profit" class="file">
                                                                     </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->income_statement ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -204,6 +245,9 @@
     flex: 0 0 50%;
     padding-bottom: 50px !important;
     max-width: 50%;
+}
+.img-file{
+    max-width: 20% !important;
 }
     </style>
 @section('js')
