@@ -293,7 +293,7 @@ class BorrowerController extends Controller
             'penalty_percentage' => 0,
             'penalty_max_percentage' => 45,
             'penalty_max_amount' => 45,
-            'status' => 0,
+            'status' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ];
