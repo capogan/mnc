@@ -264,24 +264,12 @@ class LenderController extends Controller
         $path =public_path().'/upload/lender/file';
         $i=0;
         foreach($requests as $item){
-            
+            if($i==0){
+                $j = $i;
+            }else{
+                $j = $i+1;
+            }
             if(array_key_exists('active' , $item)){
-                if(array_key_exists('identity_image'.$j, $request->all())){
-                    if($request->hasFile('identity_image'.$i)) {
-                        $identity_image= $request->file('identity_image'.$i);
-                        $filename_identity = 'director_ktp_'.$i.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
-                        $identity_image->move($path, $filename_identity);
-                        $data['identity_photo'] = $filename_identity;
-                    }
-                }
-                if(array_key_exists('self_image'.$j, $request->all())){
-                    if($request->hasFile('self_image'.$i)) {
-                        $self_image= $request->file('self_image'.$i);
-                        $filename_self_image= 'director_selfie_'.$i.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
-                        $self_image->move($path, $filename_self_image);
-                        $data['self_image'] = $filename_self_image;
-                    }
-                }
                 $data = [
                     'uid' => Auth::id(),
                     'director_nik' => $item['identity_number'],
@@ -296,10 +284,25 @@ class LenderController extends Controller
                     'regency_id' =>$item['city'],
                     'village_id' =>$item['vilages'],
                     'district_id' =>$item['district'],
-                    //'identity_photo' => $filename_identity,
-                    //'self_photo' => $filename_self_image,
                     'position' => $i
                 ];
+                if(array_key_exists('identity_image'.$j, $request->all())){
+                    if($request->hasFile('identity_image'.$j)) {
+                        $identity_image= $request->file('identity_image'.$j);
+                        $filename_identity = 'director_ktp_'.$j.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                        $identity_image->move($path, $filename_identity);
+                        $data['identity_photo'] = $filename_identity;
+                    }
+                }
+                if(array_key_exists('self_image'.$j, $request->all())){
+                    if($request->hasFile('self_image'.$j)) {
+                        $self_image= $request->file('self_image'.$j);
+                        $filename_self_image= 'director_selfie_'.$j.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                        $self_image->move($path, $filename_self_image);
+                        $data['self_photo'] = $filename_self_image;
+                    }
+                }
+                
                 LenderDirectorData::updateOrCreate(
                     ['position' => $i,
                     'uid' => Auth::id()],
@@ -309,13 +312,6 @@ class LenderController extends Controller
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'director_verification' => true]
                 );
-                DB::beginTransaction();
-                try{
-                    //print_r($data);  
-                    DB::commit();
-                }
-                catch (Exception $e) {
-                }
                     
             }
             $i++;
@@ -335,7 +331,7 @@ class LenderController extends Controller
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
     public function submit_commisioner_data(Request $request){
-        // print_r($request->all()); exit;
+        //print_r($request->all()); exit;
          $validators = [
              'identity_number'       => 'required',
              'director_name'         => 'required',
@@ -421,39 +417,45 @@ class LenderController extends Controller
          $path =public_path().'/upload/lender/file';
          $i=0;
          foreach($requests as $item){
+            if($i==0){
+                $j = $i;
+            }else{
+                $j = $i+1;
+            }
              if(array_key_exists('active' , $item)){
+                $data = [
+                    'uid' => Auth::id(),
+                    'commissioner_nik' => $item['identity_number'],
+                    'commissioner_name' => $item['director_name'],
+                    'commissioner_dob' => $item['dob'],
+                    'commissioner_phone_number' => $item['phone_number'],
+                    'commissioner_email' => $item['email'],
+                    'commissioner_npwp' => $item['npwp_of_director'],
+                    'commissioner_level' => $item['director_level'],
+                    'address' => $item['address'],
+                    'province_id' =>$item['province'],
+                    'regency_id' =>$item['city'],
+                    'village_id' =>$item['vilages'],
+                    'district_id' =>$item['district'],
+                    'sequence' => $i
+                ];
                 if(array_key_exists('identity_image'.$j, $request->all())){
-                    if($request->hasFile('identity_image'.$i)) {
-                        $identity_image= $request->file('identity_image'.$i);
-                        $filename_identity = 'director_ktp_'.$i.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                    if($request->hasFile('identity_image'.$j)) {
+                        $identity_image= $request->file('identity_image'.$j);
+                        $filename_identity = 'commissaris_ktp_'.$j.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
                         $identity_image->move($path, $filename_identity);
                         $data['identity_photo'] = $filename_identity;
                     }
                 }
                 if(array_key_exists('self_image'.$j, $request->all())){
-                    if($request->hasFile('self_image'.$i)) {
-                        $self_image= $request->file('self_image'.$i);
-                        $filename_self_image= 'director_selfie_'.$i.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                    if($request->hasFile('self_image'.$j)) {
+                        $self_image= $request->file('self_image'.$j);
+                        $filename_self_image= 'commissaris_selfie_'.$j.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
                         $self_image->move($path, $filename_self_image);
-                        $data['self_image'] = $filename_self_image;
+                        $data['self_photo'] = $filename_self_image;
                     }
                 }
-                 $data = [
-                     'uid' => Auth::id(),
-                     'commissioner_nik' => $item['identity_number'],
-                     'commissioner_name' => $item['director_name'],
-                     'commissioner_dob' => $item['dob'],
-                     'commissioner_phone_number' => $item['phone_number'],
-                     'commissioner_email' => $item['email'],
-                     'commissioner_npwp' => $item['npwp_of_director'],
-                     'commissioner_level' => $item['director_level'],
-                     'address' => $item['address'],
-                     'province_id' =>$item['province'],
-                     'regency_id' =>$item['city'],
-                     'village_id' =>$item['vilages'],
-                     'district_id' =>$item['district'],
-                     'sequence' => $i
-                 ];
+                
                  LenderCommissionerData::updateOrCreate(
                      ['sequence' => $i,
                      'uid' => Auth::id()],
@@ -463,13 +465,7 @@ class LenderController extends Controller
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'commissioner_verification' => true]
                 );
-                 DB::beginTransaction();
-                 try{
-                     //print_r($data);  
-                     DB::commit();
-                 }
-                 catch (Exception $e) {
-                 }
+                 
                      
              }
              $i++;

@@ -53,10 +53,11 @@
                                                 <div class=" ">
                                                     <form id="form_lender_director_information" method="POST" enctype="multipart/form-data">
                                                         <div class="section_number_appends director-1">
-                                                            @if(isset($director))
+                                                            @if(isset($director) && count($director) > 0)
                                                                 <?php 
                                                                     $i = 0; 
                                                                 ?>
+                                                                
                                                                 @foreach($director as $item)
 
                                                                 
