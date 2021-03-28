@@ -170,7 +170,12 @@
         </div>
     </div>
 </div>
-
+<style>
+.file_preview img{
+        width: 35% !important;
+        text-align: center;
+    }
+    </style>
 @section('js')
     <script src="{{ asset('/script/lender.js') }}"></script>
 @endsection

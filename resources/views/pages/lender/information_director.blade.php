@@ -53,10 +53,11 @@
                                                 <div class=" ">
                                                     <form id="form_lender_director_information" method="POST" enctype="multipart/form-data">
                                                         <div class="section_number_appends director-1">
-                                                            @if(isset($director))
+                                                            @if(isset($director) && count($director) > 0)
                                                                 <?php 
                                                                     $i = 0; 
                                                                 ?>
+                                                                
                                                                 @foreach($director as $item)
 
                                                                 
@@ -135,7 +136,7 @@
                                                                             <div class="col">
                                                                                 <h6>Kota <span>*</span></h6>
                                                                                 <select class="form-control" id="city{{$this_val}}" name="city[]" onchange="get_district(this.value ,'{{$this_val}}')">
-                                                                                    <option value="{{$item->regency_id}}">{{$item->regency_id}}</option>
+                                                                                    <option value="{{$item->regency_id}}">{{$item->regencies_name}}</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -144,13 +145,13 @@
                                                                             <div class="col">
                                                                                 <h6>Kecamatan <span>*</span></h6>
                                                                                 <select class="form-control" id="district{{$this_val}}" name="district[]" onchange="get_villages(this.value ,'{{$this_val}}')" >
-                                                                                    <option value="{{$item->district_id}}">{{$item->district_id}}</option>
+                                                                                    <option value="{{$item->district_id}}">{{$item->districts_name}}</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col">
                                                                                 <h6>Kelurahan <span>*</span></h6>
                                                                                 <select class="form-control" id="vilages{{$this_val}}" name="vilages[]">
-                                                                                    <option value="{{$item->village_id}}">{{$item->village_id}}</option>
+                                                                                    <option value="{{$item->village_id}}">{{$item->villages_name}}</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -681,6 +682,12 @@
         </div>
     </div>
 
+<style>
+.file_preview img{
+    width: 35% !important;
+    text-align: center;
+}
+</style>
 @section('js')
     <script src="{{ asset('/script/lender.js') }}"></script>
 @endsection

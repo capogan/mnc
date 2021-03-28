@@ -215,10 +215,13 @@ $(document).ready(function() {
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c05312134fcc8d4439a274797200a14fd40235dd
         if( $('.section_number_append').length < max_fields){
-            x++;
-            //alert(x);
+            x = $('.section_number_append').length + 1;
+            //alert($('.section_number_append').length);
             //$('.directors').html('<div class="section_number_appends director-'+x+'">'+$('.director-1').html()+'</div>');
             //$('.director-'+x).find()
             $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Direktur  </h3>\n' +
@@ -399,7 +402,7 @@ $(document).ready(function() {
 
 
         if( $('.section_number_append').length < max_fields){
-            x++;
+            x = $('.section_number_append').length + 1;
             //alert(x);
             //$('.directors').html('<div class="section_number_appends director-'+x+'">'+$('.director-1').html()+'</div>');
             //$('.director-'+x).find()
