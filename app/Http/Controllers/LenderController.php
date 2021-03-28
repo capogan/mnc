@@ -175,7 +175,12 @@ class LenderController extends Controller
         }else if($step->business_verification != true){
             return redirect('profile/lender'); 
         }
-        $director = LenderDirectorData::where('uid' , Auth::id())->get();
+        $director = LenderDirectorData::select('lender_director_data.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
+                        ->leftJoin('regencies' ,'lender_director_data.regency_id' , 'regencies.id')
+                        ->leftJoin('districts' ,'lender_director_data.district_id' , 'districts.id')
+                        ->leftJoin('villages' ,'lender_director_data.village_id' , 'villages.id')
+                        ->leftJoin('provinces' ,'lender_director_data.province_id' , 'provinces.id')
+                        ->where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
             'director' => $director
@@ -337,7 +342,12 @@ class LenderController extends Controller
             return redirect('profile/lender/information/director'); 
         }
 
-        $director = LenderCommissionerData::where('uid' , Auth::id())->get();
+        $director = LenderCommissionerData::select('lender_commissioner_data.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
+        ->leftJoin('regencies' ,'lender_commissioner_data.regency_id' , 'regencies.id')
+        ->leftJoin('districts' ,'lender_commissioner_data.district_id' , 'districts.id')
+        ->leftJoin('villages' ,'lender_commissioner_data.village_id' , 'villages.id')
+        ->leftJoin('provinces' ,'lender_commissioner_data.province_id' , 'provinces.id')
+        ->where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
             'director' => $director
@@ -500,7 +510,6 @@ class LenderController extends Controller
         $attachment = LenderAttachmentData::where('uid' , Auth::id())->first();
        // print_r($attachment); exit;
         $data = array(
-            'provinces' => Province::get(),
             'attachment' => $attachment
         );
        
