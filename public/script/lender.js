@@ -2,11 +2,111 @@ $(document).ready(function() {
 
     $("#npwp_of_bussiness,#npwp_of_director").inputmask({"mask": "99.999.999.9-999.999"});
 
-    $('#amount_setoran_modal,#taxpayer,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
+    $('#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
         $(this).val(function (index, value) {
             return 'Rp ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
     }));
+
+
+    $("#form_lender_director_information").on("submit", function(event) {
+
+        event.preventDefault();
+
+        var btn = $("#btn_submit_voucher");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/lender/register/director',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async:true,
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(response)
+            {
+                if(response.status == true){
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = 'lender/information/commissioner';
+                }else{
+                    var text = '';
+                    $.each(response.message, function( index, value ) {
+                        text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function() {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            }
+        })
+    });
+
+
+    $("#form_lender_commisioner_information").on("submit", function(event) {
+
+        event.preventDefault();
+
+        var btn = $("#btn_submit_voucher");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/lender/register/commisioner',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async:true,
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(response)
+            {
+                if(response.status == true){
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = 'lender/information/file';
+                }else{
+                    var text = '';
+                    $.each(response.message, function( index, value ) {
+                        text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function() {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            }
+        })
+    });
 
 
     $("#form_lender_business_information").on("submit", function(event) {
@@ -41,7 +141,56 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    //window.location.href = '/information/director';
+                    window.location.href = 'lender/information/director';
+
+                }else{
+                    var text = '';
+                    $.each(response.message, function( index, value ) {
+                        text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function() {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            }
+        })
+    });
+
+    $("#form_lender_attacment").on("submit", function(event) {
+        event.preventDefault();
+        var btn = $("#btn_submit_voucher");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/lender/submit/attachment/',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async:true,
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(response)
+            {
+                if(response.status == true){
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                   // window.location.href = '/lender/profile';
+
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -70,163 +219,138 @@ $(document).ready(function() {
 
         if( $('.section_number_append').length < max_fields){
             x++;
-            $(wrapper).append('<div class="section_number_append">\n' +
-                '                                                            <h3>Informasi Direktur</h3>\n' +
-                '                                                            <hr>\n' +
-                '                                                            <div class="result-message"></div>\n' +
+            //alert(x);
+            //$('.directors').html('<div class="section_number_appends director-'+x+'">'+$('.director-1').html()+'</div>');
+            //$('.director-'+x).find()
+            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Direktur  </h3>\n' +
                 '\n' +
-                '                                                            <div class="row mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>NIK<span>*</span></h6>\n' +
-                '                                                                    <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number">\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Nama<span>*</span></h6>\n' +
-                '                                                                    <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name">\n' +
-                '                                                                </div>\n' +
+                '                                                        <hr>\n' +
+                '                                                        <div class="result-message"></div>\n' +
+                '\n' +
+                '                                                        <div class="row mb-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>NIK<span>*</span></h6>\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">\n' +
                 '                                                            </div>\n' +
-                '\n' +
-                '                                                            <div class="row mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Tanggal Lahir<span>*</span></h6>\n' +
-                '                                                                    <input class="form-control" type="date"  name="dob" id="example-date-input" value="">\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Email<span>*</span></h6>\n' +
-                '                                                                    <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="">\n' +
-                '                                                                </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Nama<span>*</span></h6>\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name[]">\n' +
                 '                                                            </div>\n' +
+                '                                                        </div>\n' +
                 '\n' +
-                '                                                            <div class="row mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Nomor Telepon<span>*</span></h6>\n' +
-                '                                                                    <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="" >\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>NPWP<span>*</span></h6>\n' +
-                '                                                                    <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director">\n' +
-                '                                                                </div>\n' +
+                '                                                        <div class="row mb-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Tanggal Lahir<span>*</span></h6>\n' +
+                '                                                                <input class="form-control" type="date"  name="dob[]" id="example-date-input" value="">\n' +
                 '                                                            </div>\n' +
-                '\n' +
-                '                                                            <div class="row mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Jabatan<span>*</span></h6>\n' +
-                '                                                                    <select class="form-control" id="director_level">\n' +
-                '                                                                        <option value="">--Pilih Jabatan--</option>\n' +
-                '                                                                        <option value="director">Direktur</option>\n' +
-                '                                                                        <option value="president_director">Direktur Utama</option>\n' +
-                '                                                                    </select>\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Alamat<span>*</span></h6>\n' +
-                '                                                                    <textarea class="form-control" name="address" id="address"></textarea>\n' +
-                '                                                                </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Email<span>*</span></h6>\n' +
+                '                                                                <input type="text" class="form-control" placeholder="Email" name="email[]" id="email"  value="">\n' +
                 '                                                            </div>\n' +
+                '                                                        </div>\n' +
                 '\n' +
-                '                                                            <div class="row mt-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Propinsi <span>*</span></h6>\n' +
-                '                                                                    <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">\n' +
-                '                                                                        <option></option>\n' +
-                '                                                                        @foreach($provinces as $key => $val)\n' +
-                '                                                                            <option value="{{$val->id}}">{{$val->name}}</option>\n' +
-                '                                                                        @endforeach\n' +
-                '                                                                    </select>\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Kota <span>*</span></h6>\n' +
-                '                                                                    <select class="form-control" id="city" name="city" onchange="get_district(this.value)">\n' +
-                '                                                                    </select>\n' +
-                '                                                                </div>\n' +
+                '                                                        <div class="row mb-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Nomor Telepon<span>*</span></h6>\n' +
+                '                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >\n' +
                 '                                                            </div>\n' +
-                '\n' +
-                '                                                            <div class="row mt-4 mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Kecamatan <span>*</span></h6>\n' +
-                '                                                                    <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >\n' +
-                '                                                                    </select>\n' +
-                '                                                                </div>\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <h6>Kelurahan <span>*</span></h6>\n' +
-                '                                                                    <select class="form-control" id="vilages" name="vilages">\n' +
-                '                                                                    </select>\n' +
-                '                                                                </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>NPWP<span>*</span></h6>\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director[]">\n' +
                 '                                                            </div>\n' +
-                '                                                            <div class="row mt-4 mb-4">\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <div class="row mt-2">\n' +
-                '                                                                        <div class="col">\n' +
-                '                                                                            <p>Unggah Foto Identitas *</p>\n' +
-                '                                                                        </div>\n' +
-                '                                                                    </div>\n' +
+                '                                                        </div>\n' +
                 '\n' +
-                '                                                                    <div class="row mt-2">\n' +
-                '                                                                        <div class="col">\n' +
-                '                                                                            <div class="upload-file">\n' +
-                '                                                                                <div class="file-input">\n' +
-                '                                                                                    <input type="file" id="identity_image" name="identity_image" class="file" >\n' +
-                '                                                                                    <label for="identity_image">\n' +
-                '                                                                                        <svg\n' +
-                '                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"\n' +
-                '                                                                                            viewBox="0 0 16 16">\n' +
-                '                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />\n' +
-                '                                                                                        </svg>\n' +
-                '                                                                                        <span>Pilih Foto</span>\n' +
-                '                                                                                    </label>\n' +
-                '                                                                                </div>\n' +
-                '                                                                            </div>\n' +
-                '                                                                            <div class="file_preview">\n' +
-                '                                                                                <img src="" id="identity_image_preview" alt="" style="width:100%">\n' +
-                '                                                                            </div>\n' +
-                '                                                                        </div>\n' +
-                '                                                                    </div>\n' +
-                '\n' +
-                '                                                                </div>\n' +
-                '\n' +
-                '                                                                <div class="col">\n' +
-                '                                                                    <div class="row mt-2">\n' +
-                '                                                                        <div class="col">\n' +
-                '                                                                            <p>Unggah Foto Diri *</p>\n' +
-                '                                                                        </div>\n' +
-                '                                                                    </div>\n' +
-                '\n' +
-                '                                                                    <div class="row mt-2">\n' +
-                '                                                                        <div class="col">\n' +
-                '                                                                            <div class="upload-file">\n' +
-                '                                                                                <div class="file-input">\n' +
-                '                                                                                    <input type="file" id="self_image" name="self_image" class="file" >\n' +
-                '                                                                                    <label for="self_image">\n' +
-                '                                                                                        <svg\n' +
-                '                                                                                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"\n' +
-                '                                                                                            viewBox="0 0 16 16">\n' +
-                '                                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />\n' +
-                '                                                                                        </svg>\n' +
-                '                                                                                        <span>Pilih Foto</span>\n' +
-                '                                                                                    </label>\n' +
-                '                                                                                </div>\n' +
-                '                                                                            </div>\n' +
-                '                                                                            <div class="file_preview">\n' +
-                '                                                                                <img src="" id="self_image_preview" alt="" style="width:100%">\n' +
-                '                                                                            </div>\n' +
-                '                                                                        </div>\n' +
-                '                                                                    </div>\n' +
-                '                                                                </div>\n' +
+                '                                                        <div class="row mb-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Jabatan<span>*</span></h6>\n' +
+                '                                                                <select class="form-control" name="director_level[]" id="director_level">\n' +
+                '                                                                    <option value="">--Pilih Jabatan--</option>\n' +
+                '                                                                    <option value="director">Direktur</option>\n' +
+                '                                                                    <option value="president_director">Direktur Utama</option>\n' +
+                '                                                                </select>\n' +
                 '                                                            </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Alamat<span>*</span></h6>\n' +
+                '                                                                <textarea class="form-control" name="address[]" id="address"></textarea>\n' +
+                '                                                            </div>\n' +
+                '                                                        </div>\n' +
                 '\n' +
+                '                                                        <div class="row mt-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Propinsi <span>*</span></h6>\n' +
+                '                                                                <select class="form-control" id="province'+x+'" name="province[]" onchange="get_city(this.value,'+x+')" style="width: 100%;">\n' +
+                '                                                                    ' +$('#province').html() +
+                '                                                                </select>\n' +
+                '                                                            </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Kota <span>*</span></h6>\n' +
+                '                                                                <select class="form-control" id="city'+x+'" name="city[]" onchange="get_district(this.value ,'+x+')">\n' +
+                '                                                                </select>\n' +
+                '                                                            </div>\n' +
+                '                                                        </div>\n' +
                 '\n' +
-                '                                                    </div>');
+                '                                                        <div class="row mt-4 mb-4">\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Kecamatan <span>*</span></h6>\n' +
+                '                                                                <select class="form-control" id="district'+x+'" name="district[]" onchange="get_villages(this.value,'+x+')" >\n' +
+                '                                                                </select>\n' +
+                '                                                            </div>\n' +
+                '                                                            <div class="col">\n' +
+                '                                                                <h6>Kelurahan <span>*</span></h6>\n' +
+                '                                                                <select class="form-control" id="vilages'+x+'" name="vilages[]">\n' +
+                '                                                                </select>\n' +
+                '                                                            </div></div>\n' +
+                                                                           '<div class="row mt-4 mb-4">'+
+                                                                            '<div class="col">'+
+                                                                                '<div class="row mt-2"><div class="col"><p>Unggah Foto Identitas *</p></div></div>'+
+                                                                                '<div class="row mt-2">'+
+                                                                                   ' <div class="col image-of-display">'+
+                                                                                       ' <div class="upload-file">'+
+                                                                                            '<div class="file-input">'+
+                                                                                               ' <input type="file" id="identity_image'+x+'" name="identity_image'+x+'" class="file" >'+
+                                                                                                '<label for="identity_image'+x+'">'+
+                                                                                                    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'+
+                                                                                                    '</svg>'+
+                                                                                                    '<span>Pilih Foto</span>'+
+                                                                                                '</label>'+
+                                                                                           ' </div>'+
+                                                                                        '</div>'+
+                                                                                        '<div class="file_preview"> <img src="" id="identity_image'+x+'_preview" alt="" style="width:100%"></div>'+
+                                                                                    '</div>'+
+                                                                                '</div>'+
+                                                                            '</div>'+
+                                                                            
+                                                                            '<div class="col">'+
+                                                                                '<div class="row mt-2"><div class="col"><p>Unggah Foto Diri *</p></div></div>'+
+                                                                                '<div class="row mt-2">'+
+                                                                                   ' <div class="col image-of-display">'+
+                                                                                       ' <div class="upload-file">'+
+                                                                                            '<div class="file-input">'+
+                                                                                               ' <input type="file" id="self_image'+x+'" name="self_image'+x+'" class="file" >'+
+                                                                                                '<label for="self_image'+x+'">'+
+                                                                                                    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'+
+                                                                                                    '</svg>'+
+                                                                                                    '<span>Pilih Foto</span>'+
+                                                                                                '</label>'+
+                                                                                           ' </div>'+
+                                                                                        '</div>'+
+                                                                                        '<div class="file_preview"> <img src="" id="self_image'+x+'_preview" alt="" style="width:100%"></div>'+
+                                                                                    '</div>'+
+                                                                                '</div>'+
+                                                                            
+                '                                                        </div></div>');
+
+
             $('.section_number_append').each(function(index){
                 $(this).find('.klkl').text(index+1)
             })
 
-        }else{
-            Swal.fire('Informasi data direktur hanya dapat dikirim 3 kali')
         }
         $(wrapper).on("click",".remove_field_"+x, function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); x--;
-            $('.section_number_append').each(function(index){
-                $(this).find('.klkl').text(index+1);
-            })
+            e.preventDefault(); $(this).parent('div').remove(); 
+            // $('.section_number_append').each(function(index){
+            //     $(this).find('.klkl').text(index+1);
+            // })
         })
     });
 
@@ -241,7 +365,10 @@ $(document).ready(function() {
 
         if( $('.section_number_append').length < max_fields){
             x++;
-            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi komisaris </h3>\n' +
+            //alert(x);
+            //$('.directors').html('<div class="section_number_appends director-'+x+'">'+$('.director-1').html()+'</div>');
+            //$('.director-'+x).find()
+            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Komisioner  </h3>\n' +
                 '\n' +
                 '                                                        <hr>\n' +
                 '                                                        <div class="result-message"></div>\n' +
@@ -249,40 +376,40 @@ $(document).ready(function() {
                 '                                                        <div class="row mb-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>NIK<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number">\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Nama<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nama Komisaris" id="commissioner_name" name="commissioner_name">\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nama Komisioner" id="director_name" name="director_name[]">\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
                 '                                                        <div class="row mb-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Tanggal Lahir<span>*</span></h6>\n' +
-                '                                                                <input class="form-control" type="date"  name="dob" id="example-date-input" value="">\n' +
+                '                                                                <input class="form-control" type="date"  name="dob[]" id="example-date-input" value="">\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Email<span>*</span></h6>\n' +
-                '                                                                <input type="text" class="form-control" placeholder="Email" name="email" id="email"  value="">\n' +
+                '                                                                <input type="text" class="form-control" placeholder="Email" name="email[]" id="email"  value="">\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
                 '                                                        <div class="row mb-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Nomor Telepon<span>*</span></h6>\n' +
-                '                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number" value="" >\n' +
+                '                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>NPWP<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_commissioner" name="npwp_of_commissioner">\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director[]">\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
                 '                                                        <div class="row mb-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Jabatan<span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="director_level">\n' +
+                '                                                                <select class="form-control" name="director_level[]" id="director_level">\n' +
                 '                                                                    <option value="">--Pilih Jabatan--</option>\n' +
                 '                                                                    <option value="director">Direktur</option>\n' +
                 '                                                                    <option value="president_director">Direktur Utama</option>\n' +
@@ -290,23 +417,20 @@ $(document).ready(function() {
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Alamat<span>*</span></h6>\n' +
-                '                                                                <textarea class="form-control" name="address" id="address"></textarea>\n' +
+                '                                                                <textarea class="form-control" name="address[]" id="address"></textarea>\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
                 '                                                        <div class="row mt-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Propinsi <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">\n' +
-                '                                                                    <option></option>\n' +
-                '                                                                    @foreach($provinces as $key => $val)\n' +
-                '                                                                        <option value="{{$val->id}}">{{$val->name}}</option>\n' +
-                '                                                                    @endforeach\n' +
+                '                                                                <select class="form-control" id="province'+x+'" name="province[]" onchange="get_city(this.value,'+x+')" style="width: 100%;">\n' +
+                '                                                                    ' +$('#province').html() +
                 '                                                                </select>\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Kota <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)">\n' +
+                '                                                                <select class="form-control" id="city'+x+'" name="city[]" onchange="get_district(this.value ,'+x+')">\n' +
                 '                                                                </select>\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
@@ -314,32 +438,71 @@ $(document).ready(function() {
                 '                                                        <div class="row mt-4 mb-4">\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Kecamatan <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >\n' +
+                '                                                                <select class="form-control" id="district'+x+'" name="district[]" onchange="get_villages(this.value,'+x+')" >\n' +
                 '                                                                </select>\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Kelurahan <span>*</span></h6>\n' +
-                '                                                                <select class="form-control" id="vilages" name="vilages">\n' +
+                '                                                                <select class="form-control" id="vilages'+x+'" name="vilages[]">\n' +
                 '                                                                </select>\n' +
-                '                                                            </div>\n' +
+                '                                                            </div></div>\n' +
+                                                                           '<div class="row mt-4 mb-4">'+
+                                                                            '<div class="col">'+
+                                                                                '<div class="row mt-2"><div class="col"><p>Unggah Foto Identitas *</p></div></div>'+
+                                                                                '<div class="row mt-2">'+
+                                                                                   ' <div class="col image-of-display">'+
+                                                                                       ' <div class="upload-file">'+
+                                                                                            '<div class="file-input">'+
+                                                                                               ' <input type="file" id="identity_image'+x+'" name="identity_image'+x+'" class="file" >'+
+                                                                                                '<label for="identity_image'+x+'">'+
+                                                                                                    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'+
+                                                                                                    '</svg>'+
+                                                                                                    '<span>Pilih Foto</span>'+
+                                                                                                '</label>'+
+                                                                                           ' </div>'+
+                                                                                        '</div>'+
+                                                                                        '<div class="file_preview"> <img src="" id="identity_image'+x+'_preview" alt="" style="width:100%"></div>'+
+                                                                                    '</div>'+
+                                                                                '</div>'+
+                                                                            '</div>'+
+                                                                            
+                                                                            '<div class="col">'+
+                                                                                '<div class="row mt-2"><div class="col"><p>Unggah Foto Diri *</p></div></div>'+
+                                                                                '<div class="row mt-2">'+
+                                                                                   ' <div class="col image-of-display">'+
+                                                                                       ' <div class="upload-file">'+
+                                                                                            '<div class="file-input">'+
+                                                                                               ' <input type="file" id="self_image'+x+'" name="self_image'+x+'" class="file" >'+
+                                                                                                '<label for="self_image'+x+'">'+
+                                                                                                    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'+
+                                                                                                    '</svg>'+
+                                                                                                    '<span>Pilih Foto</span>'+
+                                                                                                '</label>'+
+                                                                                           ' </div>'+
+                                                                                        '</div>'+
+                                                                                        '<div class="file_preview"> <img src="" id="self_image'+x+'_preview" alt="" style="width:100%"></div>'+
+                                                                                    '</div>'+
+                                                                                '</div>'+
+                                                                            
                 '                                                        </div></div>');
+
+
             $('.section_number_append').each(function(index){
                 $(this).find('.klkl').text(index+1)
             })
 
         }
         $(wrapper).on("click",".remove_field_"+x, function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); x--;
-            $('.section_number_append').each(function(index){
-                $(this).find('.klkl').text(index+1);
-            })
+            e.preventDefault(); $(this).parent('div').remove(); 
+            // $('.section_number_append').each(function(index){
+            //     $(this).find('.klkl').text(index+1);
+            // })
         })
     });
 
 });
 
-function get_city(province_id){
-
+function get_city(province_id , attr){
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url:'/get/city?province_id='+province_id,
@@ -348,12 +511,12 @@ function get_city(province_id){
 
         success:function(res){
             // console.log(response);
-            $("#city").empty();
-            $("#city").append('<option>Pilih Kota</option>');
+            $("#city"+attr).empty();
+            $("#city"+attr).append('<option>Pilih Kota</option>');
             var index = 0;
 
             $.each(res,function(key,value){
-                $("#city").append('<option value="'+key+'">'+value+'</option>');
+                $("#city"+attr).append('<option value="'+key+'">'+value+'</option>');
             });
 
         },
@@ -364,7 +527,7 @@ function get_city(province_id){
     })
 }
 
-function get_district(regency_id){
+function get_district(regency_id , attr){
 
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
@@ -374,12 +537,12 @@ function get_district(regency_id){
 
         success:function(res){
             // console.log(response);
-            $("#district").empty();
-            $("#district").append('<option>Pilih Kecamatan</option>');
+            $("#district"+attr).empty();
+            $("#district"+attr).append('<option>Pilih Kecamatan</option>');
             var index = 0;
 
             $.each(res,function(key,value){
-                $("#district").append('<option value="'+key+'">'+value+'</option>');
+                $("#district"+attr).append('<option value="'+key+'">'+value+'</option>');
             });
 
         },
@@ -390,7 +553,7 @@ function get_district(regency_id){
     })
 }
 
-function get_villages(district_id){
+function get_villages(district_id , attr){
 
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
@@ -400,12 +563,12 @@ function get_villages(district_id){
 
         success:function(res){
             // console.log(response);
-            $("#vilages").empty();
-            $("#vilages").append('<option>Pilih Kelurahan</option>');
+            $("#vilages"+attr).empty();
+            $("#vilages"+attr).append('<option>Pilih Kelurahan</option>');
             var index = 0;
 
             $.each(res,function(key,value){
-                $("#vilages").append('<option value="'+key+'">'+value+'</option>');
+                $("#vilages"+attr).append('<option value="'+key+'">'+value+'</option>');
             });
 
         },
@@ -416,10 +579,12 @@ function get_villages(district_id){
     })
 }
 
+
+
+
 $(document).on('change' , 'input[type="file"]' , function(){
     readURL(this , $(this).attr('id'));
 });
-
 
 function readURL(input , imagetarget) {
     if (input.files && input.files[0]) {
@@ -430,5 +595,3 @@ function readURL(input , imagetarget) {
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
-
-

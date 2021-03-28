@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\LenderBusiness;
+use App\LenderVerification;
+use App\LoanRequest;
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+use Illuminate\Support\Facades\DB;
+use App\LenderDirectorData;
+use App\LenderCommissionerData;
+use App\LenderAttachmentData;
 
 class LenderController extends Controller
 {
@@ -17,7 +25,7 @@ class LenderController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index(Request $request){
@@ -156,10 +164,148 @@ class LenderController extends Controller
     }
 
     public function director(Request $request){
+        $director = LenderDirectorData::where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
+            'director' => $director
         );
         return view('pages.lender.information_director',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function submit_director_data(Request $request){
+       //print_r($request->all()); exit;
+        $validators = [
+            'identity_number'       => 'required',
+            'director_name'         => 'required',
+            'dob'                   => 'required',
+            'email'                 => 'required',
+            'phone_number'          => 'required',
+            'npwp_of_director'      => 'required',
+            'director_level'        => 'required',
+            'address'               => 'required',
+            'province'              => 'required',
+            'city'                  => 'required',
+            'district'              => 'required',
+            'vilages'               => 'required',
+        ];
+        $messagesvalidator = [
+            'identity_number.required'      => 'Nomor KTP tidak boleh kosong',
+            'director_name.required'        => 'Nama direktur tidak boleh kosong',
+            'dob.required'                  => 'Tanggal lahir tidak boleh kosong',
+            'email.required'                => 'Email tidak boleh kosong',
+            'phone_number.required'         => 'Nomor Telepon tidak boleh kosong',
+            'npwp_of_director.required'     => 'Npwp tidak boleh kosong',
+            'director_level.required'       => 'Jabatan tidak boleh kosong',
+            'address.required'              => 'Alamat tidak boleh kosong',
+            'province.required'             => 'Propinsi tidak boleh kosong',
+            'city.required'                 => 'Kota tidak boleh kosong',
+            'district.required'             => 'Kecamatan tidak boleh kosong',
+            'vilages.required'              => 'Desa tidak boleh kosong',
+        ];
+
+        for($i=0; $i<count($request->identity_number);$i++){
+            $requests[$i]['identity_number'] = $request['identity_number'][$i];
+            $requests[$i]['director_name'] = $request['director_name'][$i];
+            $requests[$i]['dob'] = $request['dob'][$i];
+            $requests[$i]['email'] = $request['email'][$i];
+            $requests[$i]['phone_number'] = $request['phone_number'][$i];
+            $requests[$i]['npwp_of_director'] = $request['npwp_of_director'][$i];
+            $requests[$i]['director_level'] = $request['director_level'][$i];
+            $requests[$i]['address'] = $request['address'][$i];
+            $requests[$i]['vilages'] = $request['vilages'][$i];
+            $requests[$i]['province'] = $request['province'][$i];
+            $requests[$i]['city'] = $request['city'][$i];
+            $requests[$i]['district'] = $request['district'][$i];
+            
+            foreach($request->all() as $key => $val){
+                if(!$request->hasFile($key)){
+                    if($val[$i] != ''){
+                        $requests[$i]['active'] = 'active';
+                    }
+                }
+                
+            }
+            if($i==0){
+                $j = $i;
+            }else{
+                $j = $i+1;
+            }
+            if(array_key_exists('self_image'.$j, $request->all())){
+                $requests[$i]['self_image'.$j] = $request['self_image'.$j];
+                //$validators['self_image'.$i] = 'required|image|mimes:png,jpg';
+                //$messagesvalidator['self_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                //$messagesvalidator['self_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+            }
+            if(array_key_exists('identity_image'.$j, $request->all())){
+                $requests[$i]['identity_image'.$j] = $request['identity_image'.$j];
+                //$validators['identity_image'.$i] = 'required|image|mimes:png,jpg';
+                //$messagesvalidator['identity_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                //$messagesvalidator['identity_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                
+            }
+            $validation = Validator::make($requests[$i], $validators ,$messagesvalidator);
+            if(array_key_exists('active' , $requests[$i])){
+                if($validation->fails()) {
+                    $json = [
+                        "status"=> false,
+                        "message"=> $validation->messages(),
+                    ];
+                    return response()->json($json);
+                }
+            }
+        }
+        $path =public_path().'/upload/lender/file';
+        $i=0;
+        foreach($requests as $item){
+            if(array_key_exists('active' , $item)){
+                if($request->hasFile('identity_image'.$i)) {
+                    $identity_image= $request->file('identity_image'.$i);
+                    $filename_identity = 'director_ktp_'.$i.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                    $identity_image->move($path, $filename_identity);
+                }
+                if($request->hasFile('self_image'.$i)) {
+                    $self_image= $request->file('self_image'.$i);
+                    $filename_self_image= 'director_selfie_'.$i.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                    $self_image->move($path, $filename_self_image);
+                }
+                $data = [
+                    'uid' => Auth::id(),
+                    'director_nik' => $item['identity_number'],
+                    'director_name' => $item['director_name'],
+                    'director_dob' => $item['dob'],
+                    'director_phone_number' => $item['phone_number'],
+                    'director_email' => $item['email'],
+                    'director_npwp' => $item['npwp_of_director'],
+                    'director_level' => $item['director_level'],
+                    'address' =>$item['address'],
+                    'province_id' =>$item['province'],
+                    'regency_id' =>$item['city'],
+                    'village_id' =>$item['vilages'],
+                    'district_id' =>$item['district'],
+                    'identity_photo' => $filename_identity,
+                    'self_photo' => $filename_self_image,
+                    'position' => $i
+                ];
+                LenderDirectorData::updateOrCreate(
+                    ['position' => $i,
+                    'uid' => Auth::id()],
+                    $data
+                );
+                DB::beginTransaction();
+                try{
+                    //print_r($data);  
+                    DB::commit();
+                }
+                catch (Exception $e) {
+                }
+                    
+            }
+            $i++;
+        }
+        return response()->json([
+            "status"=> true,
+            "message"=> 'Data Personal berhasil di tambahkan',
+        ]);
     }
 
     public function commissioner(Request $request){
@@ -168,6 +314,143 @@ class LenderController extends Controller
         );
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
+    public function submit_commisioner_data(Request $request){
+        // print_r($request->all()); exit;
+         $validators = [
+             'identity_number'       => 'required',
+             'director_name'         => 'required',
+             'dob'                   => 'required',
+             'email'                 => 'required',
+             'phone_number'          => 'required',
+             'npwp_of_director'      => 'required',
+             'director_level'        => 'required',
+             'address'               => 'required',
+             'province'              => 'required',
+             'city'                  => 'required',
+             'district'              => 'required',
+             'vilages'               => 'required',
+         ];
+         $messagesvalidator = [
+             'identity_number.required'      => 'Nomor KTP tidak boleh kosong',
+             'director_name.required'        => 'Nama direktur tidak boleh kosong',
+             'dob.required'                  => 'Tanggal lahir tidak boleh kosong',
+             'email.required'                => 'Email tidak boleh kosong',
+             'phone_number.required'         => 'Nomor Telepon tidak boleh kosong',
+             'npwp_of_director.required'     => 'Npwp tidak boleh kosong',
+             'director_level.required'       => 'Jabatan tidak boleh kosong',
+             'address.required'              => 'Alamat tidak boleh kosong',
+             'province.required'             => 'Propinsi tidak boleh kosong',
+             'city.required'                 => 'Kota tidak boleh kosong',
+             'district.required'             => 'Kecamatan tidak boleh kosong',
+             'vilages.required'              => 'Desa tidak boleh kosong',
+         ];
+ 
+         for($i=0; $i<count($request->identity_number);$i++){
+             $requests[$i]['identity_number'] = $request['identity_number'][$i];
+             $requests[$i]['director_name'] = $request['director_name'][$i];
+             $requests[$i]['dob'] = $request['dob'][$i];
+             $requests[$i]['email'] = $request['email'][$i];
+             $requests[$i]['phone_number'] = $request['phone_number'][$i];
+             $requests[$i]['npwp_of_director'] = $request['npwp_of_director'][$i];
+             $requests[$i]['director_level'] = $request['director_level'][$i];
+             $requests[$i]['address'] = $request['address'][$i];
+             $requests[$i]['vilages'] = $request['vilages'][$i];
+             $requests[$i]['province'] = $request['province'][$i];
+             $requests[$i]['city'] = $request['city'][$i];
+             $requests[$i]['district'] = $request['district'][$i];
+             
+             foreach($request->all() as $key => $val){
+                 if(!$request->hasFile($key)){
+                     if($val[$i] != ''){
+                         $requests[$i]['active'] = 'active';
+                     }
+                 }
+                 
+             }
+             if($i==0){
+                 $j = $i;
+             }else{
+                 $j = $i+1;
+             }
+             if(array_key_exists('self_image'.$j, $request->all())){
+                 $requests[$i]['self_image'.$j] = $request['self_image'.$j];
+                 //$validators['self_image'.$i] = 'required|image|mimes:png,jpg';
+                 //$messagesvalidator['self_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                 //$messagesvalidator['self_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+             }
+             if(array_key_exists('identity_image'.$j, $request->all())){
+                 $requests[$i]['identity_image'.$j] = $request['identity_image'.$j];
+                 //$validators['identity_image'.$i] = 'required|image|mimes:png,jpg';
+                 //$messagesvalidator['identity_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                 //$messagesvalidator['identity_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
+                 
+             }
+             $validation = Validator::make($requests[$i], $validators ,$messagesvalidator);
+             //if(array_key_exists('active' , $requests[$i])){
+                 if($validation->fails()) {
+                     $json = [
+                         "status"=> false,
+                         "message"=> $validation->messages(),
+                     ];
+                     return response()->json($json);
+                 }
+             //}
+         }
+
+         //print_r($requests); exit;
+         $path =public_path().'/upload/lender/file';
+         $i=0;
+         foreach($requests as $item){
+             if(array_key_exists('active' , $item)){
+                 if($request->hasFile('identity_image'.$i)) {
+                     $identity_image= $request->file('identity_image'.$i);
+                     $filename_identity = 'commissioner_ktp_'.$i.'_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                     $identity_image->move($path, $filename_identity);
+                 }
+                 if($request->hasFile('self_image'.$i)) {
+                     $self_image= $request->file('self_image'.$i);
+                     $filename_self_image= 'commissioner_selfie_'.$i.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                     $self_image->move($path, $filename_self_image);
+                 }
+                 $data = [
+                     'uid' => Auth::id(),
+                     'commissioner_nik' => $item['identity_number'],
+                     'commissioner_name' => $item['director_name'],
+                     'commissioner_dob' => $item['dob'],
+                     'commissioner_phone_number' => $item['phone_number'],
+                     'commissioner_email' => $item['email'],
+                     'commissioner_npwp' => $item['npwp_of_director'],
+                     'commissioner_level' => $item['director_level'],
+                     'address' =>$item['address'],
+                     'province_id' =>$item['province'],
+                     'regency_id' =>$item['city'],
+                     'village_id' =>$item['vilages'],
+                     'district_id' =>$item['district'],
+                     'identity_photo' => $filename_identity,
+                     'self_photo' => $filename_self_image,
+                     'sequence' => $i
+                 ];
+                 LenderCommissionerData::updateOrCreate(
+                     ['sequence' => $i,
+                     'uid' => Auth::id()],
+                     $data
+                 );
+                 DB::beginTransaction();
+                 try{
+                     //print_r($data);  
+                     DB::commit();
+                 }
+                 catch (Exception $e) {
+                 }
+                     
+             }
+             $i++;
+         }
+         return response()->json([
+             "status"=> true,
+             "message"=> 'Data Personal berhasil di tambahkan',
+         ]);
+     }
 
     public function information_file(Request $request){
         $data = array(
@@ -175,12 +458,134 @@ class LenderController extends Controller
         );
         return view('pages.lender.information_file',$this->merge_response($data, static::$CONFIG));
     }
+    public function submit_attachment_data(Request $request){
+        //print_r($request->all());
+        $validation = Validator::make($request->all(), 
+        [
+                'npwp' => 'required|image|mimes:png,jpg',
+                'tdp'     => 'required|mimes:pdf',
+                'nib'     => 'required|mimes:pdf',
+                'doc_kta'   => 'required|mimes:pdf',
+                'doc_last_ahu'   => 'required|mimes:pdf',
+                'organizational_structure'   => 'required|mimes:pdf',
+                'balance_report'   => 'required|mimes:pdf',
+                'cash_flow'   => 'required|mimes:pdf',
+                'loss_profit'   => 'required|mimes:pdf',
+        ],
+        [
+            'npwp.required' => 'Dokumen NPWP wajib diunggah',
+            'nib.required' => 'Dokumen NIB wajib diunggah',
+            'tdp.required' => 'Dokumen TDP wajib diunggah',
+            'doc_kta.required' => 'Dokumen kta Pendirian & Pengesahaan AHU wajib diunggah',
+            'doc_last_ahu.required' => 'Dokumen akta Perubahan Terakhir & Pengesahaan AHU wajib diunggah',
+            'organizational_structure.required' => 'Dokumen Struktur Organisasi Perusahaan wajib diunggah',
+            'balance_report.required' => 'Dokumen Neraca wajib diunggah',
+            'cash_flow.required' => 'Dokumen Dokumen Laporan Arus Kas  wajib diunggah',
+            'loss_profit.required' => 'Dokumen Laporan Laba Rugi wajib diunggah',
+        ]
+        );
+        
+        $path =public_path().'/upload/lender/file/attachment';
+        if($validation->fails()) {
+            $json = [
+                "status"=> false,
+                "message"=> $validation->messages(),
+            ];
+        }else{
+            
+            if($request->hasFile('npwp')) {
+                $identity_image= $request->file('npwp');
+                $lender_npwp_ = 'lender_npwp_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $lender_npwp_);
+            }
+            if($request->hasFile('nib')) {
+                $identity_image= $request->file('nib');
+                $nib = 'lender_nib_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $nib);
+            }
+
+            if($request->hasFile('tdp')) {
+                $identity_image= $request->file('tdp');
+                $tdp = 'lender_tdp_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $tdp);
+            }
+            if($request->hasFile('doc_kta')) {
+                $identity_image= $request->file('doc_kta');
+                $doc_kta = 'lender_doc_kta_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $doc_kta);
+            }
+            if($request->hasFile('doc_last_ahu')) {
+                $identity_image= $request->file('doc_last_ahu');
+                $doc_last_ahu = 'lender_doc_last_ahu_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $doc_last_ahu);
+            }
+            if($request->hasFile('organizational_structure')) {
+                $identity_image= $request->file('organizational_structure');
+                $organizational_structure = 'lender_organizational_structure_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $organizational_structure);
+            }
+            if($request->hasFile('balance_report')) {
+                $identity_image= $request->file('balance_report');
+                $balance_report = 'lender_balance_report_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $balance_report);
+            }
+            if($request->hasFile('cash_flow')) {
+                $identity_image= $request->file('cash_flow');
+                $cash_flow = 'lender_cash_flow_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $cash_flow);
+            }
+            if($request->hasFile('loss_profit')) {
+                $identity_image= $request->file('loss_profit');
+                $loss_profit = 'lender_loss_profit_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
+                $identity_image->move($path, $loss_profit);
+            }
+            $data = [
+                'uid' => Auth::id(),
+                'npwp' => $lender_npwp_,
+                'nib' => $nib,
+                'tdp' => $tdp,
+                'akta_pendirian' => $doc_kta,
+                'akta_perubahan' =>  $doc_last_ahu,
+                'structure_organization' =>$organizational_structure,
+                'balance_sheet' => $balance_report,
+                'cash_flow_statement' => $cash_flow,
+                'income_statement' => $loss_profit
+            ];
+            LenderAttachmentData::updateOrCreate(
+                ['uid' => Auth::id()],
+                $data
+            );
+            
+
+            $json = [
+                "status"=> true,
+                "message"=> 'Data Personal berhasil di tambahkan',
+            ];
+        }
+
+        return response()->json($json);
+    }
 
     public function market_place(Request $request){
+        $status_verification = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
+        if(!$status_verification){
+            return view('pages.lender.market_place',$this->merge_response(static::$CONFIG));
+        }
+        $borrower_data = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->get();
+        $data = [
+            'borrower_request' => $borrower_data 
+        ];
+        return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function profile(){
         $data = array(
             'provinces' => Province::get(),
         );
-        return view('pages.lender.market_place',$this->merge_response($data, static::$CONFIG));
+        return view('pages.lender.profile',$this->merge_response($data, static::$CONFIG));
     }
 
 

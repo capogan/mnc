@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_lender')
 @section('content')
     <div class="container">
         <div class="row">
@@ -18,7 +18,7 @@
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
                     <a href="/profile/lender/" type="button" class="btn btn-primary btn-circle">1</a>
-                    <p>Informasi Perusahaan</p>
+                    <p>Informasi Usaha</p>
                 </div>
                 <div class="stepwizard-step">
                     <a href="/profile/lender/information/director" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
@@ -31,11 +31,6 @@
                 <div class="stepwizard-step">
                     <a href="/profile/lender/information/file" type="button" class="btn btn-default btn-circle">4</a>
                     <p>Informasi Dokumen</p>
-
-                </div>
-                <div class="stepwizard-step">
-                    <a href="/profile/lender/information/market/place" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-                    <p>Market Place</p>
 
                 </div>
             </div>
@@ -110,7 +105,7 @@
                                                                     {{--                                        @if(isset($get_user->district ))--}}
                                                                     {{--                                            <option value="{{$get_user->district}}">{{$get_user->personal_district}}</option>--}}
                                                                     {{--                                        @endif--}}
-                                                                    <option value="{{$lender_profile->id_disctrict}}">{{$lender_profile->districts_name}}</option>
+                                                                    <option value="{{$lender_profile->id_district}}">{{$lender_profile->districts_name}}</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col">
@@ -157,7 +152,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor pengesahaan KEMENKUMHAM AHU<span>*</span> </h6>
-                                                                <input type="text" class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="number_register_kemenkunham" name="number_register_kemenkunham" value="{{isset($lender_profile->last_akta_perubahan) ? $lender_profile->last_akta_perubahan : ''}}">
+                                                                <input type="text" class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="number_register_kemenkunham" name="number_register_kemenkunham" value="{{isset($lender_profile->letter_register_pengesahan_kemenkunham) ? $lender_profile->letter_register_pengesahan_kemenkunham : ''}}">
                                                             </div>
                                                         </div>
 
@@ -168,7 +163,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor pengesahaan KEMENKUMHAM AHU </h6>
-                                                                <input type="text"  class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="letter_change_pengesahan_kemenkunham" name="letter_change_pengesahan_kemenkunham" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="letter_change_pengesahan_kemenkunham" name="letter_change_pengesahan_kemenkunham" value="{{isset($lender_profile->letter_change_pengesahan_kemenkunham) ? $lender_profile->letter_change_pengesahan_kemenkunham : ''}}">
                                                             </div>
                                                         </div>
 
@@ -178,49 +173,48 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Jumlah Setoran Modal<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Jumlah Setoran Modal" id="amount_setoran_modal" name="amount_setoran_modal" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Jumlah Setoran Modal" id="amount_setoran_modal" name="amount_setoran_modal" value="{{isset($lender_profile->amount_setoran_modal) ? $lender_profile->amount_setoran_modal : ''}}">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Wajib Pajak<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer" value="{{isset($lender_profile->taxpayer) ? $lender_profile->taxpayer : ''}}">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Nilai Aset<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value" value="{{isset($lender_profile->asset_value) ? $lender_profile->asset_value : ''}}">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nilai Ekuitas<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nilai Ekuitas" id="equity_value" name="equity_value" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nilai Ekuitas" id="equity_value" name="equity_value" value="{{isset($lender_profile->equity_value) ? $lender_profile->equity_value : ''}}">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Kewajiban Jangka Pendek<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Kewajiban Jangka Pendek" id="short_term_liabilities" name="short_term_liabilities" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Kewajiban Jangka Pendek" id="short_term_liabilities" name="short_term_liabilities" value="{{isset($lender_profile->short_term_obligations) ? $lender_profile->short_term_obligations : ''}}">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Pendapatan Tahun berjalan sampai dengan saat ini<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Pendapatan Tahun berjalan sampai dengan saat ini" id="income_year" name="income_year" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Pendapatan Tahun berjalan sampai dengan saat ini" id="income_year" name="income_year" value="{{isset($lender_profile->annual_income) ? $lender_profile->annual_income : ''}}">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-4">
                                                             <div class="col">
                                                                 <h6>Beban Operasional tahun berjalan sampai dengan saat ini<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Beban Operasional tahun berjalan sampai dengan saat ini" id="operating_expenses" name="operating_expenses" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Beban Operasional tahun berjalan sampai dengan saat ini" id="operating_expenses" name="operating_expenses" value="{{isset($lender_profile->operating_expenses) ? $lender_profile->operating_expenses : ''}}">
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Laba - Rugi periode Tahun berjalan sampai dengan saat ini</h6>
-                                                                <input type="text"  class="form-control" placeholder="Laba - Rugi periode Tahun berjalan sampai dengan saat ini" id="profit_loss" name="profit_loss" value="{{isset($lender_profile->induk_berusaha_number) ? $lender_profile->induk_berusaha_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Laba - Rugi periode Tahun berjalan sampai dengan saat ini" id="profit_loss" name="profit_loss" value="{{isset($lender_profile->profit_and_loss) ? $lender_profile->profit_and_loss : ''}}">
                                                             </div>
                                                         </div>
-
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" id="qwe" data-text="Tambahkan Data" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
+                                                            <button type="submit" id="qwe" data-text="Tambahkan Data" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
                                                     </form>
                                                 </div>

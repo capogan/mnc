@@ -96,7 +96,13 @@ Route::post('/lender/information/business/add', 'LenderController@information_bu
 Route::get('/profile/lender/information/director', 'LenderController@director')->name('profile.lender.information.director');
 Route::get('/profile/lender/information/commissioner', 'LenderController@commissioner')->name('profile.lender.information.commissioner');
 Route::get('/profile/lender/information/file', 'LenderController@information_file')->name('profile.lender.information.file');
-Route::get('/profile/lender/information/market/place', 'LenderController@market_place')->name('profile.lender.information.market.place');
+//Route::get('/profile/lender/information/market/place', 'LenderController@market_place')->name('profile.lender.information.market.place');
+Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
+Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
+Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
+
+Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
+Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');
 
 //.............................................................................
 //...............................SSSSSS........................................
