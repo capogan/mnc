@@ -52,15 +52,16 @@
                                                 <div class=" ">
                                                 <form id="form_lender_commisioner_information" method="POST" enctype="multipart/form-data">
                                                 <div class="section_number_appends director-1">
+
                                                             @if(isset($director) && count($director) > 0)
-                                                                <?php 
-                                                                    $i = 0; 
+                                                                <?php
+                                                                    $i = 0;
                                                                 ?>
                                                                 @foreach($director as $item)
 
-                                                                
+
                                                                     <div class="section_number_append section_number_append-section1" id="section_number_append">
-                                                                    <?php 
+                                                                    <?php
                                                                         if($i == 0){
                                                                             $this_val = '';
                                                                             $image = '0';
@@ -226,7 +227,7 @@
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>Nama<span>*</span></h6>
-                                                                        <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name[]">
+                                                                        <input type="text" value="" class="form-control" placeholder="Nama Komisaris" id="director_name" name="director_name[]">
                                                                     </div>
                                                                 </div>
 
@@ -360,7 +361,7 @@
                                                             @endif
 
 
-                                                            
+
                                                         </div>
                                                         <div class="directors"></div>
                                                         <!-- <div class="section_number_appends director-2"></div>
@@ -655,7 +656,7 @@
                                                         </div>-->
                                                         <div id="section_director"></div>
                                                         <div class="form-group mt-4">
-                                                            <button type="button" id="add_commissioner_section" data-text="Tambahkan Data" class="btn btn-default btn-block">+ Tambahkan Data Direktur </button>
+                                                            <button type="button" id="add_commissioner_section" data-text="Tambahkan Data" class="btn btn-default btn-block">+ Tambahkan Data Komisaris </button>
                                                         </div>
                                                         <div class="form-group mt100">
                                                             <button type="submit" id="qwe" data-text="Tambahkan Data" class="btn btn-primary btn-block">Simpan & lanjutkan </button>
@@ -680,12 +681,7 @@
         </div>
     </div>
 
-<style>
-.file_preview img{
-    width: 35% !important;
-    text-align: center;
-}
-</style>
+
 @section('js')
     <script src="{{ asset('/script/lender.js') }}"></script>
 @endsection

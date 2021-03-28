@@ -17,7 +17,7 @@
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
-                    <a href="/profile/lender/" type="button" class="btn btn-primary btn-circle">1</a>
+                    <a href="/profile/lender/" type="button" data-text="1" class="btn btn-primary btn-circle">1</a>
                     <p>Informasi Usaha</p>
                 </div>
                 <div class="stepwizard-step">
@@ -86,7 +86,7 @@
                                                                     <option></option>
                                                                     @foreach($provinces as $key => $val)
                                                                             <option value="{{$val->id}}"  {{ $lender_profile->id_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>--}}
-                                                                            
+
                                                                     @endforeach
                                                                 </select>
                                                             </div>

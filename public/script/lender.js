@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $("#npwp_of_bussiness,#npwp_of_director").inputmask({"mask": "99.999.999.9-999.999"});
 
-    $('#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
+    $('#amount_setoran_modal,#taxpayer,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
         $(this).val(function (index, value) {
             return 'Rp ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
@@ -129,8 +129,12 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend:function(){
+              loading();
+            },
             success:function(response)
             {
+                close_loading();
                 if(response.status == true){
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
@@ -141,7 +145,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = 'lender/information/director';
+                    window.location.href = '/profile/lender/information/director';
 
                 }else{
                     var text = '';
@@ -215,6 +219,8 @@ $(document).ready(function() {
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
+
+
         if( $('.section_number_append').length < max_fields){
             x = $('.section_number_append').length + 1;
             //alert($('.section_number_append').length);
@@ -254,7 +260,7 @@ $(document).ready(function() {
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>NPWP<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director[]">\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director'+x+'" name="npwp_of_director[]">\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
@@ -277,7 +283,42 @@ $(document).ready(function() {
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Propinsi <span>*</span></h6>\n' +
                 '                                                                <select class="form-control" id="province'+x+'" name="province[]" onchange="get_city(this.value,'+x+')" style="width: 100%;">\n' +
-                '                                                                    ' +$('#province').html() +
+                '                                                                       <option value="">--Pilih Propinsi--</option>\n' +
+                '                                                                       <option value="11">Aceh</option>\n' +
+                '                                                                       <option value="12">SUMATERA UTARA</option>\n' +
+                '                                                                       <option value="13">SUMATERA BARAT</option>\n' +
+                '                                                                       <option value="14">RIAU</option>\n' +
+                '                                                                       <option value="15">JAMBI</option>\n' +
+                '                                                                       <option value="16">SUMATERA SELATAN</option>\n' +
+                '                                                                       <option value="17">BENGKULU</option>\n' +
+                '                                                                       <option value="18">LAMPUNG</option>\n' +
+                '                                                                       <option value="19">KEPULAUAN BANGKA BELITUNG</option>\n' +
+                '                                                                       <option value="21">KEPULAUAN RIAU</option>\n' +
+                '                                                                       <option value="31">DKI JAKARTA</option>\n' +
+                '                                                                       <option value="32">JAWA BARAT</option>\n' +
+                '                                                                       <option value="33">JAWA TENGAH</option>\n' +
+                '                                                                       <option value="34">DI YOGYAKARTA</option>\n' +
+                '                                                                       <option value="35">JAWA TIMUR</option>\n' +
+                '                                                                       <option value="36">BANTEN</option>\n' +
+                '                                                                       <option value="51">BALI</option>\n' +
+                '                                                                       <option value="52">NUSA TENGGARA BARAT</option>\n' +
+                '                                                                       <option value="53">NUSA TENGGARA TIMUR</option>\n' +
+                '                                                                       <option value="61">KALIMANTAN BARAT</option>\n' +
+                '                                                                       <option value="62">KALIMANTAN TENGAH</option>\n' +
+                '                                                                       <option value="63">KALIMANTAN SELATAN</option>\n' +
+                '                                                                       <option value="64">KALIMANTAN TIMUR</option>\n' +
+                '                                                                       <option value="65">KALIMANTAN UTARA</option>\n' +
+                '                                                                       <option value="71">SULAWESI UTARA</option>\n' +
+                '                                                                       <option value="72">SULAWESI TENGAH</option>\n' +
+                '                                                                       <option value="73">SULAWESI SELATAN</option>\n' +
+                '                                                                       <option value="74">SULAWESI TENGGARA</option>\n' +
+                '                                                                       <option value="75">GORONTALO</option>\n' +
+                '                                                                       <option value="76">SULAWESI BARAT</option>\n' +
+                '                                                                       <option value="81">MALUKU</option>\n' +
+                '                                                                       <option value="82">MALUKU UTARA</option>\n' +
+                '                                                                       <option value="91">PAPUA BARAT</option>\n' +
+                '                                                                       <option value="94">PAPUA</option>\n' +
+
                 '                                                                </select>\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
@@ -317,7 +358,7 @@ $(document).ready(function() {
                                                                                     '</div>'+
                                                                                 '</div>'+
                                                                             '</div>'+
-                                                                            
+
                                                                             '<div class="col">'+
                                                                                 '<div class="row mt-2"><div class="col"><p>Unggah Foto Diri *</p></div></div>'+
                                                                                 '<div class="row mt-2">'+
@@ -335,7 +376,7 @@ $(document).ready(function() {
                                                                                         '<div class="file_preview"> <img src="" id="self_image'+x+'_preview" alt="" style="width:100%"></div>'+
                                                                                     '</div>'+
                                                                                 '</div>'+
-                                                                            
+
                 '                                                        </div></div>');
 
 
@@ -345,11 +386,12 @@ $(document).ready(function() {
 
         }
         $(wrapper).on("click",".remove_field_"+x, function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); 
+            e.preventDefault(); $(this).parent('div').remove();
             // $('.section_number_append').each(function(index){
             //     $(this).find('.klkl').text(index+1);
             // })
         })
+        $("#npwp_of_director"+x).inputmask({"mask": "99.999.999.9-999.999"});
     });
 
 
@@ -400,7 +442,7 @@ $(document).ready(function() {
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>NPWP<span>*</span></h6>\n' +
-                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director" name="npwp_of_director[]">\n' +
+                '                                                                <input type="text" value="" class="form-control" placeholder="Nomor Npwp" id="npwp_of_director'+x+'" name="npwp_of_director[]">\n' +
                 '                                                            </div>\n' +
                 '                                                        </div>\n' +
                 '\n' +
@@ -423,7 +465,41 @@ $(document).ready(function() {
                 '                                                            <div class="col">\n' +
                 '                                                                <h6>Propinsi <span>*</span></h6>\n' +
                 '                                                                <select class="form-control" id="province'+x+'" name="province[]" onchange="get_city(this.value,'+x+')" style="width: 100%;">\n' +
-                '                                                                    ' +$('#province').html() +
+                '                                                                       <option value="">--Pilih Propinsi--</option>\n' +
+                '                                                                       <option value="11">Aceh</option>\n' +
+                '                                                                       <option value="12">SUMATERA UTARA</option>\n' +
+                '                                                                       <option value="13">SUMATERA BARAT</option>\n' +
+                '                                                                       <option value="14">RIAU</option>\n' +
+                '                                                                       <option value="15">JAMBI</option>\n' +
+                '                                                                       <option value="16">SUMATERA SELATAN</option>\n' +
+                '                                                                       <option value="17">BENGKULU</option>\n' +
+                '                                                                       <option value="18">LAMPUNG</option>\n' +
+                '                                                                       <option value="19">KEPULAUAN BANGKA BELITUNG</option>\n' +
+                '                                                                       <option value="21">KEPULAUAN RIAU</option>\n' +
+                '                                                                       <option value="31">DKI JAKARTA</option>\n' +
+                '                                                                       <option value="32">JAWA BARAT</option>\n' +
+                '                                                                       <option value="33">JAWA TENGAH</option>\n' +
+                '                                                                       <option value="34">DI YOGYAKARTA</option>\n' +
+                '                                                                       <option value="35">JAWA TIMUR</option>\n' +
+                '                                                                       <option value="36">BANTEN</option>\n' +
+                '                                                                       <option value="51">BALI</option>\n' +
+                '                                                                       <option value="52">NUSA TENGGARA BARAT</option>\n' +
+                '                                                                       <option value="53">NUSA TENGGARA TIMUR</option>\n' +
+                '                                                                       <option value="61">KALIMANTAN BARAT</option>\n' +
+                '                                                                       <option value="62">KALIMANTAN TENGAH</option>\n' +
+                '                                                                       <option value="63">KALIMANTAN SELATAN</option>\n' +
+                '                                                                       <option value="64">KALIMANTAN TIMUR</option>\n' +
+                '                                                                       <option value="65">KALIMANTAN UTARA</option>\n' +
+                '                                                                       <option value="71">SULAWESI UTARA</option>\n' +
+                '                                                                       <option value="72">SULAWESI TENGAH</option>\n' +
+                '                                                                       <option value="73">SULAWESI SELATAN</option>\n' +
+                '                                                                       <option value="74">SULAWESI TENGGARA</option>\n' +
+                '                                                                       <option value="75">GORONTALO</option>\n' +
+                '                                                                       <option value="76">SULAWESI BARAT</option>\n' +
+                '                                                                       <option value="81">MALUKU</option>\n' +
+                '                                                                       <option value="82">MALUKU UTARA</option>\n' +
+                '                                                                       <option value="91">PAPUA BARAT</option>\n' +
+                '                                                                       <option value="94">PAPUA</option>\n' +
                 '                                                                </select>\n' +
                 '                                                            </div>\n' +
                 '                                                            <div class="col">\n' +
@@ -463,7 +539,7 @@ $(document).ready(function() {
                                                                                     '</div>'+
                                                                                 '</div>'+
                                                                             '</div>'+
-                                                                            
+
                                                                             '<div class="col">'+
                                                                                 '<div class="row mt-2"><div class="col"><p>Unggah Foto Diri *</p></div></div>'+
                                                                                 '<div class="row mt-2">'+
@@ -481,7 +557,7 @@ $(document).ready(function() {
                                                                                         '<div class="file_preview"> <img src="" id="self_image'+x+'_preview" alt="" style="width:100%"></div>'+
                                                                                     '</div>'+
                                                                                 '</div>'+
-                                                                            
+
                 '                                                        </div></div>');
 
 
@@ -491,16 +567,18 @@ $(document).ready(function() {
 
         }
         $(wrapper).on("click",".remove_field_"+x, function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); 
+            e.preventDefault(); $(this).parent('div').remove();
             // $('.section_number_append').each(function(index){
             //     $(this).find('.klkl').text(index+1);
             // })
         })
+        $("#npwp_of_director"+x).inputmask({"mask": "99.999.999.9-999.999"});
     });
 
 });
 
 function get_city(province_id , attr){
+
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url:'/get/city?province_id='+province_id,
@@ -508,7 +586,7 @@ function get_city(province_id , attr){
         dataType:'json',
 
         success:function(res){
-            // console.log(response);
+
             $("#city"+attr).empty();
             $("#city"+attr).append('<option>Pilih Kota</option>');
             var index = 0;
@@ -516,6 +594,8 @@ function get_city(province_id , attr){
             $.each(res,function(key,value){
                 $("#city"+attr).append('<option value="'+key+'">'+value+'</option>');
             });
+
+
 
         },
         error: function(xhr, status, error) {
@@ -543,6 +623,8 @@ function get_district(regency_id , attr){
                 $("#district"+attr).append('<option value="'+key+'">'+value+'</option>');
             });
 
+
+
         },
         error: function(xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");
@@ -561,7 +643,7 @@ function get_villages(district_id , attr){
 
         success:function(res){
             // console.log(response);
-            $("#vilages"+attr).empty();
+           $("#vilages"+attr).empty();
             $("#vilages"+attr).append('<option>Pilih Kelurahan</option>');
             var index = 0;
 
