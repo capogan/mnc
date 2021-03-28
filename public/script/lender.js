@@ -129,8 +129,12 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend:function(){
+              loading();
+            },
             success:function(response)
             {
+                close_loading();
                 if(response.status == true){
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
