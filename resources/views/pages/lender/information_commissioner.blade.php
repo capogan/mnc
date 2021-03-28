@@ -70,7 +70,7 @@
                                                                             $image = $i+1;;
                                                                         }
                                                                     ?>
-                                                                        <h3>Informasi Direktur</h3>
+                                                                        <h3>Informasi Komisaris</h3>
                                                                         <hr>
                                                                         <div class="result-message"></div>
 
@@ -216,7 +216,7 @@
                                                                 @endforeach
                                                             @else
                                                             <div class="section_number_append section_number_append-section1" id="section_number_append">
-                                                                <h3>Informasi Direktur</h3>
+                                                                <h3>Informasi Komisaris</h3>
                                                                 <hr>
                                                                 <div class="result-message"></div>
 
@@ -227,7 +227,7 @@
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>Nama<span>*</span></h6>
-                                                                        <input type="text" value="" class="form-control" placeholder="Nama Direktur" id="director_name" name="director_name[]">
+                                                                        <input type="text" value="" class="form-control" placeholder="Nama Komisaris" id="director_name" name="director_name[]">
                                                                     </div>
                                                                 </div>
 

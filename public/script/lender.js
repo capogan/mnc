@@ -215,10 +215,8 @@ $(document).ready(function() {
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
-<<<<<<< HEAD
 
-=======
->>>>>>> c05312134fcc8d4439a274797200a14fd40235dd
+
         if( $('.section_number_append').length < max_fields){
             x = $('.section_number_append').length + 1;
             //alert($('.section_number_append').length);
