@@ -69,7 +69,7 @@
                                                                             $image = $i+1;;
                                                                         }
                                                                     ?>
-                                                                        <h3>Informasi Direktur</h3>
+                                                                        <h3>Informasi Komisaris</h3>
                                                                         <hr>
                                                                         <div class="result-message"></div>
 
@@ -215,7 +215,7 @@
                                                                 @endforeach
                                                             @else
                                                             <div class="section_number_append section_number_append-section1" id="section_number_append">
-                                                                <h3>Informasi Direktur</h3>
+                                                                <h3>Informasi Komisaris</h3>
                                                                 <hr>
                                                                 <div class="result-message"></div>
 
@@ -257,8 +257,8 @@
                                                                         <h6>Jabatan<span>*</span></h6>
                                                                         <select class="form-control" name="director_level[]" id="director_level">
                                                                             <option value="">--Pilih Jabatan--</option>
-                                                                            <option value="director">Direktur</option>
-                                                                            <option value="president_director">Direktur Utama</option>
+                                                                            <option value="commissioner" >Komisaris</option>
+                                                                            <option value="president_commissioner">Komisaris Utama</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="col">

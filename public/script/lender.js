@@ -366,7 +366,7 @@ $(document).ready(function() {
             //alert(x);
             //$('.directors').html('<div class="section_number_appends director-'+x+'">'+$('.director-1').html()+'</div>');
             //$('.director-'+x).find()
-            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Komisioner  </h3>\n' +
+            $(wrapper).append('<div class="remove_'+x+' section_number_append"><button type="button" class="btn btn-sm btn-danger pull-right remove_field_'+x+'" style="background:crimson">hapus</button><h3 class="title-section">Informasi Komisaris  </h3>\n' +
                 '\n' +
                 '                                                        <hr>\n' +
                 '                                                        <div class="result-message"></div>\n' +

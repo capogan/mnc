@@ -82,7 +82,7 @@
                                                         <div class="row mt-4">
                                                             <div class="col">
                                                                 <h6>Propinsi {{$lender_profile->provinces_name}} <span>*</span></h6>
-                                                                <select class="form-control" id="province" name="province" onChange="get_city(this.value);" style="width: 100%;">
+                                                                <select class="form-control" id="province" name="province" onchange="get_city(this.value ,'');" style="width: 100%;">
                                                                     <option></option>
                                                                     @foreach($provinces as $key => $val)
                                                                             <option value="{{$val->id}}"  {{ $lender_profile->id_province == $val->id ? "selected" : "" }}>{{$val->name}}</option>--}}
@@ -92,7 +92,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Kota <span>*</span></h6>
-                                                                <select class="form-control" id="city" name="city" onchange="get_district(this.value)">
+                                                                <select class="form-control" id="city" name="city" onchange="get_district(this.value ,'')">
                                                                     <option value="{{$lender_profile->id_regency}}" selected>{{$lender_profile->regencies_name}}</option>
                                                                 </select>
                                                             </div>
@@ -101,7 +101,7 @@
                                                         <div class="row mt-4">
                                                             <div class="col">
                                                                 <h6>Kecamatan <span>*</span></h6>
-                                                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value)" >
+                                                                <select class="form-control" id="district" name="district" onchange="get_villages(this.value ,'')" >
                                                                     {{--                                        @if(isset($get_user->district ))--}}
                                                                     {{--                                            <option value="{{$get_user->district}}">{{$get_user->personal_district}}</option>--}}
                                                                     {{--                                        @endif--}}
