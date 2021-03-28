@@ -169,6 +169,12 @@ class LenderController extends Controller
     }
 
     public function director(Request $request){
+        $step = LenderVerification::where('uid' , Auth::id())->first();
+        if(!$step){
+           return redirect('profile/lender'); 
+        }else if($step->business_verification != true){
+            return redirect('profile/lender'); 
+        }
         $director = LenderDirectorData::where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
@@ -323,6 +329,14 @@ class LenderController extends Controller
     }
 
     public function commissioner(Request $request){
+        
+        $step = LenderVerification::where('uid' , Auth::id())->first();
+        if(!$step){
+           return redirect('profile/lender'); 
+        }else if($step->director_verification != true){
+            return redirect('profile/lender/information/director'); 
+        }
+
         $director = LenderCommissionerData::where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
@@ -477,6 +491,12 @@ class LenderController extends Controller
      }
 
     public function information_file(Request $request){
+        $step = LenderVerification::where('uid' , Auth::id())->first();
+        if(!$step){
+           return redirect('profile/lender'); 
+        }else if($step->commissioner_verification != true){
+            return redirect('profile/lender/information/commissioner'); 
+        }
         $attachment = LenderAttachmentData::where('uid' , Auth::id())->first();
        // print_r($attachment); exit;
         $data = array(
