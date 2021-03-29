@@ -31,4 +31,9 @@ class BusinessInfo extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function income_factory()
+    {
+        return $this->hasOne(IncomeFactory::class , 'id' , 'id_credit_score_income_factor');
+    }
 }

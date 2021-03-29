@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_lender')
 @section('content')
     <div class="container">
         <div class="row">
@@ -31,12 +31,6 @@
                 <div class="stepwizard-step">
                     <a href="/profile/lender/information/file" type="button" class="btn btn-primary btn-circle">4</a>
                     <p>Informasi Dokumen</p>
-
-                </div>
-                <div class="stepwizard-step">
-                    <a href="/profile/lender/information/market/place" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-                    <p>Market Place</p>
-
                 </div>
             </div>
         </div>
@@ -57,15 +51,15 @@
                                         <div class=" bg-white ">
                                             <div class="contact-form mb60">
                                                 <div class=" ">
-                                                    <form id="file_upload_image" enctype="multipart/form-data">
+                                                    <form id="form_lender_attacment" enctype="multipart/form-data">
                                                         <h3>Unggah Berkas</h3>
                                                         <hr>
-                                                        <div class="result-message-f"></div>
+                                                        <div class="result-message"></div>
                                                         <div class="row">
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
-                                                                        <p>Unggah Foto KTP *</p>
+                                                                        <p>Unggah NPWP KTP *</p>
                                                                     </div>
                                                                 </div>
 
@@ -73,8 +67,8 @@
                                                                     <div class="col">
                                                                         <div class="upload-file">
                                                                             <div class="file-input">
-                                                                                <input type="file" id="identity_image" name="identity_image" class="file" >
-                                                                                <label for="identity_image">
+                                                                                <input type="file" id="npwp" name="npwp" class="file" >
+                                                                                <label for="npwp">
                                                                                     <svg
                                                                                         xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
                                                                                         viewBox="0 0 16 16">
@@ -85,219 +79,144 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->identity_photo ?? ''}}" id="identity_image_preview" alt="" style="width:100%">
+                                                                            <img class="img-file" src="{{asset('/upload/lender/file/attachment')}}/{{$attachment->npwp ?? ''}}" id="npwp_preview" alt="" style="width:100%">
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                             </div>
                                                             <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Unggah Foto Diri *</p>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6>Dokumen NIB *</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                        <input type="file" id="nib" name="nib" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
                                                                     </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-                                                                                <input type="file" id="self_image" name="self_image" class="file" >
-                                                                                <label for="self_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->nib ?? ''}}"> download </a>
                                                                         </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->self_photo ?? '' }}" id="self_image_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Unggah Foto NPWP *</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="npwp_image" name="npwp_image" class="file">
-                                                                                <label for="npwp_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->npwp_photo ?? ''}}" id="npwp_image_preview" alt="" style="width:100%">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Foto tempat usaha *</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="business_location_image" name="business_location_image" class="file">
-                                                                                <label for="business_location_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->business_build_photo ?? ''}}" id="business_location_image_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Foto bukti kepemilikan atau kontrak tempat usaha</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="business_owner_file" name="business_owner_file" class="file">
-                                                                                <label for="business_owner_file">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->business_owner_photo ?? ''}}" id="business_owner_file_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Foto dokumen usaha *</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="business_document" name="business_document" class="file">
-                                                                                <label for="business_document">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->siup_photo ?? ''}}" id="business_document_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Foto aktifitas usaha *</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="business_activity_image" name="business_activity_image" class="file">
-                                                                                <label for="business_activity_image">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->business_activity_photo ?? ''}}" id="business_activity_image_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-xl-6">
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <p>Foto NPWP usaha</p>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6>Dokumen TDP *</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input type="file" id="tdp" name="tdp" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
                                                                     </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col">
-                                                                        <div class="upload-file">
-                                                                            <div class="file-input">
-
-                                                                                <input type="file" id="business_npwp" name="business_npwp" class="file">
-                                                                                <label for="business_npwp">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg>
-                                                                                    <span>Pilih Foto</span>
-                                                                                </label>
-                                                                            </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->tdp ?? ''}}"> download </a>
                                                                         </div>
-                                                                        <div class="file_preview">
-                                                                            <img src="{{url('/')}}/{{$file->npwp_business_photo ?? ''}}" id="business_npwp_preview" alt="" style="width:100%">
-                                                                        </div>
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6> Dokumen kta Pendirian & Pengesahaan AHU *</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input type="file" id="doc_kta" name="doc_kta" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
+                                                                    </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->akta_pendirian ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6>Dokumen akta Perubahan Terakhir & Pengesahaan AHU</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input type="file" id="doc_last_ahu" name="doc_last_ahu" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
+                                                                    </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->akta_perubahan ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6> Dokumen Struktur Organisasi Perusahaan</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input type="file" id="organizational_structure" name="organizational_structure" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;"  class="file">
+                                                                    </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->structure_organization ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6> Neraca</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="balance_report" name="balance_report" class="file">
+                                                                    </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->balance_sheet ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6> Dokumen Laporan Arus Kas *</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                    <input type="file" id="cash_flow" name="cash_flow" class="file"  style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
+                                                                    </div>
+
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->cash_flow_statement ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group m-form__group row">
+                                                                    <label for="example-text-input" class="col-12 col-form-label">
+                                                                    <h6>Laporan Laba Rugi*</h6>
+                                                                    </label>
+                                                                    <div class="col-12">
+                                                                        <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="loss_profit" name="loss_profit" class="file">
+                                                                    </div>
+                                                                    @if(isset($attachment))
+                                                                        <div class="col-12">
+                                                                            <a target="_blank"  style="margin-top: 46px;" class="btn btn-primary" href="{{asset('/upload/lender/file/attachment')}}/{{$attachment->income_statement ?? ''}}"> download </a>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" class="btn btn-primary btn-block"> Tambahkan Informasi </button>
+                                                            <button type="submit" class="btn btn-primary btn-block"> Selesai </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -319,6 +238,24 @@
         </div>
 
     </div>
+<style>
+   .col-xl-6 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    padding-bottom: 50px !important;
+    max-width: 50%;
+}
+.img-file{
+    max-width: 20% !important;
+}
+
+.file_preview img{
+        width: 35% !important;
+        text-align: center;
+    }
+    </style>
+
 
 @section('js')
     <script src="{{ asset('/script/lender.js') }}"></script>

@@ -46,7 +46,12 @@ class BorrowerController extends Controller
             if(Auth::user()->otp_verified != true){
                 return Redirect::to('/otp/verified');
             }
+            if(Auth::user()->group == 'lender'){
+                return Redirect::to('/profile/lender');
+            }
+
         }
+
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_info.id as id_personal',
                     'personal_emergency_contact.*','regencies.name as personal_city','districts.name as personal_district',
@@ -99,7 +104,7 @@ class BorrowerController extends Controller
         $regency = Regency::get();
         $siblings = Siblings::get();
         $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::get();
+        $criteria = BussinessCriteria::where('status',true)->get();
         $partner_since = BecomePartner::get();
         $building_status = BuildingStatus::get();
         $estabilished = Estabilished::get();
@@ -293,7 +298,7 @@ class BorrowerController extends Controller
             'penalty_percentage' => 0,
             'penalty_max_percentage' => 45,
             'penalty_max_amount' => 45,
-            'status' => 0,
+            'status' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ];
