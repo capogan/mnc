@@ -114,9 +114,9 @@
                             <img src="images/blog-img-1.jpg" alt="Borrow - Loan Company Website Template" class="img-fluid">
                         </div>
                         <div class="bg-white pinside40 outline">
-                            <h3><a href="blog-single.html" class="title">Perkembangan teknologi yang cukup pesat di kota Bandung dan banyaknya kaum kreatif muda menjadikan PT. Newline Fintech Indonesia tertarik untuk mengadakan sosialisasi.</a></h3>
+                            <h3><a href="blog-single.html" class="title">What is Lorem Ipsum?</a></h3>
                             <p class="meta"><span class="meta-date">Aug 24, 2017</span><span class="meta-author">By<a href="#"> Admin</a></span></p>
-                            <p>Dengan adanya edukasi mengenai Fintech ini diharapkan dapat memberikan pemahaman pada masyarakat untuk lebih mengenal perbedaan Fintech legal dan nonlegal serta memanfaatkan platform P2P dengan efektif.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         </div>
                     </div>
                 </div>
@@ -127,9 +127,9 @@
                             <img src="images/blog-img-1.jpg" alt="Borrow - Loan Company Website Template" class="img-fluid">
                         </div>
                         <div class="bg-white pinside40 outline">
-                            <h3><a href="blog-single.html" class="title">Perkembangan teknologi yang cukup pesat di kota Bandung dan banyaknya kaum kreatif muda menjadikan PT. Newline Fintech Indonesia tertarik untuk mengadakan sosialisasi.</a></h3>
+                            <h3><a href="blog-single.html" class="title">What is Lorem Ipsum?</a></h3>
                             <p class="meta"><span class="meta-date">Aug 24, 2017</span><span class="meta-author">By<a href="#"> Admin</a></span></p>
-                            <p>Dengan adanya edukasi mengenai Fintech ini diharapkan dapat memberikan pemahaman pada masyarakat untuk lebih mengenal perbedaan Fintech legal dan nonlegal serta memanfaatkan platform P2P dengan efektif.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         </div>
                     </div>
                 </div>
@@ -140,9 +140,9 @@
                             <img src="images/blog-img-2.jpg" alt="Borrow - Loan Company Website Templates" class="img-fluid">
                         </div>
                         <div class="bg-white pinside40 outline">
-                            <h3><a href="blog-single.html" class="title">Perkembangan teknologi yang cukup pesat di kota Bandung dan banyaknya kaum kreatif muda menjadikan PT. Newline Fintech Indonesia tertarik untuk mengadakan sosialisasi.</a></h3>
+                            <h3><a href="blog-single.html" class="title">What is Lorem Ipsum?</a></h3>
                             <p class="meta"><span class="meta-date">Aug 24, 2017</span><span class="meta-author">By<a href="#"> Admin</a></span></p>
-                            <p>Dengan adanya edukasi mengenai Fintech ini diharapkan dapat memberikan pemahaman pada masyarakat untuk lebih mengenal perbedaan Fintech legal dan nonlegal serta memanfaatkan platform P2P dengan efektif.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         </div>
                     </div>
                 </div>

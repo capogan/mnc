@@ -118,12 +118,12 @@
                     <h2>PROFIL PERUSAHAAN</h2>
                 </div>
                 <div class="row">
-                    <p style="text-align: justify;">"PT. (nama pt) merupakan salah satu perusahaan berbasis teknologi yang bergerak di bidang jasa keuangan non perbankan yang dapat diandalkan dalam mengatasi masalah keuangan dengan cepat. Kami selalu berkomitmen untuk memberikan pelayanan yang terbaik bagi para konsumen yang membutuhkan pinjaman cepat untuk berbagai keperluan. Dalam mendukung peningkatan kinerja dan keberlangsungan usaha, PT.  (nama pt) senantiasa memperhatikan kebutuhan keuangan setiap konsumen yang membutuhkan. PT.  (nama pt) senantiasa memperhatikan penyediaan pelayanan yang baik, kehandalan teknologi informasi dan staff yang professional dibidangnya, serta integrasi manajemen resiko sebagai bagian yang tidak terpisahkan dari proses pengelolaan jasa keuangan."</p>
+                    <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                 </div>
             </div>        
         </div>
         <div class="row mt-5 justify-content-center align-items-center">
-            <h2>Tim Kami</h2>
+            <h2>Lorem Ipsum</h2>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
         <div class="row mt-5">
@@ -131,18 +131,18 @@
             <div class="col">
                 <div class="bg-white bg-boxshadow pinside40 outline text-center mb30">
                  <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
-                <h2 class="capital-title">YUSUF SAPUTRA</h2>
-                <a href="#" class="btn-link">Komisaris</a> 
-                <p>Beliau lahir di Jakarta dengan menempuh pendidikan S1 Keuangan di Universitas Gunadarma pada tahun 2008 dan melanjutkan S2 Akuntansi di Universitas Trisakti lulus pada tahun 2019. Pada tahun ini beliau sudah memasukin dunia bisnis keuangan. Beliau tidak pernah berhenti untuk berfikir dan berinovasi bagaimana meningkatkan pelayanan jasa keuangan di Indonesia. Menurut Bapak Yusuf dijaman yang sudah era Digital seperti ini Kecepatan dan ketepatan sangatlah berperan penting dalam memberikan kepuasan kepada setiap konsumen PT  (nama pt).</p>
+                <h2 class="capital-title">Lorem Ipsum</h2>
+                <a href="#" class="btn-link">Lorem Ipsum</a> 
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                </div>
             </div>
                 <div class="col">
                     <div class="bg-white bg-boxshadow pinside40 outline text-center mb30">
                         <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
-                        <h2 class="capital-title">YUSUF SAPUTRA</h2>
+                        <h2 class="capital-title">Lorem Ipsum</h2>
                        
-                        <a href="#" class="btn-link">Komisaris</a> 
-                        <p>Beliau lahir di Jakarta dengan menempuh pendidikan S1 Keuangan di Universitas Gunadarma pada tahun 2008 dan melanjutkan S2 Akuntansi di Universitas Trisakti lulus pada tahun 2019. Pada tahun ini beliau sudah memasukin dunia bisnis keuangan. Beliau tidak pernah berhenti untuk berfikir dan berinovasi bagaimana meningkatkan pelayanan jasa keuangan di Indonesia. Menurut Bapak Yusuf dijaman yang sudah era Digital seperti ini Kecepatan dan ketepatan sangatlah berperan penting dalam memberikan kepuasan kepada setiap konsumen PT Newline Fintech Indonesia.</p>
+                        <a href="#" class="btn-link">Lorem Ipsum</a> 
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                          </div>
                     </div>
                 </div>
