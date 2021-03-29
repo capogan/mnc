@@ -193,7 +193,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/lender/profiles';
+                    window.location.href = '/profile/lender/register/sign';
 
                 }else{
                     var text = '';

@@ -32,6 +32,10 @@
                     <a href="/profile/lender/information/file" type="button" class="btn btn-primary btn-circle">4</a>
                     <p>Informasi Dokumen</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender/register/sign" type="button" class="btn btn-default btn-circle">5</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
 
