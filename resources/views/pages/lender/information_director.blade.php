@@ -33,6 +33,10 @@
                     <p>Informasi Dokumen</p>
 
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender/register/sign" type="button" class="btn btn-default btn-circle">5</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
         <div class="row">

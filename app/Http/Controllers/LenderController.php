@@ -652,6 +652,21 @@ class LenderController extends Controller
         return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
     }
 
+    public function register_sign_aggrement(Request $request){
+        $status_verification = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
+        if(!$status_verification){
+            return view('pages.lender.market_place',$this->merge_response(static::$CONFIG));
+        }
+        $borrower_data = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->get();
+        $data = [
+            'borrower_request' => $borrower_data 
+        ];
+        return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
+    }
+
     public function profile(){
         $data = array(
             'provinces' => Province::get(),
