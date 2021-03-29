@@ -217,31 +217,34 @@ class BorrowerController extends Controller
 
 
     public function my_profile_transaction(Request $request){
+        $uid = Auth::id();
         if(Auth::check()){
             if(Auth::user()->otp_verified != true){
                 return Redirect::to('/otp/verified');
             }
         }
+
+        $loans =LoanRequest::
+            leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
+            ->select('request_loan.*','master_status_loan_request.title as status_title')
+            ->where('uid',$uid)->get();
+
+
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
             'dependents' => Dependents::get(),
-            'request_loan' => LoanRequest::where('uid' , Auth::id())->get()
+            'request_loan' => $loans
         ];
         return view('pages.borrower.profile',$this->merge_response($data, static::$CONFIG));
     }
 
-    public function profile(){
 
-    }
 
     public function my_business(Request $request){
         $uid = Auth::uid();
         $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
     }
-
-
-
 
     public function sumbit_loan(Request $request){
         $validation = Validator::make($request->all(), [
@@ -343,6 +346,48 @@ class BorrowerController extends Controller
         return $data;
 
     }
+
+    public function sign(Request $request){
+
+        $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        if($loan->status != '19'){
+            return Redirect::to('/profile/transaction');
+        }
+        $data = [
+            'header_section' => 'step1',
+            'no_invoice'    => $request->invoice,
+            'id_loan'       => $loan->id,
+        ];
+        return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function congratulation(Request $request){
+
+        $data = [
+            'header_section' => 'step1',
+            'no_invoice'    => $request->invoice
+        ];
+        return view('pages.borrower.congrats',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function confirm(Request $request){
+
+        $id_loan = $request->id_loan;
+        $number_status = $request->number_status;
+
+        LoanRequest::where([
+            ['id',$id_loan],
+
+        ])->update
+        ([
+            "status" =>$number_status,
+            "updated_at"=>date('Y-m-d H:i:s'),
+        ]);
+        $message = "Sukses menyimpan Data";
+        return json_encode(['status'=> true, 'message'=> $id_loan]);
+
+    }
+
 
 
 
