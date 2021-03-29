@@ -16,7 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/lender', function () {
+    return view('index_lender');
+});
 
+Route::get('/tentang-kami', function () {
+    return view('tentang_kami');
+});
+
+Route::get('/kegiatan', function () {
+    return view('kegiatan');
+});
+
+Route::get('/pinjam', function () {
+    return view('pinjam');
+});
 
 Auth::routes();
 

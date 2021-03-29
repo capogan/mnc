@@ -162,7 +162,26 @@ html {
     line-height: 1.428571429;
     border-radius: 15px;
 }
-
+.img-fluid {
+  max-width: 80%;
+  height: auto;
+}
+.post-img {
+  width: 436.5px;
+}
+.num{
+  width: 40px;
+}
+.arrow{
+  height: 50px;
+  
+}
+.icon2{
+  width: 55px;
+  height: 55px;
+ margin-left: 300px;
+ 
+}
 
 
 
