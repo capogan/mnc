@@ -8,7 +8,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
      <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-
+ 
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
     <link href="{{asset('css/simple-slider.css')}}" rel="stylesheet">
@@ -57,11 +57,18 @@
                             <li><a href="/register/borrower" class="animsition-link">profile</a>
                             </li>
                             @else
-                                <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+                                <li><a href="/lender" class="animsition-link">Pendanaan</a>
                                 </li>
-                                <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
+                                <li><a href="/pinjam" class="animsition-link">Peminjam</a>
                                 </li>
                             @endif
+
+                            <li class="active"><a href="/" class="animsition-link">Perusahaan</a>
+                            <ul>
+                                <li><a href="/tentang-kami" class="animsition-link">Tentang Kami</a>
+                                <li><a href="/kegiatan" class="animsition-link">Kegiatan</a>
+                            </ul>
+                            <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a>
 
 
                         </ul>
@@ -87,7 +94,7 @@
 @yield('content')
 
 
-    <div class="footer section-space100 mt-5">
+    <div class="footer section-space100 mt-3">
         <!-- footer -->
         <div class="container">
             <div class="row">
@@ -166,7 +173,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('script/main.js')}}"></script>
-
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/slider-carousel.js')}}"></script>
+    <script src="{{asset('js/service-carousel.js')}}"></script>
 
 @yield('js')
 
