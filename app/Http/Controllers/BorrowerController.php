@@ -309,7 +309,7 @@ class BorrowerController extends Controller
         $id_loan_request = LoanRequest::create(
             $data_loan
         );
-        User::where('id' , Auth::id())->update(['step' => 4]);
+        User::where('id' , Auth::id())->update(['step' => 5]);
         $loanRequest = LogRequestInvoice::create(
             [
                 'request_loan_id' => $id_loan_request->id,
