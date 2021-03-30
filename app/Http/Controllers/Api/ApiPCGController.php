@@ -203,8 +203,9 @@ class ApiPCGController extends ApiController
         $credit_limit = HelpCreditScoring::credit_limit($credit_score);
         $config_admin_fee = FeeConfig::where('code_fee' , 'admin_fee')->first();
         if($data_pcg_account > 0){
-            $interest_loan = HelpCreditScoring::interest_loan($data_pcg_account , $loan_period_req);
+            
             $admin_fee = $config_admin_fee ? HelpCreditScoring::calculate_admin_fee($config_admin_fee->value , $data_pcg_account) : 0;
+            $interest_loan = HelpCreditScoring::interest_loan(($data_pcg_account + $admin_fee) , $loan_period_req);
             if($data_pcg_account > $credit_limit){
                 $response = [
                     'status_loan' => 'not-approve',

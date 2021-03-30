@@ -286,7 +286,7 @@ class BorrowerController extends Controller
             $query->where('max', '>=', $period);
         })
         ->first();
-        $interest_loan = HelpCreditScoring::interest_loan($invoice_id , $period);
+        $interest_loan = HelpCreditScoring::interest_loan(($invoice_id +$admin_fee)  , $period);
 
         $data_loan = [
             'invoice_number' => $request->invoice_number,

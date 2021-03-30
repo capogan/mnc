@@ -25,7 +25,7 @@
                                     @foreach($request_loan as $item)
                                         <tr>
                                             <td>{{$item->invoice_number}}</td>
-                                            <td>Rp {{ number_format(($item->loan_amount + $item->admin_fee_amount) ,0,',','.') }}</td>
+                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
                                             <td><span class="label label-warning">{{$item->status_title }}</span></td>
                                             <td>{{date('Y-m-d' , strtotime($item->created_at))}}</td>
                                             <td></td>
