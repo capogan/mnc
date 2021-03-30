@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/bill/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/lender/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/BorrowerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_29_080729_create_user_ekyc.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/database/migrations/2021_03_29_080729_create_user_ekyc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/public/js/lender_verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/lender_verification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UsersEKYCController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UsersEKYCController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
