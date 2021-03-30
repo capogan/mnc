@@ -16,7 +16,7 @@
                 <div class="row">
                 @foreach($borrower_request as $item)
                     @if($item->business_info && $item->scoring && $item->personal_info)
-                    <?php 
+                    <?php
                         $scoring  = json_decode($item->scoring->detail_scoring , true);
                     ?>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
@@ -27,11 +27,11 @@
                             </div>
                             <div class="lender-rate-box">
                                 <div class="lender-ads-rate">
-                                    <small>Credibility Score</small>
+                                    <small>Persentasi Skor</small>
                                     <h3 class="lender-rate-value">{{isset($scoring['message']['credibiliti_percentage']) ? $scoring['message']['credibiliti_percentage']:''}}</h3>
                                 </div>
                                 <div class="lender-compare-rate">
-                                    <small>Jumlah Pinjaman </small>
+                                    <small>Status </small>
                                     <h3 class="lender-rate-value">{{isset($scoring['message']['credibiliti_status']) ? $scoring['message']['credibiliti_status']:''}}</h3>
                                 </div>
                             </div>
