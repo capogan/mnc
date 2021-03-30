@@ -434,6 +434,17 @@ class BorrowerController extends Controller
 
     }
 
+    public function loan_installments(Request $request){
+
+        $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        $data = [
+            'no_invoice'    => $request->invoice,
+            'id_loan'       => $loan->id,
+        ];
+
+        return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));
+    }
+
 
 
 

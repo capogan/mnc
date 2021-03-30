@@ -68,6 +68,7 @@ Route::get('/profile/sign/{invoice}', 'BorrowerController@sign')->name('personal
 Route::get('/profile/congratulation/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.congratulation');
 Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
+Route::get('/profile/loan/detail/{invoice}', 'BorrowerController@loan_installments')->name('loan.detail');
 
 //................................................................
 //................SSSSSS...............................SSSSSS.....
@@ -119,8 +120,6 @@ Route::get('/profile/lender/information/file', 'LenderController@information_fil
 
 
 Route::post('/lender/business/add', 'LenderController@information_business_add')->name('lender.register.business.add');
-
-
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
 Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');

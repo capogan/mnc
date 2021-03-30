@@ -262,9 +262,9 @@ $(document).ready(function() {
                     });
                     $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
                     window.scrollTo(500, 0);
-                    setTimeout(function() {
-                        $(".result-message").fadeOut("slow");
-                    }, 2000);
+                    // setTimeout(function() {
+                    //     $(".result-message").fadeOut("slow");
+                    // }, 2000);
                 }
 
             },

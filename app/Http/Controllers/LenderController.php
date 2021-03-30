@@ -48,8 +48,7 @@ class LenderController extends Controller
     }
 
     public function information_business_add(Request $request){
-
-
+        
         $arr_request = $request->all();
 
         //Asset Value
@@ -662,7 +661,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->where('id' ,$id)->first();
-        
+
         $data = [
             'loan' => $loan ? $loan : false
         ];
@@ -692,7 +691,7 @@ class LenderController extends Controller
     }
 
     public function submit_request_loan(Request $request){
-        
+
     }
     public function portofolio(){
         $installment = LoanInstallment::where('');
@@ -700,14 +699,14 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->where('id' ,$id)->first();
-        
+
         $data = [
             'loan' => $loan ? $loan : false
         ];
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
 
-    
+
 
 
 
