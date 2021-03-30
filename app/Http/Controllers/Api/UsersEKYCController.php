@@ -12,7 +12,7 @@ class UsersEKYCController extends Controller
 
 
         $ekyc = UserEKYC::create([
-            'callback'=>$request,
+            'callback'=>$request->all(),
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
