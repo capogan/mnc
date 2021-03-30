@@ -10,10 +10,9 @@ class UsersEKYCController extends Controller
 {
     public function index(Request $request){
 
-        $callback = $request->callback;
 
         $ekyc = UserEKYC::create([
-            'callback'=>$request->callback,
+            'callback'=>$request,
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
