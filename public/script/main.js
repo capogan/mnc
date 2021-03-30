@@ -1,4 +1,5 @@
 function loading(){
+
     $('.btn-primary[type=submit]').attr('disabled','disabled').html('<i class="fa fa-spinner fa-spin"></i> Mohon Tunggu');
 
 }

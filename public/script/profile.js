@@ -5,13 +5,13 @@ $(document).ready(function() {
         allowClear: true
     });
 
+
 });
 
 $(document).on('change', '.btn-file :file', function() {
     var input = $(this),
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [label]);
-
 
 });
 
@@ -633,6 +633,37 @@ function get_villages_business(district_id){
             alert(err);
         }
     })
+}
+
+function updated_status(id,number_status){
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+     $.ajax({
+         url:'/profile/received',
+         method:"POST",
+         headers: {
+             'X-CSRF-TOKEN': token
+         },
+         dataType:'json',
+         data:{
+             id_loan:id,
+             number_status:number_status,
+         },
+         beforeSend:function(){
+           loading();
+         },
+         success:function(response)
+         {
+            close_loading();
+             setTimeout(function(){
+                window.location.href = '/profile/transaction'
+             }, 800);
+         },
+         error: function() {
+             alert_error();
+             close_loading();
+         }
+     })
 }
 
 
