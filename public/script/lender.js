@@ -143,30 +143,31 @@ $(document).ready(function() {
             },
             success:function(response)
             {
-                close_loading();
-                if(response.status == true){
-                    text = 'Data berhasil ditambahkan'
-                    var title = 'Sukses';
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Anda telah tersimpan',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    window.location.href = '/profile/lender/information/director';
-
-                }else{
-                    var text = '';
-                    $.each(response.message, function( index, value ) {
-                        text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
-                    });
-                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
-                    window.scrollTo(500, 0);
-                    setTimeout(function() {
-                        $(".result-message").fadeOut("slow");
-                    }, 2000);
-                }
+                echo "test";
+                // close_loading();
+                // if(response.status == true){
+                //     text = 'Data berhasil ditambahkan'
+                //     var title = 'Sukses';
+                //     Swal.fire({
+                //         position: 'top-end',
+                //         icon: 'success',
+                //         title: 'Data Anda telah tersimpan',
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     })
+                //     window.location.href = '/profile/lender/information/director';
+                //
+                // }else{
+                //     var text = '';
+                //     $.each(response.message, function( index, value ) {
+                //         text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                //     });
+                //     $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                //     window.scrollTo(500, 0);
+                //     setTimeout(function() {
+                //         $(".result-message").fadeOut("slow");
+                //     }, 2000);
+                // }
 
             },
             error: function(xhr, status, error) {
