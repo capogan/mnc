@@ -51,9 +51,7 @@ class BorrowerController extends Controller
             if(Auth::user()->group == 'lender'){
                 return Redirect::to('/profile/lender');
             }
-
         }
-
         $uid = Auth::id();
         $get_user = PersonalInfo::select('personal_info.*','personal_info.id as id_personal',
                     'personal_emergency_contact.*','regencies.name as personal_city','districts.name as personal_district',

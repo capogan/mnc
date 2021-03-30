@@ -124,15 +124,16 @@ class HelpCreditScoring {
         }
         
         $credibility_check = DB::table('credibility_score')->whereRaw($score_first_step.' BETWEEN min AND max')->first();
-    
+        
         $if_business = DB::table('credit_score_income_factory')->where('id' , $data->id_credit_score_income_factor)->first();
         
         $seconds_step = 0;
         
         if($if_business){
-            $seconds_step = $credibility_check->max - $if_business->value;
+           // $seconds_step = $score_first_step->max - $if_business->value;
+            $seconds_step = $score_first_step - $if_business->value;
         }
-        
+        //echo $credibility_check->max; exit;
         $limit_of_loan = $credibility_check = DB::table('credibility_score')->whereRaw($seconds_step.' BETWEEN min AND max')->first();
         
         $credibility_check = DB::table('cap_limit_credit')

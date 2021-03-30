@@ -37,14 +37,17 @@
             <div class="row">
                 <div class="col-sm-1.1">
                     <!-- logo -->
-                    <div class="logo p-2">
+
+                    <div class="logo p-2 mt-2">
                     <a href="/"><img src="/images/siap.png" class="saturate"></a>
 
+                   
                     </div>
                 </div>
                 <div class="col-sm-1">
                    <div class="logo p-2">
                         <img src="/images/ojk3.png" alt="Logo">
+                        <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span> 
                     </div>
                 </div>
                 <!-- logo -->
