@@ -698,18 +698,11 @@ class LenderController extends Controller
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '18')->where('id' ,$id)->first();
-
+        ->where('status' , '18')->first();
+        
         $data = [
             'loan' => $loan ? $loan : false
         ];
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
-
-
-
-
-
-
-
 }
