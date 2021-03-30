@@ -201,7 +201,7 @@ $(document).ready(function() {
                     })
 
                     setTimeout(function() {
-                       
+
                         window.location.href = '/profile/lender/information/file';
                     }, 2000);
 
@@ -236,7 +236,7 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/submit/attachment/',
+            url: '/lender/submit/attachment',
             method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
