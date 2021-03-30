@@ -48,8 +48,6 @@ class LenderController extends Controller
 
     public function information_business_add(Request $request){
 
-        echo "test";
-        die();
         $arr_request = $request->all();
 
         //Asset Value

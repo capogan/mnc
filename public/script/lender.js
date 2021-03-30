@@ -117,7 +117,7 @@ $(document).ready(function() {
     });
 
 
-    $("#form_lender_business_information").on("submit", function(event) {
+    $("#form_register_lender_business_information").on("submit", function(event) {
 
         event.preventDefault();
 
@@ -127,7 +127,7 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/register/business/add/',
+            url: '/lender/business/add/',
             method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
