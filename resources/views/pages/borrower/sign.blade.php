@@ -31,7 +31,7 @@
                                 <li>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting.</li>
 
                             </ul>
-                            <button type="submit" onclick="updated_status('{{$id_loan}}','20')" class="btn btn-primary btn-sm pull-left">KLIK untuk tanda tangan</button>
+                            <button type="submit" onclick="updated_status('{{$id_loan}}','28')" class="btn btn-primary btn-sm pull-left">KLIK untuk tanda tangan</button>
 
                         </div>
                     </div>

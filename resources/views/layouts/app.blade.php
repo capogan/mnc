@@ -173,9 +173,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('script/main.js')}}"></script>
-  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+<<<<<<< HEAD
+  <!--<script src="{{asset('js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('js/slider-carousel.js')}}"></script>
-    <script src="{{asset('js/service-carousel.js')}}"></script>
+    <script src="{{asset('js/service-carousel.js')}}"></script>-->
+=======
+<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+{{--<script src="{{asset('js/slider-carousel.js')}}"></script>--}}
+<script src="{{asset('js/service-carousel.js')}}"></script>
+>>>>>>> 509ea93c54c76a5a24f56cf9cbfdd53bf88e9fd7
 
 @yield('js')
 

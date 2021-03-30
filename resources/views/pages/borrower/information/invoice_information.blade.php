@@ -108,6 +108,8 @@
 
                                     </div>
                                 </div>
+
+
                                 <div class="table-invoice">
                                 </div>
                                 <button type="button" data-text="Ajukan Pinjaman" class="btn btn-primary btn-block" id="request_loan_">

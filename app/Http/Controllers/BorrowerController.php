@@ -9,6 +9,7 @@ use App\MarriedStatus;
 use App\Models\Province;
 use App\Models\Regency;
 use App\PersonalInfo;
+use App\RequestLoanInstallments;
 use App\Siblings;
 use App\User;
 use Illuminate\Http\Request;
@@ -350,15 +351,22 @@ class BorrowerController extends Controller
     public function sign(Request $request){
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
-        if($loan->status != '19'){
-            return Redirect::to('/profile/transaction');
-        }
-        $data = [
+        if($loan){
+            if($loan->status != '19'){
+                return Redirect::to('/profile/transaction');
+            }
 
-            'no_invoice'    => $request->invoice,
-            'id_loan'       => $loan->id,
-        ];
-        return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
+            $data = [
+
+                'no_invoice'    => $request->invoice,
+                'id_loan'       => $loan->id,
+            ];
+            return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
+
+        }else{
+            abort(404, 'Page Not Found.');
+        }
+
     }
 
     public function congratulation(Request $request){
@@ -396,9 +404,27 @@ class BorrowerController extends Controller
             if($periode == '14')
             {
                 $amount = $loan_amount / 2 ;
-
+                $x = 3;
             }else{
                 $amount = $loan_amount / 4 ;
+                $x = 5;
+            }
+
+            for ($row = 1; $row < $x; $row++){
+
+                RequestLoanInstallments::create([
+                    'id_request_loan'=>$id_loan,
+                    'stages'=>$row,
+                    'amount'=>$amount,
+                    'date_payment'=>date('Y-m-d H:i:s'),
+                    'due_date_payment'=>date('Y-m-d H:i:s'),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'status_payment'=>'1',
+                    'lender_uid'=>$loan->lender_uid,
+                    'borrower_uid'=>$loan->uid,
+
+                ]);
             }
 
 
