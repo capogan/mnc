@@ -33,6 +33,10 @@
                     <p>Informasi Dokumen</p>
 
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender/register/sign" type="button" class="btn btn-default btn-circle">5</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -51,7 +55,7 @@
                                         <div class=" bg-white ">
                                             <div class="contact-form mb60">
                                                 <div class=" ">
-                                                    <form id="form_lender_business_information">
+                                                    <form id="form_register_lender_business_information" method="POST">
                                                         <h3>Informasi Perusahaan</h3>
                                                         <hr>
                                                         <div class="result-message"></div>
@@ -214,7 +218,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" id="qwe" data-text="Tambahkan Data" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
+                                                            <button type="submit" id="btn_submit_business_register" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
                                                     </form>
                                                 </div>

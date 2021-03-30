@@ -64,6 +64,10 @@ Route::get('/profile/file', 'BorrowerController@my_profile_file')->name('borrowe
 Route::get('/profile/faktur', 'BorrowerController@my_profile_faktur')->name('borrower.personal.profile');
 Route::get('/profile/transaction', 'BorrowerController@my_profile_transaction')->name('borrower.personal.profile');
 Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('submit.loan');
+Route::get('/profile/sign/{invoice}', 'BorrowerController@sign')->name('personal.sign');
+Route::get('/profile/congratulation/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
+Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.congratulation');
+Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 
 //................................................................
 //................SSSSSS...............................SSSSSS.....
@@ -106,17 +110,25 @@ Route::post('/user/send/otp', 'UsersController@send_otp_again')->name('borrower.
 //............................................................................
 
 Route::get('/profile/lender', 'LenderController@index')->name('profile.lender');
-Route::post('/lender/information/business/add', 'LenderController@information_business_add')->name('lendeer.information.business.add');
+
+
 Route::get('/profile/lender/information/director', 'LenderController@director')->name('profile.lender.information.director');
 Route::get('/profile/lender/information/commissioner', 'LenderController@commissioner')->name('profile.lender.information.commissioner');
 Route::get('/profile/lender/information/file', 'LenderController@information_file')->name('profile.lender.information.file');
-//Route::get('/profile/lender/information/market/place', 'LenderController@market_place')->name('profile.lender.information.market.place');
+
+
+
+Route::post('/lender/business/add', 'LenderController@information_business_add')->name('lender.register.business.add');
+
+
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
 Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
 
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
 Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');
+
+Route::post('/profile/lender/register/sign', 'LenderController@register_sign_aggrement')->name('profile.lender.attachment');
 
 //.............................................................................
 //...............................SSSSSS........................................

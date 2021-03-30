@@ -41,12 +41,14 @@ class LenderController extends Controller
             ->where('users.id', Auth::id())->first(),
         );
 
-      
+
         //print_r(User::with('business_lender')->where('id', Auth::id())->first()); exit;
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
     }
 
     public function information_business_add(Request $request){
+
+
         $arr_request = $request->all();
 
         //Asset Value
@@ -118,7 +120,7 @@ class LenderController extends Controller
             'operating_expenses.required'   => 'Beban Operasional tahun berjalan tidak boleh kosong',
             'profit_loss.required'          => 'Laba - Rugi periode Tahun tidak boleh kosong',
         ]);
-        
+
 
         if($validation->fails()) {
             $json = [
@@ -171,9 +173,9 @@ class LenderController extends Controller
     public function director(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         if(!$step){
-           return redirect('profile/lender'); 
+           return redirect('profile/lender');
         }else if($step->business_verification != true){
-            return redirect('profile/lender'); 
+            return redirect('profile/lender');
         }
         $director = LenderDirectorData::select('lender_director_data.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
                         ->leftJoin('regencies' ,'lender_director_data.regency_id' , 'regencies.id')
@@ -234,14 +236,14 @@ class LenderController extends Controller
             $requests[$i]['province'] = $request['province'][$i];
             $requests[$i]['city'] = $request['city'][$i];
             $requests[$i]['district'] = $request['district'][$i];
-            
+
             foreach($request->all() as $key => $val){
                 if(!$request->hasFile($key)){
                     if($val[$i] != ''){
                         $requests[$i]['active'] = 'active';
                     }
                 }
-                
+
             }
             if($i==0){
                 $j = $i;
@@ -259,7 +261,7 @@ class LenderController extends Controller
                 //$validators['identity_image'.$i] = 'required|image|mimes:png,jpg';
                 //$messagesvalidator['identity_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
                 //$messagesvalidator['identity_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
-                
+
             }
             $validation = Validator::make($requests[$i], $validators ,$messagesvalidator);
             if(array_key_exists('active' , $requests[$i])){
@@ -313,7 +315,7 @@ class LenderController extends Controller
                         $data['self_photo'] = $filename_self_image;
                     }
                 }
-                
+
                 LenderDirectorData::updateOrCreate(
                     ['position' => $i,
                     'uid' => Auth::id()],
@@ -323,7 +325,7 @@ class LenderController extends Controller
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'director_verification' => true]
                 );
-                    
+
             }
             $i++;
         }
@@ -334,12 +336,12 @@ class LenderController extends Controller
     }
 
     public function commissioner(Request $request){
-        
+
         $step = LenderVerification::where('uid' , Auth::id())->first();
         if(!$step){
-           return redirect('profile/lender'); 
+           return redirect('profile/lender');
         }else if($step->director_verification != true){
-            return redirect('profile/lender/information/director'); 
+            return redirect('profile/lender/information/director');
         }
 
         $director = LenderCommissionerData::select('lender_commissioner_data.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
@@ -384,7 +386,7 @@ class LenderController extends Controller
              'district.required'             => 'Kecamatan tidak boleh kosong',
              'vilages.required'              => 'Desa tidak boleh kosong',
          ];
- 
+
          for($i=0; $i<count($request->identity_number);$i++){
              $requests[$i]['identity_number'] = $request['identity_number'][$i];
              $requests[$i]['director_name'] = $request['director_name'][$i];
@@ -398,14 +400,14 @@ class LenderController extends Controller
              $requests[$i]['province'] = $request['province'][$i];
              $requests[$i]['city'] = $request['city'][$i];
              $requests[$i]['district'] = $request['district'][$i];
-             
+
              foreach($request->all() as $key => $val){
                  if(!$request->hasFile($key)){
                      if($val[$i] != ''){
                          $requests[$i]['active'] = 'active';
                      }
                  }
-                 
+
              }
              if($i==0){
                  $j = $i;
@@ -423,7 +425,7 @@ class LenderController extends Controller
                  //$validators['identity_image'.$i] = 'required|image|mimes:png,jpg';
                  //$messagesvalidator['identity_image'.$i.'.image' ] = 'Format tidak sesuai. Masukkan format png,jpg';
                  //$messagesvalidator['identity_image'.$i.'.required' ] = 'Format tidak sesuai. Masukkan format png,jpg';
-                 
+
              }
              $validation = Validator::make($requests[$i], $validators ,$messagesvalidator);
              //if(array_key_exists('active' , $requests[$i])){
@@ -479,7 +481,7 @@ class LenderController extends Controller
                         $data['self_photo'] = $filename_self_image;
                     }
                 }
-                
+
                  LenderCommissionerData::updateOrCreate(
                      ['sequence' => $i,
                      'uid' => Auth::id()],
@@ -489,8 +491,8 @@ class LenderController extends Controller
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'commissioner_verification' => true]
                 );
-                 
-                     
+
+
              }
              $i++;
          }
@@ -503,21 +505,21 @@ class LenderController extends Controller
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         if(!$step){
-           return redirect('profile/lender'); 
+           return redirect('profile/lender');
         }else if($step->commissioner_verification != true){
-            return redirect('profile/lender/information/commissioner'); 
+            return redirect('profile/lender/information/commissioner');
         }
         $attachment = LenderAttachmentData::where('uid' , Auth::id())->first();
        // print_r($attachment); exit;
         $data = array(
             'attachment' => $attachment
         );
-       
+
         return view('pages.lender.information_file',$this->merge_response($data, static::$CONFIG));
     }
     public function submit_attachment_data(Request $request){
         //print_r($request->all());
-        $validation = Validator::make($request->all(), 
+        $validation = Validator::make($request->all(),
         [
                 'npwp' => 'required|image|mimes:png,jpg',
                 'tdp'     => 'required|mimes:pdf',
@@ -541,7 +543,7 @@ class LenderController extends Controller
             'loss_profit.required' => 'Dokumen Laporan Laba Rugi wajib diunggah',
         ]
         );
-        
+
         $path =public_path().'/upload/lender/file/attachment';
         if($validation->fails()) {
             $json = [
@@ -549,7 +551,7 @@ class LenderController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
-            
+
             if($request->hasFile('npwp')) {
                 $identity_image= $request->file('npwp');
                 $lender_npwp_ = 'lender_npwp_'.Auth::id().'_'.time(). '.' . $identity_image->getClientOriginalExtension();
@@ -627,7 +629,7 @@ class LenderController extends Controller
                     "message"=> ['message' => 'Error when save data'],
                 ];
             }
-            
+
             $json = [
                 "status"=> true,
                 "message"=> 'Data Personal berhasil di tambahkan',
@@ -647,7 +649,22 @@ class LenderController extends Controller
         ->with('scoring')
         ->where('status' , '18')->get();
         $data = [
-            'borrower_request' => $borrower_data 
+            'borrower_request' => $borrower_data
+        ];
+        return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function register_sign_aggrement(Request $request){
+        $status_verification = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
+        if(!$status_verification){
+            return view('pages.lender.market_place',$this->merge_response(static::$CONFIG));
+        }
+        $borrower_data = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->get();
+        $data = [
+            'borrower_request' => $borrower_data
         ];
         return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
     }
