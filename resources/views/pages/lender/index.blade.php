@@ -62,7 +62,7 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
                                                             </div>
 
                                                             <div class="col">
