@@ -19,7 +19,7 @@
                                     <input type="hidden" name="group" id="group" value="{{$group}}">
                                     <input type="hidden" name="level" id="level" value="{{$level}}">
                                     <div class="form-group input-group">
-                                        <input name="name" id="name" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" type="text">
+                                        <input name="name" id="name" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Perusahaan" type="text">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
