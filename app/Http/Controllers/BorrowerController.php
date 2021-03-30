@@ -354,7 +354,7 @@ class BorrowerController extends Controller
             return Redirect::to('/profile/transaction');
         }
         $data = [
-            'header_section' => 'step1',
+
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,
         ];
@@ -362,10 +362,14 @@ class BorrowerController extends Controller
     }
 
     public function congratulation(Request $request){
-
+        $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        if($loan->status != '28'){
+            return Redirect::to('/profile/transaction');
+        }
         $data = [
-            'header_section' => 'step1',
-            'no_invoice'    => $request->invoice
+
+            'no_invoice'    => $request->invoice,
+            'id_loan'       => $loan->id,
         ];
         return view('pages.borrower.congrats',$this->merge_response($data, static::$CONFIG));
     }
@@ -383,6 +387,22 @@ class BorrowerController extends Controller
             "status" =>$number_status,
             "updated_at"=>date('Y-m-d H:i:s'),
         ]);
+
+        if($number_status == '21'){
+
+            $loan = LoanRequest::where('id',$id_loan)->first();
+            $periode = $loan->periode;
+            $loan_amount = $loan->loan_amount;
+            if($periode == '14')
+            {
+                $amount = $loan_amount / 2 ;
+
+            }else{
+                $amount = $loan_amount / 4 ;
+            }
+
+
+        }
         $message = "Sukses menyimpan Data";
         return json_encode(['status'=> true, 'message'=> $id_loan]);
 

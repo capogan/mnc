@@ -67,6 +67,7 @@ Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('su
 Route::get('/profile/sign/{invoice}', 'BorrowerController@sign')->name('personal.sign');
 Route::get('/profile/congratulation/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.congratulation');
+Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 
 //................................................................
 //................SSSSSS...............................SSSSSS.....
