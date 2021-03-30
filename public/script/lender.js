@@ -19,7 +19,7 @@ $(document).ready(function() {
 
         $.ajax({
             url: '/lender/business/add/',
-            method:"GET",
+            method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
             },
