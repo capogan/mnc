@@ -145,7 +145,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    // window.location.href = '/profile/lender/information/commissioner';
+                    window.location.href = '/profile/lender/information/commissioner';
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
