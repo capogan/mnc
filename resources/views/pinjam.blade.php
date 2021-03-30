@@ -11,8 +11,8 @@
                         <h1 class="slider-title">SIAP</h1>
                         <p class="slider-text d-none d-xl-block d-lg-block d-sm-block">The low rate you need for the need you want! Call
                             <br> (555) 123-4567</p>
-                        <a href="loan-listing-image.html" class="btn btn-default">Login</a> 
-                        <a href="loan-listing-image.html" class="btn btn-default">Register</a> 
+                         <a href="/login" class="btn btn-default">Login</a> 
+                        <a href="/register/borrower" class="btn btn-default">Register</a>  
                         </div>
                     <!-- /.slider-captions -->
                 </div>
@@ -26,8 +26,8 @@
                             <!-- slider-captions -->
                              <h1 class="slider-title">SIAP</h1>
                             <p class="slider-text d-none d-xl-block d-lg-block d-sm-block"> Award winning car loans with low fixed rates and no ongoing fees.</p>
-                            <a href="loan-listing-image.html" class="btn btn-default">Login</a> 
-                        <a href="loan-listing-image.html" class="btn btn-default">Register</a>  
+                            <a href="/login" class="btn btn-default">Login</a> 
+                        <a href="/register/borrower" class="btn btn-default">Register</a>  
                             </div>
                         <!-- /.slider-captions -->
                     </div>
@@ -42,8 +42,8 @@
                             <!-- slider-captions -->
                             <h1 class="slider-title">SIAP</h1>
                             <p class="slider-text d-none d-xl-block d-lg-block d-sm-block">Education Loan From Avanse At An Attractive Rate Of Interest. Apply Now!</p>
-                            <a href="loan-listing-image.html" class="btn btn-default">Login</a> 
-                        <a href="loan-listing-image.html" class="btn btn-default">Register</a> 
+                            <a href="/login" class="btn btn-default">Login</a> 
+                        <a href="/register/borrower" class="btn btn-default">Register</a>  
                             </div>
                         <!-- /.slider-captions -->
                     </div>

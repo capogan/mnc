@@ -44,7 +44,7 @@
                                                 </div>
                                                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                                                     <div class="">
-                                                        <label>Lorem Ipsum</label>
+                                                        <label>Pilih</label>
                                                         <select class="wide">
                                                             <option value="Select Loan Purpose">Pilih kategori Lender</option>
                                                             <option value="Debt Consolidation">Pribadi</option>
@@ -72,6 +72,139 @@
                                 </li>
                             </ul>
                             <!-- Tab panes -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="rate-table">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="rate-counter-block">
+                        <div class="icon rate-icon  "> <img src="images/mortgage.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                        <div class="rate-box">
+                            <h1 class="loan-rate">3.74%</h1>
+                            <small class="rate-title">Home Loans</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="rate-counter-block">
+                        <div class="icon rate-icon  "> <img src="images/loan.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                        <div class="rate-box">
+                            <h1 class="loan-rate">8.96%</h1>
+                            <small class="rate-title">Personal Loans</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="rate-counter-block">
+                        <div class="icon rate-icon  "> <img src="images/car.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                        <div class="rate-box">
+                            <h1 class="loan-rate">6.70%</h1>
+                            <small class="rate-title">Car Loans</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="rate-counter-block">
+                        <div class="icon rate-icon  "> <img src="images/credit-card.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                        <div class="rate-box">
+                            <h1 class="loan-rate">9.00%</h1>
+                            <small class="rate-title">Credit card</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div class="container">
+        <div class="row mt-5 mb-5">
+            <div class="row">
+                <div class="col">
+                
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h2>TENTANG LAYANAN</h2>
+                    </div>
+                <div class="row">
+                    <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            </div>        
+        </div>
+
+        </div>
+        
+        </div>
+        
+    </div>
+      <div class="section-space80 bg-gradient call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class=" offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
+                    <div class="text-center">
+                        <!-- section title start-->
+                        <h1 class="text-white">ESCROW</h1>
+                        <p class="text-white">Escrow merupakan pihak ketiga yang ditunjuk dan bertindak sebagai pemelihara/perwakilan untuk dokumen dan dana-dana sepanjang proses penyerahan hak milik pemberi pinjaman ke penerima pinjaman atau selama penggantian struktur kepemilikan.Escrow account atau rekening Bersama dikelola oleh agen yang berperan mengamankan aset berupa uang yang telah disetorkan oleh pihak penerima pinjaman untuk nantinya diserahkan kepada pihak pemberi pinjaman yang terlibat dalan transaksi secara online.</p>
+                        
+                    </div>
+                    <!-- /.section title start-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-space80 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
+                    <div class="section-title mb60 text-center">
+                        <!-- section title start-->
+                        <h1>Reasons to choose us</h1>
+                        <p>Nunc iaculis velit a vestibulum cursu estibentum nec ante eu molestie.</p>
+                    </div>
+                    <!-- /.section title start-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="feature feature-icon-style">
+                        <div class="feature-icon"> <i class="fa fa-calculator fa-2x"></i></div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Calculator</h3>
+                            <p>Fusce sed erat libasellus id orciquise ctus velit, asimple male suada urna sodales eu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="feature feature-icon-style">
+                        <div class="feature-icon"><i class="fa fa-heart fa-2x"></i></div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Customers love us!</h3>
+                            <p>Quisque ut ligula nec est pretium phareest male sunec felis atmetus mattis volutpat invel elit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="feature feature-icon-style">
+                        <div class="feature-icon"> <i class="fa fa-file-text-o fa-2x"></i></div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Easy Documentation </h3>
+                            <p>Vestibulum elementum pellent esques ittnunc dui in massa variusare augue feugiat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="feature feature-icon-style">
+                        <div class="feature-icon"><i class="fa fa-flash fa-2x"></i></div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Fast Approval</h3>
+                            <p>Pellent esques ittnunc vene nata uri bulum eleme ntum in massa varnare augue feugiat.</p>
                         </div>
                     </div>
                 </div>
