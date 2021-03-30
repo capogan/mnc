@@ -27,7 +27,7 @@ $(document).ready(function() {
                 {
                     label: "Cancel",
                     className: "btn btn-default pull-left",
-                    callback: function() {       
+                    callback: function() {
                     }
                 },
                 {
@@ -64,7 +64,7 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/business/add/',
+            url: '/lender/business/add',
             method:"post",
             headers: {
                 'X-CSRF-TOKEN': token
@@ -646,7 +646,7 @@ $(document).ready(function() {
 });
 
 function show_modal_request_fund(){
-    
+
 }
 function submitfundingloan(id){
     var token = $('meta[name="csrf-token"]').attr('content');
