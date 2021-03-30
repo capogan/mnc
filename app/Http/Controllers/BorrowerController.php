@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BussinessCriteria;
 use App\Education;
 use App\IncomeFactory;
+use App\LoanInstallment;
 use App\MarriedStatus;
 use App\Models\Province;
 use App\Models\Regency;
@@ -435,9 +436,13 @@ class BorrowerController extends Controller
     public function loan_installments(Request $request){
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        $loan_installments = LoanInstallment::
+        leftJoin('master_status_payment' ,'request_loan_installments.status_payment','=','master_status_payment.id')->
+        where('id_request_loan',$loan->id)->get();
         $data = [
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,
+            'loan_installments'=>$loan_installments
         ];
 
         return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));

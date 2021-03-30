@@ -1,40 +1,42 @@
 @extends('layouts.app')
 @section('content')
-<div class="tab-pane" id="invest" role="tabpanel">
-    <div class="row">
-        <div class="col">
-            <div class=" bg-white ">
-                <div class="contact-form mb60">
-                    <div class=" ">
 
-                        <div class="row mt-2">
-                            <h3>Pengajuan Pinjaman</h3>
-                            <hr>
 
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-xl-12 ">
+                <div class="card bg-light">
+                        <div class="card-body">
                             <table class="table table-striped table-bordered mt-4">
                                 <thead>
                                 <tr>
                                     <th>Nomor Invoice</th>
-                                    <th>Pinjaman diajukan</th>
-                                    <th>Status Pinjaman</th>
-                                    <th>Tanggal Permintaan</th>
-                                    <th>Tanggal disetujui</th>
-                                    <th></th>
+                                    <th>Pembayaran ke-</th>
+                                    <th>Jumlah Pembayaran</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    <th>Tanggal Jatuh tempo</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach($loan_installments as $val)
+                                        <tr class="text-center">
+                                            <td>{{$no_invoice}}</td>
+                                            <td >{{$val->stages}}</td>
+                                            <td>Rp {{ number_format(($val->amount) ,0,',','.') }}</td>
+                                            <td>{{$val->date_payment}}</td>
+                                            <td>{{$val->due_date_payment}}</td>
+                                            <td>{{$val->status_name}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+
                         </div>
-
-
-                    </div>
                 </div>
-                <!-- /.section title start-->
             </div>
-
         </div>
 
     </div>
-</div>
+
+@endsection

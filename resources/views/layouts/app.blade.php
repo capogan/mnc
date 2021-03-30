@@ -37,7 +37,7 @@
                 <div class="col-sm-1.1">
                     <!-- logo -->
                     <div class="logo p-2">
-                    <a href="#">[LOGO]</a>
+                    <a href="/"><img src="/images/siap.png"></a>
 
                     </div>
                 </div>
