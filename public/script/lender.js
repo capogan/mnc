@@ -121,9 +121,6 @@ $(document).ready(function() {
 
         event.preventDefault();
 
-        var btn = $("#btn_submit_voucher");
-        btn.attr("disabled", "disabled");
-
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -132,11 +129,7 @@ $(document).ready(function() {
             headers: {
                 'X-CSRF-TOKEN': token
             },
-            async:true,
             data:new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
             beforeSend:function(){
               loading();
             },
