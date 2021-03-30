@@ -183,6 +183,7 @@
                                                                 <h6>Wajib Pajak<span>*</span></h6>
 {{--                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer" value="{{isset($lender_profile->taxpayer) ? $lender_profile->taxpayer : ''}}">--}}
                                                                 <select class="form-control" id="taxpayer" name="taxpayer">
+
                                                                     <option value="">Pilih Status</option>
                                                                     <option value="pkp">PKP</option>
                                                                     <option value="non_pkp">Non PKP</option>
