@@ -199,7 +199,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender/information/file';
+                    // window.location.href = '/profile/lender/information/file';
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -253,7 +253,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender/register/sign';
+                    // window.location.href = '/profile/lender/register/sign';
 
                 }else{
                     var text = '';
@@ -262,9 +262,9 @@ $(document).ready(function() {
                     });
                     $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
                     window.scrollTo(500, 0);
-                    // setTimeout(function() {
-                    //     $(".result-message").fadeOut("slow");
-                    // }, 2000);
+                    setTimeout(function() {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
                 }
 
             },
