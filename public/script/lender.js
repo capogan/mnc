@@ -118,61 +118,61 @@ $(document).ready(function() {
 
 
     $("#form_lender_business_information").on("submit", function(event) {
-        alert("test");
-        // event.preventDefault();
-        //
-        // var btn = $("#btn_submit_voucher");
-        // btn.attr("disabled", "disabled");
-        //
-        // var token = $('meta[name="csrf-token"]').attr('content');
-        //
-        // $.ajax({
-        //     url: '/lender/information/business/add/',
-        //     method:"POST",
-        //     headers: {
-        //         'X-CSRF-TOKEN': token
-        //     },
-        //     async:true,
-        //     data:new FormData(this),
-        //     contentType: false,
-        //     cache: false,
-        //     processData: false,
-        //     beforeSend:function(){
-        //       loading();
-        //     },
-        //     success:function(response)
-        //     {
-        //         close_loading();
-        //         if(response.status == true){
-        //             text = 'Data berhasil ditambahkan'
-        //             var title = 'Sukses';
-        //             Swal.fire({
-        //                 position: 'top-end',
-        //                 icon: 'success',
-        //                 title: 'Data Anda telah tersimpan',
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             })
-        //             window.location.href = '/profile/lender/information/director';
-        //
-        //         }else{
-        //             var text = '';
-        //             $.each(response.message, function( index, value ) {
-        //                 text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
-        //             });
-        //             $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
-        //             window.scrollTo(500, 0);
-        //             setTimeout(function() {
-        //                 $(".result-message").fadeOut("slow");
-        //             }, 2000);
-        //         }
-        //
-        //     },
-        //     error: function(xhr, status, error) {
-        //         var err = eval("(" + xhr.responseText + ")");
-        //         alert(err);
-        //     }
-        // })
+
+        event.preventDefault();
+
+        var btn = $("#btn_submit_voucher");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/lender/information/business/add/',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async:true,
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend:function(){
+              loading();
+            },
+            success:function(response)
+            {
+                close_loading();
+                if(response.status == true){
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = '/profile/lender/information/director';
+
+                }else{
+                    var text = '';
+                    $.each(response.message, function( index, value ) {
+                        text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function() {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err);
+            }
+        })
     });
 
     $("#form_lender_attacment").on("submit", function(event) {
