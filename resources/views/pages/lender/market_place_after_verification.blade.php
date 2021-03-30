@@ -45,7 +45,7 @@
                                 </ul>
                             </div>
                             <div class="lender-actions">
-                                <a href="javascript:void(0)" data-toggle="modal" class="btn btn-default btn-block" data-target="#modalRequestfund">Ajukan Pendanaan</a>
+                                <a href="/marketplace/{{$item->id}}" class="btn btn-default btn-block">Ajukan Pendanaan</a>
                             </div>
                         </div>
                     </div>

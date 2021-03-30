@@ -17,6 +17,7 @@ use App\LenderDirectorData;
 use App\LenderCommissionerData;
 use App\LenderAttachmentData;
 use App\RequestFunding;
+use App\LoanInstallment;
 
 class LenderController extends Controller
 {
@@ -654,6 +655,18 @@ class LenderController extends Controller
         return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
     }
 
+    public function marketplace_agreement($id){
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->where('id' ,$id)->first();
+        
+        $data = [
+            'loan' => $loan ? $loan : false
+        ];
+        return view('pages.lender.sign',$this->merge_response($data, static::$CONFIG));
+    }
+
     public function register_sign_aggrement(Request $request){
         $data = [
             'borrower_request' => []
@@ -678,6 +691,18 @@ class LenderController extends Controller
 
     public function submit_request_loan(Request $request){
         
+    }
+    public function portofolio(){
+        $installment = LoanInstallment::where('');
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->where('id' ,$id)->first();
+        
+        $data = [
+            'loan' => $loan ? $loan : false
+        ];
+        return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
 
     
