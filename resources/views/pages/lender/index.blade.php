@@ -56,8 +56,6 @@
                                             <div class="contact-form mb60">
                                                 <div class=" ">
                                                     <form id="form_register_lender_business_information" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('PUT') }}
                                                         <h3>Informasi Perusahaan</h3>
                                                         <hr>
                                                         <div class="result-message"></div>
