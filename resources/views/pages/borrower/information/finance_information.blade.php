@@ -31,6 +31,8 @@
                                             <td></td>
                                             @if($item->status == '19')
                                                 <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
+                                            @elseif($item->status == '21')
+                                                <td><a  href="/profile/loan/detail/{{$item->invoice_number}}" class="btn btn-default btn-xs"> detail </a></td>
                                             @elseif($item->status == '27')
                                                 <td><button onclick="updated_status('{{$item->id}}','21')" href="#" class="btn btn-primary btn-xs"> Klik jika sudah diterima </button></td>
                                             @elseif($item->status == '28')

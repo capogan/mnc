@@ -27,7 +27,7 @@ $(document).ready(function() {
                 {
                     label: "Cancel",
                     className: "btn btn-default pull-left",
-                    callback: function() {       
+                    callback: function() {
                     }
                 },
                 {
@@ -65,11 +65,13 @@ $(document).ready(function() {
 
         $.ajax({
             url: '/lender/business/add',
-            method:"post",
+            method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
             },
             data:new FormData(this),
+            contentType: false,
+            cache: false,
             processData: false,
 
             beforeSend:function(){
@@ -131,8 +133,12 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend:function(){
+                loading();
+            },
             success:function(response)
             {
+                close_loading();
                 if(response.status == true){
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
@@ -185,8 +191,12 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend:function(){
+                loading();
+            },
             success:function(response)
             {
+                close_loading();
                 if(response.status == true){
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
@@ -197,7 +207,12 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender/information/file';
+
+                    setTimeout(function() {
+
+                        window.location.href = '/profile/lender/information/file';
+                    }, 2000);
+
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -229,7 +244,7 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/submit/attachment/',
+            url: '/lender/submit/attachment',
             method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
@@ -239,8 +254,12 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend:function(){
+                loading();
+            },
             success:function(response)
             {
+                close_loading();
                 if(response.status == true){
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
@@ -251,7 +270,10 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender/register/sign';
+                    setTimeout(function() {
+                        window.location.href = '/profile/lender/register/sign';
+                    }, 2000);
+
 
                 }else{
                     var text = '';
@@ -267,8 +289,8 @@ $(document).ready(function() {
 
             },
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err);
+                alert_error();
+                close_loading();
             }
         })
     });
@@ -644,7 +666,7 @@ $(document).ready(function() {
 });
 
 function show_modal_request_fund(){
-    
+
 }
 function submitfundingloan(id){
     var token = $('meta[name="csrf-token"]').attr('content');

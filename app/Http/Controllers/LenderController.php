@@ -49,7 +49,6 @@ class LenderController extends Controller
 
     public function information_business_add(Request $request){
 
-
         $arr_request = $request->all();
 
         //Asset Value
@@ -522,15 +521,15 @@ class LenderController extends Controller
         //print_r($request->all());
         $validation = Validator::make($request->all(),
         [
-                'npwp' => 'required|image|mimes:png,jpg',
-                'tdp'     => 'required|mimes:pdf',
-                'nib'     => 'required|mimes:pdf',
-                'doc_kta'   => 'required|mimes:pdf',
-                'doc_last_ahu'   => 'required|mimes:pdf',
-                'organizational_structure'   => 'required|mimes:pdf',
-                'balance_report'   => 'required|mimes:pdf',
-                'cash_flow'   => 'required|mimes:pdf',
-                'loss_profit'   => 'required|mimes:pdf',
+                'npwp' => 'required|image|mimes:png,jpg|max:1000',
+                'tdp'     => 'required|mimes:pdf|max:1000',
+                'nib'     => 'required|mimes:pdf|max:1000',
+                'doc_kta'   => 'required|mimes:pdf|max:1000',
+                'doc_last_ahu'   => 'required|mimes:pdf|max:1000',
+                'organizational_structure'   => 'required|mimes:pdf|max:1000',
+                'balance_report'   => 'required|mimes:pdf|max:1000',
+                'cash_flow'   => 'required|mimes:pdf|max:1000',
+                'loss_profit'   => 'required|mimes:pdf|max:1000',
         ],
         [
             'npwp.required' => 'Dokumen NPWP wajib diunggah',
@@ -662,7 +661,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->where('id' ,$id)->first();
-        
+
         $data = [
             'loan' => $loan ? $loan : false
         ];
@@ -692,7 +691,7 @@ class LenderController extends Controller
     }
 
     public function submit_request_loan(Request $request){
-        
+
     }
     public function portofolio(){
         $installment = LoanInstallment::where('');
