@@ -115,10 +115,10 @@ Route::get('/profile/lender', 'LenderController@index')->name('profile.lender');
 Route::get('/profile/lender/information/director', 'LenderController@director')->name('profile.lender.information.director');
 Route::get('/profile/lender/information/commissioner', 'LenderController@commissioner')->name('profile.lender.information.commissioner');
 Route::get('/profile/lender/information/file', 'LenderController@information_file')->name('profile.lender.information.file');
-//Route::get('/profile/lender/information/market/place', 'LenderController@market_place')->name('profile.lender.information.market.place');
 
 
-Route::post('/lender/business/add', 'LenderController@information_business_add')->name('lender.register.business.add');
+
+Route::post('/lender/business/add', 'LenderController@submit_director_data')->name('lender.register.business.add');
 
 
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
