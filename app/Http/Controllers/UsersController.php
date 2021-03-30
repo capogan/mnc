@@ -242,7 +242,7 @@ class UsersController extends Controller
 
            if($request->hasFile('business_npwp')) {
             $npwp_imagebusiness_npwp = $request->file('business_npwp');
-            $filename_npwp_imagebusiness_npwp = 'npwp_'.$uid.'_'.time(). '.' . $npwp_imagebusiness_npwp->getClientOriginalExtension();
+            $filename_npwp_imagebusiness_npwp = 'npwp_business_'.$uid.'_'.time(). '.' . $npwp_imagebusiness_npwp->getClientOriginalExtension();
             $npwp_imagebusiness_npwp->move($path, $filename_npwp_imagebusiness_npwp);
            }
 
