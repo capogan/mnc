@@ -194,6 +194,8 @@ html {
     max-height: 450px;
 }
 
+.saturate { filter: brightness(0) invert(1); }
+
 
 
 
