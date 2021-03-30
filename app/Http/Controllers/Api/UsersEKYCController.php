@@ -30,7 +30,6 @@ class UsersEKYCController extends Controller
                 ];
             }
         }
-
         return response()->json($json);
     }
 }
