@@ -218,7 +218,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" id="qwe" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
+                                                            <button type="submit" id="btn_submit_business_register" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
                                                     </form>
                                                 </div>

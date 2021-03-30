@@ -121,7 +121,7 @@ $(document).ready(function() {
 
         event.preventDefault();
 
-        var btn = $("#btn_submit_voucher");
+        var btn = $("#btn_submit_business_register");
         btn.attr("disabled", "disabled");
 
         var token = $('meta[name="csrf-token"]').attr('content');
