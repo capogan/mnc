@@ -143,7 +143,7 @@ $(document).ready(function() {
             },
             success:function(response)
             {
-                echo "test";
+                alert( "test");
                 // close_loading();
                 // if(response.status == true){
                 //     text = 'Data berhasil ditambahkan'
