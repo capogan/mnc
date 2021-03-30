@@ -56,8 +56,8 @@ $(document).ready(function() {
 
             },
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err);
+                alert_error();
+                close_loading();
             }
         })
     });
@@ -110,8 +110,8 @@ $(document).ready(function() {
 
             },
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err);
+                alert_error();
+                close_loading();
             }
         })
     });
@@ -127,7 +127,7 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/register/commisioner',
+            url: '/lender/register/business/add/',
             method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
@@ -170,8 +170,8 @@ $(document).ready(function() {
 
             },
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err);
+                alert_error();
+                close_loading();
             }
         })
     });
