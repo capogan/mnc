@@ -54,6 +54,10 @@ $(document).ready(function() {
                     }, 2000);
                 }
 
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err);
             }
         })
     });
@@ -104,6 +108,10 @@ $(document).ready(function() {
                     }, 2000);
                 }
 
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err);
             }
         })
     });
@@ -159,6 +167,10 @@ $(document).ready(function() {
                     }, 2000);
                 }
 
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err);
             }
         })
     });
@@ -207,6 +219,10 @@ $(document).ready(function() {
                     }, 2000);
                 }
 
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err);
             }
         })
     });
