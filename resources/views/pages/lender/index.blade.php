@@ -217,6 +217,34 @@
                                                                 <input type="text"  class="form-control" placeholder="Laba - Rugi periode Tahun berjalan sampai dengan saat ini" id="profit_loss" name="profit_loss" value="{{isset($lender_profile->profit_and_loss) ? $lender_profile->profit_and_loss : ''}}">
                                                             </div>
                                                         </div>
+
+                                                        <h3>Informasi Bank</h3>
+                                                        <hr>
+                                                        <div class="row mt-5">
+                                                            <div class="col">
+                                                                <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
+                                                            </div>
+
+                                                            <div class="col">
+                                                                <h6>Nomor NPWP<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Nomor Npwp" id="npwp_of_bussiness" name="npwp_of_bussiness" value="{{isset($lender_profile->npwp) ? $lender_profile->npwp : ''}}">
+                                                                <p id="id_cap_of_business_description"></p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row mt-5">
+                                                            <div class="col">
+                                                                <h6>Email<span>*</span></h6>
+                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{isset($lender_profile->email) ? $lender_profile->email : ''}}">
+                                                            </div>
+                                                            <div class="col">
+                                                                <h6>Nomor Telepon<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness" value="{{isset($lender_profile->phone_number) ? $lender_profile->phone_number : ''}}">
+                                                            </div>
+                                                        </div>
+
+
                                                         <div class="form-group mt-5">
                                                             <button type="submit" id="btn_submit_business_register" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
