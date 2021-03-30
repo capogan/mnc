@@ -63,7 +63,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
-                                                                        <p>Unggah NPWP KTP *</p>
+                                                                        <p>Unggah NPWP KTP * (maks: 1 Mb)</p>
                                                                     </div>
                                                                 </div>
 
@@ -92,7 +92,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokumen NIB *</h6>
+                                                                    <h6>Dokumen NIB * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                         <input type="file" id="nib" name="nib" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
@@ -108,7 +108,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokumen TDP *</h6>
+                                                                    <h6>Dokumen TDP * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="tdp" name="tdp" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
@@ -124,7 +124,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen kta Pendirian & Pengesahaan AHU *</h6>
+                                                                    <h6> Dokumen kta Pendirian & Pengesahaan AHU * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="doc_kta" name="doc_kta" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
@@ -140,7 +140,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokumen akta Perubahan Terakhir & Pengesahaan AHU</h6>
+                                                                    <h6>Dokumen akta Perubahan Terakhir & Pengesahaan AHU (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="doc_last_ahu" name="doc_last_ahu" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
@@ -156,7 +156,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen Struktur Organisasi Perusahaan</h6>
+                                                                    <h6> Dokumen Struktur Organisasi Perusahaan (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="organizational_structure" name="organizational_structure" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;"  class="file">
@@ -172,7 +172,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Neraca</h6>
+                                                                    <h6> Neraca (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="balance_report" name="balance_report" class="file">
@@ -188,7 +188,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen Laporan Arus Kas *</h6>
+                                                                    <h6> Dokumen Laporan Arus Kas * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="cash_flow" name="cash_flow" class="file"  style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
@@ -205,7 +205,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Laporan Laba Rugi*</h6>
+                                                                    <h6>Laporan Laba Rugi* (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                         <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="loss_profit" name="loss_profit" class="file">
