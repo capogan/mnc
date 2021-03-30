@@ -6,73 +6,7 @@
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12 ">
                     <div class="hero-tab-block">
-                        <div class="st-tabs">
-                            <!-- Nav tabs -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="service1">
-                                    <div class="loan-form">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                    <h2 class="text-bold">Lorem Ipsum is simply dummy text </h2>
-                                                </div>
-                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                                                    <div class="">
-                                                        <label>Lorem Ipsum</label>
-                                                        <select class="wide">
-                                                            <option value="">Pilih Kategori Borrower</option>
-                                                            <option value="borrower/personal/profile">Pribadi</option>
-                                                            <option value="borrower/bussiness/profile">Bisnis</option>
-                                                        </select>
-
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mt30 nopl nopr">
-                                                    <a href="/borrower/personal/profile" class="btn btn-default btn-lg">Lorem Ipsum</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="service2">
-                                    <div class="loan-form">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                    <h2 class="text-bold">Lorem Ipsum is simply dummy text</h2>
-                                                </div>
-                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                                                    <div class="">
-                                                        <label>Pilih</label>
-                                                        <select class="wide">
-                                                            <option value="Select Loan Purpose">Pilih kategori Lender</option>
-                                                            <option value="Debt Consolidation">Pribadi</option>
-                                                            <option value="Major Purpose">Bisnis</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mt30 nopl nopr">
-                                                    <a href="#" class="btn btn-default btn-lg">get your loan</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="tab-1" data-toggle="tab" href="#service1" role="tab" aria-controls="responsibilities" aria-selected="true"><i class="fa fa-money fa-lg"></i><p>  Borrower</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-2" data-toggle="tab" href="#service2" role="tab" aria-controls="education" aria-selected="false"><i class="fa fa-briefcase fa-lg"></i><p>Lender</p></a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -144,6 +78,66 @@
         </div>
         
     </div>
+    <div class="container text-center my-3">
+   
+    <div class="row mx-auto my-auto">
+        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div class="carousel-inner w-100" role="listbox">
+                <div class="carousel-item active">
+                    <div class="col-md-4">
+                        
+                            <img class="img-fluid" src="/images/bni.png">
+                       
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-md-4">
+                        
+                            <img class="img-fluid" src="/images/bni.png">
+                      
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-md-4">
+                      
+                            <img class="img-fluid" src="/images/bni.png">
+                       
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-md-4">
+                       
+                            <img class="img-fluid" src="/images/bni.png">
+                       
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-md-4">
+                        
+                            <img class="img-fluid" src="/images/bni.png">
+                       
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-md-4">
+                       
+                            <img class="img-fluid" src="/images/bni.png">
+                        
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    
+</div>
       <div class="section-space80 bg-gradient call-to-action">
         <div class="container">
             <div class="row">
@@ -211,6 +205,7 @@
             </div>
         </div>
     </div>
+    
 {{--    <div class="bg-dark-blue section-space20">--}}
 {{--        <div class="container">--}}
 {{--            <div class="row">--}}
@@ -525,6 +520,29 @@
             $('.wide').niceSelect();
 
         });
+    </script>
+    <script>
+        $('#recipeCarousel').carousel({
+  interval: 10000
+})
+
+$('.carousel .carousel-item').each(function(){
+    var minPerSlide = 3;
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    for (var i=0;i<minPerSlide;i++) {
+        next=next.next();
+        if (!next.length) {
+        	next = $(this).siblings(':first');
+      	}
+        
+        next.children(':first-child').clone().appendTo($(this));
+      }
+});
     </script>
 
 @endsection
