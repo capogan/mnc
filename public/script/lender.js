@@ -127,16 +127,16 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/register/business/add/',
+            url: '/lender/register/commisioner',
             method:"POST",
             headers: {
                 'X-CSRF-TOKEN': token
             },
+            async:true,
+            data:new FormData(this),
             contentType: false,
             cache: false,
             processData: false,
-            async:true,
-            data:new FormData(this),
 
             beforeSend:function(){
               loading();
