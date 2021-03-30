@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/lender/detail.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/lender/info/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/script/lender.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/script/lender.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +41,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Siap-Admin" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>

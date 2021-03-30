@@ -48,7 +48,7 @@ $(document).ready(function() {
     });
     $("#npwp_of_bussiness,#npwp_of_director").inputmask({"mask": "99.999.999.9-999.999"});
 
-    $('#amount_setoran_modal,#taxpayer,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
+    $('#amount_setoran_modal,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
         $(this).val(function (index, value) {
             return 'Rp ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });

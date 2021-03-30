@@ -62,7 +62,7 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
                                                             </div>
 
                                                             <div class="col">
@@ -181,7 +181,13 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Wajib Pajak<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer" value="{{isset($lender_profile->taxpayer) ? $lender_profile->taxpayer : ''}}">
+{{--                                                                <input type="text"  class="form-control" placeholder="Wajib Pajak" id="taxpayer" name="taxpayer" value="{{isset($lender_profile->taxpayer) ? $lender_profile->taxpayer : ''}}">--}}
+                                                                <select class="form-control" id="taxpayer" name="taxpayer">
+
+                                                                    <option value="">Pilih Status</option>
+                                                                    <option value="pkp">PKP</option>
+                                                                    <option value="non_pkp">Non PKP</option>
+                                                                </select>
                                                             </div>
                                                         </div>
 
