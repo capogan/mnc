@@ -277,7 +277,7 @@ class UsersController extends Controller
                 $data_insert['self_photo'] = 'upload/'.$filename_self_image;
             }
             if(isset($request->npwp_image)){
-                $data_insert['npwp_photo'] = 'upload/'.$filename_self_image;
+                $data_insert['npwp_photo'] = 'upload/'.$filename_npwp_image;
             }
             if(isset($request->business_location_image)){
                 $data_insert['business_build_photo'] = 'upload/'.$filename_npwp_imagebusiness_location_image;
