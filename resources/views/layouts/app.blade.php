@@ -30,6 +30,7 @@
     <title>SIAP</title>
 
 </head>
+
 <body>
 <div class="header header-regular">
         <div class="container">
@@ -37,7 +38,7 @@
                 <div class="col-sm-1.1">
                     <!-- logo -->
                     <div class="logo p-2">
-                    <a href="/"><img src="/images/siap.png"></a>
+                    <a href="/"><img src="/images/siap.png" class="saturate"></a>
 
                     </div>
                 </div>
