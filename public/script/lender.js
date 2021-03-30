@@ -199,7 +199,12 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    // window.location.href = '/profile/lender/information/file';
+
+                    setTimeout(function() {
+                       
+                        window.location.href = '/profile/lender/information/file';
+                    }, 2000);
+
                 }else{
                     var text = '';
                     $.each(response.message, function( index, value ) {
@@ -253,7 +258,10 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    // window.location.href = '/profile/lender/register/sign';
+                    setTimeout(function() {
+                        window.location.href = '/profile/lender/register/sign';
+                    }, 2000);
+
 
                 }else{
                     var text = '';
