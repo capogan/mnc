@@ -18,6 +18,7 @@ use App\LenderCommissionerData;
 use App\LenderAttachmentData;
 use App\RequestFunding;
 use App\LoanInstallment;
+use App\LenderBankInfo;
 
 class LenderController extends Controller
 {
@@ -33,16 +34,15 @@ class LenderController extends Controller
     public function index(Request $request){
         $data = array(
             'provinces' => Province::get(),
-            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name')
+            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
             ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
             ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
             ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
             ->leftJoin('villages' ,'lender_business.id_village' , 'villages.id')
             ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
+            ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
             ->where('users.id', Auth::id())->first(),
         );
-
-
         //print_r(User::with('business_lender')->where('id', Auth::id())->first()); exit;
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
     }
@@ -98,6 +98,10 @@ class LenderController extends Controller
             'income_year'               => 'required',
             'operating_expenses'        => 'required',
             'profit_loss'               => 'required',
+            'bank'                      => 'required',
+            'rek_number'                => 'required',
+            'rek_name'                  => 'required',
+            'rek_lender'                => 'required',
         ],
         [
             'name_of_bussiness.required'    => 'Nama Usaha tidak boleh kosong',
@@ -119,6 +123,11 @@ class LenderController extends Controller
             'income_year.required'          => 'Pendapatan Tahun tidak boleh kosong',
             'operating_expenses.required'   => 'Beban Operasional tahun berjalan tidak boleh kosong',
             'profit_loss.required'          => 'Laba - Rugi periode Tahun tidak boleh kosong',
+            'bank.required'                      => 'Bank harus dipilih',
+            'rek_number.required'                => 'Nomor rekening tidak boleh kosong',
+            'rek_name.required'                  => 'Nama rekening tidak boleh kosong',
+            'rek_lender.required'                => 'Nomor rekening lender tidak boleh kosong',
+
         ]);
 
 
@@ -157,9 +166,20 @@ class LenderController extends Controller
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                 ]);
+
                 LenderVerification::updateOrCreate(
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'business_verification' => true]
+                );
+                LenderBankInfo::updateOrCreate(
+                    ['uid' => Auth::id()],
+                    [
+                        'uid' => Auth::id(),
+                        'rekening_number' => $request->rek_number,
+                        'rekening_name' => $request->rek_name,
+                        'rdl_number' => $request->rek_lender,
+                        'bank' => $request->bank 
+                    ]
                 );
             $json = [
                 "status"=> true,

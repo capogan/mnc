@@ -228,36 +228,40 @@
                                                         <hr>
                                                         <div class="row mt-5">
                                                             <div class="col">
-                                                                <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nama Usaha" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
+                                                                <h6>Nama Bank Penerima<span>*</span></h6>
+                                                                <select name="bank" class="form-control">
+                                                                    <option value="" >Pilih Bank</option>
+                                                                    <option value="bca" {{$lender_profile->bank == 'bca' ? 'selected' : ''}}>BCA</option>
+                                                                    <option value="bni" {{$lender_profile->bank == 'bni' ? 'selected' : ''}}>BNI</option>
+                                                                    <option value="mandiri "{{$lender_profile->bank == 'mandiri' ? 'selected' : ''}}>Mandiri</option>
+                                                                    <option value="bri" {{$lender_profile->bank == 'bri' ? 'selected' : ''}}>BRI</option>
+                                                                    <option value="nisp" {{$lender_profile->bank == 'nisp' ? 'selected' : ''}}>NISP</option>
+                                                                    <option value="cimb" {{$lender_profile->bank == 'cimb' ? 'selected' : ''}}>CIMB NIAGA</option>
+                                                                </select>
                                                             </div>
-
                                                             <div class="col">
-                                                                <h6>Nomor NPWP<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nomor Npwp" id="npwp_of_bussiness" name="npwp_of_bussiness" value="{{isset($lender_profile->npwp) ? $lender_profile->npwp : ''}}">
+                                                                <h6>Nomor Rekening<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Contoh : 912389127492" id="rek_number" name="rek_number" value="{{isset($lender_profile->rekening_number) ? $lender_profile->rekening_number : ''}}">
                                                                 <p id="id_cap_of_business_description"></p>
                                                             </div>
-
                                                         </div>
                                                         <div class="row mt-5">
                                                             <div class="col">
-                                                                <h6>Email<span>*</span></h6>
-                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{isset($lender_profile->email) ? $lender_profile->email : ''}}">
+                                                                <h6>Nama Rekening<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder=" Nama Rekening " id="rek_name" name="rek_name" value="{{isset($lender_profile->rekening_name) ? $lender_profile->rekening_name : ''}}">
                                                             </div>
+
                                                             <div class="col">
-                                                                <h6>Nomor Telepon<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness" value="{{isset($lender_profile->phone_number) ? $lender_profile->phone_number : ''}}">
+                                                                <h6>Nomor Rekening Dana Lender<span>*</span></h6>
+                                                                <input type="text"  class="form-control" placeholder="Contoh : 126812912371" id="rek_dana_lender" name="rek_lender" value="{{isset($lender_profile->rdl_number) ? $lender_profile->rdl_number : ''}}">
                                                             </div>
                                                         </div>
-
-
                                                         <div class="form-group mt-5">
                                                             <button type="submit" id="btn_submit_business_register" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <!-- /.section title start-->
                                         </div>
 
                                     </div>
