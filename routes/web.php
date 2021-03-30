@@ -110,7 +110,10 @@ Route::post('/user/send/otp', 'UsersController@send_otp_again')->name('borrower.
 //............................................................................
 
 Route::get('/profile/lender', 'LenderController@index')->name('profile.lender');
-Route::post('/lender/information/business/add', 'LenderController@information_business_add')->name('lender.information.business.add');
+//Route::post('/lender/information/business/add', 'LenderController@information_business_add')->name('lender.information.business.add');
+Route::post('/lender/information/business/add', function () {
+    return 'Hello World';
+});
 Route::get('/profile/lender/information/director', 'LenderController@director')->name('profile.lender.information.director');
 Route::get('/profile/lender/information/commissioner', 'LenderController@commissioner')->name('profile.lender.information.commissioner');
 Route::get('/profile/lender/information/file', 'LenderController@information_file')->name('profile.lender.information.file');
