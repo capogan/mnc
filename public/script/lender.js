@@ -18,12 +18,14 @@ $(document).ready(function() {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/lender/business/add',
+            url: '/lender/business/add/',
             method:"post",
             headers: {
                 'X-CSRF-TOKEN': token
             },
             data:new FormData(this),
+            contentType: false,
+            cache: false,
             processData: false,
 
             beforeSend:function(){
