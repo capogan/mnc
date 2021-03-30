@@ -18,9 +18,6 @@
                     @if($item->business_info && $item->scoring && $item->personal_info)
                     <?php 
                         $scoring  = json_decode($item->scoring->detail_scoring , true);
-                        //print_r($scoring);
-                        //print_r($scoring['message']['credibiliti_percentage']);
-                        
                     ?>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                         <div class="lender-listing">
@@ -48,7 +45,7 @@
                                 </ul>
                             </div>
                             <div class="lender-actions">
-                                <a href="#" class="btn btn-default btn-block">Ajukan Pendanaan</a>
+                                <a href="javascript:void(0)" data-toggle="modal" class="btn btn-default btn-block" data-target="#modalRequestfund">Ajukan Pendanaan</a>
                             </div>
                         </div>
                     </div>
@@ -57,6 +54,39 @@
             </div>
         </div>
     </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modalRequestfund" tabindex="-1" role="dialog" aria-labelledby="modalRequestfund" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tanda Tangan Perjanjian</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="bank-account-tabs st-tabs">
+                <div class="tab-content">
+                    <input type="hidden" id="id_to_reques" />
+                    <div role="tabpanel" class="tab-pane fade show active" id="service1">
+                        <h3>To open a Borrow Life account, you must:</h3>
+                        <ul class="list-unstyled">
+                            <li>Be aged 18+ (if you're under 18, check out our Borrow Savings account); and</li>
+                            <li>Have a Borrow everyday account.</li>
+                            <li>Vivamus at ultricies tortor, vel volutpat neque.</li>
+                            <li>In justo turpis, aliquam id suscipit vel, suscipit eget nisl. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+            <button type="button" class="btn btn-primary" id="lender_request_to_fung"> Danai</button>
+        </div>
+        </div>
     </div>
 </div>
 
