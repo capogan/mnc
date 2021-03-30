@@ -220,7 +220,7 @@
 
                                                         </div>
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" class="btn btn-primary btn-block"> Selesai </button>
+                                                            <button type="submit" data-text="Selesai" class="btn btn-primary btn-block"> Selesai </button>
                                                         </div>
                                                     </form>
                                                 </div>
