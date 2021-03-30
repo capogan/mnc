@@ -5,8 +5,9 @@
       <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/lender/detail.blade.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/lender/info/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/LenderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/include/bussiness.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +44,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Siap-Admin" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
