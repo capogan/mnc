@@ -118,7 +118,7 @@ Route::get('/profile/lender/information/file', 'LenderController@information_fil
 
 
 
-Route::post('/lender/business/add', 'LenderController@submit_director_data')->name('lender.register.business.add');
+Route::post('/lender/business/add', 'LenderController@information_business_add')->name('lender.register.business.add');
 
 
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
