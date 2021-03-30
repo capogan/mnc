@@ -17,6 +17,7 @@ use App\LenderDirectorData;
 use App\LenderCommissionerData;
 use App\LenderAttachmentData;
 use App\RequestFunding;
+use App\LoanInstallment;
 
 class LenderController extends Controller
 {
@@ -615,7 +616,7 @@ class LenderController extends Controller
                 ['uid' => Auth::id()],
                 $data
             );
-            RequestFunding::updateOrCreate(['uid' =>Auth::id()],['uid' => Auth::id() , 'status' => 1]);
+            //RequestFunding::updateOrCreate(['uid' =>Auth::id()],['uid' => Auth::id() , 'status' => 1]);
             LenderVerification::updateOrCreate(
                 ['uid' => Auth::id()],
                 ['uid' => Auth::id() , 'document_verification' => true]
@@ -648,25 +649,31 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->get();
+        // print_r($borrower_data);
+        // exit;
         $data = [
             'borrower_request' => $borrower_data
         ];
         return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
     }
 
-    public function register_sign_aggrement(Request $request){
-        $status_verification = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
-        if(!$status_verification){
-            return view('pages.lender.market_place',$this->merge_response(static::$CONFIG));
-        }
-        $borrower_data = LoanRequest::with('personal_info')
+    public function marketplace_agreement($id){
+        $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '18')->get();
+        ->where('status' , '18')->where('id' ,$id)->first();
+        
         $data = [
-            'borrower_request' => $borrower_data
+            'loan' => $loan ? $loan : false
         ];
-        return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
+        return view('pages.lender.sign',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function register_sign_aggrement(Request $request){
+        $data = [
+            'borrower_request' => []
+        ];
+        return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
     }
 
     public function profile(){
@@ -675,6 +682,32 @@ class LenderController extends Controller
         );
         return view('pages.lender.profile',$this->merge_response($data, static::$CONFIG));
     }
+
+    public function update_status_sign(Request $request){
+        RequestFunding::updateOrCreate(['uid' =>Auth::id()],['uid' => Auth::id() , 'status' => 1]);
+        LenderVerification::updateOrCreate(
+            ['uid' => Auth::id()],
+            ['uid' => Auth::id() , 'sign_agreement' => true]
+        );
+    }
+
+    public function submit_request_loan(Request $request){
+        
+    }
+    public function portofolio(){
+        $installment = LoanInstallment::where('');
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->where('id' ,$id)->first();
+        
+        $data = [
+            'loan' => $loan ? $loan : false
+        ];
+        return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
+    }
+
+    
 
 
 

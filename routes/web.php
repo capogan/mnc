@@ -128,7 +128,11 @@ Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
 Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');
 
-Route::post('/profile/lender/register/sign', 'LenderController@register_sign_aggrement')->name('profile.lender.attachment');
+Route::get('/profile/lender/register/sign', 'LenderController@register_sign_aggrement')->name('profile.lender.attachment');
+Route::post('/lender/register/agreement', 'LenderController@update_status_sign')->name('profile.lender.sign');
+Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->name('profile.lender.sign');
+Route::get('/marketplace/{id}', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
+Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
 
 //.............................................................................
 //...............................SSSSSS........................................

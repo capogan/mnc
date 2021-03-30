@@ -56,6 +56,7 @@
                             @if (Auth::check())
                             <li><a href="/profile/lender" class="animsition-link">profile</a></li>
                             <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
+                            <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
                             @else
                                 <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
                                 </li>

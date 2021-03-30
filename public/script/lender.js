@@ -1,5 +1,51 @@
 $(document).ready(function() {
 
+    $(document).on('click' , '#sign_agreement_' , function(){
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/lender/register/agreement',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async:true,
+            data: {agreement : 'agree'},
+            success:function(response)
+            {
+                window.location.href = '/lender/funding';
+            }
+        })
+    });
+
+    $(document).on('click' , '#lender_request_to_fung' , function(){
+        var id = $(this).attr('attr');
+        var modal = bootbox.dialog({
+            message: "Klik lanjutkan untuk melanjutkan proses pendanaan.",
+            title: "Ajukan Pendanaan",
+            buttons: [
+                {
+                    label: "Cancel",
+                    className: "btn btn-default pull-left",
+                    callback: function() {       
+                    }
+                },
+                {
+                    label: "Lanjutkan",
+                    className: "btn btn-primary pull-left",
+                    callback: function() {
+                        submitfundingloan(id);
+                    }
+                }
+            ],
+            show: false,
+            onEscape: function() {
+                modal.modal("hide");
+            }
+        });
+
+        modal.modal("show");
+    });
     $("#npwp_of_bussiness,#npwp_of_director").inputmask({"mask": "99.999.999.9-999.999"});
 
     $('#amount_setoran_modal,#taxpayer,#asset_value,#equity_value,#short_term_liabilities,#income_year,#operating_expenses,#profit_loss').on('change click keyup input paste',(function (event) {
@@ -227,6 +273,10 @@ $(document).ready(function() {
                 alert(err);
             }
         })
+    });
+
+    $().on('click' , '#' , function(){
+        $('#modalRequestfund').show();
     });
 
     var max_fields      = 3; //maximum input boxes allowed
@@ -595,6 +645,28 @@ $(document).ready(function() {
 
 });
 
+function show_modal_request_fund(){
+    
+}
+function submitfundingloan(id){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        url:'/request/to_fund/loan',
+        type:"POST",
+        dataType:'json',
+        dtaa: {id : id},
+        success:function(res){
+            bootbox.alert(data.message);
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err);
+        }
+    })
+}
 function get_city(province_id , attr){
 
     var token = $('meta[name="csrf-token"]').attr('content');
