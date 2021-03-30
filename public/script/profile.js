@@ -78,6 +78,7 @@ $(document).on('keyup' , '#request_loan_borrower' , function(){
     var rupiah = formatRupiah(number , '');
     $(this).val(rupiah);
     check_interest();
+    $('#la_value').text(rupiah);
 });
 
 $('#personal_info_form').on('submit', function(event){

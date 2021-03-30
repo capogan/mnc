@@ -10,7 +10,7 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="section-title mb60" style="text-align:center;">
                                 <div class="alert alert-danger" role="alert">
-                                    Status akun kamu masih dalam proses.
+                                     Status akun kamu masih dalam proses.
                                     </div>
                                 </div>
                             </div>
