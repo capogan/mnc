@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/congrats.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/congrats.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/information/finance_information.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/borrower/sign.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/borrower/sign.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

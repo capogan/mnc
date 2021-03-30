@@ -350,15 +350,22 @@ class BorrowerController extends Controller
     public function sign(Request $request){
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
-        if($loan->status != '19'){
-            return Redirect::to('/profile/transaction');
-        }
-        $data = [
+        if($loan){
+            if($loan->status != '19'){
+                return Redirect::to('/profile/transaction');
+            }
 
-            'no_invoice'    => $request->invoice,
-            'id_loan'       => $loan->id,
-        ];
-        return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
+            $data = [
+
+                'no_invoice'    => $request->invoice,
+                'id_loan'       => $loan->id,
+            ];
+            return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
+
+        }else{
+            abort(404, 'Page Not Found.');
+        }
+
     }
 
     public function congratulation(Request $request){
