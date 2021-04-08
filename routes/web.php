@@ -133,6 +133,13 @@ Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->na
 Route::get('/marketplace/{id}', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
 Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
 
+Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
+Route::post('/profile/lender-individu', 'LenderIndividualController@post_profile')->name('profile.lender.individu.submit');
+Route::get('/profile/lender-individu/occupation', 'LenderIndividualController@get_occupation')->name('profile.lender.individu.occupation');
+Route::get('/profile/lender-individu/occupation/sme', 'LenderIndividualController@get_occupation_sme')->name('profile.lender.individu.occupation.sme');
+Route::post('/profile/lender-individu/occupation', 'LenderIndividualController@post_occupation')->name('profile.lender.individu.occupation.submit');
+Route::get('/profile/lender-individu/document', 'LenderIndividualController@get_document')->name('profile.lender.individu.document');
+
 //.............................................................................
 //...............................SSSSSS........................................
 //.MMMMM...MMMMM.....AAAAA......SSSSSSSS..STTTTTTTTTT.EEEEEEEEEEE.RRRRRRRRRR...
