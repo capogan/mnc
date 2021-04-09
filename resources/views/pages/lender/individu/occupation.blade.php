@@ -105,7 +105,7 @@
                                                             <div class="col">
                                                                 <h6>Tanggal Penggajian <span>*</span></h6>
                                                                 <input class="form-control" type="date" name="payment_date"
-                                                                    id="example-date-input"
+                                                                    id="payment_date"
                                                                     value="{{ isset($occupation_lender_individual->payment_date) ? $occupation_lender_individual->payment_date : '' }}">
                                                             </div>
                                                         </div>

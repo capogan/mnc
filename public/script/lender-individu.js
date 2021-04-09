@@ -44,7 +44,7 @@ $(document).on('ready',function () {
                         timer: 1500
                     })
                     window.location.href = '/profile/lender-individu/occupation/sme';
-                    if ($("#lender_type_info").val() == 2){
+                    if ($("#lender_type").val() == 2){
                         window.location.href = '/profile/lender-individu/occupation';
                     }
 
@@ -124,13 +124,13 @@ $(document).on('ready',function () {
 
     $("#form_register_lender_individu_occupation_sme").on("submit", function (event) {
         event.preventDefault();
-        var btn = $("#btn_submit_individual_occupation");
+        var btn = $("#btn_submit_individual_occupation_sme");
         btn.attr("disabled", "disabled");
 
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/profile/lender-individu/occupation',
+            url: '/profile/lender-individu/occupation/sme',
             method: "POST",
             headers: {
                 'X-CSRF-TOKEN': token

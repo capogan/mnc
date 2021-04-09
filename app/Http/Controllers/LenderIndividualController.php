@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
+use App\BuildingStatus;
 use App\Education;
+use App\IncomeFactory;
+use App\Legality;
 use App\LenderIndividualBankAccount;
+use App\LenderIndividualBusinessInfo;
 use App\LenderIndividualEmergencyContact;
 use App\LenderIndividualJobInformation;
 use App\LenderIndividualPersonalInfo;
@@ -13,7 +17,6 @@ use App\MasterLengthOfWork;
 use App\Models\Province;
 use App\Siblings;
 use App\StatusOfResidence;
-use App\TotalEmployee;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,10 +101,13 @@ class LenderIndividualController extends Controller
     {
         $data = array(
             'provinces' => Province::get(),
-            'employees' => TotalEmployee::get(),
-            'occupation_lender_individual' => User::select(
+            'legality' => Legality::Orderby('id', 'ASC')->get(),
+            'building_ownership_status' => BuildingStatus::Orderby('id', 'ASC')->get(),
+            'industry' => IncomeFactory::get(),
+            'occupation_lender_individual_sme' => User::select(
                 'lender_individual_business_info.*',
                 'lender_individual_personal_info.lender_type',
+                'lender_individual_personal_info.id as personal_id',
                 'districts.name as districts_name',
                 'regencies.name as regencies_name',
                 'villages.name as villages_name',
@@ -343,6 +349,93 @@ class LenderIndividualController extends Controller
         return response()->json([
             "status" => true,
             "message" => 'Informasi Pekerjaan ditambahkan',
+        ]);
+
+    }
+    public function post_occupation_sme(Request $requests)
+    {
+        $validators = [
+            'personal_id' => 'required',
+            'company_name' => 'required',
+            'company_phone_number' => 'required',
+            'business_legality' => 'required',
+            'no_siup' => 'required',
+            'npwp_of_bussiness' => 'required',
+            'founded_date' => 'required',
+            'business_place_status' => 'required',
+            'business_category' => 'required',
+            'business_type_detail' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'villages' => 'required',
+            'office_zip_code' => 'required',
+            'full_address' => 'required',
+            'average_sales_revenue_six_month' => 'required',
+            'average_monthly_expenditure_six_month' => 'required',
+            'average_monthly_profit_six_month' => 'required',
+            'total_employee' => 'required',
+        ];
+
+        $messagesvalidator = [
+            'personal_id.required' => 'Form Informasi Pribadi tidak boleh kosong',
+            'company_name.required' => 'Nama Perusahaan tidak boleh kosong',
+            'company_phone_number.required' => 'Nomor Telepon Perusahaan tidak boleh kosong',
+            'npwp_of_bussiness.required' => 'Nomor NPWP tidak boleh kosong',
+            'business_legality.required' => 'Status Badan Hukum Usaha tidak boleh kosong',
+            'no_siup.required' => 'Nomor Izin Usaha tidak boleh kosong',
+            'founded_date.required' => 'Tanggal Berdiri tidak boleh kosong',
+            'business_place_status.required' => 'Status Tempat Usaha tidak boleh kosong',
+            'business_category.required' => 'Jenis Bidang Usaha tidak boleh kosong',
+            'business_type_detail.required' => 'Detil Jenis Bidang Usaha tidak boleh kosong',
+            'province.required' => 'Propinsi tidak boleh kosong',
+            'city.required' => 'Kota tidak boleh kosong',
+            'district.required' => 'Kecamatan tidak boleh kosong',
+            'villages.required' => 'Kelurahan tidak boleh kosong',
+            'office_zip_code.required' => 'Kode Pos tidak boleh kosong',
+            'full_address.required' => 'Alamat Lengkap Tempat Usaha tidak boleh kosong',
+            'average_sales_revenue_six_month.required' => 'Rata-Rata Penjualan per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'average_monthly_expenditure_six_month.required' => 'Rata-Rata Pengeluaran per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'average_monthly_profit_six_month.required' => 'Rata-Rata Keuntungan per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'total_employee.required' => 'Total Karyawan Saat Ini tidak boleh kosong',
+        ];
+
+        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        if ($validation->fails()) {
+            $json = [
+                "status" => false,
+                "message" => $validation->messages(),
+            ];
+            return response()->json($json);
+        }
+
+        LenderIndividualBusinessInfo::updateOrCreate([
+            'id_lender_individual' => $requests->personal_id,
+        ], [
+            'id_business_legality' => $requests->business_legality,
+            'company_name' => $requests->company_name,
+            'no_siup' => $requests->no_siup,
+            'phone_number' => $requests->company_phone_number,
+            'date_of_business_birth' => $requests->founded_date,
+            'business_place_status' => $requests->business_place_status,
+            'province' => $requests->province,
+            'city' => $requests->city,
+            'district' => $requests->district,
+            'villages' => $requests->villages,
+            'no_npwp' => $requests->npwp_of_bussiness,
+            'average_sales_revenue_six_month' => $requests->average_sales_revenue_six_month,
+            'average_monthly_expenditure_six_month' => $requests->average_monthly_expenditure_six_month,
+            'average_monthly_profit_six_month' => $requests->average_monthly_profit_six_month,
+            'business_type' => $requests->business_category,
+            'business_type_detail' => $requests->business_type_detail,
+            'total_employee' => $requests->total_employee,
+            'full_address' => $requests->full_address,
+            'kodepos' => $requests->office_zip_code,
+        ]);
+
+        return response()->json([
+            "status" => true,
+            "message" => 'Informasi Usaha ditambahkan',
         ]);
 
     }

@@ -179,7 +179,7 @@
                                                             <div class="col">
                                                                 <h6>Tanggal Lahir <span>*</span></h6>
                                                                 <input class="form-control" type="date" name="dob"
-                                                                    id="example-date-input"
+                                                                    id="dob"
                                                                     value="{{ isset($lender_individual_personal_info->dob) ? $lender_individual_personal_info->dob : '' }}">
                                                             </div>
                                                         </div>
