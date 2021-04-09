@@ -49,7 +49,7 @@
                                         <div class=" bg-white ">
                                             <div class="contact-form mb60">
                                                 <div class=" ">
-                                                    <form id="form_individual_lender_documents"
+                                                    <form id="form_individual_lender_documents_sme"
                                                         enctype="multipart/form-data">
                                                         <input type="hidden" name="lender_type_info" id="lender_type_info"
                                                             value="{{ isset($lender_individual_docs->lender_type) ? $lender_individual_docs->lender_type : '' }}">
@@ -126,14 +126,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <hr>
-                                                        <h3>Unggah Berkas Pekerjaan</h3>
-                                                        <hr>
-
-                                                        <div class="row">
-
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
@@ -168,19 +160,27 @@
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+
+                                                        <hr>
+                                                        <h3>Unggah Berkas Pekerjaan</h3>
+                                                        <hr>
+
+                                                        <div class="row">
+
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
-                                                                        <p>Unggah ID Card (maks: 1 Mb)</p>
+                                                                        <p>Unggah NPWP Usaha * (maks: 1 Mb)</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mt-2">
                                                                     <div class="col">
                                                                         <div class="upload-file">
                                                                             <div class="file-input">
-                                                                                <input type="file" id="photo_id_card"
-                                                                                    name="photo_id_card" class="file">
-                                                                                <label for="photo_id_card">
+                                                                                <input type="file" id="business_npwp_image"
+                                                                                    name="business_npwp_image" class="file">
+                                                                                <label for="business_npwp_image">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="40" height="40" fill="white"
                                                                                         class="bi bi-plus"
@@ -194,26 +194,28 @@
                                                                         </div>
                                                                         <div class="file_preview">
                                                                             <img class="img-file"
-                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->id_card_image ?? '' }}"
-                                                                                id="photo_id_card_preview" alt=""
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->business_npwp_image ?? '' }}"
+                                                                                id="business_npwp_image_preview" alt=""
                                                                                 style="width:100%">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
-                                                                        <p>Unggah Slip Gaji * (maks: 1 Mb)</p>
+                                                                        <p>Unggah Foto Tempat Usaha * (maks: 1 Mb)</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mt-2">
                                                                     <div class="col">
                                                                         <div class="upload-file">
                                                                             <div class="file-input">
-                                                                                <input type="file" id="photo_salary_slip"
-                                                                                    name="photo_salary_slip" class="file">
-                                                                                <label for="photo_salary_slip">
+                                                                                <input type="file" id="business_place_image"
+                                                                                    name="business_place_image"
+                                                                                    class="file">
+                                                                                <label for="business_place_image">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="40" height="40" fill="white"
                                                                                         class="bi bi-plus"
@@ -227,8 +229,156 @@
                                                                         </div>
                                                                         <div class="file_preview">
                                                                             <img class="img-file"
-                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->identity_image ?? '' }}"
-                                                                                id="photo_salary_slip_preview" alt=""
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->business_place_image ?? '' }}"
+                                                                                id="business_place_image_preview" alt=""
+                                                                                style="width:100%">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <p>Unggah Foto Surat Izin Usaha atau Sejenisnya *
+                                                                            (maks: 1 Mb)</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <div class="upload-file">
+                                                                            <div class="file-input">
+                                                                                <input type="file"
+                                                                                    id="license_business_document_image"
+                                                                                    name="license_business_document_image"
+                                                                                    class="file">
+                                                                                <label
+                                                                                    for="license_business_document_image">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="40" height="40" fill="white"
+                                                                                        class="bi bi-plus"
+                                                                                        viewBox="0 0 16 16">
+                                                                                        <path
+                                                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                    </svg>
+                                                                                    <span>Pilih Foto</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="file_preview">
+                                                                            <img class="img-file"
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->license_business_document_image ?? '' }}"
+                                                                                id="license_business_document_image_preview"
+                                                                                alt="" style="width:100%">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <p>Unggah Bukti Kepemilikan / Kontrak Tempat Usaha *
+                                                                            (maks: 1 Mb)</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <div class="upload-file">
+                                                                            <div class="file-input">
+                                                                                <input type="file"
+                                                                                    id="proof_of_ownership_image"
+                                                                                    name="proof_of_ownership_image"
+                                                                                    class="file">
+                                                                                <label for="proof_of_ownership_image">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="40" height="40" fill="white"
+                                                                                        class="bi bi-plus"
+                                                                                        viewBox="0 0 16 16">
+                                                                                        <path
+                                                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                    </svg>
+                                                                                    <span>Pilih Foto</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="file_preview">
+                                                                            <img class="img-file"
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->proof_of_ownership_image ?? '' }}"
+                                                                                id="proof_of_ownership_image_preview" alt=""
+                                                                                style="width:100%">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <p>Unggah Foto Dokumen Usaha *
+                                                                            (maks: 1 Mb)</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <div class="upload-file">
+                                                                            <div class="file-input">
+                                                                                <input type="file" id="document_image"
+                                                                                    name="document_image" class="file">
+                                                                                <label for="document_image">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="40" height="40" fill="white"
+                                                                                        class="bi bi-plus"
+                                                                                        viewBox="0 0 16 16">
+                                                                                        <path
+                                                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                    </svg>
+                                                                                    <span>Pilih Foto</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="file_preview">
+                                                                            <img class="img-file"
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->document_image ?? '' }}"
+                                                                                id="document_image_preview" alt=""
+                                                                                style="width:100%">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-xl-6">
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <p>Unggah Foto Aktifitas Usaha *
+                                                                            (maks: 1 Mb)</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2">
+                                                                    <div class="col">
+                                                                        <div class="upload-file">
+                                                                            <div class="file-input">
+                                                                                <input type="file"
+                                                                                    id="business_activity_image"
+                                                                                    name="business_activity_image"
+                                                                                    class="file">
+                                                                                <label for="business_activity_image">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="40" height="40" fill="white"
+                                                                                        class="bi bi-plus"
+                                                                                        viewBox="0 0 16 16">
+                                                                                        <path
+                                                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                    </svg>
+                                                                                    <span>Pilih Foto</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="file_preview">
+                                                                            <img class="img-file"
+                                                                                src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->business_activity_image ?? '' }}"
+                                                                                id="business_activity_image_preview" alt=""
                                                                                 style="width:100%">
                                                                         </div>
                                                                     </div>
@@ -236,9 +386,9 @@
                                                             </div>
                                                         </div>
 
-
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" data-text="Selesai" id="btn_submit_personal_document"
+                                                            <button type="submit" data-text="Selesai"
+                                                                id="btn_submit_personal_document_sme"
                                                                 class="btn btn-primary btn-block"> Selesai </button>
                                                         </div>
                                                     </form>

@@ -10,6 +10,7 @@ use App\Legality;
 use App\LenderIndividualBankAccount;
 use App\LenderIndividualBusinessInfo;
 use App\LenderIndividualEmergencyContact;
+use App\LenderIndividualFile;
 use App\LenderIndividualJobInformation;
 use App\LenderIndividualPersonalInfo;
 use App\MarriedStatus;
@@ -126,17 +127,31 @@ class LenderIndividualController extends Controller
     public function get_document()
     {
         $data = array(
-            'provinces' => Province::get(),
-            'lender_profile' => User::select('lender_business.*', 'districts.name as districts_name', 'regencies.name as regencies_name', 'villages.name as villages_name', 'provinces.name as provinces_name', 'lender_bank_info.bank', 'lender_bank_info.rdl_number', 'lender_bank_info.rekening_name', 'lender_bank_info.rekening_number')
-                ->leftJoin('lender_business', 'lender_business.uid', 'users.id')
-                ->leftJoin('regencies', 'lender_business.id_regency', 'regencies.id')
-                ->leftJoin('districts', 'lender_business.id_district', 'districts.id')
-                ->leftJoin('villages', 'lender_business.id_village', 'villages.id')
-                ->leftJoin('provinces', 'lender_business.id_province', 'provinces.id')
-                ->leftJoin('lender_bank_info', 'lender_bank_info.uid', 'lender_business.uid')
+            'lender_individual_docs' => User::select(
+                'lender_individual_personal_info.lender_type',
+                'lender_individual_personal_info.id as personal_id',
+                'lender_individual_file.*')
+                ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+                ->leftJoin('lender_individual_file', 'lender_individual_personal_info.id', 'lender_individual_file.id_lender_individual')
+                ->leftJoin('lender_individual_sme_job_information', 'lender_individual_personal_info.id', 'lender_individual_sme_job_information.id_lender_individual')
                 ->where('users.id', Auth::id())->first(),
         );
         return view('pages.lender.individu.document', $this->merge_response($data, static::$CONFIG));
+    }
+
+    public function get_document_sme()
+    {
+        $data = array(
+            'lender_individual_docs' => User::select(
+                'lender_individual_personal_info.lender_type',
+                'lender_individual_personal_info.id as personal_id',
+                'lender_individual_file.*')
+                ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+                ->leftJoin('lender_individual_file', 'lender_individual_personal_info.id', 'lender_individual_file.id_lender_individual')
+                ->leftJoin('lender_individual_sme_job_information', 'lender_individual_personal_info.id', 'lender_individual_sme_job_information.id_lender_individual')
+                ->where('users.id', Auth::id())->first(),
+        );
+        return view('pages.lender.individu.document_sme', $this->merge_response($data, static::$CONFIG));
     }
 
     public function post_profile(Request $requests)
@@ -352,6 +367,7 @@ class LenderIndividualController extends Controller
         ]);
 
     }
+
     public function post_occupation_sme(Request $requests)
     {
         $validators = [
@@ -438,5 +454,179 @@ class LenderIndividualController extends Controller
             "message" => 'Informasi Usaha ditambahkan',
         ]);
 
+    }
+
+    public function post_document(Request $requests)
+    {
+        $validators = [
+            'personal_id' => 'required',
+            'photo_ktp' => 'required|image|mimes:png,jpg,jpeg|',
+            'selfie_photo' => 'required|image|mimes:png,jpg,jpeg|',
+            'photo_npwp' => 'required|image|mimes:png,jpg,jpeg|',
+            'photo_salary_slip' => 'required|image|mimes:png,jpg|',
+        ];
+
+        $messagesvalidator = [
+            'personal_id.required' => 'Form Informasi Pribadi tidak boleh kosong',
+            'photo_ktp.image' => 'Foto KTP harus dalam format gambar',
+            'photo_ktp.required' => 'Foto KTP tidak boleh kosong',
+            'selfie_photo.required' => 'Swafoto tidak boleh kosong',
+            'photo_npwp.required' => 'Foto NPWP tidak boleh kosong',
+            'photo_salary_slip.required' => 'Foto Slip Gaji tidak boleh kosong',
+        ];
+
+        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        if ($validation->fails()) {
+            $json = [
+                "status" => false,
+                "message" => $validation->messages(),
+            ];
+            return response()->json($json);
+        }
+
+        $imageData = [];
+        $path = public_path() . '/upload/lender/individu/file/attachment';
+        if ($requests->hasFile('photo_ktp')) {
+            $photo_ktp = $requests->file('photo_ktp');
+            $imageData['identity_image'] = 'lender_ktp' . Auth::id() . '_' . time() . '.' . $photo_ktp->getClientOriginalExtension();
+            $photo_ktp->move($path, $imageData['identity_image']);
+        }
+
+        if ($requests->hasFile('selfie_photo')) {
+            $selfie_photo = $requests->file('selfie_photo');
+            $imageData['self_image'] = 'lender_self_image' . Auth::id() . '_' . time() . '.' . $selfie_photo->getClientOriginalExtension();
+            $selfie_photo->move($path, $imageData['self_image']);
+        }
+
+        if ($requests->hasFile('photo_npwp')) {
+            $photo_npwp = $requests->file('photo_npwp');
+            $imageData['npwp_image'] = 'lender_npwp_image' . Auth::id() . '_' . time() . '.' . $photo_npwp->getClientOriginalExtension();
+            $photo_npwp->move($path, $imageData['npwp_image']);
+        }
+
+        if ($requests->hasFile('photo_id_card')) {
+            $photo_id_card = $requests->file('photo_id_card');
+            $imageData['id_card_image'] = 'lender_id_card_image' . Auth::id() . '_' . time() . '.' . $photo_id_card->getClientOriginalExtension();
+            $photo_id_card->move($path, $imageData['id_card_image']);
+        }
+
+        if ($requests->hasFile('photo_salary_slip')) {
+            $photo_salary_slip = $requests->file('photo_salary_slip');
+            $imageData['sallary_slip_image'] = 'lender_sallary_slip_image' . Auth::id() . '_' . time() . '.' . $photo_salary_slip->getClientOriginalExtension();
+            $photo_salary_slip->move($path, $imageData['sallary_slip_image']);
+        }
+
+        LenderIndividualFile::updateOrCreate([
+            'id_lender_individual' => $requests->personal_id,
+        ], $imageData);
+
+        return response()->json([
+            "status" => true,
+            "message" => 'Informasi Berkas ditambahkan',
+        ]);
+    }
+
+    public function post_document_sme(Request $requests)
+    {
+        $validators = [
+            'personal_id' => 'required',
+            'photo_ktp' => 'required|image|mimes:png,jpg,jpeg|',
+            'selfie_photo' => 'required|image|mimes:png,jpg,jpeg|',
+            'photo_npwp' => 'required|image|mimes:png,jpg,jpeg|',
+            'business_npwp_image' => 'required|image|mimes:png,jpg,jpeg|',
+            'business_place_image' => 'required|image|mimes:png,jpg,jpeg|',
+            'license_business_document_image' => 'required|image|mimes:png,jpg,jpeg|',
+            'proof_of_ownership_image' => 'required|image|mimes:png,jpg,jpeg|',
+            'document_image' => 'required|image|mimes:png,jpg,jpeg|',
+            'business_activity_image' => 'required|image|mimes:png,jpg,jpeg|',
+        ];
+
+        $messagesvalidator = [
+            'personal_id.required' => 'Form Informasi Pribadi tidak boleh kosong',
+            'photo_ktp.image' => 'Foto KTP harus dalam format gambar',
+            'photo_ktp.required' => 'Foto KTP tidak boleh kosong',
+            'selfie_photo.required' => 'Swafoto tidak boleh kosong',
+            'photo_npwp.required' => 'Foto NPWP tidak boleh kosong',
+            'business_npwp_image.required' => 'Foto NPWP Usaha tidak boleh kosong',
+            'business_place_image.required' => 'Foto Tempat Usaha tidak boleh kosong',
+            'license_business_document_image.required' => 'Foto Foto Surat Izin Usaha atau Sejenisnya tidak boleh kosong',
+            'proof_of_ownership_image.required' => 'Foto Bukti Kepemilikan / Kontrak Tempat Usaha tidak boleh kosong',
+            'document_image.required' => 'Foto Dokumen Usaha tidak boleh kosong',
+            'business_activity_image.required' => 'Foto Aktifitas Usaha tidak boleh kosong',
+        ];
+
+        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        if ($validation->fails()) {
+            $json = [
+                "status" => false,
+                "message" => $validation->messages(),
+            ];
+            return response()->json($json);
+        }
+
+        $imageData = [];
+        $path = public_path() . '/upload/lender/individu/file/attachment';
+        if ($requests->hasFile('photo_ktp')) {
+            $photo_ktp = $requests->file('photo_ktp');
+            $imageData['identity_image'] = 'lender_ktp' . Auth::id() . '_' . time() . '.' . $photo_ktp->getClientOriginalExtension();
+            $photo_ktp->move($path, $imageData['identity_image']);
+        }
+
+        if ($requests->hasFile('selfie_photo')) {
+            $selfie_photo = $requests->file('selfie_photo');
+            $imageData['self_image'] = 'lender_self_image' . Auth::id() . '_' . time() . '.' . $selfie_photo->getClientOriginalExtension();
+            $selfie_photo->move($path, $imageData['self_image']);
+        }
+
+        if ($requests->hasFile('photo_npwp')) {
+            $photo_npwp = $requests->file('photo_npwp');
+            $imageData['npwp_image'] = 'lender_npwp_image' . Auth::id() . '_' . time() . '.' . $photo_npwp->getClientOriginalExtension();
+            $photo_npwp->move($path, $imageData['npwp_image']);
+        }
+
+        if ($requests->hasFile('business_npwp_image')) {
+            $business_npwp_image = $requests->file('business_npwp_image');
+            $imageData['business_npwp_image'] = 'lender_business_npwp_image' . Auth::id() . '_' . time() . '.' . $business_npwp_image->getClientOriginalExtension();
+            $business_npwp_image->move($path, $imageData['business_npwp_image']);
+        }
+
+        if ($requests->hasFile('business_place_image')) {
+            $business_place_image = $requests->file('business_place_image');
+            $imageData['business_place_image'] = 'lender_business_place_image' . Auth::id() . '_' . time() . '.' . $business_place_image->getClientOriginalExtension();
+            $business_place_image->move($path, $imageData['business_place_image']);
+        }
+
+        if ($requests->hasFile('license_business_document_image')) {
+            $license_business_document_image = $requests->file('license_business_document_image');
+            $imageData['license_business_document_image'] = 'lender_license_business_document_image' . Auth::id() . '_' . time() . '.' . $license_business_document_image->getClientOriginalExtension();
+            $license_business_document_image->move($path, $imageData['license_business_document_image']);
+        }
+
+        if ($requests->hasFile('proof_of_ownership_image')) {
+            $proof_of_ownership_image = $requests->file('proof_of_ownership_image');
+            $imageData['proof_of_ownership_image'] = 'lender_proof_of_ownership_image' . Auth::id() . '_' . time() . '.' . $proof_of_ownership_image->getClientOriginalExtension();
+            $proof_of_ownership_image->move($path, $imageData['proof_of_ownership_image']);
+        }
+
+        if ($requests->hasFile('document_image')) {
+            $document_image = $requests->file('document_image');
+            $imageData['document_image'] = 'lender_document_image' . Auth::id() . '_' . time() . '.' . $document_image->getClientOriginalExtension();
+            $document_image->move($path, $imageData['document_image']);
+        }
+
+        if ($requests->hasFile('business_activity_image')) {
+            $business_activity_image = $requests->file('business_activity_image');
+            $imageData['business_activity_image'] = 'lender_business_activity_image' . Auth::id() . '_' . time() . '.' . $business_activity_image->getClientOriginalExtension();
+            $business_activity_image->move($path, $imageData['business_activity_image']);
+        }
+
+        LenderIndividualFile::updateOrCreate([
+            'id_lender_individual' => $requests->personal_id,
+        ], $imageData);
+
+        return response()->json([
+            "status" => true,
+            "message" => 'Informasi Berkas ditambahkan',
+        ]);
     }
 }

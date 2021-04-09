@@ -176,6 +176,114 @@ $(document).on('ready',function () {
         })
     });
 
+    $("#form_individual_lender_documents").on("submit", function (event) {
+        event.preventDefault();
+        var btn = $("#btn_submit_personal_document");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/profile/lender-individu/document',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async: true,
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                loading();
+            },
+            success: function (response) {
+                close_loading();
+                if (response.status == true) {
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = '/profile/lender-individu/';
+                } else {
+                    var text = '';
+                    $.each(response.message, function (index, value) {
+                        text += '<p class="error"><i data-feather="x-square"></i> ' + value[0] + '</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function () {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert_error();
+                close_loading();
+            }
+        })
+    });
+
+    $("#form_individual_lender_documents_sme").on("submit", function (event) {
+        event.preventDefault();
+        var btn = $("#btn_submit_personal_document_sme");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/profile/lender-individu/document/sme',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async: true,
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                loading();
+            },
+            success: function (response) {
+                close_loading();
+                if (response.status == true) {
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = '/profile/lender-individu/';
+                } else {
+                    var text = '';
+                    $.each(response.message, function (index, value) {
+                        text += '<p class="error"><i data-feather="x-square"></i> ' + value[0] + '</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function () {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert_error();
+                close_loading();
+            }
+        })
+    });
+
     $("#lender_type").on("change", function (e) {
         if (this.value == 1) {
             showSME()

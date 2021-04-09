@@ -27,7 +27,7 @@
                     <p>Informasi Usaha</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="/profile/lender-individu/document" type="button" class="btn btn-default btn-circle"
+                    <a href="/profile/lender-individu/document/sme" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>

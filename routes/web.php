@@ -140,6 +140,9 @@ Route::post('/profile/lender-individu/occupation', 'LenderIndividualController@p
 Route::get('/profile/lender-individu/occupation/sme', 'LenderIndividualController@get_occupation_sme')->name('profile.lender.individu.occupation.sme');
 Route::post('/profile/lender-individu/occupation/sme', 'LenderIndividualController@post_occupation_sme')->name('profile.lender.individu.occupation.submit.sme');
 Route::get('/profile/lender-individu/document', 'LenderIndividualController@get_document')->name('profile.lender.individu.document');
+Route::get('/profile/lender-individu/document/sme', 'LenderIndividualController@get_document_sme')->name('profile.lender.individu.document.sme');
+Route::post('/profile/lender-individu/document', 'LenderIndividualController@post_document')->name('profile.lender.individu.document.submit');
+Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController@post_document_sme')->name('profile.lender.individu.document.submit.sme');
 
 //.............................................................................
 //...............................SSSSSS........................................
