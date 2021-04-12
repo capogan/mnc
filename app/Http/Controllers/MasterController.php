@@ -6,6 +6,8 @@ use App\Models\Village;
 use Illuminate\Http\Request;
 use App\Models\Regency;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class MasterController extends Controller
@@ -31,5 +33,18 @@ class MasterController extends Controller
             ->pluck("name","id");
         return response()->json($vil);
 
+    }
+    public function generatePDF()
+    {
+//        $id = Auth::id();
+//        $data_loan =
+
+        $data = [
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => '2021-04-12 17:00:00',
+        ];
+
+        $pdf = PDF::loadView('agreement.loan', $data);
+        return $pdf->stream();
     }
 }

@@ -179,6 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -235,6 +236,7 @@ return [
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
         'RequestConnection' => App\Helpers\Capi::class,
         'Utils' => App\Helpers\Utils::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

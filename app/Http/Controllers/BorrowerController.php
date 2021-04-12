@@ -410,18 +410,26 @@ class BorrowerController extends Controller
             }
 
             for ($row = 1; $row < $x; $row++){
-
+                $startDate = time();
+                $due_date = "";
+                if($row == 1){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+7 day', $startDate));
+                }else if($row == 2){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+14 day', $startDate));
+                }else if($row == 3){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+21 day', $startDate));
+                }
+                else if($row == 4){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+28 day', $startDate));
+                }
                 RequestLoanInstallments::create([
                     'id_request_loan'=>$id_loan,
                     'stages'=>$row,
                     'amount'=>$amount,
-                    'date_payment'=>date('Y-m-d H:i:s'),
-                    'due_date_payment'=>date('Y-m-d H:i:s'),
+                    'due_date_payment'=>$due_date,
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
-                    'status_payment'=>'1',
-                    'lender_uid'=>$loan->lender_uid,
-                    'borrower_uid'=>$loan->uid,
+                    'id_status_payment'=>'1',
 
                 ]);
             }
@@ -437,8 +445,9 @@ class BorrowerController extends Controller
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
         $loan_installments = LoanInstallment::
-        leftJoin('master_status_payment' ,'request_loan_installments.status_payment','=','master_status_payment.id')->
-        where('id_request_loan',$loan->id)->get();
+        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
+        where('id_request_loan',$loan->id)->orderBy('stages','ASC')
+            ->get();
         $data = [
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,

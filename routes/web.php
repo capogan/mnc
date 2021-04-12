@@ -153,6 +153,7 @@ Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.s
 Route::get('/get/city','MasterController@get_city')->name('city');
 Route::get('/get/district','MasterController@get_district')->name('district');
 Route::get('/get/villages','MasterController@get_villages')->name('get_villages');
+Route::get('laporan-pdf','MasterController@generatePDF');
 
 
 
