@@ -22,12 +22,12 @@
                     <p>Informasi Pribadi</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="/profile/lender-individu/occupation" type="button" class="btn btn-default btn-circle"
+                    <a href="/profile/lender-individu/occupation/sme" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">2</a>
                     <p>Informasi Pekerjaan</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="/profile/lender-individu/document" type="button" class="btn btn-primary btn-circle">3</a>
+                    <a href="/profile/lender-individu/document/sme" type="button" class="btn btn-primary btn-circle">3</a>
                     <p>Berkas</p>
                 </div>
             </div>
