@@ -31,11 +31,6 @@
                     <p>Berkas</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="/profile/lender-individu/document" type="button" class="btn btn-default btn-circle"
-                        disabled="disabled">3</a>
-                    <p>Berkas</p>
-                </div>
-                <div class="stepwizard-step">
                     <a href="/profile/lender-individu/sign" type="button" class="btn btn-default btn-circle">4</a>
                     <p>Tanda Tangan</p>
                 </div>

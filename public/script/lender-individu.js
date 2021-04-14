@@ -155,7 +155,7 @@ $(document).on('ready',function () {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender-individu/document';
+                    window.location.href = '/profile/lender-individu/document/sme';
                 } else {
                     var text = '';
                     $.each(response.message, function (index, value) {
@@ -209,7 +209,7 @@ $(document).on('ready',function () {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender-individu/';
+                    window.location.href = '/profile/lender-individu/sign';
                 } else {
                     var text = '';
                     $.each(response.message, function (index, value) {
@@ -263,7 +263,7 @@ $(document).on('ready',function () {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender-individu/';
+                    window.location.href = '/profile/lender-individu/sign';
                 } else {
                     var text = '';
                     $.each(response.message, function (index, value) {

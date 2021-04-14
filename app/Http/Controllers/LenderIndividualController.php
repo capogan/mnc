@@ -35,39 +35,52 @@ class LenderIndividualController extends Controller
         $this->middleware('auth');
     }
 
-    public function urlValidation()
+    public function urlValidation($u)
     {
-        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        $urlStep = [
+            '1' => 'profile/lender-individu',
+            '2a' => 'profile/lender-individu/occupation/sme',
+            '2b' => 'profile/lender-individu/occupation/',
+            '3a' => 'profile/lender-individu/document/sme',
+            '3b' => 'profile/lender-individu/document',
+            '4' => 'profile/lender-individu/sign',
+        ];
+
         $lender = LenderIndividualPersonalInfo::select('lender_type', 'uid')->where('uid', $u->id)->first();
         switch ($u->step) {
             case ('1'):
-                return redirect('profile/lender-individu');
+                return redirect($urlStep['1']);
                 break;
             case '2':
                 if ($lender->lender_type == 1) {
-                    return redirect('profile/lender-individu/occupation/sme');
+                    return redirect($urlStep['2a']);
                 } else {
-                    return redirect('profile/lender-individu/occupation');
+                    return redirect($urlStep['2b']);
                 }
                 break;
             case '3':
                 if ($lender->lender_type == 1) {
-                    return redirect('profile/lender-individu/document/sme');
+                    return redirect($urlStep['3a']);
                 } else {
-                    return redirect('profile/lender-individu/document');
+                    return redirect($urlStep['3b']);
                 }
                 break;
             case '4':
-                return redirect('profile/lender-individu/sign');
+                return redirect($urlStep['4']);
                 break;
             default:
-                return redirect('profile/lender-individu');
+                return redirect($urlStep['1']);
                 break;
         }
     }
 
     public function index(Request $request)
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 1 && $u->step != null && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
+
         $data = array(
             'provinces' => Province::get(),
             'married_status' => MarriedStatus::get(),
@@ -103,6 +116,11 @@ class LenderIndividualController extends Controller
 
     public function get_occupation()
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 2 && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
+
         $data = array(
             'provinces' => Province::get(),
             'length_of_work' => MasterLengthOfWork::Orderby('id', 'ASC')->get(),
@@ -127,6 +145,11 @@ class LenderIndividualController extends Controller
 
     public function get_occupation_sme()
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 2 && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
+
         $data = array(
             'provinces' => Province::get(),
             'legality' => Legality::Orderby('id', 'ASC')->get(),
@@ -153,6 +176,10 @@ class LenderIndividualController extends Controller
 
     public function get_document()
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 3 && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
         $data = array(
             'lender_individual_docs' => User::select(
                 'lender_individual_personal_info.lender_type',
@@ -168,6 +195,10 @@ class LenderIndividualController extends Controller
 
     public function get_document_sme()
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 3 && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
         $data = array(
             'lender_individual_docs' => User::select(
                 'lender_individual_personal_info.lender_type',
@@ -184,11 +215,11 @@ class LenderIndividualController extends Controller
     public function post_profile(Request $requests)
     {
         $validators = [
-            'identity_number' => 'required|integer',
+            'identity_number' => 'required|numeric',
             'full_name' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => 'required|numeric',
             'email' => 'required',
-            'whatsapp_number' => 'required',
+            'whatsapp_number' => 'required|numeric',
             'gender' => 'required',
             'dob' => 'required|date',
             'pob' => 'required',
@@ -200,25 +231,27 @@ class LenderIndividualController extends Controller
             'city' => 'required',
             'district' => 'required',
             'villages' => 'required',
-            'kodepos' => 'required|integer',
+            'kodepos' => 'required|numeric',
             'emergency_name' => 'required',
             'relationship_as' => 'required',
-            'emergency_phone' => 'required',
+            'emergency_phone' => 'required|numeric',
             'emergency_full_address' => 'required',
             'bank_id' => 'required',
-            'rek_number' => 'required',
+            'rek_number' => 'required|numeric',
             'rek_name' => 'required',
-            'no_hp_in_bank' => 'required',
+            'no_hp_in_bank' => 'required|numeric',
             'lender_type' => 'required',
         ];
 
         $messagesvalidator = [
             'identity_number.required' => 'Nomor KTP tidak boleh kosong',
-            'identity_number.integer' => 'Nomor KTP harus angka',
+            'identity_number.numeric' => 'Nomor KTP harus angka',
             'full_name.required' => 'Nama Lengkap tidak boleh kosong',
             'phone_number.required' => 'Nomor Telepon tidak boleh kosong',
+            'phone_number.numeric' => 'Nomor Telepon harus angka',
             'email.required' => 'Email tidak boleh kosong',
             'whatsapp_number.required' => 'Nomor Whatsapp tidak boleh kosong',
+            'whatsapp_number.numeric' => 'Nomor Whatsapp harus angka',
             'gender.required' => 'Jenis Kelamin tidak boleh kosong',
             'pob.required' => 'Tempat Lahir tidak boleh kosong',
             'dob.required' => 'Tanggal Lahir tidak boleh kosong',
@@ -231,14 +264,16 @@ class LenderIndividualController extends Controller
             'district.required' => 'Kecamatan tidak boleh kosong',
             'villages.required' => 'Kelurahan tidak boleh kosong',
             'kodepos.required' => 'Kode Pos tidak boleh kosong',
-            'kodepos.integer' => 'Kode Pos harus angka',
+            'kodepos.numeric' => 'Kode Pos harus angka',
             'emergency_name.required' => 'Nama Kerabat tidak boleh kosong',
             'relationship_as.required' => 'Hubungan tidak boleh kosong',
             'emergency_phone.required' => 'Nomor Telepon Kerabat tidak boleh kosong',
+            'emergency_phone.numeric' => 'Nomor Telepon Kerabat harus angka',
             'emergency_full_address.required' => 'Alamat Kerabat tidak boleh kosong',
             'bank_id.required' => 'Nama Bank Penerima tidak boleh kosong',
             'rek_name.required' => 'Nama Rekening tidak boleh kosong',
             'rek_number.required' => 'Nomor Rekening tidak boleh kosong',
+            'rek_number.numeric' => 'Nomor Rekening harus angka',
             'no_hp_in_bank.required' => 'Nomor Telepon yang Didaftarkan di Bank tidak boleh kosong',
             'lender_type.required' => 'Jenis Lender Individu tidak boleh kosong',
         ];
@@ -343,17 +378,17 @@ class LenderIndividualController extends Controller
         $validators = [
             'personal_id' => 'required',
             'company_name' => 'required',
-            'company_phone_number' => 'required',
+            'company_phone_number' => 'required|numeric',
             'npwp_of_bussiness' => 'required',
             'occupation' => 'required',
-            'total_income' => 'required',
+            'total_income' => 'required|numeric',
             'payment_date' => 'required',
             'length_of_work' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
             'villages' => 'required',
-            'office_zip_code' => 'required',
+            'office_zip_code' => 'required|numeric',
             'full_address' => 'required',
         ];
 
@@ -361,9 +396,11 @@ class LenderIndividualController extends Controller
             'personal_id.required' => 'Form Informasi Pribadi tidak boleh kosong',
             'company_name.required' => 'Nama Perusahaan tidak boleh kosong',
             'company_phone_number.required' => 'Nomor Telepon Perusahaan tidak boleh kosong',
+            'company_phone_number.numeric' => 'Nomor Telepon Perusahaan harus angka',
             'npwp_of_bussiness.required' => 'Nomor NPWP tidak boleh kosong',
             'occupation.required' => 'Pekerjaan tidak boleh kosong',
             'total_income.required' => 'Tingkat Pendapatan tidak boleh kosong',
+            'total_income.numeric' => 'Tingkat Pendapatan harus angka',
             'payment_date.required' => 'Tanggal Penggajian Setiap Bulan tidak boleh kosong',
             'length_of_work.required' => 'Lama Waktu Bekerja',
             'province.required' => 'Propinsi tidak boleh kosong',
@@ -371,6 +408,7 @@ class LenderIndividualController extends Controller
             'district.required' => 'Kecamatan tidak boleh kosong',
             'villages.required' => 'Kelurahan tidak boleh kosong',
             'office_zip_code.required' => 'Kode Pos tidak boleh kosong',
+            'office_zip_code.numeric' => 'Kode Pos harus angka',
             'full_address.required' => 'Alamat tidak boleh kosong',
         ];
 
@@ -426,7 +464,7 @@ class LenderIndividualController extends Controller
         $validators = [
             'personal_id' => 'required',
             'company_name' => 'required',
-            'company_phone_number' => 'required',
+            'company_phone_number' => 'required|numeric',
             'business_legality' => 'required',
             'no_siup' => 'required',
             'npwp_of_bussiness' => 'required',
@@ -438,18 +476,19 @@ class LenderIndividualController extends Controller
             'city' => 'required',
             'district' => 'required',
             'villages' => 'required',
-            'office_zip_code' => 'required',
+            'office_zip_code' => 'required|numeric',
             'full_address' => 'required',
-            'average_sales_revenue_six_month' => 'required',
-            'average_monthly_expenditure_six_month' => 'required',
-            'average_monthly_profit_six_month' => 'required',
-            'total_employee' => 'required',
+            'average_sales_revenue_six_month' => 'required|numeric',
+            'average_monthly_expenditure_six_month' => 'required|numeric',
+            'average_monthly_profit_six_month' => 'required|numeric',
+            'total_employee' => 'required|numeric',
         ];
 
         $messagesvalidator = [
             'personal_id.required' => 'Form Informasi Pribadi tidak boleh kosong',
             'company_name.required' => 'Nama Perusahaan tidak boleh kosong',
             'company_phone_number.required' => 'Nomor Telepon Perusahaan tidak boleh kosong',
+            'company_phone_number.numeric' => 'Nomor Telepon Perusahaan harus angka',
             'npwp_of_bussiness.required' => 'Nomor NPWP tidak boleh kosong',
             'business_legality.required' => 'Status Badan Hukum Usaha tidak boleh kosong',
             'no_siup.required' => 'Nomor Izin Usaha tidak boleh kosong',
@@ -462,11 +501,16 @@ class LenderIndividualController extends Controller
             'district.required' => 'Kecamatan tidak boleh kosong',
             'villages.required' => 'Kelurahan tidak boleh kosong',
             'office_zip_code.required' => 'Kode Pos tidak boleh kosong',
+            'office_zip_code.numeric' => 'Kode Pos harus angka',
             'full_address.required' => 'Alamat Lengkap Tempat Usaha tidak boleh kosong',
             'average_sales_revenue_six_month.required' => 'Rata-Rata Penjualan per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'average_sales_revenue_six_month.numeric' => 'Rata-Rata Penjualan per Bulan (6 bulan terakhir) harus angka',
             'average_monthly_expenditure_six_month.required' => 'Rata-Rata Pengeluaran per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'average_monthly_expenditure_six_month.numeric' => 'Rata-Rata Pengeluaran per Bulan (6 bulan terakhir) harus angka',
             'average_monthly_profit_six_month.required' => 'Rata-Rata Keuntungan per Bulan (6 bulan terakhir) tidak boleh kosong',
+            'average_monthly_profit_six_month.numeric' => 'Rata-Rata Keuntungan per Bulan (6 bulan terakhir) harus angka',
             'total_employee.required' => 'Total Karyawan Saat Ini tidak boleh kosong',
+            'total_employee.numeric' => 'Total Karyawan Saat Ini harus angka',
         ];
 
         $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
@@ -724,6 +768,10 @@ class LenderIndividualController extends Controller
 
     public function get_sign()
     {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        if ($u->step != 4 && $u->step != 5) {
+            return $this->urlValidation($u);
+        }
         $data = array(
             'sign_agreement' => User::select(
                 'lender_individual_personal_info.*',
