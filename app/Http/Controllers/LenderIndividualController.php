@@ -19,6 +19,7 @@ use App\Models\Province;
 use App\Siblings;
 use App\StatusOfResidence;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -34,13 +35,40 @@ class LenderIndividualController extends Controller
         $this->middleware('auth');
     }
 
+    public function urlValidation()
+    {
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        $lender = LenderIndividualPersonalInfo::select('lender_type', 'uid')->where('uid', $u->id)->first();
+        switch ($u->step) {
+            case ('1'):
+                return redirect('profile/lender-individu');
+                break;
+            case '2':
+                if ($lender->lender_type == 1) {
+                    return redirect('profile/lender-individu/occupation/sme');
+                } else {
+                    return redirect('profile/lender-individu/occupation');
+                }
+                break;
+            case '3':
+                if ($lender->lender_type == 1) {
+                    return redirect('profile/lender-individu/document/sme');
+                } else {
+                    return redirect('profile/lender-individu/document');
+                }
+                break;
+            case '4':
+                return redirect('profile/lender-individu/sign');
+                break;
+            default:
+                return redirect('profile/lender-individu');
+                break;
+        }
+    }
+
     public function index(Request $request)
     {
-        $step = LenderIndividualPersonalInfo::where('uid', Auth::id())->first();
-        if (!$step) {
-            return redirect('profile/lender-individu');
-        }
-
+        return $this->urlValidation();
         $data = array(
             'provinces' => Province::get(),
             'married_status' => MarriedStatus::get(),
@@ -246,51 +274,64 @@ class LenderIndividualController extends Controller
             return response()->json($json);
         }
 
-        $insertID = LenderIndividualPersonalInfo::updateOrCreate([
-            'uid' => Auth::user()->id,
-        ], [
-            'identity_number' => $requests->identity_number,
-            'full_name' => $requests->full_name,
-            'phone_number' => $requests->phone_number,
-            'email' => $requests->email,
-            'whatsapp_number' => $requests->whatsapp_number,
-            'gender' => $requests->gender,
-            'dob' => $requests->dob,
-            'pob' => $requests->pob,
-            'education' => $requests->education,
-            'mother_name' => $requests->mother_name,
-            'married_status' => $requests->married_status,
-            'full_address' => $requests->full_address,
-            'province' => $requests->province,
-            'city' => $requests->city,
-            'district' => $requests->district,
-            'villages' => $requests->villages,
-            'kodepos' => $requests->kodepos,
-            'lender_type' => $requests->lender_type,
-            'status_of_residence' => $requests->status_of_residence,
-            'no_npwp' => $requests->no_npwp,
-            'total_credit_card' => $requests->total_credit_card,
-            'no_bpjs_tk' => $requests->no_bpjs_tk,
-            'no_bpjs_kesehatan' => $requests->no_bpjs_kesehatan,
-        ]);
+        DB::beginTransaction();
+        try {
+            $insertID = LenderIndividualPersonalInfo::updateOrCreate([
+                'uid' => Auth::user()->id,
+            ], [
+                'identity_number' => $requests->identity_number,
+                'full_name' => $requests->full_name,
+                'phone_number' => $requests->phone_number,
+                'email' => $requests->email,
+                'whatsapp_number' => $requests->whatsapp_number,
+                'gender' => $requests->gender,
+                'dob' => $requests->dob,
+                'pob' => $requests->pob,
+                'education' => $requests->education,
+                'mother_name' => $requests->mother_name,
+                'married_status' => $requests->married_status,
+                'full_address' => $requests->full_address,
+                'province' => $requests->province,
+                'city' => $requests->city,
+                'district' => $requests->district,
+                'villages' => $requests->villages,
+                'kodepos' => $requests->kodepos,
+                'lender_type' => $requests->lender_type,
+                'status_of_residence' => $requests->status_of_residence,
+                'no_npwp' => $requests->no_npwp,
+                'total_credit_card' => $requests->total_credit_card,
+                'no_bpjs_tk' => $requests->no_bpjs_tk,
+                'no_bpjs_kesehatan' => $requests->no_bpjs_kesehatan,
+            ]);
 
-        LenderIndividualEmergencyContact::updateOrCreate([
-            'id_lender_individual' => $insertID->id,
-        ], [
-            'emergency_name' => $requests->emergency_name,
-            'emergency_siblings' => $requests->relationship_as,
-            'emergency_phone_number' => $requests->emergency_phone,
-            'emergency_full_address' => $requests->emergency_full_address,
-        ]);
+            LenderIndividualEmergencyContact::updateOrCreate([
+                'id_lender_individual' => $insertID->id,
+            ], [
+                'emergency_name' => $requests->emergency_name,
+                'emergency_siblings' => $requests->relationship_as,
+                'emergency_phone_number' => $requests->emergency_phone,
+                'emergency_full_address' => $requests->emergency_full_address,
+            ]);
 
-        LenderIndividualBankAccount::updateOrCreate([
-            'id_lender_individual' => $insertID->id,
-        ], [
-            'account_name' => $requests->rek_number,
-            'id_bank' => $requests->bank_id,
-            'account_number' => $requests->rek_name,
-            'phone_number_register_in_bank' => $requests->no_hp_in_bank,
-        ]);
+            LenderIndividualBankAccount::updateOrCreate([
+                'id_lender_individual' => $insertID->id,
+            ], [
+                'account_name' => $requests->rek_number,
+                'id_bank' => $requests->bank_id,
+                'account_number' => $requests->rek_name,
+                'phone_number_register_in_bank' => $requests->no_hp_in_bank,
+            ]);
+
+            User::where('id', Auth::id())->update(['step' => 2]);
+            DB::commit();
+        } catch (Exception $e) {
+            $json = [
+                "status" => false,
+                "message" => $e->messages(),
+            ];
+            return response()->json($json);
+            DB::rollback();
+        }
 
         return response()->json([
             "status" => true,
@@ -343,23 +384,36 @@ class LenderIndividualController extends Controller
             return response()->json($json);
         }
 
-        LenderIndividualJobInformation::updateOrCreate([
-            'id_lender_individual' => $requests->personal_id,
-        ], [
-            'payment_level' => $requests->total_income,
-            'npwp' => $requests->npwp_of_bussiness,
-            'payment_date' => $requests->payment_date,
-            'job' => $requests->occupation,
-            'id_length_work' => $requests->length_of_work,
-            'company_phone_number' => $requests->company_phone_number,
-            'province' => $requests->province,
-            'city' => $requests->city,
-            'district' => $requests->district,
-            'villages' => $requests->villages,
-            'company_full_address' => $requests->full_address,
-            'company_name' => $requests->company_name,
-            'kode_pos' => $requests->office_zip_code,
-        ]);
+        DB::beginTransaction();
+        try {
+            LenderIndividualJobInformation::updateOrCreate([
+                'id_lender_individual' => $requests->personal_id,
+            ], [
+                'payment_level' => $requests->total_income,
+                'npwp' => $requests->npwp_of_bussiness,
+                'payment_date' => $requests->payment_date,
+                'job' => $requests->occupation,
+                'id_length_work' => $requests->length_of_work,
+                'company_phone_number' => $requests->company_phone_number,
+                'province' => $requests->province,
+                'city' => $requests->city,
+                'district' => $requests->district,
+                'villages' => $requests->villages,
+                'company_full_address' => $requests->full_address,
+                'company_name' => $requests->company_name,
+                'kode_pos' => $requests->office_zip_code,
+            ]);
+
+            User::where('id', Auth::id())->update(['step' => 3]);
+            DB::commit();
+        } catch (Exception $e) {
+            $json = [
+                "status" => false,
+                "message" => $e->messages(),
+            ];
+            return response()->json($json);
+            DB::rollback();
+        }
 
         return response()->json([
             "status" => true,
@@ -425,29 +479,42 @@ class LenderIndividualController extends Controller
             return response()->json($json);
         }
 
-        LenderIndividualBusinessInfo::updateOrCreate([
-            'id_lender_individual' => $requests->personal_id,
-        ], [
-            'id_business_legality' => $requests->business_legality,
-            'company_name' => $requests->company_name,
-            'no_siup' => $requests->no_siup,
-            'phone_number' => $requests->company_phone_number,
-            'date_of_business_birth' => $requests->founded_date,
-            'business_place_status' => $requests->business_place_status,
-            'province' => $requests->province,
-            'city' => $requests->city,
-            'district' => $requests->district,
-            'villages' => $requests->villages,
-            'no_npwp' => $requests->npwp_of_bussiness,
-            'average_sales_revenue_six_month' => $requests->average_sales_revenue_six_month,
-            'average_monthly_expenditure_six_month' => $requests->average_monthly_expenditure_six_month,
-            'average_monthly_profit_six_month' => $requests->average_monthly_profit_six_month,
-            'business_type' => $requests->business_category,
-            'business_type_detail' => $requests->business_type_detail,
-            'total_employee' => $requests->total_employee,
-            'full_address' => $requests->full_address,
-            'kodepos' => $requests->office_zip_code,
-        ]);
+        DB::beginTransaction();
+        try {
+            LenderIndividualBusinessInfo::updateOrCreate([
+                'id_lender_individual' => $requests->personal_id,
+            ], [
+                'id_business_legality' => $requests->business_legality,
+                'company_name' => $requests->company_name,
+                'no_siup' => $requests->no_siup,
+                'phone_number' => $requests->company_phone_number,
+                'date_of_business_birth' => $requests->founded_date,
+                'business_place_status' => $requests->business_place_status,
+                'province' => $requests->province,
+                'city' => $requests->city,
+                'district' => $requests->district,
+                'villages' => $requests->villages,
+                'no_npwp' => $requests->npwp_of_bussiness,
+                'average_sales_revenue_six_month' => $requests->average_sales_revenue_six_month,
+                'average_monthly_expenditure_six_month' => $requests->average_monthly_expenditure_six_month,
+                'average_monthly_profit_six_month' => $requests->average_monthly_profit_six_month,
+                'business_type' => $requests->business_category,
+                'business_type_detail' => $requests->business_type_detail,
+                'total_employee' => $requests->total_employee,
+                'full_address' => $requests->full_address,
+                'kodepos' => $requests->office_zip_code,
+            ]);
+
+            User::where('id', Auth::id())->update(['step' => 3]);
+            DB::commit();
+        } catch (Exception $e) {
+            $json = [
+                "status" => false,
+                "message" => $e->messages(),
+            ];
+            return response()->json($json);
+            DB::rollback();
+        }
 
         return response()->json([
             "status" => true,
@@ -516,9 +583,22 @@ class LenderIndividualController extends Controller
             $photo_salary_slip->move($path, $imageData['sallary_slip_image']);
         }
 
-        LenderIndividualFile::updateOrCreate([
-            'id_lender_individual' => $requests->personal_id,
-        ], $imageData);
+        DB::beginTransaction();
+        try {
+            LenderIndividualFile::updateOrCreate([
+                'id_lender_individual' => $requests->personal_id,
+            ], $imageData);
+
+            User::where('id', Auth::id())->update(['step' => 4]);
+            DB::commit();
+        } catch (Exception $e) {
+            $json = [
+                "status" => false,
+                "message" => $e->messages(),
+            ];
+            return response()->json($json);
+            DB::rollback();
+        }
 
         return response()->json([
             "status" => true,
@@ -620,13 +700,39 @@ class LenderIndividualController extends Controller
             $business_activity_image->move($path, $imageData['business_activity_image']);
         }
 
-        LenderIndividualFile::updateOrCreate([
-            'id_lender_individual' => $requests->personal_id,
-        ], $imageData);
+        DB::beginTransaction();
+        try {
+            LenderIndividualFile::updateOrCreate([
+                'id_lender_individual' => $requests->personal_id,
+            ], $imageData);
+
+            User::where('id', Auth::id())->update(['step' => 4]);
+            DB::commit();
+        } catch (Exception $e) {
+            $json = [
+                "status" => false,
+                "message" => $e->messages(),
+            ];
+            return response()->json($json);
+            DB::rollback();
+        }
 
         return response()->json([
             "status" => true,
             "message" => 'Informasi Berkas ditambahkan',
         ]);
+    }
+
+    public function get_sign()
+    {
+        $data = array(
+            'sign_agreement' => User::select(
+                'lender_individual_personal_info.*',
+                'users.email'
+            )
+                ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+                ->where('users.id', Auth::id())->first(),
+        );
+        return view('pages.lender.individu.sign_agreement', $this->merge_response($data, static::$CONFIG));
     }
 }
