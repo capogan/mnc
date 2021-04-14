@@ -143,6 +143,7 @@ Route::get('/profile/lender-individu/document', 'LenderIndividualController@get_
 Route::get('/profile/lender-individu/document/sme', 'LenderIndividualController@get_document_sme')->name('profile.lender.individu.document.sme');
 Route::post('/profile/lender-individu/document', 'LenderIndividualController@post_document')->name('profile.lender.individu.document.submit');
 Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController@post_document_sme')->name('profile.lender.individu.document.submit.sme');
+Route::get('/profile/lender-individu/sign', 'LenderIndividualController@get_sign')->name('profile.lender.individu.sign');
 
 //.............................................................................
 //...............................SSSSSS........................................

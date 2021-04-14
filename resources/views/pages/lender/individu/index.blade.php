@@ -40,6 +40,10 @@
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender-individu/sign" type="button" class="btn btn-default btn-circle">4</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -62,7 +66,7 @@
                                                         <input type="hidden" name="id_personal_info" id="id_personal_info"
                                                         value="{{ isset($lender_individual_personal_info->id) ? $lender_individual_personal_info->id : '' }}">
                                                         <input type="hidden" name="lender_type_info" id="lender_type_info"
-                                                            value="{{ isset($lender_individual_personal_info->lender_type) ? $lender_individual_personal_info->lender_type : '' }}">
+                                                            value="{{ isset($lender_individual_personal_info->lender_type) ? $lender_individual_personal_info->lender_type : '1' }}">
                                                         <h3>Informasi Pribadi</h3>
                                                         <hr>
                                                         <div class="result-message"></div>
@@ -77,8 +81,8 @@
                                                                                 {{ $lender_individual_personal_info->lender_type == $k ? 'selected' : '' }}>
                                                                                 {{ $val }}</option>
                                                                         @else
-                                                                            <option value="{{ $k }}">
-                                                                                {{ $k == 1 ? 'selected' : '' }}
+                                                                            <option value="{{ $k }}"
+                                                                                {{ $k == 1 ? 'selected' : '' }}>
                                                                                 {{ $val }}</option>
                                                                         @endif
                                                                     @endforeach
@@ -479,7 +483,7 @@
 
                                                         <div class="form-group mt-4">
                                                             <button type="submit" id="btn_submit_lender_individu"
-                                                                data-text="Tambahkan Data"
+                                                                data-text="Tambahkan Informasi"
                                                                 class="btn btn-primary btn-block"> Tambahkan Informasi
                                                             </button>
                                                         </div>

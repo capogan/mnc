@@ -30,6 +30,10 @@
                     <a href="/profile/lender-individu/document/sme" type="button" class="btn btn-primary btn-circle">3</a>
                     <p>Berkas</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender-individu/sign" type="button" class="btn btn-default btn-circle">4</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
 
@@ -387,9 +391,9 @@
                                                         </div>
 
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" data-text="Selesai"
+                                                            <button type="submit" data-text="Tambahkan Informasi"
                                                                 id="btn_submit_personal_document_sme"
-                                                                class="btn btn-primary btn-block"> Selesai </button>
+                                                                class="btn btn-primary btn-block"> Tambahkan Informasi </button>
                                                         </div>
                                                     </form>
                                                 </div>

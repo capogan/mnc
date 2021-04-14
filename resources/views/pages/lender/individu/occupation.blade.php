@@ -30,6 +30,15 @@
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender-individu/document" type="button" class="btn btn-default btn-circle"
+                        disabled="disabled">3</a>
+                    <p>Berkas</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="/profile/lender-individu/sign" type="button" class="btn btn-default btn-circle">4</a>
+                    <p>Tanda Tangan</p>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -209,7 +218,7 @@
                                                         </div>
 
                                                         <div class="form-group mt-5">
-                                                            <button type="submit" data-text="Tambahkan Data"
+                                                            <button type="submit" data-text="Tambahkan Informasi"
                                                                 id="btn_submit_individual_occupation"
                                                                 class="btn btn-primary btn-block"> Tambahkan Informasi
                                                             </button>
