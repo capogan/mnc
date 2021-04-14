@@ -68,7 +68,6 @@ class LenderIndividualController extends Controller
 
     public function index(Request $request)
     {
-        return $this->urlValidation();
         $data = array(
             'provinces' => Province::get(),
             'married_status' => MarriedStatus::get(),
