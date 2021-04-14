@@ -30,8 +30,13 @@
                         disabled="disabled">2</a>
                     <p>Informasi Usaha</p>
                 </div>
-                <div class="stepwizard-step">
+                <div class="stepwizard-step" id="non_sme_document">
                     <a href="/profile/lender-individu/document" type="button" class="btn btn-default btn-circle"
+                        disabled="disabled">3</a>
+                    <p>Berkas</p>
+                </div>
+                <div class="stepwizard-step" id="sme_document">
+                    <a href="/profile/lender-individu/document/sme" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>

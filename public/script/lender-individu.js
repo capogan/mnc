@@ -299,7 +299,9 @@ function showSME() {
     $("#sme_cc").show()
     $("#sme_bpjs").show()
     $("#sme_occupation").show()
+    $("#sme_document").show()
     $("#non_sme_occupation").hide()
+    $("#non_sme_document").hide()
 }
 
 function hideSME() {
@@ -307,7 +309,9 @@ function hideSME() {
     $("#sme_cc").hide()
     $("#sme_bpjs").hide()
     $("#sme_occupation").hide()
+    $("#sme_document").hide()
     $("#non_sme_occupation").show()
+    $("#non_sme_document").show()
 }
 
 function get_city(province_id, attr) {
