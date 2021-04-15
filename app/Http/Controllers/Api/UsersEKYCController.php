@@ -18,7 +18,7 @@ class UsersEKYCController extends Controller
 
     CONST SANDBOX_API_BASE_URL_V1 = 'http://oauth.privydev.id';
     CONST PRODUCTION_API_BASE_URL_V1 = 'http://oauth.privy.id';
-    
+
     public function index(Request $request){
 
 
@@ -48,19 +48,21 @@ class UsersEKYCController extends Controller
     {
         return (config('privyid.is_production')) ? self::PRODUCTION_API_BASE_URL : self::SANDBOX_API_BASE_URL;
     }
-  
 
-    public function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid){
-        $file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'rb');
+
+    public function requestRegistration(){
+        $ktp_file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
+        $selfie_file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
+
         $data = [
-            "email" => $email,
-            'phone' => $phone,
-            'selfie' => $selfie,
-            'ktp' => $ktp,
-            'identity' => json_encode([
-                'nik' => $nik,
-                'nama' => $name,
-                'tanggalLahir' => $dob
+            "email" => "kervin@yahoo.com",
+            'phone' => '08213612332',
+            'ktp' => $ktp_file,
+            'selfie' =>   $selfie_file,
+            'identity' =>json_encode([
+                'nik' => '1234123412341234',
+                'nama' => 'Richard Simbolon',
+                'tanggalLahir' => '1990-08-28'
             ])
         ];
         $client = Http::withHeaders([
@@ -71,8 +73,9 @@ class UsersEKYCController extends Controller
         ->withBasicAuth('mnc_capio','vx6mfn4yci32cmt6ddyl')
         ->asMultipart()
         ->post('https://api-sandbox.privy.id/v3/merchant/registration', $data);
+        print_r($client->body());
         //$response = json_decode($client->body());
-        $this->privylogs($client->body() , $uid);
+        //$this->privylogs($client->body() , $uid);
     }
     public function privylogs($response , $uid){
         $data = json_decode($response , true);
@@ -95,8 +98,8 @@ class UsersEKYCController extends Controller
         //$photo = response()->download(public_path('upload/ktp_41_1616591801.jpeg'));
         $client = new Client();
         $data = [
-            "email" => "richard.simbolon28@gmail.com",
-            'phone' => '081260332838',
+            "email" => "ogan_my@yahoo.com",
+            'phone' => '085275608369',
             'ktp' => $photo,
             'selfie' =>   $photo,
             'identity' =>json_encode([
@@ -117,20 +120,20 @@ class UsersEKYCController extends Controller
             'auth' => [
                 'mnc_capio','vx6mfn4yci32cmt6ddyl'
             ],
-           
+
         ]);
         exit;
         try {
-                
+
                 print_r($client);
             } catch (Exception $e) {
                 //throw new Exception ($e->getMessage(), $e->getResponse()->getStatusCode());
             }
 
-        
 
-        
-        
+
+
+
     }
 
 
@@ -199,7 +202,7 @@ class UsersEKYCController extends Controller
             $request = $client->request($type, $url, $options);
             $response = json_decode($request->getResponse()->getBody());
             return $response;
-            
+
         } catch (Exception $e) {
             throw new Exception ($e->getResponse()->getStatusCode());
         }

@@ -49,6 +49,9 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
             if(Auth::user()->group == 'lender'){
+                if (Auth::user()->level == 'individu'){
+                    return Redirect::to('/profile/lender-individu');
+                }
                 return Redirect::to('/profile/lender');
             }
         }
@@ -103,13 +106,13 @@ class BorrowerController extends Controller
         $provinces = Province::get();
         $regency = Regency::get();
         $siblings = Siblings::get();
-        $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::where('status',true)->get();
-        $partner_since = BecomePartner::get();
-        $building_status = BuildingStatus::get();
-        $estabilished = Estabilished::get();
-        $legality = Legality::get();
-        $employee = TotalEmployee::get();
+        $industry = IncomeFactory::orderBy('id','ASC')->get();
+        $criteria = BussinessCriteria::where('status',true)->orderBy('id','ASC')->get();
+        $partner_since = BecomePartner::orderBy('id','ASC')->get();
+        $building_status = BuildingStatus::orderBy('id','ASC')->get();
+        $estabilished = Estabilished::orderBy('id','ASC')->get();
+        $legality = Legality::orderBy('id','ASC')->get();
+        $employee = TotalEmployee::orderBy('id','ASC')->get();
         $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         $data = [
             'header_section' => 'step2',

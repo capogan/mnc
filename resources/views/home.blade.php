@@ -12,48 +12,7 @@
             </div>
         </div>
     </div>
-     <div class="rate-table">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/mortgage.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
-                        <div class="rate-box">
-                            <h1 class="loan-rate">3.74%</h1>
-                            <small class="rate-title">Home Loans</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/loan.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
-                        <div class="rate-box">
-                            <h1 class="loan-rate">8.96%</h1>
-                            <small class="rate-title">Personal Loans</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/car.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
-                        <div class="rate-box">
-                            <h1 class="loan-rate">6.70%</h1>
-                            <small class="rate-title">Car Loans</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/credit-card.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
-                        <div class="rate-box">
-                            <h1 class="loan-rate">9.00%</h1>
-                            <small class="rate-title">Credit card</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+     
 
    
 
@@ -61,7 +20,7 @@
         <div class="row mt-5 mb-5">
             <div class="row">
                 <div class="col">
-                
+                <img src="/images/siap-works.png">
                 </div>
                 <div class="col">
                     <div class="row">
@@ -79,7 +38,7 @@
         
     </div>
     <div class="container text-center my-3">
-   
+    
     <div class="row mx-auto my-auto">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
             <div class="carousel-inner w-100" role="listbox">

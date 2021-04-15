@@ -102,19 +102,36 @@
         <!-- footer -->
         <div class="container">
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="col-sm-2">
                     <div class="logo">
                         <!-- Footer Logo -->
-                       <img src="/images/ojk3.png" alt="Logo">
+                       <img src="/images/ojk3.png" alt="Logo"/>
                         </div>
                     <!-- /.Footer Logo -->
                 </div>
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+                 <div class="col-sm-2">
+                    <div class="logo-afpi mt-3">
+                        <!-- Footer Logo -->
+                       <img src="/images/logo_afpi.png" alt="Logo"/>
+                        </div>
+                    <!-- /.Footer Logo -->
+                </div>
+                 <div class="col-sm-3">
+                    <div class="logo ml-5">
+                        <!-- Footer Logo -->
+                       <img src="/images/mnc.png" alt="Logo"/>
+                        </div>
+                    <!-- /.Footer Logo -->
+                </div>
+                <div class="col">
+                    
+                        <div class="row">
+                        <div class="col">
                             <h3 class="newsletter-title">Signup Our Newsletter</h3>
                         </div>
-                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                        </div>
+                        <div class="row">
+                        <div class="col">
                             <div class="newsletter-form">
                                 <!-- Newsletter Form -->
                                 <form action="https://jituchauhan.com/borrow/bootstrap-4/newsletter.php" method="post">
@@ -129,7 +146,8 @@
                             </div>
                             <!-- /.Newsletter Form -->
                         </div>
-                    </div>
+                        </div>
+                   
                     <!-- /.col-lg-6 -->
                 </div>
             </div>

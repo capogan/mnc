@@ -32,5 +32,5 @@ Route::post('/borrower/credit/scoring', 'Api\ApiCreditScoringController@check_my
 Route::post('/sms/otp', 'Api\FcmController@limit_credit')->name('api.pcg.response');
 Route::post('/ekyc/callback', 'Api\UsersEKYCController@index')->name('user.ekyc.calback');
 //Route::post('/ekyc/post', 'Api\UsersEKYCController@requestRegistration')->name('user.ekyc.calback');
-Route::post('/ekyc/post', 'Api\UsersEKYCController@ekyc')->name('user.ekyc.calback');
+Route::post('/ekyc/post', 'Api\UsersEKYCController@requestRegistration')->name('user.ekyc.calback');
 Route::post('/ekycres', 'Api\UsersEKYCController@ekyc22')->name('user.ekyc.calback');

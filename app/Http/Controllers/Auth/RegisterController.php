@@ -90,8 +90,7 @@ class RegisterController extends Controller
 
     protected  function showRegistrationFormLender(Request $request){
         $group = 'lender';
-        $level = 'business';
-        return view('auth.register_lender',compact('group','level'));
+        return view('auth.register_lender',compact('group'));
     }
     protected  function showRegistrationFormBorrower(Request $request){
         $group = 'borrower';
