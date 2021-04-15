@@ -2,7 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/sign.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/sign.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/public/js/badcredit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/badcredit/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/funding/individu/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/FundingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/app/Http/Controllers/FundingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/layouts/nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UsersEKYCController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UsersEKYCController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BorrowerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register_lender.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register_lender.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,6 +183,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/aggrement" />
       <recent name="$PROJECT_DIR$/../Siap-Admin/resources/views/pages/home" />
     </key>
   </component>

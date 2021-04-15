@@ -25,7 +25,7 @@
                                             <td >{{$val->stages}}</td>
                                             <td>Rp {{ number_format(($val->amount) ,0,',','.') }}</td>
                                             <td>{{$val->date_payment}}</td>
-                                            <td>{{$val->due_date_payment}}</td>
+                                            <td>{{Utils::date_in_indonesia($val->due_date_payment)}}</td>
                                             <td>{{$val->status_name}}</td>
                                         </tr>
                                     @endforeach

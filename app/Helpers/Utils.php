@@ -155,4 +155,25 @@ class Utils {
 
     }
 
+    public static function date_in_indonesia($date){
+        $month = array (
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+
+        $array = explode('-', $date);
+        return $array[2] . ' ' . $month[ (int)$array[1] ] . ' ' . $array[0];
+
+    }
+
 }

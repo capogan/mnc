@@ -103,13 +103,13 @@ class BorrowerController extends Controller
         $provinces = Province::get();
         $regency = Regency::get();
         $siblings = Siblings::get();
-        $industry = IncomeFactory::get();
-        $criteria = BussinessCriteria::where('status',true)->get();
-        $partner_since = BecomePartner::get();
-        $building_status = BuildingStatus::get();
-        $estabilished = Estabilished::get();
-        $legality = Legality::get();
-        $employee = TotalEmployee::get();
+        $industry = IncomeFactory::orderBy('id','ASC')->get();
+        $criteria = BussinessCriteria::where('status',true)->orderBy('id','ASC')->get();
+        $partner_since = BecomePartner::orderBy('id','ASC')->get();
+        $building_status = BuildingStatus::orderBy('id','ASC')->get();
+        $estabilished = Estabilished::orderBy('id','ASC')->get();
+        $legality = Legality::orderBy('id','ASC')->get();
+        $employee = TotalEmployee::orderBy('id','ASC')->get();
         $business = BusinessInfo::rightJoin('users' , 'users.id' , 'personal_business.uid')->select('users.id as user_id','personal_business.*')->where('users.id',$uid)->first();
         $data = [
             'header_section' => 'step2',
@@ -410,18 +410,26 @@ class BorrowerController extends Controller
             }
 
             for ($row = 1; $row < $x; $row++){
-
+                $startDate = time();
+                $due_date = "";
+                if($row == 1){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+7 day', $startDate));
+                }else if($row == 2){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+14 day', $startDate));
+                }else if($row == 3){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+21 day', $startDate));
+                }
+                else if($row == 4){
+                    $due_date =   date('Y-m-d H:i:s', strtotime('+28 day', $startDate));
+                }
                 RequestLoanInstallments::create([
                     'id_request_loan'=>$id_loan,
                     'stages'=>$row,
                     'amount'=>$amount,
-                    'date_payment'=>date('Y-m-d H:i:s'),
-                    'due_date_payment'=>date('Y-m-d H:i:s'),
+                    'due_date_payment'=>$due_date,
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
-                    'status_payment'=>'1',
-                    'lender_uid'=>$loan->lender_uid,
-                    'borrower_uid'=>$loan->uid,
+                    'id_status_payment'=>'1',
 
                 ]);
             }
@@ -437,8 +445,9 @@ class BorrowerController extends Controller
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
         $loan_installments = LoanInstallment::
-        leftJoin('master_status_payment' ,'request_loan_installments.status_payment','=','master_status_payment.id')->
-        where('id_request_loan',$loan->id)->get();
+        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
+        where('id_request_loan',$loan->id)->orderBy('stages','ASC')
+            ->get();
         $data = [
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,

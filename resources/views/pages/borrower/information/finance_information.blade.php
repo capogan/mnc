@@ -27,7 +27,7 @@
                                             <td>{{$item->invoice_number}}</td>
                                             <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
                                             <td><span class="label label-warning">{{$item->status_title }}</span></td>
-                                            <td>{{date('Y-m-d' , strtotime($item->created_at))}}</td>
+                                            <td>{{ Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->created_at)))}}</td>
                                             <td></td>
                                             @if($item->status == '19')
                                                 <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>

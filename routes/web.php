@@ -133,6 +133,18 @@ Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->na
 Route::get('/marketplace/{id}', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
 Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
 
+Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
+Route::post('/profile/lender-individu', 'LenderIndividualController@post_profile')->name('profile.lender.individu.submit');
+Route::get('/profile/lender-individu/occupation', 'LenderIndividualController@get_occupation')->name('profile.lender.individu.occupation');
+Route::post('/profile/lender-individu/occupation', 'LenderIndividualController@post_occupation')->name('profile.lender.individu.occupation.submit');
+Route::get('/profile/lender-individu/occupation/sme', 'LenderIndividualController@get_occupation_sme')->name('profile.lender.individu.occupation.sme');
+Route::post('/profile/lender-individu/occupation/sme', 'LenderIndividualController@post_occupation_sme')->name('profile.lender.individu.occupation.submit.sme');
+Route::get('/profile/lender-individu/document', 'LenderIndividualController@get_document')->name('profile.lender.individu.document');
+Route::get('/profile/lender-individu/document/sme', 'LenderIndividualController@get_document_sme')->name('profile.lender.individu.document.sme');
+Route::post('/profile/lender-individu/document', 'LenderIndividualController@post_document')->name('profile.lender.individu.document.submit');
+Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController@post_document_sme')->name('profile.lender.individu.document.submit.sme');
+Route::get('/profile/lender-individu/sign', 'LenderIndividualController@get_sign')->name('profile.lender.individu.sign');
+
 //.............................................................................
 //...............................SSSSSS........................................
 //.MMMMM...MMMMM.....AAAAA......SSSSSSSS..STTTTTTTTTT.EEEEEEEEEEE.RRRRRRRRRR...
@@ -153,6 +165,7 @@ Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.s
 Route::get('/get/city','MasterController@get_city')->name('city');
 Route::get('/get/district','MasterController@get_district')->name('district');
 Route::get('/get/villages','MasterController@get_villages')->name('get_villages');
+Route::get('laporan-pdf','MasterController@generatePDF');
 
 
 
