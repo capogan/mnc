@@ -49,6 +49,9 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
             if(Auth::user()->group == 'lender'){
+                if (Auth::user()->level == 'individu'){
+                    return Redirect::to('/profile/lender-individu');
+                }
                 return Redirect::to('/profile/lender');
             }
         }

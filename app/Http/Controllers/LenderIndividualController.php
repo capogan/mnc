@@ -782,4 +782,13 @@ class LenderIndividualController extends Controller
         );
         return view('pages.lender.individu.sign_agreement', $this->merge_response($data, static::$CONFIG));
     }
+
+    public function post_sign(Request $requests)
+    {
+        User::where('id', Auth::id())->update(['step' => 5]);
+        return response()->json([
+            "status" => true,
+            "message" => 'Berhasil Ditandatangani',
+        ]);
+    }
 }
