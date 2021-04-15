@@ -19,6 +19,7 @@ use App\LenderAttachmentData;
 use App\RequestFunding;
 use App\LoanInstallment;
 use App\LenderBankInfo;
+use App\Helpers\PrivyID;
 
 class LenderController extends Controller
 {
@@ -346,8 +347,13 @@ class LenderController extends Controller
                     ['uid' => Auth::id() , 'director_verification' => true]
                 );
 
+                if($i == 0){
+                    PrivyID::requestRegistration($item['email'],$item['phone_number'],$request->file('self_image'.$j),$request->file('identity_image'.$j),$item['identity_number'],$item['director_name'],$item['dob'],Auth::id());
+                }
+
             }
             $i++;
+            
         }
         return response()->json([
             "status"=> true,

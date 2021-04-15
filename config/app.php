@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         App\Providers\CreditScoringServiceProvider::class,
+        //App\Providers\PrivyIDServicesServiceProvider::class,
         App\Providers\CapiServiceProvider::class,
 
         /*
@@ -234,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
+        'PrivyIDServices' => App\Helpers\PrivyIDServices::class,
         'RequestConnection' => App\Helpers\Capi::class,
         'Utils' => App\Helpers\Utils::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,

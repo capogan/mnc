@@ -1,18 +1,15 @@
 <?php
+namespace App\Helpers;
 
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
 use App\UserEKYC;
 use GuzzleHttp\Client;
 use function GuzzleHttp\json_encode;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use function GuzzleHttp\json_decode;
 use App\PrivyLogs;
 
-class UsersEKYCController extends Controller
-{
+class PrivyIDServices {
+    
     CONST SANDBOX_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
     CONST PRODUCTION_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
 
@@ -50,7 +47,7 @@ class UsersEKYCController extends Controller
     }
   
 
-    public function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid){
+    public static function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid){
         $file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'rb');
         $data = [
             "email" => $email,

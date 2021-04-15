@@ -1,139 +1,31 @@
 <?php
-
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use App\UserEKYC;
+namespace App\Http\Controllers;
 use GuzzleHttp\Client;
-use function GuzzleHttp\json_encode;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
-use function GuzzleHttp\json_decode;
-use App\PrivyLogs;
 
-class UsersEKYCController extends Controller
+class PrivyID  extends Controller
 {
+    private $server_key;
+    private $is_production;
+
     CONST SANDBOX_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
-    CONST PRODUCTION_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
+    CONST PRODUCTION_API_BASE_URL = 'https://core.privy.id/v3/merchant';
 
     CONST SANDBOX_API_BASE_URL_V1 = 'http://oauth.privydev.id';
     CONST PRODUCTION_API_BASE_URL_V1 = 'http://oauth.privy.id';
-    
-    public function index(Request $request){
 
-
-        $ekyc = UserEKYC::create([
-            'callback'=>$request->getContent(),
-            'created_at'=>date('Y-m-d'),
-            'updated_at'=>date('Y-m-d'),
-        ]);
-
-        if($ekyc){
-            $json = [
-                "status"=> true,
-                "message"=> 'Data berhasil ditambahkan.',
-            ];
-        }else{
-            if($ekyc){
-                $json = [
-                    "status"=> false,
-                    "message"=> 'Data Error',
-                ];
-            }
-        }
-        return response()->json($json);
+    public function __construct()
+    {
     }
 
     private function baseUrl()
     {
         return (config('privyid.is_production')) ? self::PRODUCTION_API_BASE_URL : self::SANDBOX_API_BASE_URL;
     }
-  
 
-    public function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid){
-        $file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'rb');
-        $data = [
-            "email" => $email,
-            'phone' => $phone,
-            'selfie' => $selfie,
-            'ktp' => $ktp,
-            'identity' => json_encode([
-                'nik' => $nik,
-                'nama' => $name,
-                'tanggalLahir' => $dob
-            ])
-        ];
-        $client = Http::withHeaders([
-            'Merchant-Key' => $this->getMerchantKey(),
-            'Accept' => '*/*',
-            'Connection' => 'keep-alive'
-        ])
-        ->withBasicAuth('mnc_capio','vx6mfn4yci32cmt6ddyl')
-        ->asMultipart()
-        ->post('https://api-sandbox.privy.id/v3/merchant/registration', $data);
-        //$response = json_decode($client->body());
-        $this->privylogs($client->body() , $uid);
+    private function baseUrlV1()
+    {
+        return (config('privyid.is_production')) ? self::PRODUCTION_API_BASE_URL_V1 : self::SANDBOX_API_BASE_URL_V1;
     }
-    public function privylogs($response , $uid){
-        $data = json_decode($response , true);
-        PrivyLogs::create([
-            'uid' => $uid,
-            'response' => $response,
-            'status' => $data['message'],
-            'created_at' => date('Y-m-d H:i:s')
-        ]);
-    }
-
-    public function ekyc22(Request $request){
-        print_r($request->all());
-    }
-
-    public function ekyc2(Request $request){
-
-        //$photo = fopen(public_path('upload/ktp_41_1616591801.jpeg'), 'r');
-        $photo = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
-        //$photo = response()->download(public_path('upload/ktp_41_1616591801.jpeg'));
-        $client = new Client();
-        $data = [
-            "email" => "richard.simbolon28@gmail.com",
-            'phone' => '081260332838',
-            'ktp' => $photo,
-            'selfie' =>   $photo,
-            'identity' =>json_encode([
-                'nik' => '1234123412341234',
-                'nama' => 'Richard Simbolon',
-                'tanggalLahir' => '1990-08-28'
-            ])
-        ];
-
-       //print_r($data);exit;
-
-        $client->request('POST', 'https://api-sandbox.privy.id/v3/merchant/registration', [
-            'headers' => [
-                'Merchant-Key' => 'syjapxhkpm3rtwoxcqd9',
-                'Content-type' => 'Multipart/form-data'
-            ],
-            'form_params' =>$data,
-            'auth' => [
-                'mnc_capio','vx6mfn4yci32cmt6ddyl'
-            ],
-           
-        ]);
-        exit;
-        try {
-                
-                print_r($client);
-            } catch (Exception $e) {
-                //throw new Exception ($e->getMessage(), $e->getResponse()->getStatusCode());
-            }
-
-        
-
-        
-        
-    }
-
-
 
 
     private function requestHeader()
@@ -183,25 +75,27 @@ class UsersEKYCController extends Controller
 
         return $return;
     }
-
     private function clientRequest($url, $type, $data = null, $files = [])
     {
         try {
             $options = [
                 'headers' => $this->requestHeader(),
                 'multipart' => $this->dataToMultipart($data),
-                'auth' => ['mnc_capio_2','t6ca7oh7utkqzykbb7sj'],
+                'auth' => [$this->getUsername(), $this->getPassword()],
             ];
+
             foreach($files as $filename => $content) {
                 $options[$filename] = $content;
             }
             $client = new Client();
+            //$client->setAuth($this->getUsername(), $this->getPassword());
+
             $request = $client->request($type, $url, $options);
-            $response = json_decode($request->getResponse()->getBody());
+
+            $response = json_decode($request->getBody()->getContents(),true);
             return $response;
-            
         } catch (Exception $e) {
-            throw new Exception ($e->getResponse()->getStatusCode());
+            throw new Exception ($e->getMessage(), $e->getResponse()->getStatusCode());
         }
     }
 
@@ -361,26 +255,31 @@ class UsersEKYCController extends Controller
     }
 
 
-    // public function requestRegistration(Request $request)
-    // {
-    //     $file =  fopen(public_path('upload/bebelac_front_banner.png'), 'r');
-    //     $email = 'richard.simbolon28@gmail.com';
-    //     $phone = '081260332838';
-    //     $selfie = $file;
-    //     $ktp = $file;
-    //     $identity ='{"nik": "2341234121230419", "nama": "Ridcat", "tanggalLahir":"1989-11-01"}';
-    //     $url = 'registration';
-    //     $endpoint = $this->baseUrl() . '/'. $url ;
-    //     $data = [
-    //         'email' => $email,
-    //         'phone' => $phone,
-    //         'selfie' => $selfie,
-    //         'ktp' => $ktp,
-    //         'identity' => $identity,
-    //     ];
-    //     $response = $this->clientRequest($endpoint, 'POST', $data);
-    //     return $response;
-    // }
+
+    /**
+     * @param $email    user@usermail.com	User's mail
+     * @param $phone    08233324223	User's phone number
+     * @param $selfie   Exampleselfie.png	Face close up photo of Registrant on image format (.png / .jpg / .jpeg)
+     * @param $ktp      ExampleKTP.png	User's Identity card on image format (.png / .jpg / .jpeg)
+     * @param $identity Object[]	{"nik": "123456564454644", "nama": "Tiffany Kumala", "tanggalLahir":"1983-01-02"}	Registrant's identity. NIK, name and date of birth required. NIK must be 16 digits and the sixteenth digit can't be 0.
+     * @return mixed
+     *
+     */
+    public function requestRegistration($email, $phone, $selfie, $ktp, $identity)
+    {
+        $url = 'registration';
+        $endpoint = $this->baseUrl() . '/'. $url ;
+        $data = [
+            'email' => $email,
+            'phone' => $phone,
+            'selfie' => $selfie,
+            'ktp' => $ktp,
+            'identity' => $identity,
+        ];
+        $response = $this->clientRequest($endpoint, 'POST', $data);
+
+        return $response;
+    }
 
 
     /**
