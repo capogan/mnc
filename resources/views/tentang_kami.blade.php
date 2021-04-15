@@ -48,48 +48,68 @@
             </div>
         </div>
     </div>
-    <div class="rate-table">
+     <div class="rate-table">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/mortgage.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+            <div class="row mt-3 mb-3">
+                <div class="col">
+                   <div class="row d-flex justify-content-center">
+                        <div> <img src="images/disalurkan.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
+                        </div>
+                        <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                            <h1 class="loan-rate">3.74%</h1>
-                            <small class="rate-title">Home Loans</small>
+                            
+                            <p class="text-center rate-title">TOTAL PINJAMAN YANG DISALURKAN</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/loan.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                <div class="col">
+                        <div class="row d-flex justify-content-center">
+                        <div class="icon rate-icon  "> <img src="images/tahun_ini.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
+                        </div>
+                        <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                            <h1 class="loan-rate">8.96%</h1>
-                            <small class="rate-title">Personal Loans</small>
+                            
+                            <p class="text-center rate-title">TOTAL PINJAMAN YANG DISALURKAN TAHUN INI</p>
+                        </div>
+                        </div>
+    
+                </div>
+                <div class="col">
+                    <div class="row d-flex justify-content-center">
+                        <div class="icon rate-icon  "> <img src="images/outstanding.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
+                        </div>
+                        <div class="row mt-3 justify-content-center">
+                        <div class="rate-box">
+                           
+                            <p class="text-center rate-title">TOTAL OUTSTANDING</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/car.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                <div class="col">
+                    <div class="row d-flex justify-content-center">
+                        <div class="icon rate-icon  "> <img src="images/akumulasi_pinjaman.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
+                        </div>
+                        <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                            <h1 class="loan-rate">6.70%</h1>
-                            <small class="rate-title">Car Loans</small>
+                          
+                            <p class="text-center rate-title">TOTAL AKUMILASI PEMINJAM</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="rate-counter-block">
-                        <div class="icon rate-icon  "> <img src="images/credit-card.svg" alt="Borrow - Loan Company Website Template" class="icon-svg-1x"></div>
+                <div class="col">
+                    <div class="row d-flex justify-content-center">
+                        <div class="icon rate-icon  "> <img src="images/total_akumulasi.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
+                        </div>
+                        <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                            <h1 class="loan-rate">9.00%</h1>
-                            <small class="rate-title">Credit card</small>
+                           
+                            <p class="text-center rate-title">TOTAL AKUMULASI PEMINJAM AKTIF</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   </div>
    
     <div class="container">
         <div class="row">
