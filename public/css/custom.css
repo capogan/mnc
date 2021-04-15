@@ -166,6 +166,10 @@ html {
   max-width: 80%;
   height: auto;
 }
+.img-fluid2 {
+  width: 300px;
+  height: auto;
+}
 .post-img {
   width: 436.5px;
 }

@@ -1454,6 +1454,6 @@ input:focus + label {
     color: white;
     padding: 0.4rem;
     font-size: 13px;
-  
+    text-align: justify;
 }
 

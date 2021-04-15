@@ -72,7 +72,9 @@
         </div>
         <div class="row mt-5">
             <div class="col">
-                <img src="/images/cth2.jpg" alt="work" class="img-fluid">
+                <div class="row justify-content-center">
+                <img src="images/tumbnail-image-syarat.png" alt="work" class="img-fluid2">
+                </div>
             </div>
             <div class="col">
                 <div class="row">
@@ -91,12 +93,16 @@
                     </div>
                 </div>
                 <div class="col">
-                    <img src="/images/cth2.jpg" alt="work" class="img-fluid">
+                     <div class="row justify-content-center">
+                    <img src="/images/tumbnail-image-online.png" alt="work" class="img-fluid2">
+                    </div>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col">
-                    <img src="/images/cth2.jpg" alt="work" class="img-fluid">
+                     <div class="row justify-content-center">
+                    <img src="/images/tumbnail-image-aman.png" alt="work" class="img-fluid2">
+                    </div>
                 </div>
                 <div class="col">
                     <div class="row">
