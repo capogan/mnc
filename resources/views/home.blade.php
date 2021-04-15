@@ -20,7 +20,9 @@
         <div class="row mt-5 mb-5">
             <div class="row">
                 <div class="col">
-                <img src="/images/siap-works.png">
+             
+
+                <img src="images/disalurkan.png" alt="Borrow - Loan Company Website Template" class="icon-ttg-layanan">
                 </div>
                 <div class="col">
                     <div class="row">
