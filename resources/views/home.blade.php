@@ -20,7 +20,7 @@
         <div class="row mt-5 mb-5">
             <div class="row">
                 <div class="col">
-                
+                <img src="/images/siap-works.png">
                 </div>
                 <div class="col">
                     <div class="row">
