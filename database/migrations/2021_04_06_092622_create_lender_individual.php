@@ -15,6 +15,7 @@ class CreateLenderIndividual extends Migration
     {
         Schema::create('lender_individual_personal_info', function (Blueprint $table) {
             $table->id();
+            $table->integer('uid');
             $table->string('identity_number',20);
             $table->string('full_name',255);
             $table->char('gender');
@@ -35,6 +36,7 @@ class CreateLenderIndividual extends Migration
             $table->integer('education'); //from education
             $table->string('whatsapp_number');
             $table->string('email');
+            $table->string('zip_code');
             $table->integer('lender_type');//1 is SME ; 2 is Non SME
             $table->timestamps();
         });
@@ -47,6 +49,6 @@ class CreateLenderIndividual extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lender_individual');
+        Schema::dropIfExists('lender_individual_personal_info');
     }
 }

@@ -19,6 +19,7 @@ class CreateLenderIndividualEmergencyContact extends Migration
             $table->string('emergency_name');
             $table->integer('emergency_siblings');//from siblings master
             $table->string('emergency_phone_number');
+            $table->string('emergency_full_address');
             $table->timestamps();
         });
     }
