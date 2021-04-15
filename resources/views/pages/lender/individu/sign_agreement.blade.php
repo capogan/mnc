@@ -142,7 +142,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary" id="sign_agreement_">Setuju</button>
+                    <button type="button" class="btn btn-primary" id="btn_sign_agreement_lender_individu">Setuju</button>
                 </div>
             </div>
         </div>
