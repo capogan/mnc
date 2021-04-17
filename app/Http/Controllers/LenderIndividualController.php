@@ -16,6 +16,7 @@ use App\LenderIndividualPersonalInfo;
 use App\MarriedStatus;
 use App\MasterLengthOfWork;
 use App\Models\Province;
+use App\RequestFunding;
 use App\Siblings;
 use App\StatusOfResidence;
 use App\User;
@@ -633,6 +634,7 @@ class LenderIndividualController extends Controller
             ], $imageData);
 
             User::where('id', Auth::id())->update(['step' => 4]);
+            RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
             DB::commit();
         } catch (Exception $e) {
             $json = [
@@ -750,6 +752,7 @@ class LenderIndividualController extends Controller
             ], $imageData);
 
             User::where('id', Auth::id())->update(['step' => 4]);
+            RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
             DB::commit();
         } catch (Exception $e) {
             $json = [
