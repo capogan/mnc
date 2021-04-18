@@ -20,6 +20,8 @@ use App\RequestFunding;
 use App\LoanInstallment;
 use App\LenderBankInfo;
 use App\Helpers\PrivyID;
+use App\PrivyID as AppPrivyID;
+use PDF;
 
 class LenderController extends Controller
 {
@@ -348,7 +350,8 @@ class LenderController extends Controller
                 );
 
                 if($i == 0){
-                    PrivyID::requestRegistration($item['email'],$item['phone_number'],$request->file('self_image'.$j),$request->file('identity_image'.$j),$item['identity_number'],$item['director_name'],$item['dob'],Auth::id());
+                    $privy = new PrivyID();
+                    $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'director');
                 }
 
             }
@@ -517,6 +520,11 @@ class LenderController extends Controller
                     ['uid' => Auth::id()],
                     ['uid' => Auth::id() , 'commissioner_verification' => true]
                 );
+
+                if($i == 0){
+                    $privy = new PrivyID();
+                    $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'commissioner');
+                }
 
 
              }
@@ -694,9 +702,61 @@ class LenderController extends Controller
         return view('pages.lender.sign',$this->merge_response($data, static::$CONFIG));
     }
 
-    public function register_sign_aggrement(Request $request){
+    public function upload_document_aggreement(Request $request){
+        $lender = LenderBusiness::where('uid' , Auth::id())->first();
+        $director_profile = LenderDirectorData::where('uid' , Auth::id())->where('position' ,'0')->first();
         $data = [
-            'borrower_request' => []
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => date('Y-m-d'),
+            'business' => $lender->business_name,
+            'director' => $director_profile,
+        ];
+        $recipient = AppPrivyID::where('uid' , Auth::id())->where('position' ,'director')->first();
+        if(!$recipient || !$director_profile || !$lender){
+            return false;
+        }
+        $pathDocument = public_path('upload/document/'.str_replace(' ' , '' ,$lender->business_name.uniqid()).'.pdf');
+        PDF::loadView('agreement.loan', $data)->save($pathDocument);
+        $recipients = [
+            [
+                'privyId' => $recipient->privyId,
+                'type' => 'Signer',
+                'enterpriseToken' =>''
+            ]
+        ];
+        $privy = new PrivyID;
+        $endpoint = $privy->requestDocumentUpload('Dokumen Perjanjian Pendanaan' , 'Serial' , $recipients , $pathDocument ,'registration');
+        echo json_encode(['status' => 'true' , 'url' => $endpoint]);
+
+    }
+
+    public function register_sign_aggrement(Request $request){
+        
+        $check_status = AppPrivyID::where('uid' , Auth::id())
+                        ->whereIn('status' , ['registered' , 'verified'])
+                        ->count();
+        $allow_sign = false;
+        // $completeAgreement = AppPrivyID::
+        //                     ->leftJoin('privyid_documents','privyid_documents.user_token' , 'privyids.')
+        //                     ->select('user_token')
+        //                     ->where('uid' , Auth::id())
+        //                     ->get();
+        // if(){
+
+
+        // }
+        if(Auth::user()->level == 'business'){
+            if($check_status >= 2 ){
+                $allow_sign = true;
+            }
+        }else{
+            if($check_status > 0){
+                $allow_sign = true;
+            }
+        }
+        $data = [
+            'borrower_request' => [],
+            'allow_to_sign' => $allow_sign
         ];
         return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
     }
@@ -730,5 +790,9 @@ class LenderController extends Controller
             'loan' => $loan ? $loan : false
         ];
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function priview_document(){
+        return view('agreement.document_sign');
     }
 }

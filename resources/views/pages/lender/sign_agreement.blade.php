@@ -34,7 +34,7 @@
                 </div>
                 <div class="stepwizard-step">
                     <a href="/profile/lender/register/sign" type="button" class="btn btn-primary btn-circle" disabled="disabled">5</a>
-                    <p>Tanda Tangan</p>
+                    <p>Verifikasi</p>
                 </div>
             </div>
         </div>
@@ -55,21 +55,34 @@
                                             <div class="contact-form mb60">
                                                 <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12 col-12">
                                                     <div class="wrapper-content bg-white">
-                                                        <div class="section-scroll pinside60" id="section-about">
-                                                            <h1>Sign Agreement</h1>
-                                                            <p class="lead">To make your home loan journey a smooth sail, in this article we will help you to know eligibility criteria, rates of interest, process, necessary documents, comparison and transfer for lowest rates. </p>
-                                                            <div class="row">
-                                                                    <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                    <p>Maecenas in ultricies sem. Nunc eget orci mi. Sed porttitor lacus quis scelerisque dignissim. Nullam bibendum lputatesAliquam non mageselislacerat sapien dolor et dui.</p>
+                                                        @if($allow_to_sign == true)
+                                                            <div class="section-scroll pinside60" id="section-about">
+                                                                <h1>Tanda tangan perjanjian</h1>
+                                                                <p class="lead">To make your home loan journey a smooth sail, in this article we will help you to know eligibility criteria, rates of interest, process, necessary documents, comparison and transfer for lowest rates. </p>
+                                                                <div class="row">
+                                                                        <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
+                                                                        <p>Maecenas in ultricies sem. Nunc eget orci mi. Sed porttitor lacus quis scelerisque dignissim. Nullam bibendum lputatesAliquam non mageselislacerat sapien dolor et dui.</p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                    <p>Sed sit amet volutpat erat. Lorem ipsum dolor sit amet lorem consectetur adipiscing elit. Nam massa ipsum, mollis et sit amet ullamcorque duraesent nec vehicula dolor. </p>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                            <p>Phasellus tellus nunc, sollicitudin quist amet it simple nequeuisque lacus mi tesimly diummy cintenbt mpus nec purus vitae tempor placerat leo. </p>
-                                                            <a href="#" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">Tanda Tangan Perjanjian</a> </div>
+                                                                <hr>
+                                                                <div class="alert alert-success" role="alert">
+                                                                        Silahkan klik "tanda tangan perjanjian" untuk melanjutkan proses pendaftaran, anda akan diarakan ke website privyID untuk melakukan tanda tangan dokumen.
+                                                                        <p>
+                                                                         Silahkan login menggunakan akun privyID yang sudah dikirimkan sebelumnya.    
+                                                                        </p>
+                                                                    </div>
+                                                            <button  class="btn btn-default" id="doSignPolicy">Tanda Tangan Perjanjian</a> </div>
                                                     </div>
+                                                    @else
+                                                    <div class="section-scroll pinside60" id="section-about">
+                                                        <div class="alert alert-success" role="alert">
+                                                            Data anda masih dalam proses, kami akan mengirimkan link privyID untuk tanda tangan perjanjian jika data anda berhasil kami proses.
+                                                            <p>
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!-- /.section title start-->

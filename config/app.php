@@ -165,7 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         App\Providers\CreditScoringServiceProvider::class,
-        //App\Providers\PrivyIDServicesServiceProvider::class,
+        App\Providers\PrivyIDServiceProvider::class,
         App\Providers\CapiServiceProvider::class,
 
         /*

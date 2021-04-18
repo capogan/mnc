@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     $(document).on('click' , '#sign_agreement_' , function(){
         var token = $('meta[name="csrf-token"]').attr('content');
-
         $.ajax({
             url: '/lender/register/agreement',
             method:"POST",
@@ -13,7 +12,25 @@ $(document).ready(function() {
             data: {agreement : 'agree'},
             success:function(response)
             {
-                window.location.href = '/lender/funding';
+                window.location.href = '/document/privy';
+            }
+        })
+    });
+
+    $(document).on('click' , '#doSignPolicy' , function(){
+        $(this).prop('disabled', true);
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/lender/register/dosign',
+            method:"POST",
+            dataType : 'json',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            success:function(response)
+            {
+                //alert(response.url);
+               window.location.href = response.url;
             }
         })
     });

@@ -1,76 +1,127 @@
 <?php
+namespace App\Helpers;
 
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
 use App\UserEKYC;
 use GuzzleHttp\Client;
 use function GuzzleHttp\json_encode;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use function GuzzleHttp\json_decode;
 use App\PrivyLogs;
-use App\Helpers\PrivyID;
+use App\PrivyID as ModelPriviID;
+use Illuminate\Support\Facades\Auth;
+use App\PrivyIDDocument;
+use App\PrivyIDDocumentRecipients;
 
-class UsersEKYCController extends Controller
-{
+class PrivyID {
+    protected $this;
     CONST SANDBOX_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
     CONST PRODUCTION_API_BASE_URL = 'https://api-sandbox.privy.id/v3/merchant';
-
     CONST SANDBOX_API_BASE_URL_V1 = 'http://oauth.privydev.id';
     CONST PRODUCTION_API_BASE_URL_V1 = 'http://oauth.privy.id';
-
-    public function index(Request $request){
-
-        $privy = new PrivyID;
-        return $privy->privyIDCallback('{"eventName":"document-signed","data":{"docTitle":"Dokumen Perjanjian Pendanaan","docToken":"04b195392e919ba23484dfc52b517a67dbd80a9a8e2e8329c6e3ff7ff55b92dc","recipients":[{"privyId":"DEVRI2838","type":"Signer","signatoryStatus":"Completed"}],"documentStatus":"Completed","download":{"url":"https://api-sandbox.privy.id/document/1Aan4JAgYv-89f08ad1-6057-4798-be68-b21eab531d5e?Expires=1618749870\u0026Signature=FMBdg4mtbMwxSBrkl5n43%2Fi6H7%2F56YwSWenpMWXFFaAVpYM2AR2AOS4OQe%2FXNAAkc7nQJSEJVSS3JYFSBLndairZjoXN%2Ffkr0yyB4CeqJXxsJpcgaJSg%2BThpJl9q3xB6h27TKAUdOZLd%2F7NPpYFnJg6KdVZMYRy47NpvdC7DHtTq3JJNwDGCL22xW2x2E2c5I9oMtP80I5olZSqrziAeHwFucZcFHLkPx6BEzQp8QCzivD8yy9QXT%2BpcKTt9khaTxjZr573zORDDX6fVd35kkNiZQMdAQpJ3OoupZwwEc2JPg6ya%2FLxmH3OJ4%2BEdWEVVHPfPLQEaQXpsz3dwiD8UHA%3D%3D","expiredAt":"2021-04-18T12:44:22+00:00"}},"message":"Document has been completed"}');
-
-        return response()->json($json);
-        
-        $ekyc = UserEKYC::create([
-            'callback'=>$request->getContent(),
-            'created_at'=>date('Y-m-d'),
-            'updated_at'=>date('Y-m-d'),
-        ]);
-
-        if($ekyc){
-            $json = [
-                "status"=> true,
-                "message"=> 'Data berhasil ditambahkan.',
-            ];
-        }else{
-            if($ekyc){
-                $json = [
-                    "status"=> false,
-                    "message"=> 'Data Error',
-                ];
-            }
-        }
-        $privy = new PrivyID;
-        $privy->privyIDCallback('{"eventName":"document-signed","data":{"docTitle":"Dokumen Perjanjian Pendanaan","docToken":"04b195392e919ba23484dfc52b517a67dbd80a9a8e2e8329c6e3ff7ff55b92dc","recipients":[{"privyId":"DEVRI2838","type":"Signer","signatoryStatus":"Completed"}],"documentStatus":"Completed","download":{"url":"https://api-sandbox.privy.id/document/1Aan4JAgYv-89f08ad1-6057-4798-be68-b21eab531d5e?Expires=1618749870\u0026Signature=FMBdg4mtbMwxSBrkl5n43%2Fi6H7%2F56YwSWenpMWXFFaAVpYM2AR2AOS4OQe%2FXNAAkc7nQJSEJVSS3JYFSBLndairZjoXN%2Ffkr0yyB4CeqJXxsJpcgaJSg%2BThpJl9q3xB6h27TKAUdOZLd%2F7NPpYFnJg6KdVZMYRy47NpvdC7DHtTq3JJNwDGCL22xW2x2E2c5I9oMtP80I5olZSqrziAeHwFucZcFHLkPx6BEzQp8QCzivD8yy9QXT%2BpcKTt9khaTxjZr573zORDDX6fVd35kkNiZQMdAQpJ3OoupZwwEc2JPg6ya%2FLxmH3OJ4%2BEdWEVVHPfPLQEaQXpsz3dwiD8UHA%3D%3D","expiredAt":"2021-04-18T12:44:22+00:00"}},"message":"Document has been completed"}');
-
-        return response()->json($json);
-    }
-
+    
     private function baseUrl()
     {
         return (config('privyid.is_production')) ? self::PRODUCTION_API_BASE_URL : self::SANDBOX_API_BASE_URL;
     }
 
+    public function requestRegistrationStatus($token,$uid,$position, $event){
+        $client = Http::withHeaders([
+            'Merchant-Key' => $this->getMerchantKey(),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->withBasicAuth('mnc_capio','vx6mfn4yci32cmt6ddyl')
+        ->asMultipart()
+        ->post('https://api-sandbox.privy.id/v3/merchant/registration/status', ['token' => $token]);
+        $this->processResponseRegisterStatus($client->body(), $uid,$position, $event);
+    }
+    public function privyIDCallback($response = null){
+        $res= json_decode($response , true);
+        switch($res['eventName']){
+            case 'register' :
+                ModelPriviID::where('user_token' , $res['data']['userToken'])
+                ->update(
+                    [
+                        'privyId' => $res['data']['privyId'],
+                        'status' => $res['data']['status'],
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]
+                );
+            break;
+            case 'document-signed' :
+                $doc = PrivyIDDocument::where('token' , $res['data']['docToken'])->first();
+                $doc->document_status = strtolower($res['data']['documentStatus']);
+                $doc->document_response_json =  $res['data']['download'];
+                $doc->status_recipients =json_encode($res['data']['recipients']);
+                $doc->updated_at = date('Y-m-d H:i:s');
+                $doc->save();
+            break;
+            default :    
+            break;
+        }
+    }
+    public function processResponseRegisterStatus($response , $uid ,$position, $event ){
+        $resp = json_decode($response);
+        if($resp['code'] == '201'){
+            switch($resp['data']['status']){
+                case 'invalid' :
+                    ModelPriviID::where('user_token' , $resp['data']['userToken'])
+                    ->update(
+                        [
+                            'status' => $resp['data']['status'],
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ]
+                    );
+                break;
+                case 'registered' :
+                    ModelPriviID::where('user_token' , $resp['data']['userToken'])
+                    ->update(
+                        [
+                            'status' => $resp['data']['status'],
+                            'privyid' => $resp['data']['privyId'],
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ]
+                    );
+                break;
+                case 'verified' :
+                    ModelPriviID::where('user_token' , $resp['data']['userToken'])
+                    ->update(
+                        [
+                            'status' => $resp['data']['status'],
+                            'privyid' => $resp['data']['privyId'],
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ]
+                    );
+                break;
+                case 'rejected' :
+                    ModelPriviID::where('user_token' , $resp['data']['userToken'])
+                    ->update(
+                        [
+                            'status' => $resp['data']['status'],
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ]
+                    );
+                break;
 
-    public function requestRegistration(){
-        $ktp_file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
-        $selfie_file = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
-
+                case 'waiting' :
+                    
+                break;
+            }
+        }
+        $this->privylogs($response, $uid ,$position, $event);
+    }
+    public function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid , $position){
+        $selfie = fopen('/'.$selfie, 'r');
+        $ktp =  fopen('/'.$ktp, 'r');
         $data = [
-            "email" => "kervin@yahoo.com",
-            'phone' => '08213612332',
-            'ktp' => $ktp_file,
-            'selfie' =>   $selfie_file,
-            'identity' =>json_encode([
-                'nik' => '1234123412341234',
-                'nama' => 'Richard Simbolon',
-                'tanggalLahir' => '1990-08-28'
+            "email" => $email,
+            'phone' => $phone,
+            'selfie' => $selfie,
+            'ktp' => $ktp,
+            'identity' => json_encode([
+                'nik' => $nik,
+                'nama' => $name,
+                'tanggalLahir' => $dob
             ])
         ];
         $client = Http::withHeaders([
@@ -81,71 +132,117 @@ class UsersEKYCController extends Controller
         ->withBasicAuth('mnc_capio','vx6mfn4yci32cmt6ddyl')
         ->asMultipart()
         ->post('https://api-sandbox.privy.id/v3/merchant/registration', $data);
-        print_r($client->body());
-        //$response = json_decode($client->body());
-        //$this->privylogs($client->body() , $uid);
+        $this->processResponseRegister($client->body(), $uid , $position);
     }
-    public function privylogs($response , $uid){
+    public function processResponseRegister($body , $uid , $position){
+        $this->privylogs($body , $uid , $position , 'register');
+       // $response = '{"eventName":"register","data":{"privyId":"DEVRI2838","email":"richard.simbolon28@gmail.com","phone":"+6281260332838","processedAt":"2021-04-16 14:32:52 +0700","userToken":"4dd169d8a23d152ecf8a98fe30a9adabc2801936cfb4464ad81bf58e52356783","status":"verified","identity":{"nama":"Ridcat Simbolon","nik":"9834982394802300","tanggalLahir":"1990-06-28","tempatLahir":"Sleman"}},"message":"Data Verified"}';
+        $response = json_decode($body , true);
+        if($response['code'] == '201'){
+            ModelPriviID::updateOrCreate(
+                [
+                    'uid' => $uid
+                ],
+                [
+                'uid' => $uid,
+                'position' => $position,
+                'code' => $response['code'],
+                'status' => $response['data']['status'],
+                'user_token' => $response['data']['userToken']
+            ]
+            );
+        }
+    }
+
+    public function requestDocumentUpload($docTitle ,$docType , $recipients , $pathDocument , $function){
+        $data = [
+            'documentTitle' => $docTitle,
+            'docType' => $docType,
+            'owner' => $this->getOwner(),
+            'recipients' => json_encode($recipients),
+            'document' => fopen($pathDocument, 'r')
+        ];
+        $client = Http::withHeaders([
+            'Merchant-Key' => $this->getMerchantKey(),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->withBasicAuth($this->getUsername(),$this->getPassword())
+        ->asMultipart()
+        ->post('https://api-sandbox.privy.id/v3/merchant/document/upload', $data);
+        //$request = '{"code":201,"data":{"docToken":"3023bd03c543f8ac7902afda2a0fcdae705dfa78c5ee28d6fa1c67e29d3072c3","urlDocument":"https://sign-sandbox.privy.id/doc/3023bd03c543f8ac7902afda2a0fcdae705dfa78c5ee28d6fa1c67e29d3072c3","recipients":[{"privyId":"DEVRI2838","type":"Signer","enterpriseToken":null,"magicLink":null}]},"message":"Document successfully upload and shared"}';
+        return $this->processResponseUploadDocument($client->body(),$docTitle,$docType ,'DEVRE3368', $pathDocument , json_encode($recipients) , $function);
+    }
+    public function processResponseUploadDocument($body,$docTitle,$docType ,$owner, $pathDocument , $recipients , $func){
+        $this->privylogs($body);
+        $response = json_decode($body , true);
+        $redirect = '';
+        if($response['code'] == '201'){
+            $save_doc = PrivyIDDocument::create([
+                'token' => $response['data']['docToken'],
+                'url'=>$response['data']['urlDocument'],
+                'recipients'=> json_encode($response['data']['recipients']),
+                'title' => $docTitle,
+                'type' => $docType,
+                'owner' => $this->getOwnerEnterpriseToken(),
+                'document_function' => $func
+            ]);
+            $redirect =  $response['data']['urlDocument'];
+            $this->process_recipients_data($response['data']['recipients'], $save_doc->id);
+        }
+        PrivyLogs::create([
+            'uid' => Auth::id(),
+            'response' => $body,
+            'position' => '',
+            'event' => 'uploaddocument',
+            'status' => '',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        return $redirect;
+    }
+    public function privylogs($response , $uid=null , $position=null , $event=''){
         $data = json_decode($response , true);
         PrivyLogs::create([
             'uid' => $uid,
             'response' => $response,
+            'position' => $position,
+            'event' => $event,
             'status' => $data['message'],
             'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 
-    public function ekyc22(Request $request){
-        print_r($request->all());
-    }
-
-    public function ekyc2(Request $request){
-
-        //$photo = fopen(public_path('upload/ktp_41_1616591801.jpeg'), 'r');
-        $photo = fopen(public_path('/upload/lender/file/commissaris_selfie_0_51_1616943212.png'), 'r');
-        //$photo = response()->download(public_path('upload/ktp_41_1616591801.jpeg'));
-        $client = new Client();
-        $data = [
-            "email" => "ogan_my@yahoo.com",
-            'phone' => '085275608369',
-            'ktp' => $photo,
-            'selfie' =>   $photo,
-            'identity' =>json_encode([
-                'nik' => '1234123412341234',
-                'nama' => 'Richard Simbolon',
-                'tanggalLahir' => '1990-08-28'
-            ])
-        ];
-
-       //print_r($data);exit;
-
-        $client->request('POST', 'https://api-sandbox.privy.id/v3/merchant/registration', [
-            'headers' => [
-                'Merchant-Key' => 'syjapxhkpm3rtwoxcqd9',
-                'Content-type' => 'Multipart/form-data'
-            ],
-            'form_params' =>$data,
-            'auth' => [
-                'mnc_capio','vx6mfn4yci32cmt6ddyl'
-            ],
-
-        ]);
-        exit;
-        try {
-
-                print_r($client);
-            } catch (Exception $e) {
-                //throw new Exception ($e->getMessage(), $e->getResponse()->getStatusCode());
+    public function process_recipients_data($data , $id){
+        $datas = [];
+        if(count($data) > 0){
+            for($i=0; $i < count($data); $i++){
+                $recipientsid = '';
+                if(array_key_exists('email' , $data[$i])){
+                    $recipientsid = $data[$i]['email'];
+                }
+                if(array_key_exists('privyId' , $data[$i])){
+                    $recipientsid = $data[$i]['privyId'];
+                }
+                $datas[$i]['privyid'] = $recipientsid;
+                if(array_key_exists('signatoryStatus' , $data[$i])){
+                    $datas[$i]['status'] = $data[$i]['signatoryStatus'];
+                }
+                if(array_key_exists('type' , $data[$i])){
+                    $datas[$i]['type'] = $data[$i]['type'];
+                }
+                if(array_key_exists('enterpriseToken' , $data[$i])){
+                    $datas[$i]['enterprise_token'] = $data[$i]['enterpriseToken'];
+                }
+                if(array_key_exists('magicLink' , $data[$i])){
+                    $datas[$i]['magic_link'] = $data[$i]['magicLink'];
+                }
+                $datas[$i]['document_id'] = $id;
             }
-
-
-
-
-
+        }
+        if(count($datas) > 0){
+            PrivyIDDocumentRecipients::insert($datas);
+        }
     }
-
-
-
 
     private function requestHeader()
     {
@@ -210,7 +307,7 @@ class UsersEKYCController extends Controller
             $request = $client->request($type, $url, $options);
             $response = json_decode($request->getResponse()->getBody());
             return $response;
-
+            
         } catch (Exception $e) {
             throw new Exception ($e->getResponse()->getStatusCode());
         }
@@ -271,16 +368,14 @@ class UsersEKYCController extends Controller
     }
 
     public function getOwner() {
-        $owner = (config('privyid.is_production')) ? config('privyid.production.owner') : config('privyid.sandbox.owner');
-
-        return [
-            'privyId' => $owner,
+        return json_encode([
+            'privyId' => (config('privyid.is_production')) ? config('privyid.production.enterprise_owner') : config('privyid.sandbox.enterprise_owner'),
             'enterpriseToken' => $this->getOwnerEnterpriseToken()
-        ];
+        ]);
     }
 
     private function getOwnerEnterpriseToken() {
-        return (config('privyid.is_production')) ? config('privyid.production.owner_enterprise_token') : config('privyid.sandbox.owner_enterprise_token');
+        return (config('privyid.is_production')) ? config('privyid.production.enterprise_owner_token') : config('privyid.sandbox.enterprise_owner_token');
     }
 
     public function getMerchantKey() {

@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
-class PrivyIDServicesServiceProvider extends ServiceProvider
+class PrivyIDServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -14,7 +14,7 @@ class PrivyIDServicesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path() . '/Helpers/PrivyIDServices.php';
+        require_once app_path() . '/Helpers/PrivyID.php';
     }
 
     /**

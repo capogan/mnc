@@ -33,17 +33,17 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
     <tr>
         <td>Nama</td>
         <td>:</td>
-        <td>Ogan</td>
+        <td>{{$director->director_name}}</td>
     </tr>
     <tr>
         <td>Alamat</td>
         <td>:</td>
-        <td>Ogan</td>
+        <td>{{$director->address}}</td>
     </tr>
     <tr>
         <td>No. KTP</td>
         <td>:</td>
-        <td>Ogan</td>
+        <td>{{$director->director_nik}}</td>
     </tr>
     </table>
 
