@@ -81,6 +81,17 @@ $(document).on('keyup' , '#request_loan_borrower' , function(){
     $('#la_value').text(rupiah);
 });
 
+$(document).on('keyup' , '#omset_value' , function(){
+    var number = $(this).val();
+    var rupiah = formatRupiah(number , '');
+    $(this).val(rupiah);
+});
+$(document).on('keyup' , '#asset_value' , function(){
+    var number = $(this).val();
+    var rupiah = formatRupiah(number , '');
+    $(this).val(rupiah);
+});
+
 $('#personal_info_form').on('submit', function(event){
     event.preventDefault();
 

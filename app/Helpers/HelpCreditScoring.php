@@ -140,7 +140,7 @@ class HelpCreditScoring {
                             ->where('cap_of_business_criteria_id' ,$data->id_cap_of_business)
                             ->where('credibility_score_id' ,$credibility_check->id)
                             ->where('maximal_cap' ,$limit_of_loan->max)
-                            ->first();      
+                            ->first();
         if(!$credibility_check){
 
             return ['status' => false , 'score' => $score , 'detail' => $detail, 'credit_score' => $score_first_step , 'message' => [ 'credit_limit' => 0 , 'credibiliti_status' => 0, 'credibiliti_percentage' => 0]];

@@ -17,6 +17,7 @@ use App\Helpers\Utils;
 use function GuzzleHttp\json_encode;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Validation\Rule;
+use App\MasterCapOfBusiness;
 
 class UsersController extends Controller
 {
@@ -324,9 +325,11 @@ class UsersController extends Controller
    }
 
     public function add_personal_business(Request $request){
+        
+        
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
-            'id_cap_of_business' => 'required',
+            // 'id_cap_of_business' => 'required',
             'business_location_status' => 'required',
             'business_partner' => 'required',
             'legality_status' =>'required',
@@ -339,11 +342,13 @@ class UsersController extends Controller
             'vilages_business' => 'required',
             'postal_code_business' => 'required|numeric',
             'phone_number_business' => 'required|numeric',
+            'omset_value' => 'required',
+            'asset_value' => 'required'
 
         ],
             [
                 'name_of_bussiness.required' => 'Nama usaha tidak boleh kosong',
-                'id_cap_of_business.required' => 'Kriteria usaha tidak boleh kosong',
+                // 'id_cap_of_business.required' => 'Kriteria usaha tidak boleh kosong',
                 'business_location_status.required' => 'Status tempat usaha tidak boleh kosong',
                 'business_partner.required' => 'Lama menjadi partner tidak boleh kosong',
                 'legality_status.required' => 'Status Badan usaha tidak boleh kosong',
@@ -356,9 +361,8 @@ class UsersController extends Controller
                 'vilages_business.required' => 'Kelurahan tidak boleh kosong',
                 'postal_code_business.required' => 'Kode pos tidak boleh kosong',
                 'phone_number_business.numeric' => 'Nomor telepon harus berupa angka',
-
-
-
+                'omset_value.required' => 'Omzet tidak boleh kosong ',
+                'asset_value.required' => 'Penjualan tidak boleh kosong',
             ]);
 
         if($validation->fails()) {
@@ -367,14 +371,29 @@ class UsersController extends Controller
                 "message"=> $validation->messages(),
             ];
         }else{
+
             User::where('id' , Auth::id())->update(['step' => 3]);
+            
+            $request->omset_value = str_replace('Rp' ,'' , $request->omset_value);
+            $request->omset_value = str_replace('.' ,'' , $request->omset_value);
+
+            $request->asset_value = str_replace('Rp' ,'' , $request->asset_value);
+            $request->asset_value = str_replace('.' ,'' , $request->asset_value);
+
+            $omzet = (0.8 * $request->omset_value);
+            $id_cap_of_business = MasterCapOfBusiness::whereRaw($omzet.' BETWEEN min AND max')->where('status' , true)->first();
+            if($id_cap_of_business){
+                $id_cap = $id_cap_of_business->id;
+            }else{
+                $id_cap = 1;
+            }
             BusinessInfo::updateOrCreate(
                 [
                     'uid' => Auth::id()
                 ],[
                     'uid' => Auth::id(),
                     'business_name' => $request->name_of_bussiness,
-                    'id_cap_of_business' => $request->id_cap_of_business,
+                    'id_cap_of_business' => $id_cap,
                     'id_credit_score_income_factor' => $request->business_category,
                     'business_established_since' => $request->business_established_since,
                     'total_employees' => $request->number_of_employee,
@@ -393,7 +412,9 @@ class UsersController extends Controller
                     'average_monthly_profit_six_month' => $request->profit,
                     'average_monthly_expenditure_six_month' => $request->expenditure,
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'omset_value' => $request->omset_value,
+                    'asset_value' => $request->asset_value
                 ]
             );
 

@@ -16,20 +16,18 @@
                             </div>
 
                             <div class="col">
-                                <h6>Nilai Omset dan Aset<span>*</span></h6>
-                                <select class="form-control" name="id_cap_of_business">
-                                    <option selected=""> Pilih Kategori Industri</option>
-                                    @foreach($criteria as $key => $val)
-                                        @if(isset($business->id_cap_of_business))
-                                            <option attr="" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }} >{{ucfirst($val->description)}}</option>
+                                <h6>Sewa Tempat Usaha<span>*</span></h6>
+                                <select class="form-control" name="business_location_status">
+                                    <option >--Pilih--</option>
+                                    @foreach($building_status as $key => $val)
+                                        @if(isset($business->business_place_status))
+                                            <option value="{{$val->id}}" {{  $business->business_place_status== $val->id ? "selected" : "" }} >{{$val->place_status_name}}</option>
                                         @else
-                                            <option attr="" value="{{$val->id}}">{{ucfirst($val->description)}}</option>
+                                            <option value="{{$val->id}}">{{$val->place_status_name}}</option>
                                         @endif
                                     @endforeach
                                 </select>
-                                <p id="id_cap_of_business_description"></p>
                             </div>
-
                         </div>
                         <div class="row mt-5">
                             <div class="col">
@@ -45,19 +43,30 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col">
-                                <h6>Sewa Tempat Usaha<span>*</span></h6>
-                                <select class="form-control" name="business_location_status">
-                                    <option >--Pilih--</option>
-                                    @foreach($building_status as $key => $val)
-                                        @if(isset($business->business_place_status))
-                                            <option value="{{$val->id}}" {{  $business->business_place_status== $val->id ? "selected" : "" }} >{{$val->place_status_name}}</option>
+                            <!-- <div class="col">
+                                <h6>Nilai Omset dan Aset<span>*</span></h6>
+                                <select class="form-control" name="id_cap_of_business">
+                                    <option selected=""> Pilih Kategori Industri</option>
+                                    @foreach($criteria as $key => $val)
+                                        @if(isset($business->id_cap_of_business))
+                                            <option attr="" value="{{$val->id}}" {{  $business->id_cap_of_business== $val->id ? "selected" : "" }}> {{ucfirst($val->description)}}</option>
                                         @else
-                                            <option value="{{$val->id}}">{{$val->place_status_name}}</option>
+                                            <option attr="" value="{{$val->id}}">{{ucfirst($val->description)}}</option>
                                         @endif
                                     @endforeach
                                 </select>
+                                <p id="id_cap_of_business_description"></p>
+                            </div> -->
+                            <div class="col">
+                                <h6>Nilai Omset<span>*</span></h6>
+                                    <input type="text" value="{{$business->omset_value ?? ''}}" class="form-control" placeholder="Nilai omzet" id="omset_value" name="omset_value">
                             </div>
+
+                            <div class="col">
+                                <h6>Nilai Asset<span>*</span></h6>
+                                <input type="text" value="{{$business->asset_value ?? ''}}" class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value">
+                            </div>
+                            
                         </div>
                         <div class="row mt-5">
                             <div class="col">

@@ -29,7 +29,9 @@ class BusinessInfo extends Model
         'average_monthly_expenditure_six_month',
         'average_monthly_profit_six_month',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'omset_value',
+        'asset_value'
     ];
 
     public function income_factory()
