@@ -11,6 +11,8 @@ use App\PrivyID as ModelPriviID;
 use Illuminate\Support\Facades\Auth;
 use App\PrivyIDDocument;
 use App\PrivyIDDocumentRecipients;
+use App\LenderVerification;
+use App\User;
 
 class PrivyID {
     protected $this;
@@ -47,14 +49,31 @@ class PrivyID {
                         'updated_at' => date('Y-m-d H:i:s')
                     ]
                 );
+                if($res['data']['status'] == 'rejected'){
+                    $this->update_status_user_verified($res['data']['privyId'] , 'rejected');
+                }
             break;
             case 'document-signed' :
                 $doc = PrivyIDDocument::where('token' , $res['data']['docToken'])->first();
-                $doc->document_status = strtolower($res['data']['documentStatus']);
-                $doc->document_response_json =  $res['data']['download'];
-                $doc->status_recipients =json_encode($res['data']['recipients']);
-                $doc->updated_at = date('Y-m-d H:i:s');
-                $doc->save();
+                if($doc){
+                    $doc->document_status = strtolower($res['data']['documentStatus']);
+                    $doc->document_response_json =  $res['data']['download'];
+                    $doc->status_recipients =json_encode($res['data']['recipients']);
+                    $doc->updated_at = date('Y-m-d H:i:s');
+                    $doc->save();
+                    
+                    if(strtolower($res['data']['documentStatus']) == 'completed'){
+                        // richard, created queue
+                        $user_verified =  PrivyIDDocument::select('privyid_documents_recipients.privyid')
+                                            ->leftJoin('privyid_documents_recipients' , 'privyid_documents_recipients.document_id', 'privyid_documents.id')
+                                            ->where('privyid_documents.document_function' , 'register')
+                                            ->where('privyid_documents.id' , $doc->id)->first();
+                       if($user_verified){
+                            $this->update_status_user_verified($user_verified->privyid);
+                       }
+                    }
+                }
+                
             break;
             default :    
             break;
@@ -153,7 +172,23 @@ class PrivyID {
             );
         }
     }
-
+    public function update_status_user_verified($privyid , $status =null){
+        $user = ModelPriviID::select('uid')->where('privyids.privyId' , $privyid)->first();
+        if(!$user){
+            return;
+        }
+        $user_type = User::select('group')->where('id' , $user->uid)->first();
+        if(!$user_type){
+            return ;
+        }
+        if($user_type->group == 'lender'){
+            $lender = LenderVerification::where('uid' ,$user->uid)->first();
+            if($lender){
+                $lender->status = $status != null ? 'verified' : $status;
+                $lender->save();
+            }
+        }
+    }
     public function requestDocumentUpload($docTitle ,$docType , $recipients , $pathDocument , $function){
         $data = [
             'documentTitle' => $docTitle,

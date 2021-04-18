@@ -731,20 +731,14 @@ class LenderController extends Controller
     }
 
     public function register_sign_aggrement(Request $request){
-        
+        $verified_user = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
+        if($verified_user){
+            return redirect('lender/funding');
+        }
         $check_status = AppPrivyID::where('uid' , Auth::id())
                         ->whereIn('status' , ['registered' , 'verified'])
                         ->count();
         $allow_sign = false;
-        // $completeAgreement = AppPrivyID::
-        //                     ->leftJoin('privyid_documents','privyid_documents.user_token' , 'privyids.')
-        //                     ->select('user_token')
-        //                     ->where('uid' , Auth::id())
-        //                     ->get();
-        // if(){
-
-
-        // }
         if(Auth::user()->level == 'business'){
             if($check_status >= 2 ){
                 $allow_sign = true;
