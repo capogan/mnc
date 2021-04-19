@@ -3,6 +3,9 @@
     <div class="container-fluid" style="height: 100vh; display: block;">
         <div class="row no-gutter  h-100">
             <div class="col-md-7 bg-login">
+                 <div class="row d-flex justify-content-center mt-5">
+                    <img src="/images/Artboard_siap.png" class="logo-siap"/>
+                </div>
             </div>
             <div class="col-md-5 bg-light">
                 <div class="login d-flex align-items-center py-4">
