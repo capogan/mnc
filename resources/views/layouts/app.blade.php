@@ -32,9 +32,9 @@
 </head>
 
 <body>
-<div class="header header-regular">
-        <div class="container">
-            <div class="row">
+<div class="header header-regular" >
+        <div>
+            <div class="row pl-5">
                 <div class="col-sm-1.1">
                     <!-- logo -->
 
@@ -79,14 +79,14 @@
                     </div>
                     <!-- /.navigation start-->
                 </div>
-                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
+                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
                     @if (Auth::check())
                         <div class="btn-action">
-                            <a href="/logout" class="btn btn-default">KELUAR</a> </div>
+                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                         </div>
                     @else
                         <div class="btn-action">
-                            <a href="/login" class="btn btn-default">MASUK</a> </div>
+                            <a href="/login" class="btn btn-danger">MASUK</a> </div>
                         </div>
 
                     @endif
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 @yield('content')
 
 
