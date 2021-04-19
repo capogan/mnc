@@ -18,6 +18,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mt-5">
+                                        <div class="col">
+                                            <h6>Kode Member<span>*</span></h6>
+                                            <input type="text" name="member_code" id="member_code" class="form-control" placeholder="Masukkan Kode Member">
+                                        </div>
+                                    </div>
+
                                     <div class="row mt-2">
                                         <div class="col">
                                             <h6>Nomor KTP<span>*</span></h6>
