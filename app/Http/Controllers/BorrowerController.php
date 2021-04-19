@@ -254,12 +254,12 @@ class BorrowerController extends Controller
             'invoice_number' => 'required|unique:request_loan',
             'identity_numbers_invoice'=> 'required',
             'period' => 'required',
-            'member_code' => 'required',
+//            'member_code' => 'required',
             'total_invoice' => 'required'
         ],
             [
                'invoice_number.unique'=>'Nomor Faktur sudah terdaftar',
-                'member_code.required'=>'Kode Member harus diisi',
+//                'member_code.required'=>'Kode Member harus diisi',
             ]
         );
 
