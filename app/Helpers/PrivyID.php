@@ -224,6 +224,7 @@ class PrivyID {
             ]);
             $redirect =  $response['data']['urlDocument'];
             $this->process_recipients_data($response['data']['recipients'], $save_doc->id);
+            return $redirect;
         }
         PrivyLogs::create([
             'uid' => Auth::id(),

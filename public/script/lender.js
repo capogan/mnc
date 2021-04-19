@@ -30,7 +30,7 @@ $(document).ready(function() {
             success:function(response)
             {
                 //alert(response.url);
-               window.location.href = response.url;
+               //window.location.href = response.url;
             }
         })
     });
