@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .modal{
-            display: block !important; /* I added this to see the modal, you don't need this */
+            /*display: block !important; !* I added this to see the modal, you don't need this *!*/
         }
 
         /* Important part */
@@ -520,7 +520,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Saya Mengerti</button>
+                    <button type="button" class="btn btn-primary" id="close_disclamer">Saya Mengerti</button>
                 </div>
             </div>
         </div>
@@ -533,6 +533,7 @@
 
             $('.wide').niceSelect();
             $('#disclamer_modal').modal({backdrop: 'static', keyboard: false})
+
 
         });
     </script>
@@ -558,6 +559,11 @@ $('.carousel .carousel-item').each(function(){
         next.children(':first-child').clone().appendTo($(this));
       }
 });
+
+
+        $("#close_disclamer").click(function(){
+            $('#disclamer_modal').modal('hide');
+        })
 
 
     </script>
