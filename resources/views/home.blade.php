@@ -35,19 +35,35 @@
 
 
     <div class="container">
+    <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
+                <div class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        
+                    </ol>
+                </div>
+            </div>
+        </div>
         <div class="row mt-5 mb-5">
             <div class="row">
                 <div class="col">
 
 
-                <img src="images/disalurkan.png" alt="Borrow - Loan Company Website Template" class="icon-ttg-layanan">
+                <img src="/images/Artborad2.png" alt="Borrow - Loan Company Website Template" class="icon-ttg-layanan">
                 </div>
                 <div class="col">
                     <div class="row">
                         <h2>TENTANG LAYANAN</h2>
                     </div>
                 <div class="row">
-                    <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p style="text-align: justify;">SIAP danain adalah salah satu platform penyedia layanan pinjam meminjam uang berbasis teknologi informasi, atau lebih dikenal dengan peer to peer lending.
+
+Dalam Aktifitasnya SIAP dananin berperan mempertemukan antara peminjam dan pemberi pinjaman. 
+
+Dengan tujuan besar dapat berperan penuh terhadap inklusi keuangan dan perkembangan UMKM. SIAP Danain  melalui produk pinjaman produktif akan mendukung banyak UMKM dalam mendapatkan dan meningkatkan modal atau memperbesar kegiatan usaha UMKM.
+.  
+Dengan memanfaatkan kecanggihan teknologi yang dimiliki Siap Danain mampu bergerak cepat dan teapt. Cepat dalam memproses setiap transaksi dan memiliki akurasi ketepatan yang baik dalam melakukan mitigasi risiko.</p>
             </div>
             </div>
         </div>
@@ -57,7 +73,8 @@
         </div>
 
     </div>
-    <div class="container text-center my-3">
+    <div class="container text-center mt-5">
+    <h3>Partner Kami</h3>
 
     <div class="row mx-auto my-auto">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
@@ -65,45 +82,40 @@
                 <div class="carousel-item active">
                     <div class="col-md-4">
 
-                            <img class="img-fluid" src="/images/bni.png">
+                        
+                            <img class="img-fluid" src="/images/bni_baru.png">
+                       
 
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="col-md-4">
 
-                            <img class="img-fluid" src="/images/bni.png">
+                        
+                            <img class="img-fluid" src="/images/pefindo.png">
+                      
 
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="col-md-4">
 
-                            <img class="img-fluid" src="/images/bni.png">
+                      
+                            <img class="img-fluid" src="/images/privy.png">
+                       
 
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="col-md-4">
 
-                            <img class="img-fluid" src="/images/bni.png">
-
+                       
+                            <img class="img-fluid" src="/images/fm.png">
+                       
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
+               
 
-                            <img class="img-fluid" src="/images/bni.png">
-
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-
-                            <img class="img-fluid" src="/images/bni.png">
-
-                    </div>
-                </div>
             </div>
             <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
@@ -138,7 +150,7 @@
                 <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
                     <div class="section-title mb60 text-center">
                         <!-- section title start-->
-                        <h1>Reasons to choose us</h1>
+                        <h1>Mengapa Memilih Kami ?</h1>
                         <p>Nunc iaculis velit a vestibulum cursu estibentum nec ante eu molestie.</p>
                     </div>
                     <!-- /.section title start-->
@@ -149,8 +161,8 @@
                     <div class="feature feature-icon-style">
                         <div class="feature-icon"> <i class="fa fa-calculator fa-2x"></i></div>
                         <div class="feature-content">
-                            <h3 class="feature-title">Calculator</h3>
-                            <p>Fusce sed erat libasellus id orciquise ctus velit, asimple male suada urna sodales eu.</p>
+                           <h3 class="feature-title">Bunga Pinjaman Terjangkau</h3>
+                            <p>Bunga PinjamanBunga dan biaya layanan yang terjangkau  sesuai hasil analisa risiko tanpa ada biaya yang tersembunyi</p>
                         </div>
                     </div>
                 </div>
@@ -158,8 +170,10 @@
                     <div class="feature feature-icon-style">
                         <div class="feature-icon"><i class="fa fa-heart fa-2x"></i></div>
                         <div class="feature-content">
-                            <h3 class="feature-title">Customers love us!</h3>
-                            <p>Quisque ut ligula nec est pretium phareest male sunec felis atmetus mattis volutpat invel elit.</p>
+                           <h3 class="feature-title">Pelayanan yang baik</h3>
+                           <div class="row mt-5">
+                            <p>Pelayanan informasi yang jelas dan cepat serta selalu membina hubungan yang baik kepada setiap pelanggan.</p>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -167,8 +181,8 @@
                     <div class="feature feature-icon-style">
                         <div class="feature-icon"> <i class="fa fa-file-text-o fa-2x"></i></div>
                         <div class="feature-content">
-                            <h3 class="feature-title">Easy Documentation </h3>
-                            <p>Vestibulum elementum pellent esques ittnunc dui in massa variusare augue feugiat.</p>
+                            <h3 class="feature-title">Pendaftaran yang mudah</h3>
+                            <p>Proses pendaftaran yang mudah karena dapat dilakukan melalui koneksi internet kapanpun dan dimanapun.</p>
                         </div>
                     </div>
                 </div>
@@ -176,8 +190,12 @@
                     <div class="feature feature-icon-style">
                         <div class="feature-icon"><i class="fa fa-flash fa-2x"></i></div>
                         <div class="feature-content">
-                            <h3 class="feature-title">Fast Approval</h3>
-                            <p>Pellent esques ittnunc vene nata uri bulum eleme ntum in massa varnare augue feugiat.</p>
+                      
+                            <h3 class="feature-title">Proses Cepat</h3>
+                           
+                            <div class="row mt-5">
+                            <p>Proses analisa dan persetujuan pinjaman maksimal 2 hari kerja.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
