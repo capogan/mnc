@@ -271,7 +271,7 @@ class BorrowerController extends Controller
             'invoice_number' => $request->invoice_number,
             'identity_numbers_invoice' => $request->identity_numbers_invoice,
             'periode' => $request->period,
-            'id_member_code' => $request->member_code
+//            'id_member_code' => $request->member_code
         ];
 
         $period = $request->period;
