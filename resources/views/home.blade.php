@@ -110,7 +110,7 @@ Dengan memanfaatkan kecanggihan teknologi yang dimiliki Siap Danain mampu berger
                     <div class="col-md-4">
 
                        
-                            <img class="img-fluid" src="/images/fm.png">
+                            <img class="img-fluid" src="/images/FM.png">
                        
                     </div>
                 </div>
