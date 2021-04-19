@@ -256,6 +256,9 @@ html {
 }
 
 .icon-ttg-layanan{
-  width: 400px;
-  margin-left: 100px;
+  width: 100%;
+}
+.logo-siap{
+  width: 200px;
+  margin-top: 100px;
 }

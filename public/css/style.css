@@ -410,8 +410,8 @@ display: block; background: #dddddd; content: '';}*/
 #slider { }
 .slider { position: relative; }
 .slider-img img { position: relative; z-index: -1; width: 100%; }
-.slider-img { background: -moz-linear-gradient(top, rgba(16, 75, 149, 0.8) 0%, rgba(16, 75, 149, 0.8) 100%); background: -webkit-linear-gradient(top, rgba(16, 75, 149, 0.8) 0%, rgba(16, 75, 149, 0.8) 100%); background: linear-gradient(to bottom, rgba(16, 75, 149, 0.8) 0%, rgba(16, 75, 149, 0.8) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc1b2429', endColorstr='#cc1b2429', GradientType=0); position: relative; }
-.slider-captions { position: absolute; bottom: 200px; }
+.slider-img { position: relative; }
+.slider-captions { position: relative; bottom: 200px;}
 .slider-title { color: #fff; font-size: 52px; font-weight: 700; line-height: 62px; }
 .slider-text { color: #fff; }
 .slider .owl-prev { position: absolute; left: 0px; top: 40%; left: 20px; }
@@ -427,7 +427,7 @@ index-1
 ------------------------------------------*/
 .mail-text { border-right: 2px solid #1b5ca5; }
 .rate-table { background-color: #fff; border-top: 1px solid #dee7f2; border-bottom: 1px solid #dee7f2; margin-top: -21px; }
-.loan-rate { font-size: 32px; color: #414855; margin-bottom: 0px; font-weight: 600; line-height: 1; }
+.loan-rate { font-size: 28px; color: #414855; margin-bottom: 0px; font-weight: 600; line-height: 1; }
 .rate-counter-block { border-right: 1px solid #dee7f2; padding-top: 20px; padding-bottom: 20px; }
 .rate-counter-block:first-child { }
 .rate-icon { float: left; padding-top: 5px; padding-right: 20px; padding-left: 20px; }
@@ -535,8 +535,8 @@ index-1
 .header-regular #navigation.small-screen #menu-button { color: #fff; }
 .header-regular #navigation.small-screen #menu-button:before { background: #fff; }
 .header-regular #navigation.small-screen #menu-button:after { border-top: 2px solid #fff; border-bottom: 2px solid #fff; }
-.hero-section { background: url(../images/hero-img-1.jpg)no-repeat; background-size: cover; background-position-x: center; }
-.hero-tab-block { padding-top: 241px; padding-bottom: 100px; }
+.hero-section { background: url(../images/banner_baru.png)no-repeat; background-size: cover; background-position-x: center; }
+.hero-tab-block { padding-top: 241px; padding-bottom: 100px; height: 700px; }
 .hero-tab-block .st-tabs .nav-link { padding: 18px 25px; text-align: center; margin-right: -1px; margin-left: -1px; }
 .loan-form { }
 .hero-tab-block .st-tabs a { text-transform: capitalize; }

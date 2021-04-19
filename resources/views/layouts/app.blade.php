@@ -39,7 +39,7 @@
                     <!-- logo -->
 
                     <div class="logo p-2 mt-2">
-                    <a href="/"><img src="/images/siap.png" class="saturate"></a>
+                    <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
 
                    
                     </div>
@@ -127,7 +127,7 @@
                     
                         <div class="row">
                         <div class="col">
-                            <h3 class="newsletter-title">Signup Our Newsletter</h3>
+                            <h3 class="newsletter-title">Langganan Informasi SIAP</h3>
                         </div>
                         </div>
                         <div class="row">

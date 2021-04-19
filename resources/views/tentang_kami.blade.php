@@ -1,30 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="slider" id="slider">
+ <div class="slider" id="slider">
         <!-- slider -->
-        <div class="slider-img"><img src="images/slider-1.jpg" alt="Borrow - Loan Company Website Template" class="">
+       <div class="slider-img"><img src="images/banner_baru.png" alt="Borrow - Loan Company Website Template" class="">
             <div class="container">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <div class="slider-captions">
                         <!-- slider-captions -->
-                        <h1 class="slider-title">SIAP</h1>
-                        <p class="slider-text d-none d-xl-block d-lg-block d-sm-block">The low rate you need for the need you want! Call
-                            <br> (555) 123-4567</p>
                        
+                        
                         </div>
                     <!-- /.slider-captions -->
                 </div>
             </div>
         </div>
         <div>
-            <div class="slider-img"><img src="images/slider-2.jpg" alt="Borrow - Loan Company Website Template" class="">
+             <div class="slider-img"><img src="images/banner_baru_2.png" alt="Borrow - Loan Company Website Template" class="" >
                 <div class="container">
                     <div class=" col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
                         <div class="slider-captions">
                             <!-- slider-captions -->
-                             <h1 class="slider-title">SIAP</h1>
-                            <p class="slider-text d-none d-xl-block d-lg-block d-sm-block"> Award winning car loans with low fixed rates and no ongoing fees.</p>
+                            
+                            </div>
+                        <!-- /.slider-captions -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="slider-img"><img src="images/banner_baru_3.png" alt="Borrow - Loan Company Website Template" class="" >
+                <div class="container">
+                    <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
+                        <div class="slider-captions">
+                            <!-- slider-captions -->
                            
                             </div>
                         <!-- /.slider-captions -->
@@ -32,22 +41,8 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="slider-img"><img src="images/slider-3.jpg" alt="Borrow - Loan Company Website Template" class="">
-                <div class="container">
-                    <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
-                        <div class="slider-captions">
-                            <!-- slider-captions -->
-                            <h1 class="slider-title">SIAP</h1>
-                            <p class="slider-text d-none d-xl-block d-lg-block d-sm-block">Education Loan From Avanse At An Attractive Rate Of Interest. Apply Now!</p>
-                         
-                            </div>
-                        <!-- /.slider-captions -->
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
      <div class="rate-table">
         <div class="container">
             <div class="row mt-3 mb-3">
@@ -56,8 +51,9 @@
                         <div> <img src="images/disalurkan.png" alt="Borrow - Loan Company Website Template" class="icon-porto"></div>
                         </div>
                         <div class="row mt-3 justify-content-center">
-                        <div class="rate-box">
-                            
+                        <div class="rate-box mt-2">
+                            <h1 class="loan-rate text-center">3.74</h1>
+                            <br/>
                             <p class="text-center rate-title">TOTAL PINJAMAN YANG DISALURKAN</p>
                         </div>
                     </div>
@@ -68,7 +64,8 @@
                         </div>
                         <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                            
+                             <h1 class="loan-rate text-center">8.96</h1>
+                              <br/>
                             <p class="text-center rate-title">TOTAL PINJAMAN YANG DISALURKAN TAHUN INI</p>
                         </div>
                         </div>
@@ -80,7 +77,8 @@
                         </div>
                         <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                           
+                            <h1 class="loan-rate text-center">6.70</h1>
+                             <br/>
                             <p class="text-center rate-title">TOTAL OUTSTANDING</p>
                         </div>
                     </div>
@@ -91,7 +89,8 @@
                         </div>
                         <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                          
+                           <h1 class="loan-rate text-center">9.00</h1>
+                            <br/>
                             <p class="text-center rate-title">TOTAL AKUMILASI PEMINJAM</p>
                         </div>
                     </div>
@@ -102,7 +101,8 @@
                         </div>
                         <div class="row mt-3 justify-content-center">
                         <div class="rate-box">
-                           
+                            <h1 class="loan-rate text-center">3.74</h1>
+                             <br/>
                             <p class="text-center rate-title">TOTAL AKUMULASI PEMINJAM AKTIF</p>
                         </div>
                     </div>
