@@ -218,7 +218,7 @@ class LenderIndividualController extends Controller
     public function post_profile(Request $requests)
     {
         $validators = [
-            'identity_number' => 'required|numeric',
+            'identity_number' => 'required|numeric|digits:16',
             'full_name' => 'required',
             'phone_number' => 'required|numeric',
             'email' => 'required',
@@ -234,7 +234,7 @@ class LenderIndividualController extends Controller
             'city' => 'required',
             'district' => 'required',
             'villages' => 'required',
-            'kodepos' => 'required|numeric',
+            'kodepos' => 'required|numeric|digits:5',
             'emergency_name' => 'required',
             'relationship_as' => 'required',
             'emergency_phone' => 'required|numeric',
@@ -249,6 +249,7 @@ class LenderIndividualController extends Controller
         $messagesvalidator = [
             'identity_number.required' => 'Nomor KTP tidak boleh kosong',
             'identity_number.numeric' => 'Nomor KTP harus angka',
+            'identity_number.digits' => 'Nomor KTP harus 16 angka',
             'full_name.required' => 'Nama Lengkap tidak boleh kosong',
             'phone_number.required' => 'Nomor Telepon tidak boleh kosong',
             'phone_number.numeric' => 'Nomor Telepon harus angka',
@@ -268,6 +269,7 @@ class LenderIndividualController extends Controller
             'villages.required' => 'Kelurahan tidak boleh kosong',
             'kodepos.required' => 'Kode Pos tidak boleh kosong',
             'kodepos.numeric' => 'Kode Pos harus angka',
+            'kodepos.digits' => 'Kode Pos harus 5 angka',
             'emergency_name.required' => 'Nama Kerabat tidak boleh kosong',
             'relationship_as.required' => 'Hubungan tidak boleh kosong',
             'emergency_phone.required' => 'Nomor Telepon Kerabat tidak boleh kosong',
@@ -353,9 +355,9 @@ class LenderIndividualController extends Controller
             LenderIndividualBankAccount::updateOrCreate([
                 'id_lender_individual' => $insertID->id,
             ], [
-                'account_name' => $requests->rek_number,
+                'account_name' => $requests->rek_name,
                 'id_bank' => $requests->bank_id,
-                'account_number' => $requests->rek_name,
+                'account_number' => $requests->rek_number,
                 'phone_number_register_in_bank' => $requests->no_hp_in_bank,
             ]);
 
@@ -865,7 +867,7 @@ class LenderIndividualController extends Controller
             'individu' => $u,
         ];
 
-        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name .'_'. uniqid()) . '.pdf');
+        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.register_lender_individu', $data)->save($pathDocument);
         $recipients = [
             [
