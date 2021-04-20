@@ -1,6 +1,6 @@
 @extends('layouts.app_lender')
 @section('content')
-    <div class="container">
+    <div class="container containers-with-margin">
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">

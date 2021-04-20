@@ -1,5 +1,17 @@
 @extends('layouts.app_lender')
 @section('content')
+    <div class="container containers-with-margin">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
+                <div class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active text-light">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">

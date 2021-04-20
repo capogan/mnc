@@ -265,8 +265,9 @@ html {
 
 }
 
-body>.container{
-  padding-top: 130px; 
+.containers-with-margin{
+  padding-top : 100px;
+ 
 }
 .text-profile{
   text-align: right;

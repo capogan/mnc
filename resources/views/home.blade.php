@@ -24,7 +24,6 @@
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12 ">
                     <div class="hero-tab-block">
-
                     </div>
                 </div>
             </div>
