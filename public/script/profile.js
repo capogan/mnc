@@ -668,7 +668,7 @@ function updated_status(id,number_status){
          {
             close_loading();
              setTimeout(function(){
-                window.location.reload();
+                window.location.href = '/lender/funding'
              }, 800);
          },
          error: function() {
