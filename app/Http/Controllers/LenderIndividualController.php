@@ -590,14 +590,14 @@ class LenderIndividualController extends Controller
             'photo_salary_slip.required' => 'Foto Slip Gaji tidak boleh kosong',
         ];
 
-        // $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
-        // if ($validation->fails()) {
-        //     $json = [
-        //         "status" => false,
-        //         "message" => $validation->messages(),
-        //     ];
-        //     return response()->json($json);
-        // }
+        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        if ($validation->fails()) {
+            $json = [
+                "status" => false,
+                "message" => $validation->messages(),
+            ];
+            return response()->json($json);
+        }
 
         $imageData = [];
         $path = public_path() . '/upload/lender/individu/file/attachment';
