@@ -265,6 +265,7 @@ html {
 
 }
 
-body>.container{
-  padding-top: 130px; 
+.containers-with-margin{
+  padding-top : 100px;
+ 
 }
