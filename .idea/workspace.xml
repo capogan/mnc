@@ -4,14 +4,7 @@
     <list default="true" id="eded19fa-512d-40c7-a6cf-ab0e701fefd9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Siap-Admin/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Siap-Admin/resources/views/auth/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/individu/document.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/individu/document.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/individu/document_sme.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/individu/document_sme.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/individu/sign_agreement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/individu/sign_agreement.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/information_commissioner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/information_commissioner.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/information_director.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/information_director.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/lender/information_file.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/lender/information_file.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pinjam.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pinjam.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -97,7 +97,11 @@
                                     <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">
+                                    @if(Auth::user()->group == 'borrower')
+                                        <a class="dropdown-item" href="/profile">
+                                        @else(Auth::user()->group == 'borrower')
+                                        <a class="dropdown-item" href="/profile/lender">
+                                        @endif
                                         <div class="row mt-2 mb-2">
                                             <div class="col mt-2">
                                                 Profile
@@ -123,14 +127,15 @@
                                             </div>
                                         </div>
                                     </a>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 @else
-
                     <div class="btn-action">
-                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                        <a href="/login" class="btn btn-danger">MASUK</a>
+                    </div>
             </div>
 
             @endif
