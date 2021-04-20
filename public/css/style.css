@@ -342,7 +342,7 @@ top bar
 #navigation.align-center>ul>li { display: inline-block; float: none; }
 #navigation.align-center ul ul { text-align: left; }
 #navigation.align-right>ul>li { float: right; }
-#navigation>ul>li>a { padding: 16px 15px; font-size: 18px; text-decoration: none; color: #66707f; font-weight: 600; text-transform: uppercase; }
+#navigation>ul>li>a { padding: 16px 15px; font-size: 14px; text-decoration: none; color: #66707f; font-weight: 600; text-transform: uppercase; }
 #navigation>ul>li:hover>a { color: #f51f8a; }
 #navigation>ul>li.has-sub>a { padding-right: 26px; }
 

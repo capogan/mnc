@@ -86,8 +86,8 @@
                         </div>-->
                         <div class="row">
                            <div class="col-sm-3">
-                               <div class="row mt-2">
-                                   <h3 class="text-profile">Festine</h3>
+                               <div class="row mt-2 ml-1">
+                                   <h4 class="text-profile">Festine</h4>
                                </div>
                            </div>
                             <div class="col">
