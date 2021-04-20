@@ -5,7 +5,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
                 <div class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="active text-light">Profil</li>
                     </ol>
                 </div>
