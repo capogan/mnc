@@ -1,6 +1,6 @@
 @extends('layouts.app_lender')
 @section('content')
-    <div class="container">
+    <div class="container containers-with-margin">
         <div class="row">
             <div class="wrapper-content bg-white">
                 <div class="section-scroll" id="section-feature">
