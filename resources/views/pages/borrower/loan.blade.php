@@ -2,7 +2,7 @@
 @section('content')
 
 
-    <div class="container">
+    <div class="container containers-with-margin">
         <div class="row mt-4">
             <div class="col-xl-12 ">
                 <div class="card bg-light">

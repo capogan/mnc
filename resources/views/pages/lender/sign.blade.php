@@ -1,7 +1,7 @@
 @extends('layouts.app_lender')
 @section('content')
 
-    <div class="container">
+    <div class="container containers-with-margin">
         <div class="row mt-4">
             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12 mb30">
             @if($loan)
