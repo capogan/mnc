@@ -85,16 +85,12 @@
                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                        </div>-->
                     <div class="row">
-                        <div class="col">
-                            <div class="row mt-2 justify-content-end">
-                                <p class="text-right">{{Auth::user()->name}}</p>
-                            </div>
-                        </div>
+                     
                         <div class="col">
                             <div class="btn-group">
-
+                                 <button type="button" class="btn btn-warning">{{Auth::user()->name}}</button>
                                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                    <span class="caret"></span>
+                                     <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">
