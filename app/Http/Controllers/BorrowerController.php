@@ -31,6 +31,7 @@ use App\Estabilished;
 use App\Legality;
 use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
+use App\RequestFunding;
 
 class BorrowerController extends Controller
 {
@@ -389,7 +390,7 @@ class BorrowerController extends Controller
     }
 
     public function confirm(Request $request){
-
+        
         $id_loan = $request->id_loan;
         $number_status = $request->number_status;
 
@@ -401,7 +402,6 @@ class BorrowerController extends Controller
             "status" =>$number_status,
             "updated_at"=>date('Y-m-d H:i:s'),
         ]);
-
         if($number_status == '21'){
 
             $loan = LoanRequest::where('id',$id_loan)->first();
@@ -439,8 +439,8 @@ class BorrowerController extends Controller
                     'id_status_payment'=>'1',
 
                 ]);
+                
             }
-
 
         }
         $message = "Sukses menyimpan Data";
