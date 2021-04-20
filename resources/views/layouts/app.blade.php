@@ -218,7 +218,10 @@
     <script src="{{asset('js/owl.carousel.min.js')}}"></script>
     {{--<script src="{{asset('js/slider-carousel.js')}}"></script>--}}
     <script src="{{asset('js/service-carousel.js')}}"></script>
-
+    <script>
+            
+            
+    </script>
 
 
 
