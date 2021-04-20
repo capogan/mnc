@@ -50,7 +50,7 @@ class PrivyID {
                     ]
                 );
                 if($res['data']['status'] == 'rejected'){
-                    $this->update_status_user_verified($res['data']['privyId'] , 'rejected');
+                    $this->update_status_user_verified($res['data']['privyId'] , 'rejected' , false);
                 }
             break;
             case 'document-signed' :
@@ -70,7 +70,7 @@ class PrivyID {
                                             ->where('privyid_documents.id' , $doc->id)->first();
                                             //print_r($user_verified);exit;
                        if($user_verified){
-                            $this->update_status_user_verified($user_verified->privyid , 'verified');
+                            $this->update_status_user_verified($user_verified->privyid , 'verified' , true);
                        }
                     }
                 }
@@ -173,7 +173,7 @@ class PrivyID {
             );
         }
     }
-    public function update_status_user_verified($privyid , $status =null){
+    public function update_status_user_verified($privyid , $status =null , $agreement){
         $user = ModelPriviID::select('uid')->where('privyids.privyId' , $privyid)->first();
         if(!$user){
             return;
@@ -185,11 +185,15 @@ class PrivyID {
         if($user_type->group == 'lender'){
             $lender = LenderVerification::where('uid' ,$user->uid)->first();
             if($lender){
-                $lender->status = $status;
+                if($status == 'rejected'){
+                    $lender->status = $status;
+                }
+                $lender->sign_agreement = $agreement;
                 $lender->save();
             }
         }
     }
+    
     public function requestDocumentUpload($docTitle ,$docType , $recipients , $pathDocument , $function){
         $data = [
             'documentTitle' => $docTitle,

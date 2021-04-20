@@ -25,6 +25,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class LenderIndividualController extends Controller
 {
@@ -217,7 +218,7 @@ class LenderIndividualController extends Controller
     public function post_profile(Request $requests)
     {
         $validators = [
-            'identity_number' => 'required|numeric',
+            'identity_number' => 'required|numeric|digits:16',
             'full_name' => 'required',
             'phone_number' => 'required|numeric',
             'email' => 'required',
@@ -233,7 +234,7 @@ class LenderIndividualController extends Controller
             'city' => 'required',
             'district' => 'required',
             'villages' => 'required',
-            'kodepos' => 'required|numeric',
+            'kodepos' => 'required|numeric|digits:5',
             'emergency_name' => 'required',
             'relationship_as' => 'required',
             'emergency_phone' => 'required|numeric',
@@ -248,6 +249,7 @@ class LenderIndividualController extends Controller
         $messagesvalidator = [
             'identity_number.required' => 'Nomor KTP tidak boleh kosong',
             'identity_number.numeric' => 'Nomor KTP harus angka',
+            'identity_number.digits' => 'Nomor KTP harus 16 angka',
             'full_name.required' => 'Nama Lengkap tidak boleh kosong',
             'phone_number.required' => 'Nomor Telepon tidak boleh kosong',
             'phone_number.numeric' => 'Nomor Telepon harus angka',
@@ -267,6 +269,7 @@ class LenderIndividualController extends Controller
             'villages.required' => 'Kelurahan tidak boleh kosong',
             'kodepos.required' => 'Kode Pos tidak boleh kosong',
             'kodepos.numeric' => 'Kode Pos harus angka',
+            'kodepos.digits' => 'Kode Pos harus 5 angka',
             'emergency_name.required' => 'Nama Kerabat tidak boleh kosong',
             'relationship_as.required' => 'Hubungan tidak boleh kosong',
             'emergency_phone.required' => 'Nomor Telepon Kerabat tidak boleh kosong',
@@ -352,9 +355,9 @@ class LenderIndividualController extends Controller
             LenderIndividualBankAccount::updateOrCreate([
                 'id_lender_individual' => $insertID->id,
             ], [
-                'account_name' => $requests->rek_number,
+                'account_name' => $requests->rek_name,
                 'id_bank' => $requests->bank_id,
-                'account_number' => $requests->rek_name,
+                'account_number' => $requests->rek_number,
                 'phone_number_register_in_bank' => $requests->no_hp_in_bank,
             ]);
 
@@ -587,14 +590,14 @@ class LenderIndividualController extends Controller
             'photo_salary_slip.required' => 'Foto Slip Gaji tidak boleh kosong',
         ];
 
-        // $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
-        // if ($validation->fails()) {
-        //     $json = [
-        //         "status" => false,
-        //         "message" => $validation->messages(),
-        //     ];
-        //     return response()->json($json);
-        // }
+        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        if ($validation->fails()) {
+            $json = [
+                "status" => false,
+                "message" => $validation->messages(),
+            ];
+            return response()->json($json);
+        }
 
         $imageData = [];
         $path = public_path() . '/upload/lender/individu/file/attachment';
@@ -654,8 +657,8 @@ class LenderIndividualController extends Controller
             $privy->requestRegistration(
                 $u->email,
                 $u->phone_number_verified,
-                $path .'/'. $imageData['self_image'],
-                $path .'/'. $imageData['identity_image'],
+                $path . '/' . $imageData['self_image'],
+                $path . '/' . $imageData['identity_image'],
                 $u->identity_number,
                 $u->full_name,
                 $u->dob,
@@ -781,7 +784,7 @@ class LenderIndividualController extends Controller
 
             User::where('id', Auth::id())->update(['step' => 4]);
             RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
-            
+
             //get user data
             $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
                 ->select(
@@ -799,8 +802,8 @@ class LenderIndividualController extends Controller
             $privy->requestRegistration(
                 $u->email,
                 $u->phone_number_verified,
-                $path .'/'. $imageData['self_image'],
-                $path .'/'. $imageData['identity_image'],
+                $path . '/' . $imageData['self_image'],
+                $path . '/' . $imageData['identity_image'],
                 $u->identity_number,
                 $u->full_name,
                 $u->dob,
@@ -832,8 +835,10 @@ class LenderIndividualController extends Controller
         $data = array(
             'sign_agreement' => User::select(
                 'lender_individual_personal_info.*',
-                'users.email'
+                'users.email',
+                'privyids.privyId'
             )
+                ->leftJoin('privyids', 'privyids.uid', 'users.id')
                 ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
                 ->where('users.id', Auth::id())->first(),
         );
@@ -843,8 +848,40 @@ class LenderIndividualController extends Controller
     public function post_sign(Request $requests)
     {
         User::where('id', Auth::id())->update(['step' => 5]);
+
+        //get user data
+        $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+            ->select(
+                'users.email',
+                'users.phone_number_verified',
+                'lender_individual_personal_info.identity_number',
+                'lender_individual_personal_info.full_name',
+                'lender_individual_personal_info.full_address',
+            )
+            ->where('users.id', Auth::id())
+            ->first();
+
+        $data = [
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => date('Y-m-d'),
+            'individu' => $u,
+        ];
+
+        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
+        PDF::loadView('agreement.register_lender_individu', $data)->save($pathDocument);
+        $recipients = [
+            [
+                'privyId' => $u->privyId,
+                'type' => 'Signer',
+                'enterpriseToken' => '',
+            ],
+        ];
+        $privy = new PrivyID();
+        $endpoint = $privy->requestDocumentUpload('Dokumen Perjanjian Pendanaan', 'Serial', $recipients, $pathDocument, 'registration');
+
         return response()->json([
             "status" => true,
+            'url' => $endpoint,
             "message" => 'Berhasil Ditandatangani',
         ]);
     }

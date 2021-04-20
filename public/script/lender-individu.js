@@ -317,7 +317,7 @@ $(document).on('ready', function () {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = '/profile/lender-individu/';
+                    window.location.href = response.url;
                 } else {
                     var text = '';
                     $.each(response.message, function (index, value) {

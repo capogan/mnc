@@ -17,7 +17,7 @@
                                 <h4 class="card-title text-center">Buat Akun</h4>
                                 <p class="text-center">Silahkan Membuat Akun anda</p>
 
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="{{ route('register') }}" autocomplete="off">
                                     @csrf
                                     <input type="hidden" name="group" id="group" value="{{$group}}">
 {{--                                    <input type="hidden" name="level" id="level" value="{{$level}}">--}}

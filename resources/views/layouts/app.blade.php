@@ -58,7 +58,7 @@
                         <li class="active"><a href="/" class="animsition-link">Home</a>
 
                         @if (Auth::check())
-                            <li><a href="/register/borrower" class="animsition-link">profile</a>
+                            <li><a href="/profile" class="animsition-link">Profile</a>
                             </li>
                         @else
                             <li><a href="/lender" class="animsition-link">Pendanaan</a>
@@ -81,6 +81,7 @@
             </div>
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
             @if (Auth::check())
+<<<<<<< HEAD
                 <!--<div class="btn-action">
                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                        </div>-->
@@ -123,18 +124,20 @@
                                             </div>
                                         </div>
                                     </a>
+=======
+>>>>>>> f8bd7dbb67a9a5aa0cc0767d924aecda5ae98d5a
 
-                                </div>
-                            </div>
-                        </div>
+                    <div class="btn-action">
+                        <a href="/logout" class="btn btn-danger">Keluar</a>
                     </div>
                 @else
                     <div class="btn-action">
                         <a href="/login" class="btn btn-danger">MASUK</a>
                     </div>
+                @endif
             </div>
 
-            @endif
+
 
         </div>
 
@@ -240,8 +243,7 @@
 
     <a href="#0" class="cd-top" title="Go to top">Top</a>
     <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>

@@ -55,7 +55,7 @@
                                         <div class=" bg-white ">
                                             <div class="contact-form mb60">
                                                 <div class=" ">
-                                                    <form id="form_lender_attacment" enctype="multipart/form-data">
+                                                    <form id="form_lender_attacment" enctype="multipart/form-data"  autocomplete="off">
                                                         <h3>Unggah Berkas</h3>
                                                         <hr>
                                                         <div class="result-message"></div>
