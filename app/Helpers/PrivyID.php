@@ -39,6 +39,8 @@ class PrivyID {
     }
     public function privyIDCallback($response = null){
         $res= json_decode($response , true);
+        print_r($res);
+        
         switch($res['eventName']){
             case 'register' :
                 ModelPriviID::where('user_token' , $res['data']['userToken'])
@@ -66,7 +68,7 @@ class PrivyID {
                         // richard, created queue
                         $user_verified =  PrivyIDDocument::select('privyid_documents_recipients.privyid')
                                             ->leftJoin('privyid_documents_recipients' , 'privyid_documents_recipients.document_id', 'privyid_documents.id')
-                                            ->where('privyid_documents.document_function' , 'register')
+                                            ->where('privyid_documents.document_function' , 'registration')
                                             ->where('privyid_documents.id' , $doc->id)->first();
                        if($user_verified){
                             $this->update_status_user_verified($user_verified->privyid);

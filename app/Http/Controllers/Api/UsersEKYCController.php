@@ -22,17 +22,11 @@ class UsersEKYCController extends Controller
 
     public function index(Request $request){
 
-        // $privy = new PrivyID;
-        // return $privy->privyIDCallback('{"eventName":"document-signed","data":{"docTitle":"Dokumen Perjanjian Pendanaan","docToken":"04b195392e919ba23484dfc52b517a67dbd80a9a8e2e8329c6e3ff7ff55b92dc","recipients":[{"privyId":"DEVRI2838","type":"Signer","signatoryStatus":"Completed"}],"documentStatus":"Completed","download":{"url":"https://api-sandbox.privy.id/document/1Aan4JAgYv-89f08ad1-6057-4798-be68-b21eab531d5e?Expires=1618749870\u0026Signature=FMBdg4mtbMwxSBrkl5n43%2Fi6H7%2F56YwSWenpMWXFFaAVpYM2AR2AOS4OQe%2FXNAAkc7nQJSEJVSS3JYFSBLndairZjoXN%2Ffkr0yyB4CeqJXxsJpcgaJSg%2BThpJl9q3xB6h27TKAUdOZLd%2F7NPpYFnJg6KdVZMYRy47NpvdC7DHtTq3JJNwDGCL22xW2x2E2c5I9oMtP80I5olZSqrziAeHwFucZcFHLkPx6BEzQp8QCzivD8yy9QXT%2BpcKTt9khaTxjZr573zORDDX6fVd35kkNiZQMdAQpJ3OoupZwwEc2JPg6ya%2FLxmH3OJ4%2BEdWEVVHPfPLQEaQXpsz3dwiD8UHA%3D%3D","expiredAt":"2021-04-18T12:44:22+00:00"}},"message":"Document has been completed"}');
-
-        // return response()->json($json);
-        
         $ekyc = UserEKYC::create([
             'callback'=>$request->getContent(),
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
-
         if($ekyc){
             $json = [
                 "status"=> true,
@@ -47,7 +41,7 @@ class UsersEKYCController extends Controller
             }
         }
         $privy = new PrivyID;
-        $privy->privyIDCallback('{"eventName":"document-signed","data":{"docTitle":"Dokumen Perjanjian Pendanaan","docToken":"04b195392e919ba23484dfc52b517a67dbd80a9a8e2e8329c6e3ff7ff55b92dc","recipients":[{"privyId":"DEVRI2838","type":"Signer","signatoryStatus":"Completed"}],"documentStatus":"Completed","download":{"url":"https://api-sandbox.privy.id/document/1Aan4JAgYv-89f08ad1-6057-4798-be68-b21eab531d5e?Expires=1618749870\u0026Signature=FMBdg4mtbMwxSBrkl5n43%2Fi6H7%2F56YwSWenpMWXFFaAVpYM2AR2AOS4OQe%2FXNAAkc7nQJSEJVSS3JYFSBLndairZjoXN%2Ffkr0yyB4CeqJXxsJpcgaJSg%2BThpJl9q3xB6h27TKAUdOZLd%2F7NPpYFnJg6KdVZMYRy47NpvdC7DHtTq3JJNwDGCL22xW2x2E2c5I9oMtP80I5olZSqrziAeHwFucZcFHLkPx6BEzQp8QCzivD8yy9QXT%2BpcKTt9khaTxjZr573zORDDX6fVd35kkNiZQMdAQpJ3OoupZwwEc2JPg6ya%2FLxmH3OJ4%2BEdWEVVHPfPLQEaQXpsz3dwiD8UHA%3D%3D","expiredAt":"2021-04-18T12:44:22+00:00"}},"message":"Document has been completed"}');
+        $privy->privyIDCallback($request->getContent());
 
         return response()->json($json);
     }
