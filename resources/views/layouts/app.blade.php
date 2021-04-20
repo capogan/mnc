@@ -41,13 +41,13 @@
                     <div class="logo p-2 mt-2">
                     <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
 
-                   
+
                     </div>
                 </div>
                 <div class="col-sm-1">
                    <div class="logo p-2">
                         <img src="/images/ojk3.png" alt="Logo">
-                        <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span> 
+                        <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span>
                     </div>
                 </div>
                 <!-- logo -->
@@ -124,7 +124,7 @@
                     <!-- /.Footer Logo -->
                 </div>
                 <div class="col">
-                    
+
                         <div class="row">
                         <div class="col">
                             <h3 class="newsletter-title">Langganan Informasi SIAP</h3>
@@ -147,7 +147,7 @@
                             <!-- /.Newsletter Form -->
                         </div>
                         </div>
-                   
+
                     <!-- /.col-lg-6 -->
                 </div>
             </div>
