@@ -85,9 +85,9 @@
                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                        </div>-->
                     <div class="row">
-                        <div class="col-sm-3">
-                            <div class="row mt-2 ml-1">
-                                <h4 class="text-profile">{{Auth::user()->name}}</h4>
+                        <div class="col">
+                            <div class="row mt-2 justify-content-end">
+                                <p class="text-right">{{Auth::user()->name}}</p>
                             </div>
                         </div>
                         <div class="col">

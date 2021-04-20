@@ -272,5 +272,5 @@ html {
 .text-profile{
   text-align: right;
   color: #FFF;
-  
+  align-self: flex-end;
 }
