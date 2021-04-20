@@ -39,8 +39,6 @@ class PrivyID {
     }
     public function privyIDCallback($response = null){
         $res= json_decode($response , true);
-        print_r($res);
-        
         switch($res['eventName']){
             case 'register' :
                 ModelPriviID::where('user_token' , $res['data']['userToken'])
@@ -70,8 +68,9 @@ class PrivyID {
                                             ->leftJoin('privyid_documents_recipients' , 'privyid_documents_recipients.document_id', 'privyid_documents.id')
                                             ->where('privyid_documents.document_function' , 'registration')
                                             ->where('privyid_documents.id' , $doc->id)->first();
+                                            //print_r($user_verified);exit;
                        if($user_verified){
-                            $this->update_status_user_verified($user_verified->privyid);
+                            $this->update_status_user_verified($user_verified->privyid , 'verified');
                        }
                     }
                 }
@@ -186,7 +185,7 @@ class PrivyID {
         if($user_type->group == 'lender'){
             $lender = LenderVerification::where('uid' ,$user->uid)->first();
             if($lender){
-                $lender->status = $status != null ? 'verified' : $status;
+                $lender->status = $status;
                 $lender->save();
             }
         }
