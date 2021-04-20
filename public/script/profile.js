@@ -668,7 +668,7 @@ function updated_status(id,number_status){
          {
             close_loading();
              setTimeout(function(){
-                window.location.href = '/profile/transaction'
+                window.location.reload();
              }, 800);
          },
          error: function() {
