@@ -22,6 +22,8 @@
             </div>
         </div>
     </div>
+    
+    </div>
     <div class="container">
             <div class="row">
                 <div class="col">
@@ -89,6 +91,12 @@
             }
         });
 });
+    </script>
+    <script>
+        $(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
     </script>
 
 @endsection
