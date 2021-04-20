@@ -26,15 +26,15 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
-      
+
     <title>SIAP</title>
 
 </head>
 
 <body>
-<div class="header header-regular" >
-        <div>
-            <div class="row pl-5">
+<div class="header header-regular">
+        <div class="container">
+            <div class="row">
                 <div class="col-sm-1.1">
                     <!-- logo -->
 
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <!-- logo -->
-                <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12">
+                <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
                   <div id="navigation" class="p-2">
                         <!-- navigation start-->
                         <ul>
@@ -79,67 +79,22 @@
                     </div>
                     <!-- /.navigation start-->
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
+                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
                     @if (Auth::check())
-                        <!--<div class="btn-action">
-                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
-                        </div>-->
-                        <div class="row">
-                           <div class="col-sm-3">
-                               <div class="row mt-2 ml-1">
-                                   <h4 class="text-profile">Festine</h4>
-                               </div>
-                           </div>
-                            <div class="col">
-                                <div class="btn-group">
-                                   
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">
-                                            <div class="row mt-2 mb-2">
-                                                <div class="col mt-2">
-                                                 Profile
-                                                </div>
-                                                <div class="col">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item" href="/logout">
-                                            <div class="row mt-2 mb-2">
-                                                <div class="col mt-2">
-                                                     Keluar
-                                                </div>
-                                                <div class="col mt-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-                                                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="btn-action">
+                            <a href="/logout" class="btn btn-default">KELUAR</a> </div>
                         </div>
                     @else
-
                         <div class="btn-action">
-                            <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                            <a href="/login" class="btn btn-default">MASUK</a> </div>
                         </div>
 
                     @endif
 
                 </div>
-           
             </div>
         </div>
-</div>
+    </div>
 @yield('content')
 
 
@@ -230,12 +185,6 @@
         </div>
     </div>
 
-     <div id="popover-content" style="display: none">
-  <ul class="list-group custom-popover">
-    <li class="list-group-item">Airport Pickup</li>
-    <li class="list-group-item">Food and Beverage</li>
-    <li class="list-group-item">Yoga Class</li>
-  </ul>
 
 <a href="#0" class="cd-top" title="Go to top">Top</a>
 <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -246,8 +195,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('script/main.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
   <!--<script src="{{asset('js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('js/slider-carousel.js')}}"></script>
@@ -257,15 +204,6 @@
 {{--<script src="{{asset('js/slider-carousel.js')}}"></script>--}}
 <script src="{{asset('js/service-carousel.js')}}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-</script>
 
 @yield('js')
 
