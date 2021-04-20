@@ -31,60 +31,54 @@
 
 </head>
 <body>
-<div class="header header-regular">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-1.1">
-                    <!-- logo -->
-                    <div class="logo p-2">
-                    <a href="#">[LOGO]</a>
+<div class="header header-regular" >
+    <div>
+        <div class="row pl-5">
+            <div class="col-sm-1.1">
+                <div class="logo p-2 mt-2">
+                <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="logo p-2">
+                    <img src="/images/ojk3.png" alt="Logo">
+                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span> 
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
+                <div id="navigation" class="p-2">
+                    <ul>
+                        <li class="active"><a href="/" class="animsition-link">Home</a>
 
+                        @if (Auth::check())
+                        <li><a href="/profile/lender" class="animsition-link">profile</a></li>
+                        <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
+                        <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
+                        @else
+                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
+                            </li>
+                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
+                @if (Auth::check())
+                    <div class="btn-action">
+                        <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
                     </div>
-                </div>
-                <div class="col-sm-1">
-                   <div class="logo p-2">
-                        <img src="/images/ojk3.png" alt="Logo">
+                @else
+                    <div class="btn-action">
+                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
                     </div>
-                </div>
-                <!-- logo -->
-                <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
-                  <div id="navigation" class="p-2">
-                        <!-- navigation start-->
-                        <ul>
-                            <li class="active"><a href="/" class="animsition-link">Home</a>
 
-                            @if (Auth::check())
-                            <li><a href="/profile/lender" class="animsition-link">profile</a></li>
-                            <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
-                            <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
-                            @else
-                                <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
-                                </li>
-                                <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
-                                </li>
-                            @endif
+                @endif
 
-
-                        </ul>
-                    </div>
-                    <!-- /.navigation start-->
-                </div>
-                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block p-2">
-                    @if (Auth::check())
-                        <div class="btn-action">
-                            <a href="/logout" class="btn btn-default">KELUAR</a> </div>
-                        </div>
-                    @else
-                        <div class="btn-action">
-                            <a href="/login" class="btn btn-default">MASUK</a> </div>
-                        </div>
-
-                    @endif
-
-                </div>
             </div>
         </div>
     </div>
+</div>
 @yield('content')
 
 

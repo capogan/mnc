@@ -24,7 +24,6 @@
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12 ">
                     <div class="hero-tab-block">
-
                     </div>
                 </div>
             </div>
@@ -110,7 +109,7 @@ Dengan memanfaatkan kecanggihan teknologi yang dimiliki Siap Danain mampu berger
                     <div class="col-md-4">
 
                        
-                            <img class="img-fluid" src="/images/fm.png">
+                            <img class="img-fluid" src="/images/FM.png">
                        
                     </div>
                 </div>
@@ -161,7 +160,7 @@ Dengan memanfaatkan kecanggihan teknologi yang dimiliki Siap Danain mampu berger
                     <div class="feature feature-icon-style">
                         <div class="feature-icon"> <i class="fa fa-calculator fa-2x"></i></div>
                         <div class="feature-content">
-                           <h3 class="feature-title">Bunga Pinjaman Terjangkau</h3>
+                           <h3 class="feature-title">Bunga Pinjaman dan Biaya</h3>
                             <p>Bunga PinjamanBunga dan biaya layanan yang terjangkau  sesuai hasil analisa risiko tanpa ada biaya yang tersembunyi</p>
                         </div>
                     </div>

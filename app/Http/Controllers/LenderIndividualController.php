@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bank;
 use App\BuildingStatus;
 use App\Education;
+use App\Helpers\PrivyID;
 use App\IncomeFactory;
 use App\Legality;
 use App\LenderIndividualBankAccount;
@@ -586,14 +587,14 @@ class LenderIndividualController extends Controller
             'photo_salary_slip.required' => 'Foto Slip Gaji tidak boleh kosong',
         ];
 
-        $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
-        if ($validation->fails()) {
-            $json = [
-                "status" => false,
-                "message" => $validation->messages(),
-            ];
-            return response()->json($json);
-        }
+        // $validation = Validator::make($requests->all(), $validators, $messagesvalidator);
+        // if ($validation->fails()) {
+        //     $json = [
+        //         "status" => false,
+        //         "message" => $validation->messages(),
+        //     ];
+        //     return response()->json($json);
+        // }
 
         $imageData = [];
         $path = public_path() . '/upload/lender/individu/file/attachment';
@@ -635,6 +636,33 @@ class LenderIndividualController extends Controller
 
             User::where('id', Auth::id())->update(['step' => 4]);
             RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
+
+            //get user data
+            $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+                ->select(
+                    'users.email',
+                    'users.phone_number_verified',
+                    'lender_individual_personal_info.identity_number',
+                    'lender_individual_personal_info.full_name',
+                    'lender_individual_personal_info.dob',
+                )
+                ->where('users.id', Auth::id())
+                ->first();
+
+            //send data to privy
+            $privy = new PrivyID();
+            $privy->requestRegistration(
+                $u->email,
+                $u->phone_number_verified,
+                $path .'/'. $imageData['self_image'],
+                $path .'/'. $imageData['identity_image'],
+                $u->identity_number,
+                $u->full_name,
+                $u->dob,
+                Auth::id(),
+                'individu'
+            );
+
             DB::commit();
         } catch (Exception $e) {
             $json = [
@@ -753,6 +781,32 @@ class LenderIndividualController extends Controller
 
             User::where('id', Auth::id())->update(['step' => 4]);
             RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
+            
+            //get user data
+            $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+                ->select(
+                    'users.email',
+                    'users.phone_number_verified',
+                    'lender_individual_personal_info.identity_number',
+                    'lender_individual_personal_info.full_name',
+                    'lender_individual_personal_info.dob',
+                )
+                ->where('users.id', Auth::id())
+                ->first();
+
+            //send data to privy
+            $privy = new PrivyID();
+            $privy->requestRegistration(
+                $u->email,
+                $u->phone_number_verified,
+                $path .'/'. $imageData['self_image'],
+                $path .'/'. $imageData['identity_image'],
+                $u->identity_number,
+                $u->full_name,
+                $u->dob,
+                Auth::id(),
+                'individu'
+            );
             DB::commit();
         } catch (Exception $e) {
             $json = [

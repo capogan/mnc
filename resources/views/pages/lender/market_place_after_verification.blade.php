@@ -1,7 +1,6 @@
 @extends('layouts.app_lender')
 @section('content')
-<div class="container" style="margin-top:40px;">
-
+<div class="container containers-with-margin">
     <div class="row">
         <div class="col-md-12">
             <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-12">
