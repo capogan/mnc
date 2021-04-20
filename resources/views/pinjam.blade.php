@@ -6,12 +6,12 @@
         <div class="slider-img"><img src="images/banner_baru.png" alt="Borrow - Loan Company Website Template" class="">
           <div class="row ml-5">
                 <div class="col ml-5">
-                    
+
                     <div class="slider-captions">
                         <!-- slider-captions -->
-                      
-                         <a href="/login" class="btn btn-default">Login</a> 
-                        <a href="/register/borrower" class="btn btn-default">Register</a>  
+
+                         <a href="/login" class="btn btn-default">Login</a>
+                        <a href="/register/borrower" class="btn btn-default">Register</a>
                         </div>
                     <!-- /.slider-captions -->
                 </div>
@@ -23,9 +23,9 @@
                     <div class=" col-xl-5 col-lg-6 col-md-12  col-sm-12 col-12">
                         <div class="slider-captions">
                             <!-- slider-captions -->
-                             
-                            <a href="/login" class="btn btn-default">Login</a> 
-                        <a href="/register/borrower" class="btn btn-default">Register</a>  
+
+                            <a href="/login" class="btn btn-default">Login</a>
+                        <a href="/register/borrower" class="btn btn-default">Register</a>
                             </div>
                         <!-- /.slider-captions -->
                     </div>
@@ -39,9 +39,9 @@
                     <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
                         <div class="slider-captions">
                             <!-- slider-captions -->
-                           
-                            <a href="/login" class="btn btn-default">Login</a> 
-                        <a href="/register/borrower" class="btn btn-default">Register</a>  
+
+                            <a href="/login" class="btn btn-default">Login</a>
+                        <a href="/register/borrower" class="btn btn-default">Register</a>
                             </div>
                         <!-- /.slider-captions -->
                     </div>
@@ -50,14 +50,14 @@
             </div>
         </div>
     </div>
-    
-   
+
+
     <div class="container">
          <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
                 <div class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="active text-light">Ajukan Pinjaman</li>
                     </ol>
                 </div>
@@ -67,9 +67,9 @@
         <div class="row">
             <div class="col">
                 <div class="row mt-5 mb-5 justify-content-center align-items-center">
-                   
+
                         <h1>BAGAI MANA CARA MEMINJAM</h1>
-                    
+
                 </div>
                 <div class="row mb-5">
                      <div class="col-md-4">
@@ -99,7 +99,7 @@
                         <div class="row mb-5">
                             <div class="col mt-3">
                                 <img src="images/creditor2.svg" alt="1" class="icon2">
-                            </div>                        
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-1">
@@ -168,15 +168,15 @@
                                <p>Pinjaman akan ditransfer ke rekening bank anda jika anda dapat lolos verifikasi</p>
                            </div>
                        </div>
-                             
+
                            </div>
                        </div>
                    </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="cta">
         <div class="container">
@@ -223,4 +223,3 @@
 
 @endsection
 @endsection
- 
