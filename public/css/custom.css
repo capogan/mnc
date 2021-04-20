@@ -264,3 +264,7 @@ html {
   margin-top: 250px;
 
 }
+
+body>.container{
+  padding-top: 130px; 
+}
