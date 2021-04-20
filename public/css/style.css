@@ -1238,7 +1238,7 @@ Landing Page Template
   /*--------------- Page Header ( for mobile view  )---------- */
   .page-header { padding: 40px 0px 80px; }
   .page-title { font-size: 28px; margin-bottom: 14px; }
-  .btn-action { text-align: center; font-size: 15px;}
+  .btn-action { text-align: center; font-size: 14px;}
   .btn-action .btn { padding: 10px; float: left; margin-left: 5px; }
   .sub-nav>.nav li a { border-bottom: 1px solid #dee7f2; margin-bottom: 0px; }
   .childern { padding-left: 0px; }

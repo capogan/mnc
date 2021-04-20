@@ -58,13 +58,13 @@
 }
 .btn-danger {
   
-  font-size: 10px;
+  font-size: 5px;
   color: #ffffff;
   letter-spacing: 1px;
   line-height: 3px;
   height: 2px;
   border: 2px solid #f51f8a;
-  border-radius: 40px;
+
   background: #f51f8a;
   transition: all 0.3s ease 0s;
   font-size: 17px;
