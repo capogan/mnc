@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/fontello.css')}}" rel="stylesheet">
@@ -26,178 +26,178 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
-      
+
     <title>SIAP</title>
 
 </head>
 
 <body>
 <div class="header header-regular" >
-        <div>
-            <div class="row pl-5">
-                <div class="col-sm-1.1">
-                    <!-- logo -->
+    <div>
+        <div class="row pl-5">
+            <div class="col-sm-1.1">
+                <!-- logo -->
 
-                    <div class="logo p-2 mt-2">
+                <div class="logo p-2 mt-2">
                     <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
 
-                   
-                    </div>
-                </div>
-                <div class="col-sm-1">
-                   <div class="logo p-2">
-                        <img src="/images/ojk3.png" alt="Logo">
-                        <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span> 
-                    </div>
-                </div>
-                <!-- logo -->
-                <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12">
-                  <div id="navigation" class="p-2">
-                        <!-- navigation start-->
-                        <ul>
-                            <li class="active"><a href="/" class="animsition-link">Home</a>
 
-                            @if (Auth::check())
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="logo p-2">
+                    <img src="/images/ojk3.png" alt="Logo">
+                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span>
+                </div>
+            </div>
+            <!-- logo -->
+            <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12">
+                <div id="navigation" class="p-2">
+                    <!-- navigation start-->
+                    <ul>
+                        <li class="active"><a href="/" class="animsition-link">Home</a>
+
+                        @if (Auth::check())
                             <li><a href="/register/borrower" class="animsition-link">profile</a>
                             </li>
-                            @else
-                                <li><a href="/lender" class="animsition-link">Pendanaan</a>
-                                </li>
-                                <li><a href="/pinjam" class="animsition-link">Peminjam</a>
-                                </li>
-                            @endif
+                        @else
+                            <li><a href="/lender" class="animsition-link">Pendanaan</a>
+                            </li>
+                            <li><a href="/pinjam" class="animsition-link">Peminjam</a>
+                            </li>
+                        @endif
 
-                            <li class="active"><a href="/" class="animsition-link">Perusahaan</a>
+                        <li class="active"><a href="/" class="animsition-link">Perusahaan</a>
                             <ul>
                                 <li><a href="/tentang-kami" class="animsition-link">Tentang Kami</a>
                                 <li><a href="/kegiatan" class="animsition-link">Kegiatan</a>
                             </ul>
-                            <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a>
+                        <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a>
 
 
-                        </ul>
-                    </div>
-                    <!-- /.navigation start-->
+                    </ul>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
-                    @if (Auth::check())
-                        <!--<div class="btn-action">
-                            <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
-                        </div>-->
-                        <div class="row">
-                           <div class="col-sm-3">
-                               <div class="row mt-2">
-                                   <h3 class="text-profile">Festine</h3>
-                               </div>
-                           </div>
-                            <div class="col">
-                                <div class="btn-group">
-                                   
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">
-                                            <div class="row mt-2 mb-2">
-                                                <div class="col mt-2">
-                                                 Profile
-                                                </div>
-                                                <div class="col">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                                    </svg>
-                                                </div>
+                <!-- /.navigation start-->
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
+            @if (Auth::check())
+                <!--<div class="btn-action">
+                           <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                       </div>-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="row mt-2 ml-1">
+                                <h4 class="text-profile">{{Auth::user()->name}}</h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="btn-group">
+
+                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">
+                                        <div class="row mt-2 mb-2">
+                                            <div class="col mt-2">
+                                                Profile
                                             </div>
-                                        </a>
-                                        <a class="dropdown-item" href="/logout">
-                                            <div class="row mt-2 mb-2">
-                                                <div class="col mt-2">
-                                                     Keluar
-                                                </div>
-                                                <div class="col mt-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                            <div class="col">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="/logout">
+                                        <div class="row mt-2 mb-2">
+                                            <div class="col mt-2">
+                                                Keluar
+                                            </div>
+                                            <div class="col mt-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
                                                     <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                                                    </svg>
-                                                </div>
+                                                </svg>
                                             </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    @else
+                    </div>
+                @else
 
-                        <div class="btn-action">
-                            <a href="/login" class="btn btn-danger">MASUK</a> </div>
-                        </div>
-
-                    @endif
-
-                </div>
-           
+                    <div class="btn-action">
+                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
             </div>
+
+            @endif
+
         </div>
+
+    </div>
+</div>
 </div>
 @yield('content')
 
 
-    <div class="footer section-space100 mt-3">
-        <!-- footer -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="logo">
-                        <!-- Footer Logo -->
-                       <img src="/images/ojk3.png" alt="Logo"/>
-                        </div>
-                    <!-- /.Footer Logo -->
+<div class="footer section-space100 mt-3">
+    <!-- footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    <!-- Footer Logo -->
+                    <img src="/images/ojk3.png" alt="Logo"/>
                 </div>
-                 <div class="col-sm-2">
-                    <div class="logo-afpi mt-3">
-                        <!-- Footer Logo -->
-                       <img src="/images/logo_afpi.png" alt="Logo"/>
-                        </div>
-                    <!-- /.Footer Logo -->
-                </div>
-                 <div class="col-sm-3">
-                    <div class="logo ml-5">
-                        <!-- Footer Logo -->
-                       <img src="/images/mnc.png" alt="Logo"/>
-                        </div>
-                    <!-- /.Footer Logo -->
-                </div>
-                <div class="col">
-                    
-                        <div class="row">
-                        <div class="col">
-                            <h3 class="newsletter-title">Langganan Informasi SIAP</h3>
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="col">
-                            <div class="newsletter-form">
-                                <!-- Newsletter Form -->
-                                <form action="https://jituchauhan.com/borrow/bootstrap-4/newsletter.php" method="post">
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" id="newsletter" name="newsletter" placeholder="Write E-Mail Address" required>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">Go!</button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form>
-                            </div>
-                            <!-- /.Newsletter Form -->
-                        </div>
-                        </div>
-                   
-                    <!-- /.col-lg-6 -->
-                </div>
+                <!-- /.Footer Logo -->
             </div>
-            <hr class="dark-line">
-            <div class="row">
+            <div class="col-sm-2">
+                <div class="logo-afpi mt-3">
+                    <!-- Footer Logo -->
+                    <img src="/images/logo_afpi.png" alt="Logo"/>
+                </div>
+                <!-- /.Footer Logo -->
+            </div>
+            <div class="col-sm-3">
+                <div class="logo ml-5">
+                    <!-- Footer Logo -->
+                    <img src="/images/mnc.png" alt="Logo"/>
+                </div>
+                <!-- /.Footer Logo -->
+            </div>
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+                        <h3 class="newsletter-title">Langganan Informasi SIAP</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="newsletter-form">
+                            <!-- Newsletter Form -->
+                            <form action="https://jituchauhan.com/borrow/bootstrap-4/newsletter.php" method="post">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="newsletter" name="newsletter" placeholder="Write E-Mail Address" required>
+                                    <span class="input-group-btn">
+                                           <button class="btn btn-default" type="submit">Go!</button>
+                                       </span>
+                                </div>
+                                <!-- /input-group -->
+                            </form>
+                        </div>
+                        <!-- /.Newsletter Form -->
+                    </div>
+                </div>
+
+                <!-- /.col-lg-6 -->
+            </div>
+        </div>
+        <hr class="dark-line">
+        <div class="row">
             <ol class="disclaimer">
                 <li  class="">Layanan Pinjam Meminjam Berbasis Teknologi Informasi merupakan kesepakatan perdata antara Pemberi Pinjaman dengan Penerima Pinjaman, sehingga segala risiko yang timbul dari kesepakatan tersebut ditanggung sepenuhnya oleh masing-masing pihak.</li>
                 <li  class="">Risiko kredit atau gagal bayar ditanggung sepenuhnya oleh Pemberi Pinjaman. Tidak ada lembaga atau otoritas negara yang bertanggung jawab atas risiko gagal bayar ini.</li>
@@ -212,60 +212,59 @@
                 <li  class="">Isi dan materi yang tersedia pada situs <b>siap.id</b> dimaksudkan untuk memberikan informasi dan tidak dianggap sebagai sebuah penawaran, permohonan, undangan, saran, maupun rekomendasi untuk menginvestasikan sekuritas, produk pasar modal, atau jasa keuangan lainya. Perusahaan dalam memberikan jasanya hanya terbatas pada fungsi administratif.</li>
                 <li  class="">Pendanaan dan pinjaman yang ditempatkan di rekening siap adalah tidak dan tidak akan dianggap sebagai simpanan yang diselenggarakan oleh Perusahaan seperti diatur dalam Peraturan Perundang-Undangan tentang Perbankan di Indonesia. Perusahaan atau setiap Direktur, Pegawai, Karyawan, Wakil, Afiliasi, atau Agen-Agennya tidak memiliki tanggung jawab terkait dengan setiap gangguan atau masalah yang terjadi atau yang dianggap terjadi yang disebabkan oleh minimnya persiapan atau publikasi dari materi yang tercantum pada situs Perusahaan.</li>
             </ol>
+        </div>
+    </div>
+</div>
+<div class="tiny-footer">
+    <!-- tiny footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+
+
             </div>
         </div>
     </div>
-    <div class="tiny-footer">
-        <!-- tiny footer -->
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+</div>
 
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+<div id="popover-content" style="display: none">
+    <ul class="list-group custom-popover">
+        <li class="list-group-item">Airport Pickup</li>
+        <li class="list-group-item">Food and Beverage</li>
+        <li class="list-group-item">Yoga Class</li>
+    </ul>
 
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
+    <script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{asset('script/main.js')}}"></script>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-     <div id="popover-content" style="display: none">
-  <ul class="list-group custom-popover">
-    <li class="list-group-item">Airport Pickup</li>
-    <li class="list-group-item">Food and Beverage</li>
-    <li class="list-group-item">Yoga Class</li>
-  </ul>
-
-<a href="#0" class="cd-top" title="Go to top">Top</a>
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
-<script src="{{asset('js/jquery.inputmask.bundle.js')}}" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="{{asset('script/main.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-  <!--<script src="{{asset('js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('js/slider-carousel.js')}}"></script>
-    <script src="{{asset('js/service-carousel.js')}}"></script>-->
+<!--<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+   <script src="{{asset('js/slider-carousel.js')}}"></script>
+   <script src="{{asset('js/service-carousel.js')}}"></script>-->
 
-<script src="{{asset('js/owl.carousel.min.js')}}"></script>
-{{--<script src="{{asset('js/slider-carousel.js')}}"></script>--}}
-<script src="{{asset('js/service-carousel.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    {{--<script src="{{asset('js/slider-carousel.js')}}"></script>--}}
+    <script src="{{asset('js/service-carousel.js')}}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
 
-</script>
+
+
+
 
 @yield('js')
 
