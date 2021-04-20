@@ -25,6 +25,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class LenderIndividualController extends Controller
 {
@@ -654,8 +655,8 @@ class LenderIndividualController extends Controller
             $privy->requestRegistration(
                 $u->email,
                 $u->phone_number_verified,
-                $path .'/'. $imageData['self_image'],
-                $path .'/'. $imageData['identity_image'],
+                $path . '/' . $imageData['self_image'],
+                $path . '/' . $imageData['identity_image'],
                 $u->identity_number,
                 $u->full_name,
                 $u->dob,
@@ -781,7 +782,7 @@ class LenderIndividualController extends Controller
 
             User::where('id', Auth::id())->update(['step' => 4]);
             RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
-            
+
             //get user data
             $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
                 ->select(
@@ -799,8 +800,8 @@ class LenderIndividualController extends Controller
             $privy->requestRegistration(
                 $u->email,
                 $u->phone_number_verified,
-                $path .'/'. $imageData['self_image'],
-                $path .'/'. $imageData['identity_image'],
+                $path . '/' . $imageData['self_image'],
+                $path . '/' . $imageData['identity_image'],
                 $u->identity_number,
                 $u->full_name,
                 $u->dob,
@@ -832,8 +833,10 @@ class LenderIndividualController extends Controller
         $data = array(
             'sign_agreement' => User::select(
                 'lender_individual_personal_info.*',
-                'users.email'
+                'users.email',
+                'privyids.privyId'
             )
+                ->leftJoin('privyids', 'privyids.uid', 'users.id')
                 ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
                 ->where('users.id', Auth::id())->first(),
         );
@@ -843,8 +846,40 @@ class LenderIndividualController extends Controller
     public function post_sign(Request $requests)
     {
         User::where('id', Auth::id())->update(['step' => 5]);
+
+        //get user data
+        $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+            ->select(
+                'users.email',
+                'users.phone_number_verified',
+                'lender_individual_personal_info.identity_number',
+                'lender_individual_personal_info.full_name',
+                'lender_individual_personal_info.full_address',
+            )
+            ->where('users.id', Auth::id())
+            ->first();
+
+        $data = [
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => date('Y-m-d'),
+            'individu' => $u,
+        ];
+
+        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name .'_'. uniqid()) . '.pdf');
+        PDF::loadView('agreement.register_lender_individu', $data)->save($pathDocument);
+        $recipients = [
+            [
+                'privyId' => $u->privyId,
+                'type' => 'Signer',
+                'enterpriseToken' => '',
+            ],
+        ];
+        $privy = new PrivyID();
+        $endpoint = $privy->requestDocumentUpload('Dokumen Perjanjian Pendanaan', 'Serial', $recipients, $pathDocument, 'registration');
+
         return response()->json([
             "status" => true,
+            'url' => $endpoint,
             "message" => 'Berhasil Ditandatangani',
         ]);
     }
