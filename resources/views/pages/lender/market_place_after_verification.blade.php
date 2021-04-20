@@ -50,6 +50,11 @@
                     </div>
                     @endif
                 @endforeach
+                @if(count($borrower_request) < 1)
+                <div>
+                    Maaf, Saat ini pinjaman belum tersedia.
+                </div>
+                @endif
             </div>
         </div>
     </div>
