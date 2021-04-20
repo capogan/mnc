@@ -55,7 +55,7 @@
                                         <div class=" bg-white ">
                                             <div class="contact-form mb60">
                                                 <div class=" ">
-                                                    <form id="form_register_lender_business_information" method="POST">
+                                                    <form id="form_register_lender_business_information" method="POST"  autocomplete="off">
                                                         <h3>Informasi Perusahaan</h3>
                                                         <hr>
                                                         <div class="result-message"></div>
