@@ -727,7 +727,6 @@ class LenderController extends Controller
         $privy = new PrivyID;
         $endpoint = $privy->requestDocumentUpload('Dokumen Perjanjian Pendanaan' , 'Serial' , $recipients , $pathDocument ,'registration');
         echo json_encode(['status' => 'true' , 'url' => $endpoint]);
-
     }
 
     public function register_sign_aggrement(Request $request){

@@ -274,3 +274,14 @@ html {
   color: #FFF;
   align-self: flex-end;
 }
+
+.btn-warning{
+  padding-right: 0;
+  background-color: #15549a;
+  color: #ffffff;
+}
+.btn-warning:hover{
+  padding-right: 0;
+  background-color: #15549a;
+  color: #ffffff;
+}
