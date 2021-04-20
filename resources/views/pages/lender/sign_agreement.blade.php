@@ -1,6 +1,19 @@
 @extends('layouts.app_lender')
 @section('content')
-    <div class="container containers-with-margin">
+
+<div class="container containers-with-margin">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
+                <div class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active text-light">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
@@ -28,11 +41,6 @@
         <div class="row">
             <div class="col">
                 <div class="sub-nav">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-
-                    </ul>
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade show active" id="service1">
                             <div class="tab-pane" id="Bisnis" role="tabpanel">
@@ -58,8 +66,8 @@
                                                                          Silahkan login menggunakan akun privyID yang sudah dikirimkan sebelumnya.    
                                                                         </p>
                                                                     </div>
-                                                            <button  class="btn btn-default" id="doSignPolicy">Tanda Tangan Perjanjian</a> </div>
-                                                    </div>
+                                                                <button  class="btn btn-default" id="doSignPolicy">Tanda Tangan Perjanjian</a> </div>
+                                                            </div>
                                                     @else
                                                     <div class="section-scroll pinside60" id="section-about">
                                                         <div class="alert alert-success" role="alert">

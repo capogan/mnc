@@ -48,17 +48,14 @@
             <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
                 <div id="navigation" class="p-2">
                     <ul>
-                        <li class="active"><a href="/" class="animsition-link">Home</a>
-
+                            <li class="active"><a href="/" class="animsition-link">Home</a></li>
                         @if (Auth::check())
-                        <li><a href="/profile/lender" class="animsition-link">profile</a></li>
-                        <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
-                        <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
+                            <li><a href="/profile/lender" class="animsition-link">profile</a></li>
+                            <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
+                            <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
                         @else
-                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a>
-                            </li>
-                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a>
-                            </li>
+                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a></li>
+                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a></li>
                         @endif
                     </ul>
                 </div>
@@ -72,7 +69,6 @@
                     <div class="btn-action">
                         <a href="/login" class="btn btn-danger">MASUK</a> </div>
                     </div>
-
                 @endif
 
             </div>
