@@ -88,7 +88,7 @@
                      
                         <div class="col">
                             <div class="btn-group">
-                                 <button type="button" class="btn btn-warning">{{Auth::user()->name}}</button>
+                                
                                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
                                      <span class="caret"></span>
                                 </button>

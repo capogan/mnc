@@ -96,15 +96,7 @@ Dengan memanfaatkan kecanggihan teknologi yang dimiliki Siap Danain mampu berger
 
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-
-                      
-                            <img class="img-fluid" src="/images/privy.png">
-                       
-
-                    </div>
-                </div>
+              
                 <div class="carousel-item">
                     <div class="col-md-4">
 
