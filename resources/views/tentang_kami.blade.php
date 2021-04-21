@@ -123,45 +123,56 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <video width="500" height="300" controls autoplay>
-                    <source src="movie.mp4" type="video/mp4">
-                </video>
+            <div class="col mt-5">
+                <div class="row mt-3">
+                <img src="/images/siap.png" alt="" class="logo-ptsiap"/>
+            </div>
             </div>
             <div class="col">
                 <div class="row">
                     <h2>PROFIL PERUSAHAAN</h2>
                 </div>
                 <div class="row">
-                    <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p style="text-align: justify;">PT SIAP ( Sistem Informasi dan Pembiayaan) adalah perusahaan yang bernaung di bawah MNC Financial Services bergerak dibidang Peer-to-Peer (P2P) Lending 
+berbasis teknologi Informasi dengan brand SIAPDANAIN.
+SIAPDANAIN berfokus pada industri produktif di Indonesia, mempertemukan Pemodal dengan para pebisnis mikro dan kecil lokal melalui 
+pinjaman modal produktif dengan risiko terukur yang berdampak sosial. 
+Melalui pendanaan di SIAP Danain, kita membantu membangun akses permodalan untuk kesejahteraan pebisnis lokal</p>
                 </div>
             </div>        
         </div>
         <div class="row mt-5 justify-content-center align-items-center">
-            <h2>Lorem Ipsum</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+            <h2>VISI Kami</h2>
+            </div>
+            <div class="row justify-content-center align-items-center"> 
+            <p class="text-center">Menciptakan kesejahteraan bagi pebisnis mikro dan kecil lokal Indonesia</p>
         </div>
         <div class="row mt-5">
             
             <div class="col">
-                <div class="bg-white bg-boxshadow pinside40 outline text-center mb30">
+                <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" style="height:350px">
                  <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
-                <h2 class="capital-title">Lorem Ipsum</h2>
-                <a href="#" class="btn-link">Lorem Ipsum</a> 
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <h2 class="capital-title">VISION</h2>
+              <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+                <p>Menjadi market leader di Indonesia dan go </p>
                </div>
             </div>
                 <div class="col">
-                    <div class="bg-white bg-boxshadow pinside40 outline text-center mb30">
+                    <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" style="height:350px">
                         <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
-                        <h2 class="capital-title">Lorem Ipsum</h2>
+                        <h2 class="capital-title">QUALITY</h2>
+                        <!-- <a href="#" class="btn-link">Lorem Ipsum</a>-->
                        
-                        <a href="#" class="btn-link">Lorem Ipsum</a> 
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                       
+                        <p>Membangun kultur kerja yang berkualitas dalam</p>
+                        <p>SPEED</p>
+                        <p>Memastikan semua aktivitas organisasi </p>
+                        
                          </div>
                     </div>
                 </div>
         </div>
+        
     </div>
  
 @section('js')
