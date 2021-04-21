@@ -638,7 +638,7 @@ class LenderIndividualController extends Controller
             ], $imageData);
 
             User::where('id', Auth::id())->update(['step' => 4]);
-            RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
+            // RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
 
             //get user data
             $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
@@ -783,7 +783,7 @@ class LenderIndividualController extends Controller
             ], $imageData);
 
             User::where('id', Auth::id())->update(['step' => 4]);
-            RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
+            // RequestFunding::updateOrCreate(['uid' => Auth::id()], ['uid' => Auth::id(), 'status' => 1]);
 
             //get user data
             $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')

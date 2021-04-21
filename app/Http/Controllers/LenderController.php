@@ -181,7 +181,7 @@ class LenderController extends Controller
                         'rekening_number' => $request->rek_number,
                         'rekening_name' => $request->rek_name,
                         'rdl_number' => $request->rek_lender,
-                        'bank' => $request->bank 
+                        'bank' => $request->bank
                     ]
                 );
             $json = [
@@ -356,7 +356,7 @@ class LenderController extends Controller
 
             }
             $i++;
-            
+
         }
         return response()->json([
             "status"=> true,
@@ -762,7 +762,7 @@ class LenderController extends Controller
     }
 
     public function update_status_sign(Request $request){
-        RequestFunding::updateOrCreate(['uid' =>Auth::id()],['uid' => Auth::id() , 'status' => 1]);
+        RequestFunding::updateOrCreate(['uid' =>Auth::id()],['uid' => Auth::id() , 'status' => 1, 'id_request_loan' => 1]);
         LenderVerification::updateOrCreate(
             ['uid' => Auth::id()],
             ['uid' => Auth::id() , 'sign_agreement' => true]
@@ -778,7 +778,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->first();
-        
+
         $data = [
             'loan' => $loan ? $loan : false
         ];
