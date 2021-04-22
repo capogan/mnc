@@ -150,23 +150,22 @@ Melalui pendanaan di SIAP Danain, kita membantu membangun akses permodalan untuk
         <div class="row mt-5">
             
             <div class="col">
-                <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" style="height:350px">
+                <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
                  <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
                 <h2 class="capital-title">VISION</h2>
               <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
-                <p>Menjadi market leader di Indonesia dan go </p>
+                <p>Menjadi market leader di Indonesia dan go global</p>
                </div>
             </div>
                 <div class="col">
-                    <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" style="height:350px">
+                    <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
                         <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
                         <h2 class="capital-title">QUALITY</h2>
                         <!-- <a href="#" class="btn-link">Lorem Ipsum</a>-->
                        
                        
-                        <p>Membangun kultur kerja yang berkualitas dalam</p>
-                        <p>SPEED</p>
-                        <p>Memastikan semua aktivitas organisasi </p>
+                        <p>Membangun kultur kerja yang berkualitas dalam bekerja.</p>
+                      
                         
                          </div>
                     </div>
