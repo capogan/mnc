@@ -4,6 +4,29 @@ $(document).ready(function() {
         placeholder: "Pilih Kategori Industri",
         allowClear: true
     });
+    $(document).on( 'click' , '#lender_sign_aggreement_of_fund' , function(){
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url:'/sign_document_fund_aggreement',
+            method:"POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            data: {id : $(this).attr('data-content')},
+            dataType:'json',
+            success:function(response)
+            {
+    
+                if(response.status == 'success'){
+                    window.location.href = '/portofolio';
+                }
+                else{
+                   
+                }
+    
+            }
+        })
+    });
 
 
 });
@@ -646,6 +669,8 @@ function get_villages_business(district_id){
         }
     })
 }
+
+
 
 function updated_status(id,number_status){
 

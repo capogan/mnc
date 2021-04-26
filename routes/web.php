@@ -136,6 +136,7 @@ Route::post('/lender/register/agreement', 'LenderController@update_status_sign')
 Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->name('profile.lender.sign');
 Route::get('/marketplace/{id}', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
 Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
+Route::post('/sign_document_fund_aggreement' , 'LenderController@lender_sign_document_fund_aggreement')->name('lender.sign.aggrement.fund');
 
 Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
 Route::post('/profile/lender-individu', 'LenderIndividualController@post_profile')->name('profile.lender.individu.submit');

@@ -22,6 +22,7 @@ use App\LenderBankInfo;
 use App\Helpers\PrivyID;
 use App\PrivyID as AppPrivyID;
 use PDF;
+use App\Helpers\Utils;
 
 class LenderController extends Controller
 {
@@ -34,7 +35,23 @@ class LenderController extends Controller
         $this->middleware('auth');
     }
 
+    public function editable_bio(){
+        $has_complete = AppPrivyID::where('uid' , Auth::id())->count();
+        $editable = true;
+        if(Auth::user()->level == 'individu'){
+            if($has_complete > 0){
+                $editable = false;
+            }
+        }elseif(Auth::user()->level == 'business'){
+            if($has_complete > 1){
+                $editable = false;
+            }
+        }
+        return $editable;
+    }
+
     public function index(Request $request){
+        $editable = $this->editable_bio();
         $data = array(
             'provinces' => Province::get(),
             'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
@@ -45,6 +62,7 @@ class LenderController extends Controller
             ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
             ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
             ->where('users.id', Auth::id())->first(),
+            'editable' => $editable
         );
         //print_r(User::with('business_lender')->where('id', Auth::id())->first()); exit;
         return view('pages.lender.index',$this->merge_response($data, static::$CONFIG));
@@ -194,6 +212,7 @@ class LenderController extends Controller
     }
 
     public function director(Request $request){
+        $editable = $this->editable_bio();
         $step = LenderVerification::where('uid' , Auth::id())->first();
         if(!$step){
            return redirect('profile/lender');
@@ -208,7 +227,8 @@ class LenderController extends Controller
                         ->where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
-            'director' => $director
+            'director' => $director,
+            'editable' => $editable
         );
         return view('pages.lender.information_director',$this->merge_response($data, static::$CONFIG));
     }
@@ -365,7 +385,7 @@ class LenderController extends Controller
     }
 
     public function commissioner(Request $request){
-
+        $editable = $this->editable_bio();
         $step = LenderVerification::where('uid' , Auth::id())->first();
         if(!$step){
            return redirect('profile/lender');
@@ -381,7 +401,8 @@ class LenderController extends Controller
         ->where('uid' , Auth::id())->get();
         $data = array(
             'provinces' => Province::get(),
-            'director' => $director
+            'director' => $director,
+            'editable' => $editable
         );
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
@@ -538,6 +559,7 @@ class LenderController extends Controller
 
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
+        $editable = $this->editable_bio();
         if(!$step){
            return redirect('profile/lender');
         }else if($step->commissioner_verification != true){
@@ -546,7 +568,8 @@ class LenderController extends Controller
         $attachment = LenderAttachmentData::where('uid' , Auth::id())->first();
        // print_r($attachment); exit;
         $data = array(
-            'attachment' => $attachment
+            'attachment' => $attachment,
+            'editable' =>$editable
         );
 
         return view('pages.lender.information_file',$this->merge_response($data, static::$CONFIG));
@@ -691,15 +714,61 @@ class LenderController extends Controller
     }
 
     public function marketplace_agreement($id){
+        
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '18')->where('id' ,$id)->first();
-
+        ->where('status' , '18')->where('id' ,Utils::decrypt($id))->first();
         $data = [
-            'loan' => $loan ? $loan : false
+            'loan' => $loan ? $loan : false,
+            'id_loan' => $id
         ];
         return view('pages.lender.sign',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function lender_sign_document_fund_aggreement(Request $request){
+        if(!isset($request->id)){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'Data tidak ditemukan.',
+            ];
+        }
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '18')->where('id' ,Utils::decrypt($request->id))->first();
+
+        if(!$loan){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'Data tidak ditemukan.',
+            ];
+        }
+        $loan->status = '19';
+        $loan->lender_uid = Auth::id();
+        if($loan->save()){
+            $this->loan_request_log($loan , Auth::id() , 19);
+            return $json = [
+                "status"=> 'success',
+                "message"=> 'Data berhasil di update.',
+            ];
+        }
+         return $json = [
+            "status"=> 'error',
+            "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
+        ];
+
+        
+    }
+
+    public function loan_request_log($json , $created_by , $status){
+        $data = array(
+            'id_request_loan' => $json->id,
+            'json_log' => json_encode($json),
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $created_by,
+            'status' => $status
+        );
     }
 
     public function upload_document_aggreement(Request $request){
@@ -773,15 +842,18 @@ class LenderController extends Controller
 
     }
     public function portofolio(){
-        $installment = LoanInstallment::where('');
-        $loan = LoanRequest::with('personal_info')
+
+        $portofolio = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '18')->first();
-
+        ->with('status_title')
+        ->where('lender_uid' , Auth::id())
+        ->get();
         $data = [
-            'loan' => $loan ? $loan : false
+            'portofolio' => $portofolio
         ];
+
+        //print_r($portofolio->toArray()); exit;
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
 

@@ -219,9 +219,11 @@
                                                             </div>
 
                                                         </div>
+                                                        @if($editable == true)
                                                         <div class="form-group mt-5">
                                                             <button type="submit" data-text="Selesai" class="btn btn-primary btn-block"> Selesai </button>
                                                         </div>
+                                                        @endif
                                                     </form>
                                                 </div>
                                             </div>

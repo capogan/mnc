@@ -657,6 +657,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>-->
+                                                        @if($editable == true)
                                                         <div id="section_director"></div>
                                                         <div class="form-group mt-4">
                                                             <button type="button" id="add_commissioner_section" data-text="Tambahkan Data" class="btn btn-default btn-block">+ Tambahkan Data Komisaris </button>
@@ -664,6 +665,7 @@
                                                         <div class="form-group mt100">
                                                             <button type="submit" id="qwe" data-text="Tambahkan Data" class="btn btn-primary btn-block">Simpan & lanjutkan </button>
                                                         </div>
+                                                        @endif
                                                     </form>
                                                 </div>
                                             </div>
