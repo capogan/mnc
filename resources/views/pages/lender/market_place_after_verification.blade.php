@@ -44,7 +44,7 @@
                                 </ul>
                             </div>
                             <div class="lender-actions">
-                                <a href="/marketplace/{{$item->id}}" class="btn btn-default btn-block">Ajukan Pendanaan</a>
+                                <a href="/marketplace/{{ \App\Helpers\Utils::encrypt($item->id)}}" class="btn btn-default btn-block">Ajukan Pendanaan</a>
                             </div>
                         </div>
                     </div>

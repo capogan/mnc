@@ -12,6 +12,23 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Redirect;
 
 class Utils {
+    protected const DEF_ENC_KEY = "SIAPFIRTSP2PINTHEWORLD";
+
+    public static function decrypt($base64_text, $hex = false) {
+        if ($hex) {
+            $base64_text = hex2bin(strtolower($base64_text));
+        }
+        return openssl_decrypt(base64_decode($base64_text), 'aes-256-cbc', static::DEF_ENC_KEY, true, str_repeat(chr(0), 16));
+    }
+
+    public static function encrypt($plain_text, $hex = false) {
+        $enc = base64_encode(openssl_encrypt($plain_text, 'aes-256-cbc', static::DEF_ENC_KEY, true, str_repeat(chr(0), 16)));
+        if ($hex) {
+            $enc = strtolower(bin2hex($enc));
+        }
+        return $enc;
+    }
+
     public static function convert_status($status) {
 
         switch ($status) {
@@ -175,5 +192,7 @@ class Utils {
         return $array[2] . ' ' . $month[ (int)$array[1] ] . ' ' . $array[0];
 
     }
+
+    
 
 }

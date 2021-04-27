@@ -256,9 +256,11 @@
                                                                 <input type="text"  class="form-control" placeholder="Contoh : 126812912371" id="rek_dana_lender" name="rek_lender" value="{{isset($lender_profile->rdl_number) ? $lender_profile->rdl_number : ''}}">
                                                             </div>
                                                         </div>
+                                                        @if($editable == true)
                                                         <div class="form-group mt-5">
                                                             <button type="submit" id="btn_submit_business_register" data-text="Simpan & lanjutkan" class="btn btn-primary btn-block"> Simpan & lanjutkan </button>
                                                         </div>
+                                                        @endif
                                                     </form>
                                                 </div>
                                             </div>
