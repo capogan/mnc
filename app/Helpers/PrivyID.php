@@ -58,7 +58,7 @@ class PrivyID {
                 if($doc){
                     $doc->document_status = strtolower($res['data']['documentStatus']);
                     $doc->document_response_json =  $res['data']['download'];
-                    $doc->status_recipients =json_encode($res['data']['recipients']);
+                    $doc->status_recipients = json_encode($res['data']['recipients']);
                     $doc->updated_at = date('Y-m-d H:i:s');
                     $doc->save();
                     
@@ -131,6 +131,21 @@ class PrivyID {
         $this->privylogs($response, $uid ,$position, $event);
     }
     public function requestRegistration($email, $phone, $selfie , $ktp , $nik,$name,$dob , $uid , $position){
+        $lender_verification = LenderVerification::where('uid' , $uid)->first();
+        if(!$lender_verification){
+            LenderVerification::create(
+                [
+                    'uid' => $uid,
+                    'status' => 'waiting',
+                    'business_verification' => false,
+                    'director_verification'=> false,
+                    'commissioner_verification'=> false,
+                    'sign_agreement'=> false,
+                    'document_verification' => false,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]
+            );
+        }
         $selfie = fopen('/'.$selfie, 'r');
         $ktp =  fopen('/'.$ktp, 'r');
         $data = [
@@ -154,6 +169,7 @@ class PrivyID {
         ->post('https://api-sandbox.privy.id/v3/merchant/registration', $data);
         $this->processResponseRegister($client->body(), $uid , $position);
     }
+
     public function processResponseRegister($body , $uid , $position){
         $this->privylogs($body , $uid , $position , 'register');
        // $response = '{"eventName":"register","data":{"privyId":"DEVRI2838","email":"richard.simbolon28@gmail.com","phone":"+6281260332838","processedAt":"2021-04-16 14:32:52 +0700","userToken":"4dd169d8a23d152ecf8a98fe30a9adabc2801936cfb4464ad81bf58e52356783","status":"verified","identity":{"nama":"Ridcat Simbolon","nik":"9834982394802300","tanggalLahir":"1990-06-28","tempatLahir":"Sleman"}},"message":"Data Verified"}';
