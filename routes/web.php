@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/digisign/request', 'LenderIndividualController@test_request_register_data');
 
 Route::get('/', function () {
     return view('home');
 });
+
 Route::get('/lender', function () {
     return view('index_lender');
 });
@@ -136,6 +137,7 @@ Route::post('/lender/register/agreement', 'LenderController@update_status_sign')
 Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->name('profile.lender.sign');
 Route::get('/marketplace/{id}', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
 Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
+Route::get('//portofolio/detail/{id}', 'LenderController@portofolio_detail')->name('profile.lender.sign');
 Route::post('/sign_document_fund_aggreement' , 'LenderController@lender_sign_document_fund_aggreement')->name('lender.sign.aggrement.fund');
 
 Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
@@ -148,8 +150,15 @@ Route::get('/profile/lender-individu/document', 'LenderIndividualController@get_
 Route::get('/profile/lender-individu/document/sme', 'LenderIndividualController@get_document_sme')->name('profile.lender.individu.document.sme');
 Route::post('/profile/lender-individu/document', 'LenderIndividualController@post_document')->name('profile.lender.individu.document.submit');
 Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController@post_document_sme')->name('profile.lender.individu.document.submit.sme');
+
+Route::post('/profile/lender-individu/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
+
+
 Route::get('/profile/lender-individu/sign', 'LenderIndividualController@get_sign')->name('profile.lender.individu.sign');
 Route::post('/profile/lender-individu/sign', 'LenderIndividualController@post_sign')->name('profile.lender.individu.sign.submit');
+Route::get('/sign/document', 'DocumentController@document')->name('document.asign.agreement');
+
+Route::get('/myprofile', 'LenderController@myprofile')->name('myprofile.lender');
 
 //.............................................................................
 //...............................SSSSSS........................................
@@ -172,6 +181,8 @@ Route::get('/get/city','MasterController@get_city')->name('city');
 Route::get('/get/district','MasterController@get_district')->name('district');
 Route::get('/get/villages','MasterController@get_villages')->name('get_villages');
 Route::get('laporan-pdf','MasterController@generatePDF');
+
+
 
 
 

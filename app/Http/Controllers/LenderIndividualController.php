@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Bank;
 use App\BuildingStatus;
+use App\DigisignActivation;
+use App\DigiSignDocument;
 use App\Education;
+use App\Helpers\DigiSign;
+use App\Helpers\LenderHelper;
 use App\Helpers\PrivyID;
+use App\Helpers\Utils;
 use App\IncomeFactory;
 use App\Legality;
 use App\LenderIndividualBankAccount;
@@ -37,6 +42,99 @@ class LenderIndividualController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+    public function test_request_register_data(){
+        $u = User::with('individuinfo')->where('id' , 128)->first();
+        
+        if(!$u){
+            return;
+        }
+        if(!$u->individuinfo && !$u->individufile){
+            return ;
+        }
+        if(!$u->individuinfo->provinces && !$u->individuinfo->cities && !$u->individuinfo->distritcs && !$u->individuinfo->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/individu/file/attachment';
+
+        $digisign =new DigiSign;
+        // $digisign->requestRegistration(
+        //     $path .'/'. $u->individuinfo->individufile->identity_image,
+        //     $path .'/'. $u->individuinfo->individufile->self_image,
+        //     $path .'/'. $u->individuinfo->individufile->npwp_image,
+        //     $u->individuinfo->full_address,
+        //     $u->individuinfo->gender,
+        //     $u->individuinfo->districts->name,
+        //     $u->individuinfo->villagess->name,
+        //     $u->individuinfo->kodepos,
+        //     $u->individuinfo->cities->name,
+        //     $u->individuinfo->full_name,
+        //     $u->phone_number_verified,
+        //     $u->individuinfo->dob,
+        //     $u->individuinfo->provinces->name,
+        //     $u->individuinfo->identity_number,
+        //     $u->individuinfo->pob,
+        //     $u->individuinfo->email,
+        //     $u->individuinfo->no_npwp,
+        //     false,
+        //     128
+        // );
+
+        //$activation  =  $digisign->activation_account($u->individuinfo->email , 128 , $u->individuinfo->identity_number);
+        //$callback = $digisign->callback_activation('aes-256');
+        // $send_to = [
+        //     [
+        //         'email_user' => 'richard.simbolon28@gmail.com',
+        //         'name' => 'Richard Simbolon'
+        //     ],
+        //     [
+        //         'email' => 'user1@test.com',
+        //         'name' => 'Penanda tangan 1'
+        //     ],
+        //     [
+        //         'email' => 'user2@test.com',
+        //         'name' => 'Penanda tangan 2'
+        //     ]
+        // ];
+        // $req_sign = [
+        //     [
+        //         'name' => 'Penanda tangan 1',
+        //         'email' => 'tangan1@gmail.com',
+        //         'aksi_ttd' => 'ttd',
+        //         'kuser' => null,
+        //         'user' => 'ttd1',
+        //         'page' => '3',
+        //         'llx' => '12',
+        //         'lly' => '13',
+        //         'urx' => '34',
+        //         'ury' => '45',
+        //         'visible' => 1
+
+        //     ],
+        //     [
+        //         'name' => 'Penanda tangan 2',
+        //         'email' => 'tangan1@gmail.com',
+        //         'aksi_ttd' => 'ttd',
+        //         'kuser' => null,
+        //         'user' => 'ttd2',
+        //         'page' => '3',
+        //         'llx' => '12',
+        //         'lly' => '13',
+        //         'urx' => '34',
+        //         'ury' => '45',
+        //         'visible' => 1
+
+        //     ]
+        // ];
+        //$uid = Auth::check() ? Auth::id() : 128;
+        //$upload_document = $digisign->upload_document('document_perjanjian.pdf', date('Y-m-d')."_001" , true, 'branch', false, $send_to , $req_sign , $uid);
+        //$callback_signers = $digisign->do_sign_the_document(['document_id' => '2021-05-08_001' , 'email_user' => 'tangan1@gmail.com']);
+        //print_r($callback_signers);
+    }
+
+   
+
 
     public function urlValidation($u)
     {
@@ -653,20 +751,22 @@ class LenderIndividualController extends Controller
                 ->first();
 
             //send data to privy
-            $privy = new PrivyID();
-            $privy->requestRegistration(
-                $u->email,
-                $u->phone_number_verified,
-                $path . '/' . $imageData['self_image'],
-                $path . '/' . $imageData['identity_image'],
-                $u->identity_number,
-                $u->full_name,
-                $u->dob,
-                Auth::id(),
-                'individu'
-            );
+            // $privy = new PrivyID();
+            // $privy->requestRegistration(
+            //     $u->email,
+            //     $u->phone_number_verified,
+            //     $path . '/' . $imageData['self_image'],
+            //     $path . '/' . $imageData['identity_image'],
+            //     $u->identity_number,
+            //     $u->full_name,
+            //     $u->dob,
+            //     Auth::id(),
+            //     'individu'
+            // );
 
+            $this->store_data_to_digisign(Auth::id());
             DB::commit();
+            
         } catch (Exception $e) {
             $json = [
                 "status" => false,
@@ -680,6 +780,42 @@ class LenderIndividualController extends Controller
             "status" => true,
             "message" => 'Informasi Berkas ditambahkan',
         ]);
+    }
+
+    public function store_data_to_digisign($uid){
+        $u = User::with('individuinfo')->where('id' , $uid)->first();
+        if(!$u){
+            return;
+        }
+        if(!$u->individuinfo && !$u->individufile){
+            return ;
+        }
+        if(!$u->individuinfo->provinces && !$u->individuinfo->cities && !$u->individuinfo->distritcs && !$u->individuinfo->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/individu/file/attachment';
+        $digisign =new DigiSign;
+        $digisign->requestRegistration(
+            $path .'/'. $u->individuinfo->individufile->identity_image,
+            $path .'/'. $u->individuinfo->individufile->self_image,
+            $path .'/'. $u->individuinfo->individufile->npwp_image,
+            $u->individuinfo->full_address,
+            $u->individuinfo->gender,
+            $u->individuinfo->districts->name,
+            $u->individuinfo->villagess->name,
+            $u->individuinfo->kodepos,
+            $u->individuinfo->cities->name,
+            $u->individuinfo->full_name,
+            $u->phone_number_verified,
+            $u->individuinfo->dob,
+            $u->individuinfo->provinces->name,
+            $u->individuinfo->identity_number,
+            $u->individuinfo->pob,
+            $u->individuinfo->email,
+            $u->individuinfo->no_npwp,
+            true,
+            $uid
+        );
     }
 
     public function post_document_sme(Request $requests)
@@ -798,18 +934,8 @@ class LenderIndividualController extends Controller
                 ->first();
 
             //send data to privy
-            $privy = new PrivyID();
-            $privy->requestRegistration(
-                $u->email,
-                $u->phone_number_verified,
-                $path . '/' . $imageData['self_image'],
-                $path . '/' . $imageData['identity_image'],
-                $u->identity_number,
-                $u->full_name,
-                $u->dob,
-                Auth::id(),
-                'individu'
-            );
+            $this->store_data_to_digisign(Auth::id());
+
             DB::commit();
         } catch (Exception $e) {
             $json = [
@@ -828,39 +954,59 @@ class LenderIndividualController extends Controller
 
     public function get_sign()
     {
+        $active_lender = LenderHelper::active_lender();
+        if($active_lender){
+            return redirect('/myprofile');
+        }
         $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
         if ($u->step != 4 && $u->step != 5) {
             return $this->urlValidation($u);
         }
         $data = array(
-            'sign_agreement' => User::select(
-                'lender_individual_personal_info.*',
-                'users.email',
-                'privyids.privyId'
-            )
-                ->leftJoin('privyids', 'privyids.uid', 'users.id')
-                ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
-                ->where('users.id', Auth::id())->first(),
+            'sign_agreement' => DigisignActivation::where('uid' , Auth::id())->first(),
+            'type' => LenderIndividualPersonalInfo::select('lender_type')->where('uid' , Auth::id())->first()
+            // 'sign_agreement' => User::select(
+            //     'lender_individual_personal_info.*',
+            //     'users.email',
+            //     'privyids.privyId'
+            // )
+            //     ->leftJoin('privyids', 'privyids.uid', 'users.id')
+            //     ->leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+            //     ->where('users.id', Auth::id())->first(),
         );
         return view('pages.lender.individu.sign_agreement', $this->merge_response($data, static::$CONFIG));
     }
 
     public function post_sign(Request $requests)
     {
+        $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
+        if($dc){    
+            return response()->json([
+                "status" => true,
+                'url' =>'/sign/document?dc='.Utils::encrypt($dc->document_id),
+                "message" => 'Berhasil Ditandatangani',
+            ]);
+        }
         User::where('id', Auth::id())->update(['step' => 5]);
-
         //get user data
-        $u = User::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'users.id')
+        $u = DigisignActivation::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'digisign.uid')
             ->select(
-                'users.email',
-                'users.phone_number_verified',
+                'digisign.email',
+                'digisign.link_activation',
+                'digisign.phone_number',
                 'lender_individual_personal_info.identity_number',
                 'lender_individual_personal_info.full_name',
                 'lender_individual_personal_info.full_address',
             )
-            ->where('users.id', Auth::id())
+            ->where('digisign.uid', Auth::id())
             ->first();
-
+        if(!$u){
+            return response()->json([
+                "status" => false,
+                'url' => 'false',
+                "message" => 'Dokumen tidak tersedia.',
+            ]);
+        }
         $data = [
             'title' => 'PERJANJIAN KREDIT',
             'date_request_loan' => date('Y-m-d'),
@@ -869,20 +1015,28 @@ class LenderIndividualController extends Controller
 
         $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.register_lender_individu', $data)->save($pathDocument);
-        $recipients = [
-            [
-                'privyId' => $u->privyId,
-                'type' => 'Signer',
-                'enterpriseToken' => '',
-            ],
-        ];
-        $privy = new PrivyID();
-        $endpoint = $privy->requestDocumentUpload('Dokumen Perjanjian Pendanaan', 'Serial', $recipients, $pathDocument, 'registration');
 
+        $send_to = [
+            [
+                'email_user' => $u->email,
+                'name' => $u->full_name
+            ]
+        ];
+        
+        $uid =Auth::id();
+        $digisign = new DigiSign();
+        $endpoint = $digisign->upload_document($pathDocument , date('Y-m-d').'_'.uniqid().'_'.$uid ,true, 'Lender_Aggreement' ,false , $send_to, $send_to , $uid , 'registration');
         return response()->json([
             "status" => true,
             'url' => $endpoint,
             "message" => 'Berhasil Ditandatangani',
         ]);
+    }
+
+    public function activation_account_digisign(){
+        
+        $u = DigisignActivation::where('uid' , Auth::id())->first();
+        $digisign = new DigiSign;
+        $digisign->activation_account($u->email, Auth::id() , $u->nik);
     }
 }

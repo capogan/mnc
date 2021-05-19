@@ -166,7 +166,9 @@ return [
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         App\Providers\CreditScoringServiceProvider::class,
         App\Providers\PrivyIDServiceProvider::class,
+        App\Providers\DigiSignServiceProvider::class,
         App\Providers\CapiServiceProvider::class,
+        App\Providers\LenderHelperServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -236,8 +238,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'HelpCreditScoringhelp' => App\Helpers\HelpCreditScoring::class,
         'PrivyIDServices' => App\Helpers\PrivyIDServices::class,
+        'DigiSignIDServices' => App\Helpers\DigiSignServiceProvider::class,
         'RequestConnection' => App\Helpers\Capi::class,
         'Utils' => App\Helpers\Utils::class,
+        'LenderHelper' => App\Helpers\Lender::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 

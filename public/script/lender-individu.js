@@ -183,6 +183,14 @@ $(document).on('ready', function () {
 
         var token = $('meta[name="csrf-token"]').attr('content');
 
+        var block = $('#selfie_photo_preview').attr('src').split(";");
+        var contentType = block[0].split(":")[1];
+        var realData = block[1].split(",")[1];
+        var blob = b64toBlob(realData, contentType);
+
+        var fd = new FormData(this);
+        fd.append("selfie_photo", blob);
+
         $.ajax({
             url: '/profile/lender-individu/document',
             method: "POST",
@@ -190,7 +198,7 @@ $(document).on('ready', function () {
                 'X-CSRF-TOKEN': token
             },
             async: true,
-            data: new FormData(this),
+            data: fd,
             contentType: false,
             cache: false,
             processData: false,
@@ -237,6 +245,15 @@ $(document).on('ready', function () {
 
         var token = $('meta[name="csrf-token"]').attr('content');
 
+
+        var block = $('#selfie_photo_preview').attr('src').split(";");
+        var contentType = block[0].split(":")[1];
+        var realData = block[1].split(",")[1];
+        var blob = b64toBlob(realData, contentType);
+
+        var fd = new FormData(this);
+        fd.append("selfie_photo", blob);
+
         $.ajax({
             url: '/profile/lender-individu/document/sme',
             method: "POST",
@@ -244,7 +261,7 @@ $(document).on('ready', function () {
                 'X-CSRF-TOKEN': token
             },
             async: true,
-            data: new FormData(this),
+            data: fd,
             contentType: false,
             cache: false,
             processData: false,
@@ -293,6 +310,61 @@ $(document).on('ready', function () {
 
         $.ajax({
             url: '/profile/lender-individu/sign',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async: true,
+            data: {},
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                loading();
+            },
+            success: function (response) {
+                close_loading();
+                if (response.status == true) {
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Anda telah tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = response.url;
+                } else {
+                    var text = '';
+                    $.each(response.message, function (index, value) {
+                        text += '<p class="error"><i data-feather="x-square"></i> ' + value[0] + '</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function () {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert_error();
+                close_loading();
+            }
+        })
+    });
+
+
+    $("#btn_send_activation_email").on('click', function (event) {
+        event.preventDefault();
+        var btn = $("#btn_send_activation_email");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/profile/lender-individu/activate_account',
             method: "POST",
             headers: {
                 'X-CSRF-TOKEN': token
@@ -444,10 +516,35 @@ $(document).on('change', 'input[type="file"]', function () {
 
 function readURL(input, imagetarget) {
     if (input.files && input.files[0]) {
+        //console.log(input.files[0]);
         var reader = new FileReader();
         reader.onload = function (e) {
             $('#' + imagetarget + '_preview').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
+}
+
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
 }

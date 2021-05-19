@@ -32,4 +32,38 @@ class LenderIndividualBusinessInfo extends Model
         'created_at',
         'updated_at',
     ];
+    public function business_legality()
+    {
+        return $this->hasOne(BusinessLegality::class , 'id' , 'id_business_legality');
+    }
+
+    public function place_status()
+    {
+        return $this->hasOne(BuildingPlaceStatus::class , 'id' , 'business_place_status');
+    }
+    public function type()
+    {
+        return $this->hasOne(IncomeFactory::class , 'id' , 'business_type');
+    }
+    // public function business_typ_detail()
+    // {
+    //     return $this->hasOne(business_ty::class , 'id' , 'business_type');
+    // }
+
+    public function provinces()
+    {
+        return $this->hasOne(Province::class , 'id' ,'province');
+    }
+    public function cities()
+    {
+        return $this->hasOne(Regency::class , 'id' ,'city');
+    }
+    public function districts()
+    {
+        return $this->hasOne(District::class , 'id' ,'district');
+    }
+    public function villagess()
+    {
+        return $this->hasOne(Village::class , 'id' ,'villages');
+    }
 }

@@ -22,7 +22,7 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{ $item->invoice_number}}</td>
                                         <td>{{$item->business_info->business_name}}</td>
-                                        <td>{{$item->repayment}}</td>
+                                        <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
                                         <td>{{$item->status_title->title}}</td>
                                         <td><a href="/portofolio/detail/{{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>
                                     </tr>

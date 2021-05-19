@@ -54,6 +54,16 @@ class Utils {
                 echo "Tertunda";
         }
     }
+    static function tryJson($str){
+        if (is_string($str) && ((substr($str, 0, 1) == '{' && substr($str, -1, 1) == '}') || (substr($str, 0, 1) == '[' && substr($str, -1, 1) == ']'))) {
+			//json
+			$obj = json_decode($str, true);
+			if ($obj) {
+				return true;
+			}
+		}
+		return false;
+    }
     public static function calculate_age($dob,$option){
         if($option == 'years'){
             return Carbon::parse($dob)->diff(Carbon::now())->format('%y Tahun');

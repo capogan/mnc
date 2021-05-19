@@ -68,7 +68,7 @@
                                                                     <div class="section_number_append section_number_append-section1" id="section_number_append">
                                                                     <?php
                                                                         if($i == 0){
-                                                                            $this_val = '';
+                                                                            $this_val = '0';
                                                                             $image = '0';
                                                                         }else{
                                                                             $this_val = $i+1;
@@ -195,20 +195,26 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row mt-2">
-                                                                                    <div class="col image-of-display">
+                                                                                    <div class="col">
                                                                                         <div class="upload-file">
                                                                                             <div class="file-input">
-                                                                                                <input type="file" id="self_image{{$this_val}}" name="self_image{{$this_val}}" class="file" >
-                                                                                                <label for="self_image{{$this_val}}">
-                                                                                                    <svg
-                                                                                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                                <input type="file" id="self_image{{$this_val}}" name="self_image{{$this_val}}" class="file">
+                                                                                                <label onclick="setup_webcam()">
+                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="40" height="40" fill="white"
+                                                                                                        class="bi bi-plus"
                                                                                                         viewBox="0 0 16 16">
-                                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                                        <path
+                                                                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                                                                                     </svg>
                                                                                                     <span>Pilih Foto</span>
                                                                                                 </label>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <br>
+                                                                                        <div id="my_selfie"></div>
+                                                                                            <input type="button" value="Ambil Foto" id="snapshot" onClick="take_snapshot()" style="display:none">
+                                                                                            <input type="button" value="Cancel" id="cancel_snapshot" onClick="cancel_snapshots()" style="display:none">
                                                                                         <div class="file_preview">
                                                                                             <img src="{{asset('/upload/lender/file/'.$item->self_photo)}}" id="self_image{{$this_val}}_preview" alt="" style="width:100%">
                                                                                         </div>
@@ -228,7 +234,7 @@
                                                                 <div class="row mb-4">
                                                                     <div class="col">
                                                                         <h6>NIK<span>*</span></h6>
-                                                                        <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
+                                                                        <input type="text" value="" maxlength="16" class="form-control identity_numbers_" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>Nama<span>*</span></h6>
@@ -250,7 +256,7 @@
                                                                 <div class="row mb-4">
                                                                     <div class="col">
                                                                         <h6>Nomor Telepon<span>*</span></h6>
-                                                                        <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >
+                                                                        <input type="text" class="form-control" maxlength="12" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>NPWP<span>*</span></h6>
@@ -340,23 +346,30 @@
                                                                                 <p>Unggah Foto Diri *</p>
                                                                             </div>
                                                                         </div>
+                                                                        
                                                                         <div class="row mt-2">
-                                                                            <div class="col image-of-display">
+                                                                            <div class="col">
                                                                                 <div class="upload-file">
                                                                                     <div class="file-input">
-                                                                                        <input type="file" id="self_image" name="self_image0" class="file" >
-                                                                                        <label for="self_image">
-                                                                                            <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus"
+                                                                                        <input type="file" id="self_image" name="self_image0" class="file">
+                                                                                        <label onclick="setup_webcam()">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="40" height="40" fill="white"
+                                                                                                class="bi bi-plus"
                                                                                                 viewBox="0 0 16 16">
-                                                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                                <path
+                                                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                                                                             </svg>
                                                                                             <span>Pilih Foto</span>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
+                                                                                <br>
+                                                                                <div id="my_selfie"></div>
+                                                                                    <input type="button" value="Ambil Foto" id="snapshot" onClick="take_snapshot()" style="display:none">
+                                                                                    <input type="button" value="Cancel" id="cancel_snapshot" onClick="cancel_snapshots()" style="display:none">
                                                                                 <div class="file_preview">
-                                                                                    <img src="" id="self_image_preview" alt="" style="width:100%">
+                                                                                    <img src="" id="selfie_photo_preview" alt="" style="width:100%">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -402,5 +415,65 @@
 
 @section('js')
     <script src="{{ asset('/script/lender.js') }}"></script>
+    <script src="{{ asset('/js/webcam.min.js') }}"></script>
+
+    <script language="JavaScript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+	</script>
+
+    <script language="JavaScript">
+		function setup_webcam() {
+            $('#selfie_photo_preview').hide();
+            $('#self_image0_preview').hide();
+			Webcam.attach( '#my_selfie' );
+            $('#snapshot').show();
+		}
+        function cancel_snapshots() {
+            Webcam.unfreeze();
+            $('#snapshot').show();
+            $('#cancel_snapshot').hide();
+        }
+		function take_snapshot() {
+			Webcam.snap( function(data_uri) {
+                var block = data_uri.split(";");
+                var contentType = block[0].split(":")[1];
+                var realData = block[1].split(",")[1];
+                var blob = b64toBlob(realData, contentType);
+                $('#selfie_photo_preview').attr('src' , data_uri);
+                $('#self_image0_preview').attr('src' , data_uri);
+                $('#cancel_snapshot').show();
+                $('#snapshot').hide();
+			} );
+
+            Webcam.freeze();
+		}
+
+        function b64toBlob(b64Data, contentType, sliceSize) {
+                contentType = contentType || '';
+                sliceSize = sliceSize || 512;
+                var byteCharacters = atob(b64Data);
+                var byteArrays = [];
+
+                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                    var byteNumbers = new Array(slice.length);
+                    for (var i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+                    var byteArray = new Uint8Array(byteNumbers);
+
+                    byteArrays.push(byteArray);
+                }
+
+              var blob = new Blob(byteArrays, {type: contentType});
+              return blob;
+            }
+	</script>
 @endsection
 @endsection

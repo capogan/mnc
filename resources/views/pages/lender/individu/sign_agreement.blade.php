@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
@@ -20,26 +19,29 @@
                     <a href="/profile/lender-individu/" type="button" data-text="1" class="btn btn-default btn-circle">1</a>
                     <p>Informasi Pribadi</p>
                 </div>
+                @if($type == '2')
                 <div class="stepwizard-step" id="non_sme_occupation">
                     <a href="/profile/lender-individu/occupation" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">2</a>
                     <p>Informasi Pekerjaan</p>
-                </div>
-                <div class="stepwizard-step" id="sme_occupation">
-                    <a href="/profile/lender-individu/occupation/sme" type="button" class="btn btn-default btn-circle"
-                        disabled="disabled">2</a>
-                    <p>Informasi Usaha</p>
                 </div>
                 <div class="stepwizard-step" id="non_sme_document">
                     <a href="/profile/lender-individu/document" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>
+                @else
+                <div class="stepwizard-step" id="sme_occupation">
+                    <a href="/profile/lender-individu/occupation/sme" type="button" class="btn btn-default btn-circle"
+                        disabled="disabled">2</a>
+                    <p>Informasi Usaha</p>
+                </div>
                 <div class="stepwizard-step" id="sme_document">
                     <a href="/profile/lender-individu/document/sme" type="button" class="btn btn-default btn-circle"
                         disabled="disabled">3</a>
                     <p>Berkas</p>
                 </div>
+                @endif
                 <div class="stepwizard-step">
                     <a href="/profile/lender-individu/sign" type="button" class="btn btn-primary btn-circle">4</a>
                     <p>Tanda Tangan</p>
@@ -64,12 +66,12 @@
                                                 <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12 col-12">
                                                     <div class="wrapper-content bg-white">
                                                         <div class="section-scroll pinside60" id="section-about">
-                                                            <input type="hidden" name="lender_type_info"
+                                                            {{-- <input type="hidden" name="lender_type_info"
                                                                 id="lender_type_info"
                                                                 value="{{ isset($sign_agreement->lender_type) ? $sign_agreement->lender_type : '' }}">
                                                             <input type="hidden" name="personal_id" id="personal_id"
-                                                                value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}">
-                                                            <h1>Sign Agreement</h1>
+                                                                value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
+                                                            <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
                                                             <p class="lead">To make your home loan journey a smooth
                                                                 sail, in
                                                                 this article we will help you to know eligibility
@@ -77,7 +79,7 @@
                                                                 rates of interest, process, necessary documents,
                                                                 comparison
                                                                 and transfer for lowest rates. </p>
-                                                            @if ($sign_agreement->privyId != null)
+                                                            @if ($sign_agreement)
                                                                 <div class="row">
                                                                     <div
                                                                         class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
@@ -103,15 +105,18 @@
                                                                     nequeuisque lacus mi tesimly diummy cintenbt mpus nec
                                                                     purus
                                                                     vitae tempor placerat leo. </p>
+                                                                @if($sign_agreement->status_activation != 'active')
+                                                                    <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Account</a>
+                                                                @endif
+                                                                @if($sign_agreement->status_activation == 'active')
                                                                 <button type="button" class="btn btn-primary"
-                                                                    id="btn_sign_agreement_lender_individu">Tanda Tangan
-                                                                    Perjanjian</button>
+                                                                    id="btn_sign_agreement_lender_individu">Lanjutkan Proses Tanda Tangan</button>
+
+                                                                @endif
                                                             @else
                                                                 <div class="row">
                                                                     <div class="alert alert-success" role="alert">
-                                                                        Data Anda masih dalam proses, kami akan mengirimkan
-                                                                        link privyID untuk tanda tangan perjanjian jika data
-                                                                        anda berhasil kami proses.
+                                                                        Mohon Maaf, Permintaan anda belum dapat kami setujui.
                                                                     </div>
                                                                 </div>
                                                             @endif

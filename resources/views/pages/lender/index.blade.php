@@ -75,11 +75,11 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Email<span>*</span></h6>
-                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{isset($lender_profile->email) ? $lender_profile->email : ''}}">
+                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{Auth::user()->email}}" disabled>
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor Telepon<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness" value="{{isset($lender_profile->phone_number) ? $lender_profile->phone_number : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nomor Telepon" id="phone_of_bussiness" name="phone_of_bussiness" value="{{Auth::user()->phone_number_verified}}" disabled>
                                                             </div>
                                                         </div>
 

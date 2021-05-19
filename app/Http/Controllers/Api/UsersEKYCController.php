@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\DigiSign;
 use App\Http\Controllers\Controller;
 use App\UserEKYC;
 use GuzzleHttp\Client;
@@ -22,6 +23,9 @@ class UsersEKYCController extends Controller
 
     public function index(Request $request){
 
+        print_r($request->all());
+        print_r($request->getContent());
+        exit;
         $ekyc = UserEKYC::create([
             'callback'=>$request->getContent(),
             'created_at'=>date('Y-m-d'),
@@ -40,10 +44,14 @@ class UsersEKYCController extends Controller
                 ];
             }
         }
-        $privy = new PrivyID;
-        $privy->privyIDCallback($request->getContent());
-
+        $digisign = new DigiSign;
+        $digisign->callback_activation($request->getContent() , $request->msg);
         return response()->json($json);
+    }
+
+    public function callback_activation(Request $request){
+        $digisign = new DigiSign;
+        $digisign->callback_activation($request->msg);
     }
 
     private function baseUrl()

@@ -40,4 +40,67 @@ class LenderIndividualPersonalInfo extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function individubank()
+    {
+        return $this->hasOne(LenderIndividualBankAccount::class , 'id_lender_individual')
+        ->with('bank:id,bank_name');
+    }
+    public function individubusiness()
+    {
+        return $this->hasOne(LenderIndividualBusinessInfo::class , 'id_lender_individual')
+        ->with('business_legality')
+        ->with('place_status')
+        ->with('type')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+        //->with('business_type_detail');
+    }
+    public function individuemergency()
+    {
+        return $this->hasOne(LenderIndividualEmergencyContact::class , 'id_lender_individual')
+        ->with('sibling');
+    }
+    public function individufile()
+    {
+        return $this->hasOne(LenderIndividualFile::class , 'id_lender_individual');
+    }
+    public function individualjob()
+    {
+        return $this->hasOne(LenderIndividualJobInformation::class , 'id_lender_individual')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+    public function educations()
+    {
+        return $this->hasOne(Education::class , 'id' ,'education');
+    }
+    public function marital_status()
+    {
+        return $this->hasOne(MarriedStatus::class , 'id' ,'married_status');
+    }
+    public function status_of_residences()
+    {
+        return $this->hasOne(BuildingPlaceStatus::class , 'id' ,'status_of_residence');
+    }
+    public function provinces()
+    {
+        return $this->hasOne(Province::class , 'id' ,'province');
+    }
+    public function cities()
+    {
+        return $this->hasOne(Regency::class , 'id' ,'city');
+    }
+    public function districts()
+    {
+        return $this->hasOne(District::class , 'id' ,'district');
+    }
+    public function villagess()
+    {
+        return $this->hasOne(Village::class , 'id' ,'villages');
+    }
 }

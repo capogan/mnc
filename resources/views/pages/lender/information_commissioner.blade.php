@@ -80,7 +80,7 @@
                                                                         <div class="row mb-4">
                                                                             <div class="col">
                                                                                 <h6>NIK<span>*</span></h6>
-                                                                                <input type="text" value="{{$item->commissioner_nik}}" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
+                                                                                <input type="text" maxlength="16" value="{{$item->commissioner_nik}}" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
                                                                             </div>
                                                                             <div class="col">
                                                                                 <h6>Nama<span>*</span></h6>
@@ -102,7 +102,7 @@
                                                                         <div class="row mb-4">
                                                                             <div class="col">
                                                                                 <h6>Nomor Telepon<span>*</span></h6>
-                                                                                <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]"  value="{{$item->commissioner_phone_number}}" >
+                                                                                <input type="text" maxlength="12" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]"  value="{{$item->commissioner_phone_number}}" >
                                                                             </div>
                                                                             <div class="col">
                                                                                 <h6>NPWP<span>*</span></h6>
@@ -226,7 +226,7 @@
                                                                 <div class="row mb-4">
                                                                     <div class="col">
                                                                         <h6>NIK<span>*</span></h6>
-                                                                        <input type="text" value="" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
+                                                                        <input type="text" value="" maxlength="16" class="form-control" placeholder="Nomor KTP" id="identity_number" name="identity_number[]">
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>Nama<span>*</span></h6>
@@ -248,7 +248,7 @@
                                                                 <div class="row mb-4">
                                                                     <div class="col">
                                                                         <h6>Nomor Telepon<span>*</span></h6>
-                                                                        <input type="text" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >
+                                                                        <input type="text" maxlength="12" class="form-control" placeholder="Nomor Telepon" id="phone_number" name="phone_number[]" value="" >
                                                                     </div>
                                                                     <div class="col">
                                                                         <h6>NPWP<span>*</span></h6>

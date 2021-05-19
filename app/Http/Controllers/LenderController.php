@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DigisignActivation;
+use App\Helpers\DigiSign;
+use App\Helpers\LenderHelper;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +26,7 @@ use App\Helpers\PrivyID;
 use App\PrivyID as AppPrivyID;
 use PDF;
 use App\Helpers\Utils;
+use App\Providers\DigiSignServiceProvider;
 
 class LenderController extends Controller
 {
@@ -36,7 +40,7 @@ class LenderController extends Controller
     }
 
     public function editable_bio(){
-        $has_complete = AppPrivyID::where('uid' , Auth::id())->count();
+        $has_complete = DigisignActivation::where('uid' , Auth::id())->count();
         $editable = true;
         if(Auth::user()->level == 'individu'){
             if($has_complete > 0){
@@ -51,6 +55,10 @@ class LenderController extends Controller
     }
 
     public function index(Request $request){
+        $active_lender = LenderHelper::active_lender();
+        if($active_lender){
+            return redirect('/myprofile');
+        }
         $editable = $this->editable_bio();
         $data = array(
             'provinces' => Province::get(),
@@ -102,8 +110,8 @@ class LenderController extends Controller
 
             'name_of_bussiness'         => 'required',
             'npwp_of_bussiness'         => 'required',
-            'email_of_bussiness'        => 'required',
-            'phone_of_bussiness'        => 'required',
+            //'email_of_bussiness'        => 'required',
+            //'phone_of_bussiness'        => 'required',
             'address_of_bussiness'      => 'required',
             'province'                  => 'required',
             'city'                      => 'required',
@@ -127,8 +135,8 @@ class LenderController extends Controller
         [
             'name_of_bussiness.required'    => 'Nama Usaha tidak boleh kosong',
             'npwp_of_bussiness.required'    => 'NPWP Usaha tidak boleh kosong',
-            'email_of_bussiness.required'   => 'Email Usaha tidak boleh kosong',
-            'phone_of_bussiness.required'   => 'Nomor telepon Usaha tidak boleh kosong',
+            //'email_of_bussiness.required'   => 'Email Usaha tidak boleh kosong',
+            //'phone_of_bussiness.required'   => 'Nomor telepon Usaha tidak boleh kosong',
             'address_of_bussiness.required' => 'Alamat Usaha tidak boleh kosong',
             'province.required'             => 'Propinsi tidak boleh kosong',
             'city.required'                 => 'Kota tidak boleh kosong',
@@ -167,9 +175,9 @@ class LenderController extends Controller
                     'id_regency'=>$request->city,
                     'id_district'=>$request->district,
                     'id_village'=>$request->vilages,
-                    'phone_number'=>$request->phone_of_bussiness,
+                    'phone_number'=>Auth::user()->phone_number_verified,
                     'website'=>$request->website_of_bussiness,
-                    'email'=>$request->email_of_bussiness,
+                    'email'=>Auth::user()->email,
                     'induk_berusaha_number'=>$request->nib_of_bussiness,
                     'tdp_number'=>$request->tdp_number,
                     'akta_pendirian'=>$request->akta_pendirian,
@@ -234,15 +242,17 @@ class LenderController extends Controller
     }
 
     public function submit_director_data(Request $request){
+        $this->store_data_to_digisign(Auth::id());exit;
        //print_r($request->all()); exit;
 
        $is_ready_data = LenderDirectorData::where('uid' , Auth::id())->first();
+       
         $validators = [
-            'identity_number'       => 'required',
+            'identity_number'       => ['required','min:16','max:16'],
             'director_name'         => 'required',
             'dob'                   => 'required',
-            'email'                 => 'required',
-            'phone_number'          => 'required',
+            'email'                 => ['required','email'],
+            'phone_number'          => ['required','min:11','max:12'],
             'npwp_of_director'      => 'required',
             'director_level'        => 'required',
             'address'               => 'required',
@@ -253,6 +263,8 @@ class LenderController extends Controller
         ];
         $messagesvalidator = [
             'identity_number.required'      => 'Nomor KTP tidak boleh kosong',
+            'identity_number.min'           => 'Nomor KTP harus 16 angka',
+            'identity_number.max'           => 'Nomor KTP harus 16 angka',
             'director_name.required'        => 'Nama direktur tidak boleh kosong',
             'dob.required'                  => 'Tanggal lahir tidak boleh kosong',
             'email.required'                => 'Email tidak boleh kosong',
@@ -265,6 +277,13 @@ class LenderController extends Controller
             'district.required'             => 'Kecamatan tidak boleh kosong',
             'vilages.required'              => 'Desa tidak boleh kosong',
         ];
+
+        if(!$is_ready_data){
+            // $validators['self_image'] = 'required|image|mimes:png,jpg';
+            // $validators['identity_image'] = 'required|image|mimes:png,jpg';
+            // $messagesvalidator['self_image.required'] = 'Swafoto tidak boleh kosong';
+            // $messagesvalidator['identity_image.required'] = 'Foto KTP tidak boleh kosong';
+        }
 
         for($i=0; $i<count($request->identity_number);$i++){
             $requests[$i]['identity_number'] = $request['identity_number'][$i];
@@ -370,8 +389,9 @@ class LenderController extends Controller
                 );
 
                 if($i == 0){
-                    $privy = new PrivyID();
-                    $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'director');
+                    $this->store_data_to_digisign(Auth::id());
+                    // $privy = new PrivyID();
+                    // $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'director');
                 }
 
             }
@@ -382,6 +402,43 @@ class LenderController extends Controller
             "status"=> true,
             "message"=> 'Data Personal berhasil di tambahkan',
         ]);
+    }
+
+    public function store_data_to_digisign($uid){
+        $u = User::with('digisignInfo')->where('id' , $uid)->first();
+
+        if(!$u){
+            return;
+        }
+        if(!$u->digisigninfo){
+            return ;
+        }
+        if(!$u->digisigninfo->provinces && !$u->digisigninfo->cities && !$u->digisigninfo->distritcs && !$u->digisigninfo->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/file';
+        $digisign =new DigiSign;
+        $digisign->requestRegistration(
+            $path .'/'. $u->digisigninfo->identity_photo,
+            $path .'/'. $u->digisigninfo->self_photo,
+            $path .'/'. $u->digisigninfo->npwp_image,
+            $u->digisigninfo->address,
+            $u->digisigninfo->gender,
+            $u->digisigninfo->districts->name,
+            $u->digisigninfo->villagess->name,
+            $u->digisigninfo->kodepos,
+            $u->digisigninfo->cities->name,
+            $u->digisigninfo->director_name,
+            $u->phone_number_verified,
+            $u->digisigninfo->director_dob,
+            $u->digisigninfo->provinces->name,
+            $u->digisigninfo->director_nik,
+            $u->digisigninfo->director_pob,
+            $u->digisigninfo->director_email,
+            $u->digisigninfo->no_npwp,
+            true,
+            $uid
+        );
     }
 
     public function commissioner(Request $request){
@@ -733,11 +790,45 @@ class LenderController extends Controller
                 "message"=> 'Data tidak ditemukan.',
             ];
         }
+
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->where('id' ,Utils::decrypt($request->id))->first();
 
+        $borrower = User::where('id' , $loan->uid)
+                    ->with('digisigndata')
+                    ->first();
+        $lender = User::where('id' ,Auth::id())
+                    ->with('digisigndata')
+                    ->first();
+        $data = [
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => date('Y-m-d'),
+            'borrower' => $borrower,
+            'lender' => $lender
+        ];
+
+        $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
+        PDF::loadView('agreement.credit_agreement', $data)->save($pathDocument);
+        $send_to = [
+            [
+                'email_user' => $borrower->digisigndata->email,
+                'name' => $borrower->digisigndata->full_name
+            ],
+            [
+                'email_user' => $lender->digisigndata->email,
+                'name' => $lender->digisigndata->full_name
+            ]
+        ];
+        $digisign = new DigiSign;
+        $response = $digisign->upload_document($pathDocument , date('Y-m-d').'_'.uniqid().'_'.$lender->id ,true, 'Lender_Aggreement' ,false , $send_to, $send_to , $lender->id , 'credit_agreement');
+        if(!$response){
+            return [
+                "status"=> 'error',
+                "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
+            ];
+        }
         if(!$loan){
             return $json = [
                 "status"=> 'error',
@@ -757,7 +848,7 @@ class LenderController extends Controller
             "status"=> 'error',
             "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
         ];
-
+       
         
     }
 
@@ -856,8 +947,54 @@ class LenderController extends Controller
         //print_r($portofolio->toArray()); exit;
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
+    public function portofolio_detail($id){
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('id' ,Utils::decrypt($id))->first();
+        $loan_installments = LoanInstallment::
+        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
+        where('id_request_loan',$loan->id)->orderBy('stages','ASC')
+            ->get();
+        $data = [
+            'no_invoice'    => $loan->invoice_number,
+            'id_loan'       => $loan->id,
+            'loan_installments'=>$loan_installments,
+            'profile' => $loan
+        ];
+        return view('pages.lender.loan',$this->merge_response($data, static::$CONFIG));
+    }
 
     public function priview_document(){
         return view('agreement.document_sign');
+    }
+
+    public function myprofile(){
+        if(Auth::user()->level == 'individu'){
+            $profile = User::with('individuinfo')->where('id' , Auth::id())->first();
+        }else{
+            $profile = User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
+            ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
+            ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
+            ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
+            ->leftJoin('villages' ,'lender_business.id_village' , 'villages.id')
+            ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
+            ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
+            ->where('users.id', Auth::id())->first();
+            
+            $other_data = User
+            ::with('commissioners')
+            ->with('directors')
+            ->with('document')
+            ->where('id' , Auth::id())->first();
+            
+
+        }
+        
+        $data = [
+            'profile' => $profile,
+            'other_data' => $other_data
+        ];
+        return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
     }
 }

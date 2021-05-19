@@ -17,4 +17,8 @@ class LenderIndividualEmergencyContact extends Model
         'created_at',
         'updated_at',
     ];
+    public function sibling()
+    {
+        return $this->hasOne(Siblings::class , 'id','emergency_siblings');
+    }
 }

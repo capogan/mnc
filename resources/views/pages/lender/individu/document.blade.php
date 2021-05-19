@@ -96,7 +96,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-xl-6">
                                                                 <div class="row mt-2">
                                                                     <div class="col">
@@ -107,9 +106,8 @@
                                                                     <div class="col">
                                                                         <div class="upload-file">
                                                                             <div class="file-input">
-                                                                                <input type="file" id="selfie_photo"
-                                                                                    name="selfie_photo" class="file">
-                                                                                <label for="selfie_photo">
+                                                                                <input type="file" id="selfie_photo" name="selfie_photo" class="file">
+                                                                                <label onclick="setup_webcam()">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="40" height="40" fill="white"
                                                                                         class="bi bi-plus"
@@ -121,6 +119,10 @@
                                                                                 </label>
                                                                             </div>
                                                                         </div>
+                                                                        <br>
+                                                                        <div id="my_selfie"></div>
+                                                                            <input type="button" value="Ambil Foto" id="snapshot" onClick="take_snapshot()" style="display:none">
+                                                                            <input type="button" value="Cancel" id="cancel_snapshot" onClick="cancel_snapshots()" style="display:none">
                                                                         <div class="file_preview">
                                                                             <img class="img-file"
                                                                                 src="{{ asset('/upload/lender/individu/file/attachment') }}/{{ $lender_individual_docs->self_image ?? '' }}"
@@ -289,5 +291,63 @@
 
 @section('js')
     <script src="{{ asset('/script/lender-individu.js') }}"></script>
+    <script src="{{ asset('/js/webcam.min.js') }}"></script>
+
+    <script language="JavaScript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+	</script>
+
+    <script language="JavaScript">
+		function setup_webcam() {
+            $('#selfie_photo_preview').hide();
+			Webcam.attach( '#my_selfie' );
+            $('#snapshot').show();
+		}
+        function cancel_snapshots() {
+            Webcam.unfreeze();
+            $('#snapshot').show();
+            $('#cancel_snapshot').hide();
+        }
+		function take_snapshot() {
+			Webcam.snap( function(data_uri) {
+                var block = data_uri.split(";");
+                var contentType = block[0].split(":")[1];
+                var realData = block[1].split(",")[1];
+                var blob = b64toBlob(realData, contentType);
+                $('#selfie_photo_preview').attr('src' , data_uri);
+                $('#cancel_snapshot').show();
+                $('#snapshot').hide();
+			} );
+
+            Webcam.freeze();
+		}
+
+        function b64toBlob(b64Data, contentType, sliceSize) {
+                contentType = contentType || '';
+                sliceSize = sliceSize || 512;
+                var byteCharacters = atob(b64Data);
+                var byteArrays = [];
+
+                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                    var byteNumbers = new Array(slice.length);
+                    for (var i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+                    var byteArray = new Uint8Array(byteNumbers);
+
+                    byteArrays.push(byteArray);
+                }
+
+              var blob = new Blob(byteArrays, {type: contentType});
+              return blob;
+            }
+	</script>
 @endsection
 @endsection

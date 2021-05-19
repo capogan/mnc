@@ -17,4 +17,9 @@ class LenderIndividualBankAccount extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function bank()
+    {
+        return $this->hasOne(Bank::class , 'id' ,'id_bank');
+    }
 }

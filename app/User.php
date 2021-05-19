@@ -42,5 +42,71 @@ class User extends Authenticatable
         return $this->hasOne(LenderBusiness::class , 'uid');
     }
 
+    public function individuinfo()
+    {
+        return $this->hasOne(LenderIndividualPersonalInfo::class , 'uid')
+                ->with('educations')
+                ->with('marital_status')
+                ->with('status_of_residences')
+                ->with('provinces')
+                ->with('cities')
+                ->with('districts')
+                ->with('villagess')
+                ->with('individubank')
+                ->with('individubusiness')
+                ->with('individuemergency')
+                ->with('individufile')
+                ->with('individualjob');
+    }
+    
+    public function digisignInfo(){
+        return $this->hasOne(LenderDirectorData::class , 'uid' ,'id')->where('position' ,'0')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+        
+    }
+
+    public function lenderbusiness(){
+        return $this->hasOne(LenderDirectorData::class , 'uid' ,'id')->where('position' ,'0')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+
+    public function business(){
+        return $this->hasOne(LenderDirectorData::class , 'uid' ,'id')->where('position' ,'0')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+
+    public function commissioners(){
+        return $this->hasMany(LenderCommissionerData::class , 'uid' ,'id')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+
+    public function directors(){
+        return $this->hasMany(LenderDirectorData::class , 'uid' ,'id')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+
+    public function document(){
+        return $this->hasOne(LenderAttachmentData::class , 'uid' ,'id');
+    }
+
+    public function digisigndata(){
+        return $this->hasOne(DigisignActivation::class , 'uid' ,'id');
+    }
+
 
 }
