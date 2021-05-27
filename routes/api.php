@@ -34,4 +34,8 @@ Route::post('/ekyc/callback', 'Api\UsersEKYCController@index')->name('user.ekyc.
 Route::post('/ekyc/callback/activation', 'Api\UsersEKYCController@callback_activation')->name('user.ekyc.calback');
 //Route::post('/ekyc/post', 'Api\UsersEKYCController@requestRegistration')->name('user.ekyc.calback');
 Route::post('/ekyc/post', 'Api\UsersEKYCController@requestRegistration')->name('user.ekyc.calback');
-Route::post('/ekycres', 'Api\UsersEKYCController@ekyc22')->name('user.ekyc.calback');
+Route::post('/ekycres', 'Api\UsersEKYCController@uploadDocumentest')->name('user.ekyc.calback');
+
+Route::get('/sign/callback', 'Api\Digisign@sign_callback')->name('user.digisign.calback');
+
+

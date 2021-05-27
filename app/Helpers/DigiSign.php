@@ -318,7 +318,7 @@ class DigiSign {
     }
     public function upload_document($file, $document_id , $redirect, $brach, $sequence_option,$send_to , $req_sign,$uid ,$step){       
         $data = [
-                'file' => $file,
+                'file' => fopen($file,'rb'),
                 'jsonfield' => json_encode([
                     'JSONFile' =>
                         [
@@ -333,17 +333,16 @@ class DigiSign {
                     ])
                 ];
         //print_r($data); exit;
-        // $client = Http::withHeaders([
-        //     'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
-        //     'Accept' => '*/*',
-        //     'Connection' => 'keep-alive'
-        // ])
-        // ->timeout(9000)
-        // ->asMultipart()
-        // ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
-        //print_r($client->body());
-        $response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
-        $document = $this->process_upload_file_response($response , $data , $uid , $step);
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->timeout(9000)
+        ->asMultipart()
+        ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
+        //$response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
+        $document = $this->process_upload_file_response( $client->body() , $data , $uid , $step);
         return $document;
         // if($document){
         //     $this->do_sign_the_document($document_id);
@@ -396,11 +395,9 @@ class DigiSign {
             $signers = [];
             foreach($JSonfield['JSONFile']['req-sign'] as $v){
                 $v['document_id'] = $JSonfield['JSONFile']['document_id'];   
-                $v['email'] = $v['email_user'];
-                unset($v['email_user']);
-                $signers[] = $v;
-                
-               
+                $v['email'] = $v['email'];
+                //unset($v['email']);
+                $signers[] = $v;               
             }
             DigiSignDocumentSigners::insert($signers);
             return true;
@@ -414,28 +411,25 @@ class DigiSign {
             return ['status' => 'error' , 'document tidak ditemukan.'];
         }
         $data = [
-            'jsonfield' => [
+            'jsonfield' => json_encode([
                 'JSONFile' => [
                     'userid' => env('DIGISIGN_USER_ID'),
                     'document_id' => $document_id,
                     'email_user' => $email->email,
                     'view_only' => false
                 ]
-            ]
+            ])
         ];
-        echo json_encode($data);
-        // $client = Http::withHeaders([
-        //     'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
-        //     'Accept' => '*/*',
-        //     'Connection' => 'keep-alive'
-        // ])
-        // ->asMultipart()
-        // ->post('https://api.tandatanganku.com/gen/genSignPage.html', json_encode($data));
-        // $response = $client->body();
-        $response = '{ "JSONFile" : { "result":"00", "link":"https://wv.tandatanganku.com/viewpage.html?view=aO7%2B4ui1zFz%2BsbMl4nb%2BLPAC17uvhMHP Z%2FexPaVRXas8ZAbL%2FElzcV9JxlH5YI%2FuMHtrI3qre6N4AVnkDbQiL%2BTNp3sPsr76xPAsq3cFgbvIH 6xcgxJVruMaykkMMqC4bC3WMj%2FiAIM80B4yuuw6KQ%3D%3D"}}';
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->asMultipart()
+        ->post('https://api.tandatanganku.com/gen/genSignPage.html', $data);
+        $response = $client->body();
         $link = $this->response_call_document_to_assign($response);
         return $link;
-        //$this->process_signers_callback($response , $data);
     }
 
     public function response_call_document_to_assign($response){
@@ -450,8 +444,15 @@ class DigiSign {
         return 'document/not-found';
     }
 
+    public function sign_document_callback($msg){
+        //$response = $this->aes_128_ecb_decrypt($msg);
+        $response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
+        print_r($this->process_signers_callback($response , []));
+    }
+
     public function process_signers_callback($response, $data){
         $res= json_decode($response , true);
+        
         if(array_key_exists('result' , $res)){
             if($res['result'] == '00'){
                 $document_signers = DigiSignDocumentSigners::leftJoin('digisign_document' ,'digisign_document.document_id' ,'=' , 'digisign_document_signers.document_id')

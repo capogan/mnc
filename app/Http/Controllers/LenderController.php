@@ -970,8 +970,15 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
+       
         if(Auth::user()->level == 'individu'){
             $profile = User::with('individuinfo')->where('id' , Auth::id())->first();
+            $other_data = [];
+            $data = [
+                'profile' => $profile,
+                'other_data' => $other_data
+            ];
+            return view('pages.lender.profile_lender',$this->merge_response($data, static::$CONFIG));
         }else{
             $profile = User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
             ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
@@ -982,19 +989,18 @@ class LenderController extends Controller
             ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
             ->where('users.id', Auth::id())->first();
             
-            $other_data = User
-            ::with('commissioners')
+            $other_data = User::with('commissioners')
             ->with('directors')
             ->with('document')
             ->where('id' , Auth::id())->first();
-            
+            $data = [
+                'profile' => $profile,
+                'other_data' => $other_data
+            ];
+            return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
 
         }
         
-        $data = [
-            'profile' => $profile,
-            'other_data' => $other_data
-        ];
-        return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
+        
     }
 }

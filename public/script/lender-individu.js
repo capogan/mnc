@@ -327,13 +327,13 @@ $(document).on('ready', function () {
                 if (response.status == true) {
                     text = 'Data berhasil ditambahkan'
                     var title = 'Sukses';
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Anda telah tersimpan',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'Data Anda telah tersimpan',
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    // })
                     window.location.href = response.url;
                 } else {
                     var text = '';
