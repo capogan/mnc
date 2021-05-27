@@ -14,7 +14,7 @@ class PrivyIDServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path() . '/Helpers/PrivyID.php';
+//        require_once app_path() . '/Helpers/PrivyID.php';
     }
 
     /**
@@ -25,6 +25,6 @@ class PrivyIDServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        
+
     }
 }
