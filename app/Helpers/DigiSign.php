@@ -394,19 +394,10 @@ class DigiSign {
         if($document){
             $signers = [];
             foreach($JSonfield['JSONFile']['req-sign'] as $v){
-<<<<<<< HEAD
                 $v['document_id'] = $JSonfield['JSONFile']['document_id'];   
                 $v['email'] = $v['email'];
                 //unset($v['email']);
                 $signers[] = $v;               
-=======
-                $v['document_id'] = $JSonfield['JSONFile']['document_id'];
-                $v['email'] = $v['email_user'];
-                unset($v['email_user']);
-                $signers[] = $v;
-
-
->>>>>>> 0e3a28b387d1574f3da9d6ae11895da805fa42a6
             }
             DigiSignDocumentSigners::insert($signers);
             return true;
