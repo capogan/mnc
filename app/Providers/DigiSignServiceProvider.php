@@ -14,7 +14,7 @@ class DigiSignServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path() . '/Helpers/DigiSign.php';
+//        require_once app_path() . '/Helpers/DigiSign.php';
     }
 
     /**
@@ -25,6 +25,6 @@ class DigiSignServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        
+
     }
 }

@@ -18,7 +18,7 @@ class DigiSign {
     const DUMMY_RESPONSE = '{"JSONFile":{"data":{"name":true,"birthplace":true,"birthdate":true,"address":"T***N W***A A**I B**K 1"},"result":"00","notif":"Pendaftaran berhasil, silahkan check email untuk aktivasi akun anda."}}';
     const DUMMY_RESPONSE_ACTIVATION = '{"JSONFile":{"result":"00","link":"https:\/\/wv.tandatanganku.com\/activationpage.html?act=YYSQN6ewqCxlo8sTb2BOmDaeHdYyHvb5jYnQWeoBgvuMX6gKyNWLmd4zrrCyjJuavzJtVTV6yrGtRZqIrqlEz2fgap4%2FNGdTs4ro8eDF0zYrUNZ4%2F4MpGQeprV6SKxflXqf9tOOeoPOYhpH5ClG1aQ%3D%3D"}}';
     const ERROR_CODE = [
-        '00' => 'Succsess' , 
+        '00' => 'Succsess' ,
         '05'=> 'Data not found' ,
         '07' => 'Customer not allowed for automatic signing' ,
         '08' => 'Redirect page not found',
@@ -73,7 +73,7 @@ class DigiSign {
         $redirect,
         $uid
         )
-    {    
+    {
         $fotodiri = fopen('/'.$fotodiri, 'r');
         $fotoktp =  fopen('/'.$fotoktp, 'r');
         $data = [
@@ -88,7 +88,7 @@ class DigiSign {
                     'kecamatan' => $kecamatan,
                     'kelurahan' => $kelurahan,
                     'kode-pos' => $kodepos,
-                    'kota' => $kota, 
+                    'kota' => $kota,
                     'nama' => $nama,
                     'tlp' => $tlp,
                     'tgl_lahir' => $tgl_lahir,
@@ -111,7 +111,7 @@ class DigiSign {
         $this->processResponseRegistration($client->body() , $uid , 'registration' , $email , $idktp , $tlp);
     }
     public function processResponseRegistration($body , $uid , $event , $email , $idktp , $tlp){
-        
+
         $this->logs($body , $uid , $event);
         if(!Utils::tryJson($body)){
             return;
@@ -121,7 +121,7 @@ class DigiSign {
             return ;
         }
         switch($response['JSONFile']['result']){
-            case '00' : 
+            case '00' :
                 // update status of lender
                 $this->verified_lender('register' , false , $uid , $email);
                 //$this->activation_account($email,$uid,$idktp);
@@ -152,7 +152,7 @@ class DigiSign {
         ->post('https://api.tandatanganku.com/gen/genACTPage.html', $data);
         //print_r($client->body()); exit;
         $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
-        
+
     }
     public function processResponseActivation($body , $uid , $email , $nik, $event){
         $this->logs($body , $uid , $event);
@@ -161,7 +161,7 @@ class DigiSign {
             return ;
         }
         switch($response['JSONFile']['result']){
-            case '00' : 
+            case '00' :
                 // update status of lender
                 //$this->activate_account('waiting activate' , $email , $uid, $nik,  $response['JSONFile']['link']);
                 break;
@@ -206,7 +206,7 @@ class DigiSign {
 
         return true;
     }
-    public function verified_lender($status =null , $agreement , $uid){
+    public function verified_lender($status , $agreement , $uid){
         $user_type = User::select('group')->where('id' , $uid)->first();
         if(!$user_type){
             return ;
@@ -260,13 +260,13 @@ class DigiSign {
     public function logs_internal($res='' , $msg=''){
         DigiInternalSignLogs::create(
             [
-                'message' => $msg , 
-                'response' => $res , 
+                'message' => $msg ,
+                'response' => $res ,
                 'created_at' => date('Y-m-d H:i:s')
             ]
         );
     }
-   
+
     public function callback_activation($msg){
         if(!isset($msg)){
             $this->logs_internal('' , 'Digisign call callback url without encript message.');
@@ -287,7 +287,7 @@ class DigiSign {
                 $this->verified_lender('register' , false , $u_acc->uid);
             }else{
                 $this->logs_internal($acc , 'User with this criteria can/\'t. updated.');
-            }   
+            }
         }
     }
     public function aes_128_ecb_decrypt($msg){
@@ -295,7 +295,7 @@ class DigiSign {
         $encrypted = $msg; //urldecode($msg);
         return openssl_decrypt(base64_decode($encrypted), 'aes-128-ecb', 'Qd6iiPGAAYnqOfqo', OPENSSL_RAW_DATA);
     }
-      
+
     public static function update_data($newemail , $email , $newphone, $phone , $uid){
         $data = [
             'userid' => env('DIGISIGN_USER_ID'),
@@ -312,11 +312,11 @@ class DigiSign {
         // ->asMultipart()
         // ->post('https://api-sandbox.privy.id/v3/merchant/registration', $data);
         //$response = $client->body();
-        
+
         $response = '{"JSONFile":{"result":"00","notif":"Sukses update data"}}';
         $this->logs($response,$uid,'update data');
     }
-    public function upload_document($file, $document_id , $redirect, $brach, $sequence_option,$send_to , $req_sign,$uid ,$step){       
+    public function upload_document($file, $document_id , $redirect, $brach, $sequence_option,$send_to , $req_sign,$uid ,$step){
         $data = [
                 'file' => $file,
                 'jsonfield' => json_encode([
@@ -395,17 +395,17 @@ class DigiSign {
         if($document){
             $signers = [];
             foreach($JSonfield['JSONFile']['req-sign'] as $v){
-                $v['document_id'] = $JSonfield['JSONFile']['document_id'];   
+                $v['document_id'] = $JSonfield['JSONFile']['document_id'];
                 $v['email'] = $v['email_user'];
                 unset($v['email_user']);
                 $signers[] = $v;
-                
-               
+
+
             }
             DigiSignDocumentSigners::insert($signers);
             return true;
-        } 
-        
+        }
+
         return false;
     }
     public function do_sign_the_document($document_id){
