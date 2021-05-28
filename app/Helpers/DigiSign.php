@@ -445,14 +445,13 @@ class DigiSign {
     }
 
     public function sign_document_callback($msg){
-        //$response = $this->aes_128_ecb_decrypt($msg);
-        $response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
-        print_r($this->process_signers_callback($response , []));
+        $response = $this->aes_128_ecb_decrypt($msg);
+        //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
+        $this->process_signers_callback($response , []);
     }
 
     public function process_signers_callback($response, $data){
         $res= json_decode($response , true);
-        
         if(array_key_exists('result' , $res)){
             if($res['result'] == '00'){
                 $document_signers = DigiSignDocumentSigners::leftJoin('digisign_document' ,'digisign_document.document_id' ,'=' , 'digisign_document_signers.document_id')
