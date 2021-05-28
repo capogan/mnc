@@ -447,7 +447,12 @@ class DigiSign {
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
         //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
-        $this->process_signers_callback($response , []);
+        $prc = $this->process_signers_callback($response , []);
+        if(!$prc){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public function process_signers_callback($response, $data){
@@ -462,12 +467,13 @@ class DigiSign {
                 if(!$document_signers){
                     return $this->signers_logs($response, $res);
                 }
-                DigiSignDocumentSigners::where('document_id' , $res['document_id'])->where('email' , $res['email_user'])->update(
-                    [
-                        'status_sign' => 'complete',
-                        'updated_at' => date('Y-m-d H:i:s')
-                    ]
-                );
+                $doc_signer = DigiSignDocumentSigners::where('document_id' , $res['document_id'])->where('email' , $res['email_user'])->first();
+                $doc_signer->status_sign = 'complete';
+                $doc_signer->updated_at =  date('Y-m-d H:i:s');
+                if(!$doc_signer->save()){
+                    $this->signers_logs($response, $res);
+                    return false;
+                }
                 if($res['status_document'] == 'complete'){
                     DigiSignDocument::where('document_id' , $res['document_id'])->update(
                         [
@@ -478,12 +484,16 @@ class DigiSign {
                     $updt_status_user = DigisignActivation::where('email' , $res['email_user'])->first();
                     if($updt_status_user){
                         $updt_status_user->status_agreement_sign = true;
-                        $updt_status_user->save();
+                        if(!$updt_status_user->save()){
+                            return false;
+                        }
+
                     }
                 }
             }
         }
-        return $this->signers_logs($response, $res);
+        $this->signers_logs($response, $res);
+        return true;
     }
     public function signers_logs($res , $data){
         DigiSignSignersLogs::create(

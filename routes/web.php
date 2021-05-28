@@ -140,6 +140,8 @@ Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.s
 Route::get('//portofolio/detail/{id}', 'LenderController@portofolio_detail')->name('profile.lender.sign');
 Route::post('/sign_document_fund_aggreement' , 'LenderController@lender_sign_document_fund_aggreement')->name('lender.sign.aggrement.fund');
 
+Route::get('/sign/success' , 'LenderController@sign_success')->name('lender.sign.aggrement.success');
+
 Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
 Route::post('/profile/lender-individu', 'LenderIndividualController@post_profile')->name('profile.lender.individu.submit');
 Route::get('/profile/lender-individu/occupation', 'LenderIndividualController@get_occupation')->name('profile.lender.individu.occupation');

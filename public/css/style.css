@@ -67,7 +67,7 @@ h3 { font-size: 20px; line-height: 28px; }
 h4 { font-size: 16px; line-height: 1.6; }
 h5 { font-size: 14px; }
 h6 { font-size: 14px; }
-p { margin: 0 0 26px; line-height: 1.6; font-weight: 400; }
+p { margin: 0 0 26px; line-height: 1.6; font-weight: 400; font-size: 14px !important;}
 ul, ol { }
 ul li, ol li { line-height: 1.8;  }
 a { color: #f51f8a; text-decoration: none; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
@@ -233,18 +233,18 @@ Background & Block color
 Buttons
 ------------------------------------------*/
 
-.btn { font-size: 18px; border-radius: 2px; line-height: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 20px 30px; border: none; font-weight: 600; }
+.btn { font-size: 18px; border-radius: 0.5rem; line-height: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 20px 30px; border: none; font-weight: 600; }
 .btn-default { background-color: #f51f8a; color: #fff; border-color: #f51f8a; }
 .btn-default:hover { color: #fff; background-color: #ff389c; border-color: #ff389c; }
 .btn-default.focus, .btn-default:focus { color: #fff; background-color: #d5504f; border-color: #c64241; }
-.btn-primary { background-color: #15549a; color: #fff; }
+.btn-primary { background-color: #0c135f; color: #fff; }
 .btn-primary:hover { color: #fff; background-color: #2573cb; }
 .btn-primary.focus, .btn-primary:focus { }
 .btn-secondary { background-color: #778191; color: #fff; }
 .btn-secondary:hover { background-color: #f51f8a; color: #fff; }
 .btn-outline { border: 2px solid #dee4ee; color: #9aa9c3; background-color: transparent; padding: 17px 28px; }
 .btn-outline:hover { border: 2px solid #dee4ee; color: #6a7a94; background-color: #dee4ee; }
-.btn-lg { padding: 25px 50px; font-size: 18px; text-align: center; }
+.btn-lg { padding: 20px 50px; font-size: 12px; text-align: center; }
 .btn-sm { padding: 15px 20px; font-size: 12px; text-align: center; }
 .btn-xs { padding: 4px 8px; font-size: 10px; }
 .btn-link { color: #15549a; font-weight: 500; padding-bottom: 4px; border-bottom: 2px solid #15549a; display: inline-block; text-decoration: none; }
@@ -497,7 +497,7 @@ index-1
  index-6 Lead Genrator
 -------------------------------------*/
 .header-wide { }
-.header-wide .lead { font-size: 21px; color: #778191; margin-top: 12px; }
+.header-wide .lead { font-size: 15px; color: #778191; margin-top: 12px; }
 .lead-hero-wrapper { background: url(../images/lead-hero-img.jpg)no-repeat; background-size: cover; padding-top: 80px; padding-bottom: 80px; }
 .lead-hero-caption { color: #fff; padding-top: 50px; margin-bottom: 20px; }
 .rating-list { color: #f99d31; margin-top: 25px; font-size: 14px; }

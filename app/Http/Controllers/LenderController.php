@@ -922,6 +922,12 @@ class LenderController extends Controller
         return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
     }
 
+    public function sign_success(){
+        $data = array(
+        );
+        return view('agreement.sign_success',$this->merge_response($data, static::$CONFIG));
+    }
+
     public function profile(){
         $data = array(
             'provinces' => Province::get(),
@@ -979,10 +985,23 @@ class LenderController extends Controller
 
     public function myprofile(){
        
+        $status_lender = LenderVerification::where('uid' , Auth::id())->first();
+        if($status_lender){
+            if($status_lender->status == 'reject'){
+                $st_msg = "Maaf, permintaan kamu belum dapat disetujui.";
+            }else if($status_lender->status == 'approve'){
+                $st_msg = "Selamat, permintaan kamu telah disetujui kamu dapat mulai melakukan pendanaan.";
+            }else{
+                $st_msg = "Pendaftaran kamu akan kami proses, tunggu verifikasi maksimal 1x24 jam untuk dapat melanjutkan proses transaksi kamu.";
+            }
+        }else{
+            return ;
+        }
         if(Auth::user()->level == 'individu'){
             $profile = User::with('individuinfo')->where('id' , Auth::id())->first();
             $other_data = [];
             $data = [
+                'msg' => $st_msg,
                 'profile' => $profile,
                 'other_data' => $other_data
             ];
@@ -1002,6 +1021,7 @@ class LenderController extends Controller
             ->with('document')
             ->where('id' , Auth::id())->first();
             $data = [
+                'msg' => $st_msg,
                 'profile' => $profile,
                 'other_data' => $other_data
             ];

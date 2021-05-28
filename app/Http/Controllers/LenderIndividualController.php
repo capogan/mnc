@@ -40,12 +40,17 @@ class LenderIndividualController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
 
     public function test_request_register_data(){
-        $u = User::with('individuinfo')->where('id' , 128)->first();
+
+        $data = $this->store_data_to_digisign(149);
+        print_r($data);
+        return;
+
+        $u = User::with('individuinfo')->where('id' , 149)->first();
         
         if(!$u){
             return;
