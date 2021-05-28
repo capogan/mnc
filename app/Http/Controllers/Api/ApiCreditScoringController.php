@@ -59,6 +59,8 @@ class ApiCreditScoringController extends ApiController
 
     public function check_my_credit_score(Request $request){    
         header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: *');
+        header('Access-Control-Allow-Headers: *');
         $personal_info = PersonalInfo::select('personal_info.date_of_birth','personal_info.number_of_dependents','personal_business.*')
                         ->leftJoin('personal_business' ,'personal_business.uid' , 'personal_info.uid')
                         ->leftJoin('users_file' , 'users_file.uid' ,'personal_info.uid' )
