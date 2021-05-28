@@ -101,10 +101,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <hr>
-                                                                <p>Phasellus tellus nunc, sollicitudin quist amet it simple
-                                                                    nequeuisque lacus mi tesimly diummy cintenbt mpus nec
-                                                                    purus
-                                                                    vitae tempor placerat leo. </p>
+                                                                <p>Silahkan aktifasi akun digisign anda sebelum melakukan tanda tangan perjanjian.</p>
                                                                 @if($sign_agreement->status_activation != 'active')
                                                                     <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Account</a>
                                                                 @endif

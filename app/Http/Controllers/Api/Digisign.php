@@ -31,4 +31,26 @@ class Digisign  extends Controller
             'updated_at'=>date('Y-m-d'),
         ]);
     }
+
+    public function activation_callback(Request $request){
+        $validator = Validator::make( $request->all(), [
+            'act' => 'required'
+        ]);
+        if($validator->fails()) {
+            return  [
+                "status"=> false,
+                "message"=> 'Can\'t Proses activation.',
+            ];
+        }
+        $digisign = new HelpersDigiSign;
+        $res = $digisign->callback_activation($request->act);
+        if($res){
+            return redirect('sign/success');
+        }
+        $ekyc = UserEKYC::create([
+            'callback'=>$request->act,
+            'created_at'=>date('Y-m-d'),
+            'updated_at'=>date('Y-m-d'),
+        ]);
+    }
 }

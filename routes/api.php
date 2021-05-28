@@ -40,5 +40,6 @@ Route::post('/ekyc/post', 'Api\UsersEKYCController@requestRegistration')->name('
 Route::post('/ekycres', 'Api\UsersEKYCController@uploadDocumentest')->name('user.ekyc.calback');
 
 Route::get('/sign/callback', 'Api\Digisign@sign_callback')->name('user.digisign.calback');
+Route::get('/activation/callback', 'Api\Digisign@activation_callback')->name('user.digisign.calback');
 
 
