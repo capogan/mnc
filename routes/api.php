@@ -28,9 +28,10 @@ Route::post('/pcg/invoice/check/interest', 'Api\ApiPCGController@check_pcg_inter
 Route::post('/pcg/invoice/responce/dummi', 'Api\ApiPCGController@get_data_from_invoice')->name('api.pcg.response');
 
 
-Route::middleware(['cors'])->group(function () {
-    Route::post('/borrower/credit/scoring', 'Api\ApiCreditScoringController@check_my_credit_score')->name('borrower.credit.scoring');
-});
+// Route::middleware(['cors'])->group(function () {
+    
+// });
+Route::post('/borrower/credit/scoring', 'Api\ApiCreditScoringController@check_my_credit_score')->name('borrower.credit.scoring');
 
 Route::post('/sms/otp', 'Api\FcmController@limit_credit')->name('api.pcg.response');
 Route::post('/ekyc/callback', 'Api\UsersEKYCController@index')->name('user.ekyc.calback');
