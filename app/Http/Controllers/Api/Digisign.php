@@ -22,9 +22,8 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $digisign->sign_document_callback($request->msg);
-
         $ekyc = UserEKYC::create([
-            'callback'=>$request->getContent(),
+            'callback'=>$request->msg,
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
