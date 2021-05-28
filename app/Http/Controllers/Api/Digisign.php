@@ -5,6 +5,7 @@ use App\Helpers\DigiSign as HelpersDigiSign;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\UserEKYC;
 use Illuminate\Support\Facades\Validator;
 
 class Digisign  extends Controller
@@ -21,5 +22,11 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $digisign->sign_document_callback($request->msg);
+
+        $ekyc = UserEKYC::create([
+            'callback'=>$request->getContent(),
+            'created_at'=>date('Y-m-d'),
+            'updated_at'=>date('Y-m-d'),
+        ]);
     }
 }

@@ -48,7 +48,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
     </tr>
     </table>
 
-    <b>PEMINJAM</b>
+    {{-- <b>PEMINJAM</b>
     <table>
         <tr>
             <td>Nama</td>
@@ -65,7 +65,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
             <td>:</td>
             <td>{{$lender->digisigndata->nik}}</td>
         </tr>
-        </table>
+        </table> --}}
 
 <p>(selanjutnya disebut <b>“Penerima Pinjaman”</b>).</p>
 </p>
@@ -91,8 +91,57 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
     <li>Fasilitas Kredit</li>
     <ul>
         <li>Tunduk kepada ketentuan Perjanjian ini, Para Pemberi Pinjaman telah setuju untuk memberikan Fasilitas Kredit kepada Penerima Pinjaman  dengan syarat dan ketentuan sebagai berikut:
+            <table>
+                <tr>
+                    <td>Jumlah Pinjaman</td>
+                    <td>:</td>
+                    <td>{{$loan->disbrusement}}</td>
+                </tr>
+                <tr>
+                    <td>Bunga</td>
+                    <td>:</td>
+                    <td>{{$loan->interest_fee_amount}}</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Pencairan</td>
+                    <td>:</td>
+                    <td>{{date('Y-m-d')}}</td>
+                </tr>
+                <tr>
+                    <td>Tenor</td>
+                    <td>:</td>
+                    <td>{{$loan->loan_period}} hari</td>
+                </tr>
+                <tr>
+                    <td>Jumlah Angsuran</td>
+                    <td>:</td>
+                    <td>{{$loan->loan_period == 28 ? '4' : }}</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Pembayaran Angsuran</td>
+                    <td>:</td>
+                    <td>____________________________</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Jatuh Tempo</td>
+                    <td>:</td>
+                    <td>____________________________</td>
+                </tr>
+                <tr>
+                    <td>Denda Keterlambatan</td>
+                    <td>:</td>
+                    <td>____________________________</td>
+                </tr>
+                <tr>
+                    <td>Pinalti Pembayaran Dipercepat</td>
+                    <td>:</td>
+                    <td>____________________________</td>
+                </tr>
+
+            </table>
+            
             <ul>
-                <li>Jumlah Pinjaman</li>
+                <li></li>
                 <li>Bunga</li>
                 <li>Tanggal Pencairan</li>
                 <li>Tenor</li>

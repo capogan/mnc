@@ -771,7 +771,6 @@ class LenderController extends Controller
     }
 
     public function marketplace_agreement($id){
-        
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -799,25 +798,34 @@ class LenderController extends Controller
         $borrower = User::where('id' , $loan->uid)
                     ->with('digisigndata')
                     ->first();
+        
         $lender = User::where('id' ,Auth::id())
                     ->with('digisigndata')
                     ->first();
+
+        if(!$lender || !$borrower){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'TIdak dapat didanai.',
+            ];
+        }
         $data = [
             'title' => 'PERJANJIAN KREDIT',
             'date_request_loan' => date('Y-m-d'),
             'borrower' => $borrower,
-            'lender' => $lender
+            'lender' => $lender,
+            'loan' => $loan
         ];
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement', $data)->save($pathDocument);
         $send_to = [
             [
-                'email_user' => $borrower->digisigndata->email,
+                'email' => $borrower->digisigndata->email,
                 'name' => $borrower->digisigndata->full_name
             ],
             [
-                'email_user' => $lender->digisigndata->email,
+                'email' => $lender->digisigndata->email,
                 'name' => $lender->digisigndata->full_name
             ]
         ];
