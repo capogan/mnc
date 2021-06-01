@@ -108,5 +108,17 @@ class User extends Authenticatable
         return $this->hasOne(DigisignActivation::class , 'uid' ,'id');
     }
 
+    public function borrower_file(){
+        return $this->hasOne(UsersFile::class , 'uid' ,'id');
+    }
+    public function borrower_personal_info(){
+        return $this->hasOne(PersonalInfo::class , 'uid' ,'id')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+    }
+    
+
 
 }

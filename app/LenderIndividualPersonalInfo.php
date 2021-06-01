@@ -34,6 +34,10 @@ class LenderIndividualPersonalInfo extends Model
         'kodepos',
         'created_at',
         'updated_at',
+        'religion',
+        'rt',
+        'rw',
+        'perum'
     ];
 
     public function user()

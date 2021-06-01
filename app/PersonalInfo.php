@@ -22,4 +22,21 @@ class PersonalInfo extends Model
         return $this->belongsTo(UsersFile::class, 'uid' , 'uid');
     }
 
+    public function provinces()
+    {
+        return $this->hasOne(Province::class , 'id' ,'province');
+    }
+    public function cities()
+    {
+        return $this->hasOne(Regency::class , 'id' ,'city');
+    }
+    public function districts()
+    {
+        return $this->hasOne(District::class , 'id' ,'district');
+    }
+    public function villagess()
+    {
+        return $this->hasOne(Village::class , 'id' ,'villages');
+    }
+
 }

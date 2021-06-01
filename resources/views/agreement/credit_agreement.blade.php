@@ -115,7 +115,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
                 <tr>
                     <td>Jumlah Angsuran</td>
                     <td>:</td>
-                    <td>{{$loan->loan_period == 28 ? '4' : }}</td>
+                    <td>{{$loan->loan_period == 28 ? '4' : '2' }}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Pembayaran Angsuran</td>

@@ -52,6 +52,32 @@ class DigiSign {
             );
         }
     }
+    public function checkrequestRegistration($uid){
+        $u = User::with('borrower_file')
+        ->with('borrower_personal_info')
+        ->where('id' , $uid)->first();
+        $this->requestRegistration(
+            public_path().'/'.$u->borrower_file->identity_photo,
+            public_path().'/'.$u->borrower_file->self_photo,
+            public_path().'/'.$u->borrower_file->npwp_photo,
+        $u->borrower_personal_info->address,
+        $u->borrower_personal_info->gender,
+        $u->borrower_personal_info->districts->name,
+        $u->borrower_personal_info->villagess->name,
+        $u->borrower_personal_info->zip_code,
+        $u->borrower_personal_info->cities->name,
+        $u->borrower_personal_info->first_name. ' ' .$u->borrower_personal_info->last_name,
+        $u->phone_number_verified,
+        $u->borrower_personal_info->date_of_birth,
+        $u->borrower_personal_info->provinces->name,
+        $u->borrower_personal_info->identity_number,
+        $u->borrower_personal_info->place_of_birth,
+        $u->email,
+        $u->borrower_personal_info->npwp_number,
+        true,
+        $uid
+        );
+    }
     public function requestRegistration(
         $fotoktp,
         $fotodiri,
@@ -79,7 +105,7 @@ class DigiSign {
         $data = [
                 'fotoktp' => $fotoktp,
                 'fotodiri' => $fotodiri,
-                'fotonpwp' => $fotonpwp,
+                'fotonpwp' => null,
                 'jsonfield' => json_encode([
                     'JSONFile' => [
                     'userid' => env('DIGISIGN_USER_ID'),
@@ -101,6 +127,7 @@ class DigiSign {
                 ]
             ])
         ];
+       
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',
@@ -108,9 +135,9 @@ class DigiSign {
         ])
         ->asMultipart()
         ->post('https://api.tandatanganku.com/REG-MITRA.html', $data);
-        $this->processResponseRegistration($client->body() , $uid , 'registration' , $email , $idktp , $tlp);
+        $this->processResponseRegistration($client->body() , $uid , 'registration' , $email , $idktp , $tlp , $nama);
     }
-    public function processResponseRegistration($body , $uid , $event , $email , $idktp , $tlp){
+    public function processResponseRegistration($body , $uid , $event , $email , $idktp , $tlp , $nama){
 
         $this->logs($body , $uid , $event);
         if(!Utils::tryJson($body)){
@@ -124,8 +151,8 @@ class DigiSign {
             case '00' :
                 // update status of lender
                 $this->verified_lender('register' , false , $uid , $email);
-                //$this->activation_account($email,$uid,$idktp);
-                $this->activate_account('waiting activate' , $email , $uid, $idktp,  $response , $tlp);
+                $this->lender_verification($uid);
+                $this->activate_account('waiting activate' , $email , $uid, $idktp,  $response , $tlp, $nama);
                 break;
             case '55' :
                 // SEND email to admin to check the token
@@ -173,12 +200,13 @@ class DigiSign {
             // $this->logs($body , $uid , 'registration');
         }
     }
-    public function activate_account($status , $email, $uid, $nik, $body , $phone = null){
+    public function activate_account($status , $email, $uid, $nik, $body , $phone = null , $nama){
         $data  =  [
             'status_activation' => $status,
             'uid' => $uid,
             'email' => $email,
             'nik' => $nik,
+            'full_name' => $nama,
             'created_at' => date('Y-m-d'),
             'phone_number' => $phone
         ];
@@ -332,7 +360,6 @@ class DigiSign {
                         ]
                     ])
                 ];
-        //print_r($data); exit;
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',

@@ -34,7 +34,7 @@ class Digisign  extends Controller
 
     public function activation_callback(Request $request){
         $validator = Validator::make( $request->all(), [
-            'act' => 'required'
+            'msg' => 'required'
         ]);
         if($validator->fails()) {
             return  [
@@ -43,12 +43,12 @@ class Digisign  extends Controller
             ];
         }
         $digisign = new HelpersDigiSign;
-        $res = $digisign->callback_activation($request->act);
+        $res = $digisign->callback_activation($request->msg);
         if($res){
             return redirect('sign/success');
         }
         $ekyc = UserEKYC::create([
-            'callback'=>$request->act,
+            'callback'=>$request->msg,
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
