@@ -43,7 +43,7 @@
                                         <select class="form-control" name="level" id="level">
                                             <option value="">--Pilih Level--</option>
                                             <option value="individu">Individu</option>
-                                            <option value="business">Usaha</option>
+                                            <option value="business">Badan Hukum</option>
                                         </select>
                                     </div> <!-- form-group// -->
 
