@@ -13,6 +13,9 @@ class RequestLoanDocument extends Model
 
     public function document()
     {
-        return $this->hasOne(DigiSignDocument::class);
+        return $this->hasOne(DigiSignDocument::class, 'document_id' ,'document_id')
+        ->with('signers');
     }
+
+    
 }

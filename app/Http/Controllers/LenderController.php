@@ -797,7 +797,6 @@ class LenderController extends Controller
     }
 
     public function lender_sign_document_fund_aggreement(Request $request){
-
         $check_balance = new BNI;
         if(!isset($request->id)){
             return $json = [
@@ -809,7 +808,12 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '18')->where('id' ,Utils::decrypt($request->id))->first();
-
+        if(!$loan){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'TIdak dapat didanai.',
+            ];
+        }
         $borrower = User::where('id' , $loan->uid)
                     ->with('digisigndata')
                     ->first();
@@ -907,14 +911,13 @@ class LenderController extends Controller
             return $json = [
                 "status"=> 'success',
                 "message"=> 'Data berhasil di update.',
+                "url"=> 'portofolio/detail?p='.$request->id,
             ];
         }
          return $json = [
             "status"=> 'error',
             "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
         ];
-       
-        
     }
 
     public function loan_request_log($json , $created_by , $status){
@@ -1025,16 +1028,18 @@ class LenderController extends Controller
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('id' ,Utils::decrypt($request->p))->first();
+        ->where('id' ,Utils::decrypt($request->p))->where('lender_uid' , Auth::id())->first();
         $loan_installments = LoanInstallment::
         leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
             ->get();
+        $document = LoanRequest::with('loandocument')->where('id' , $loan->id)->first();
         $data = [
             'no_invoice'    => $loan->invoice_number,
             'id_loan'       => $loan->id,
             'loan_installments'=>$loan_installments,
-            'profile' => $loan
+            'profile' => $loan,
+            'document' => $document
         ];
         return view('pages.lender.loan',$this->merge_response($data, static::$CONFIG));
     }

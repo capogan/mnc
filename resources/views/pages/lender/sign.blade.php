@@ -32,7 +32,7 @@
                                 <li>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting.</li>
                                 <li>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting.</li>
                             </ul>
-                            <button id="lender_sign_aggreement_of_fund" data-content="{{$id_loan}}" class="btn btn-primary btn-sm pull-left">KLIK untuk tanda tangan</button>
+                            <button id="lender_sign_aggreement_of_fund" data-content="{{$id_loan}}" class="btn btn-primary btn-sm pull-left">Proses Pinjaman</button>
 
                     </div>
                 </div>

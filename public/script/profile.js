@@ -5,6 +5,8 @@ $(document).ready(function() {
         allowClear: true
     });
     $(document).on( 'click' , '#lender_sign_aggreement_of_fund' , function(){
+        btn = $(this);
+        btn.attr("disabled", true);
         var token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url:'/sign_document_fund_aggreement',
@@ -18,11 +20,18 @@ $(document).ready(function() {
             {
     
                 if(response.status == 'success'){
-                    window.location.href = '/portofolio';
+                    window.location.href = response.url;
                 }
                 else{
-                   
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
+                btn.attr("disabled", false);
     
             }
         })
