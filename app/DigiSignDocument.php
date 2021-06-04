@@ -11,4 +11,9 @@ class DigiSignDocument extends Model
       'uid','document_id','branch','redirect','send_to','req_sign','status_document','user_id','sequence_option','step'
     ];
 
+    public function signers()
+    {
+        return $this->hasMany(DigiSignDocumentSigners::class, 'document_id' ,'document_id');
+    }
+
 }

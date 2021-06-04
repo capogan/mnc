@@ -5,22 +5,91 @@
     <div class="container containers-with-margin">
         <div class="row mt-4">
             <div class="col-xl-12 ">
-                <div class="card bg-light">
+                <div class="card wrapper-content bg-white pinside40">
                         <div class="card-body">
+                            <div class="row column-custom">
+                                <div class="col-5">
+                                Status Pendanaan :
+                                </div>
+                                <div class="col-6">
+                                </div>
+                            </div>
+                            <div class="row column-custom">
+                                <div class="col-5">
+                                    Total Pembiayaan :
+                                </div>
+                                <div class="col-6">
+                                    
+                                </div>
+                            </div>
+                            <div class="row column-custom">
+                                <div class="col-5">
+                                    Nama Peminjam :
+                                </div>
+                                <div class="col-6">
+                                    
+                                </div>
+                            </div>
+                            <div class="row column-custom">
+                                <div class="col-5">
+                                    Tanggal Pengajuan Pendanaan :
+                                </div>
+                                <div class="col-6">
+                                </div>
+                            </div>
+                            
+                            <div class="row col-md-12">
+                                <div class="m-separator col-md-12 m-separator--dashed"></div>
+                            </div>
                             <div class="row">
-                                    <div class="row font-custom">
-                                        <div class="col-md-12">
-                                            <h4>Informasi Borrower</h4>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4" class="form-label">Usaha</label>  :  <b>{{$profile->business_info->business_name}}</b> 
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4" class="form-label">Deskripsi Usaha</label> : <b>{{$profile->business_info->business_description}}</b>
-                                        </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                     <div class="testimonial-block mb30">
+                                        <div class="alert alert-success" role="alert">
+                                            This is a success alert—check it out!
+                                          </div>
+                                     </div>
+                                 </div>
+                            </div>
+                            <div class="row">
+                                
+                                    <div class="col-md-12">
+                                        <h4>Dokumen</h4>
                                     </div>
-                                    @if($profile->status == '21')
-                                    <table class="table table-striped table-bordered mt-4">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Dokumen</th>
+                                            <th>Tanggal</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                                <tr class="text-center">
+                                                    <td>Lender</td>
+                                                    <td>{ {$val->stages}}</td>
+                                                    <td>Rp { { number_format(($val->amount) ,0,',','.') }}</td>
+                                                    <td><a href="#" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>Borrower</td>
+                                                    <td>{ {$val->stages}}</td>
+                                                    <td>Rp { { number_format(($val->amount) ,0,',','.') }}</td>
+                                                    <td></td>
+                                                </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                               
+                            </div>
+                            <br/>
+                            <div class="row">
+                               
+                                    <div class="col-md-12">
+                                        <h4>Detail Cicilan</h4>
+                                    </div>
+                                    <table class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
                                             <th>Nomor Invoice</th>
@@ -37,27 +106,15 @@
                                                     <td>{{$no_invoice}}</td>
                                                     <td >{{$val->stages}}</td>
                                                     <td>Rp {{ number_format(($val->amount) ,0,',','.') }}</td>
-                                                    <td>{{$val->date_payment}}</td>
+                                                    <td></td>
                                                     <td>{{Utils::date_in_indonesia($val->due_date_payment)}}</td>
                                                     <td>{{$val->status_name}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    @else
-                                
-                                    <div class="row font-custom" style="width: 100%;">
-                                    </br>
-                                    </br>
-
-                                        <div class="col-md-12">
-                                            <div class="alert alert-danger" >Menunggu Konfirmasi tanda tangan</div>
-                                        </div>
-                                    </div>
-                                    @endif
+                               
                             </div>
-
-                            
                         </div>
                 </div>
             </div>
@@ -66,3 +123,21 @@
     </div>
 
 @endsection
+<style>
+    .table>thead>tr>th {
+        padding: 12px 43px 12px;
+        line-height: 1.4;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+        text-align: center;
+        font-size: 12px;
+    }
+    .column-custom{
+        padding: 10px 0px 10px 0px;
+    }
+    .m-separator.m-separator--dashed {
+        border-bottom: 1px dashed #ebedf2;
+        width: 100%;
+        padding: 20px 0px 20px 0px;
+    }
+    </style>
