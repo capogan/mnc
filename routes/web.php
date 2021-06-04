@@ -41,6 +41,7 @@ Route::get('/logout', function () {
 });
 Route::get('register/lender', 'Auth\RegisterController@showRegistrationFormLender');
 Route::get('register/borrower', 'Auth\RegisterController@showRegistrationFormBorrower');
+Route::get('email', 'HomeController@send_email');
 
 //..............................................................................................................
 //.................OOOOOO..................................OOOOOO...............................................
