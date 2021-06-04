@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function send_email(){
 
         Mail::send([], [], function ($message) {
-            $message->to('ogan_mi@yahoo.com')->subject('test email')->setBody('<h1>Hi, welcome user!</h1>', 'text/html'); // for HTML rich messages
+            $message->to('sapto.nugroho@mncgroup.com')->subject('test email')->setBody('<h1>Hi, welcome user!</h1>', 'text/html'); // for HTML rich messages
         });
     }
 }
