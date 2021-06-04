@@ -9,14 +9,14 @@
                         <div class="card-body">
                             <div class="row column-custom">
                                 <div class="col-5">
-                                Status Pendanaan :
+                                Status Pendanaan : 
                                 </div>
                                 <div class="col-6">
                                 </div>
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                    Total Pembiayaan :
+                                    Total Pembiayaan : 
                                 </div>
                                 <div class="col-6">
                                     
@@ -68,14 +68,14 @@
                                            
                                                 <tr class="text-center">
                                                     <td>Lender</td>
-                                                    <td>{ {$val->stages}}</td>
-                                                    <td>Rp { { number_format(($val->amount) ,0,',','.') }}</td>
+                                                    <td></td>
+                                                    <td>Rp</td>
                                                     <td><a href="#" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
                                                 </tr>
                                                 <tr class="text-center">
                                                     <td>Borrower</td>
-                                                    <td>{ {$val->stages}}</td>
-                                                    <td>Rp { { number_format(($val->amount) ,0,',','.') }}</td>
+                                                    <td></td>
+                                                    <td>Rp </td>
                                                     <td></td>
                                                 </tr>
                                            

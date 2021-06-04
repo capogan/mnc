@@ -1029,6 +1029,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('id' ,Utils::decrypt($request->p))->where('lender_uid' , Auth::id())->first();
+        //print_r($loan); exit;
         $loan_installments = LoanInstallment::
         leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
@@ -1037,7 +1038,7 @@ class LenderController extends Controller
         $data = [
             'no_invoice'    => $loan->invoice_number,
             'id_loan'       => $loan->id,
-            'loan_installments'=>$loan_installments,
+            'loan_installments'=> $loan_installments,
             'profile' => $loan,
             'document' => $document
         ];
