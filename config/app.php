@@ -183,6 +183,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        App\Providers\BNIServiceProvider::class,
 
 
     ],
@@ -243,6 +244,7 @@ return [
         'Utils' => App\Helpers\Utils::class,
         'LenderHelper' => App\Helpers\Lender::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'BNI' => App\Helpers\BNI::class
     ],
 
 ];

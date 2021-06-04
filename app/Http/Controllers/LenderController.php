@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DigisignActivation;
+use App\Helpers\BNI;
 use App\Helpers\DigiSign;
 use App\Helpers\LenderHelper;
 use App\Models\Province;
@@ -26,7 +27,12 @@ use App\Helpers\PrivyID;
 use App\PrivyID as AppPrivyID;
 use PDF;
 use App\Helpers\Utils;
+use App\LenderIndividualPersonalInfo;
+use App\LenderRDLAccount;
+use App\LenderRDLAccountRegistered;
+use App\MasterReligion;
 use App\Providers\DigiSignServiceProvider;
+use App\RequestLoanDocument;
 
 class LenderController extends Controller
 {
@@ -215,7 +221,6 @@ class LenderController extends Controller
                 "message"=> 'Data Personal berhasil di tambahkan',
             ];
         }
-
         return response()->json($json);
     }
 
@@ -770,27 +775,36 @@ class LenderController extends Controller
         return view('pages.lender.market_place_after_verification',$this->merge_response($data, static::$CONFIG));
     }
 
-    public function marketplace_agreement($id){
-        
+    public function marketplace_agreement(Request $request){
+        $ready_rdl_account = LenderRDLAccountRegistered::where('uid', Auth::id())->where('status', 'active')->exists();
+        if(!$ready_rdl_account){
+            $u = User::with('individuinfo')->where('id' , Auth::id())->first();
+            $data = ['u' => $u , 'religion' => MasterReligion::get()];
+            return view('pages.lender.rdl_account', $data);    
+        }
+        if(!isset($request->mark)){
+            return abort('404');
+        }
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '18')->where('id' ,Utils::decrypt($id))->first();
+        ->where('status' , '18')->where('id' ,Utils::decrypt($request->mark))->first();
         $data = [
             'loan' => $loan ? $loan : false,
-            'id_loan' => $id
+            'id_loan' => $request->mark,
         ];
         return view('pages.lender.sign',$this->merge_response($data, static::$CONFIG));
     }
 
     public function lender_sign_document_fund_aggreement(Request $request){
+
+        $check_balance = new BNI;
         if(!isset($request->id)){
             return $json = [
                 "status"=> 'error',
                 "message"=> 'Data tidak ditemukan.',
             ];
         }
-
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -799,34 +813,85 @@ class LenderController extends Controller
         $borrower = User::where('id' , $loan->uid)
                     ->with('digisigndata')
                     ->first();
+        
         $lender = User::where('id' ,Auth::id())
                     ->with('digisigndata')
                     ->first();
+        if(!$lender || !$borrower){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'TIdak dapat didanai.',
+            ];
+        }
         $data = [
             'title' => 'PERJANJIAN KREDIT',
             'date_request_loan' => date('Y-m-d'),
             'borrower' => $borrower,
-            'lender' => $lender
+            'lender' => $lender,
+            'loan' => $loan
         ];
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement', $data)->save($pathDocument);
         $send_to = [
             [
-                'email_user' => $borrower->digisigndata->email,
+                'email' => $borrower->digisigndata->email,
                 'name' => $borrower->digisigndata->full_name
             ],
             [
-                'email_user' => $lender->digisigndata->email,
+                'email' => $lender->digisigndata->email,
                 'name' => $lender->digisigndata->full_name
             ]
         ];
+        $req_sign = [
+            [
+                'name' => $borrower->digisigndata->full_name,
+                'email' => $borrower->digisigndata->email,
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd2',
+                'page' => '4',
+                'llx' => '12',
+                'lly' => '13',
+                'urx' => '34',
+                'ury' => '45',
+                'visible' => 1
+            ],
+            [
+                'name' => $lender->digisigndata->full_name,
+                'email' => $lender->digisigndata->email,
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd1',
+                'page' => '3',
+                'llx' => '12',
+                'lly' => '13',
+                'urx' => '34',
+                'ury' => '45',
+                'visible' => 1
+            ]
+        ];
+        $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
         $digisign = new DigiSign;
-        $response = $digisign->upload_document($pathDocument , date('Y-m-d').'_'.uniqid().'_'.$lender->id ,true, 'Lender_Aggreement' ,false , $send_to, $send_to , $lender->id , 'credit_agreement');
+        $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $lender->id , 'credit_agreement');
         if(!$response){
             return [
                 "status"=> 'error',
                 "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
+            ];
+        }
+        $create_doc_aggreement = RequestLoanDocument::create(
+            [
+                'document_id' => $doc_id,
+                'request_loan_id' => Utils::decrypt($request->id),
+                'created_at' => date('Y-m-d H:i:s'),
+                'status' => 'active'
+            ]
+        );
+        if(!$create_doc_aggreement){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'Upload document gagal.',
             ];
         }
         if(!$loan){
@@ -914,6 +979,12 @@ class LenderController extends Controller
         return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
     }
 
+    public function sign_success(){
+        $data = array(
+        );
+        return view('agreement.sign_success',$this->merge_response($data, static::$CONFIG));
+    }
+
     public function profile(){
         $data = array(
             'provinces' => Province::get(),
@@ -947,11 +1018,14 @@ class LenderController extends Controller
         //print_r($portofolio->toArray()); exit;
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
-    public function portofolio_detail($id){
+    public function portofolio_detail(Request $request){
+        if(!isset($request->p)){
+            return abort('404');
+        }
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('id' ,Utils::decrypt($id))->first();
+        ->where('id' ,Utils::decrypt($request->p))->first();
         $loan_installments = LoanInstallment::
         leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
@@ -970,8 +1044,28 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
+       
+        $status_lender = LenderVerification::where('uid' , Auth::id())->first();
+        if($status_lender){
+            if($status_lender->status == 'reject'){
+                $st_msg = "Maaf, permintaan kamu belum dapat disetujui.";
+            }else if($status_lender->status == 'approve'){
+                $st_msg = "Selamat, permintaan kamu telah disetujui kamu dapat mulai melakukan pendanaan.";
+            }else{
+                $st_msg = "Pendaftaran kamu akan kami proses, tunggu verifikasi maksimal 1x24 jam untuk dapat melanjutkan proses transaksi kamu.";
+            }
+        }else{
+            return ;
+        }
         if(Auth::user()->level == 'individu'){
             $profile = User::with('individuinfo')->where('id' , Auth::id())->first();
+            $other_data = [];
+            $data = [
+                'msg' => $st_msg,
+                'profile' => $profile,
+                'other_data' => $other_data
+            ];
+            return view('pages.lender.profile_lender',$this->merge_response($data, static::$CONFIG));
         }else{
             $profile = User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
             ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
@@ -982,19 +1076,150 @@ class LenderController extends Controller
             ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
             ->where('users.id', Auth::id())->first();
             
-            $other_data = User
-            ::with('commissioners')
+            $other_data = User::with('commissioners')
             ->with('directors')
             ->with('document')
             ->where('id' , Auth::id())->first();
-            
+            $data = [
+                'msg' => $st_msg,
+                'profile' => $profile,
+                'other_data' => $other_data
+            ];
+            return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
 
         }
         
+        
+    }
+
+    public function register_rdl_account(){
+        if(Auth::user()->level == 'business'){
+            $msg = [
+                'message' => 'Akun yang anda pilih adalah akun bisnis, silahkan update nomor rekening lender anda.'
+            ];
+            return view('pages.lender.create_rdl_response' , $msg);
+        }
+        $ready_rdl_account = LenderRDLAccountRegistered::where('uid', Auth::id())->where('status', 'active')->exists();
+        if($ready_rdl_account){
+            $msg = [
+                'message' => 'Sudah memiliki akun RDL'
+            ];
+            return view('pages.lender.create_rdl_response' , $msg);
+        }
+        $is_registered_account = LenderRDLAccount::where('uid', Auth::id())->exists();
+        if($is_registered_account){
+            $msg = [
+                'message' => 'Akun RDL sudah di registrasi, '
+            ];
+            return view('pages.lender.create_rdl_response' , $msg);
+        }
+        $u = User::with('individuinfo')->where('id' , Auth::id())->first();
         $data = [
-            'profile' => $profile,
-            'other_data' => $other_data
+            "title" => $u->individuinfo->gender,
+            "firstName" => "",
+            "middleName" => "",
+            "lastName" =>$u->individuinfo->full_name,
+            "optNPWP" => "1",
+            "NPWPNum" => $u->individuinfo->no_npwp,
+            "nationality" => "ID",
+            "domicileCountry" => "ID",
+            "religion" => $u->individuinfo->religion,
+            "birthPlace" => $u->individuinfo->pob,
+            "birthDate" => $u->individuinfo->dob,
+            "gender" => $u->individuinfo->gender,
+            "isMarried" => $u->individuinfo->married_status,
+            "motherMaidenName" => $u->individuinfo->mother_name,
+            "jobCode" => "99",
+            "education" => $u->individuinfo->education,
+            "idNumber" => $u->individuinfo->identity_number,
+            "idIssuingCity" => $u->individuinfo->cities->name,
+            "idExpiryDate" => "26102099",
+            "addressStreet" => $u->individuinfo->full_address,
+            "addressRtRwPerum" => $u->individuinfo->rt.$u->individuinfo->rw.$u->individuinfo->perum,
+            "addressKel" => $u->individuinfo->districts->name,
+            "addressKec" => $u->individuinfo->villagess->name,
+            "zipCode" => $u->individuinfo->kodepos,
+            "homePhone1" => "",
+            "homePhone2" => "",
+            "officePhone1" => "",
+            "officePhone2" => "",
+            "mobilePhone1" => $u->phone_number_verified,
+            "mobilePhone2" => $u->phone_number_verified,
+            "faxNum1" => "",
+            "faxNum2" => "",
+            "email" => $u->email,
+            "monthlyIncome" => "8000000",
+            "branchOpening" => "0259"
         ];
-        return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
+        $bni = new BNI;
+        $result = $bni->request("/p2pl/register/investor", $data, Auth::id());
+        
+        if(!$result){
+            $msg = [
+                'message' => 'Gagal meregistrasi akun RDL, Silahkan contact administrator'
+            ];
+            return view('pages.lender.create_rdl_response' , $msg);
+        }
+
+        $account_number = $bni->register_investor('/p2pl/register/investor/account' , Auth::id());
+        if(!$account_number){
+            $msg = [
+                'message' => 'Gagal membuat rekening RDL, Silahkan contact administrator'
+            ];
+            return view('pages.lender.create_rdl_response' , $msg);
+        }
+        $msg = [
+            'message' => 'Akun RDL sudah di registrasi, '
+        ];
+        return view('pages.lender.create_rdl_response' , $msg);
+    }
+
+    public function update_rdl_account(Request $request){
+       
+        $validation = Validator::make($request->all(),
+        [
+                'rt' => 'required|max:3',
+                'rw'     => 'required|max:3',
+                'perum'     => 'required',
+                'religion'   => 'required',
+        ],
+        [
+            'rt.required' => 'RT tidak boleh kosong.',
+            'rt.max' => 'RT Maksimal 3 karakter',
+            'rw.required' => 'RW tidak boleh kosong.',
+            'rw.max' => 'RW Maksimal 3 karakter',
+            'perum.required' => 'Perum tidak boleh kosong.',
+            'religion.required' => 'Agama tidak boleh kosong.',
+        ]
+        );
+        if($validation->fails()) {
+            return [
+                "status"=> false,
+                "message"=> $validation->messages(),
+            ];
+        }
+
+        $u = LenderIndividualPersonalInfo::where('uid' , Auth::id())->first();
+        if(!$u){
+            return [
+                "status"=> false,
+                "message"=> "Data tidak ditemukan.",
+            ];
+        }
+        $u->rt = $request->rt;
+        $u->rw = $request->rw;
+        $u->perum = $request->perum;
+        $u->religion = $request->religion;
+        if($u->save()){
+            return [
+                "status"=> true,
+                "message"=> "",
+            ];
+        }else{
+            return [
+                "status"=> false,
+                "message"=> "Terjadi kesalahan saat mengupdate data",
+            ];
+        }
     }
 }

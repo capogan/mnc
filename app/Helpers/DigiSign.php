@@ -52,6 +52,32 @@ class DigiSign {
             );
         }
     }
+    public function checkrequestRegistration($uid){
+        $u = User::with('borrower_file')
+        ->with('borrower_personal_info')
+        ->where('id' , $uid)->first();
+        $this->requestRegistration(
+            public_path().'/'.$u->borrower_file->identity_photo,
+            public_path().'/'.$u->borrower_file->self_photo,
+            public_path().'/'.$u->borrower_file->npwp_photo,
+        $u->borrower_personal_info->address,
+        $u->borrower_personal_info->gender,
+        $u->borrower_personal_info->districts->name,
+        $u->borrower_personal_info->villagess->name,
+        $u->borrower_personal_info->zip_code,
+        $u->borrower_personal_info->cities->name,
+        $u->borrower_personal_info->first_name. ' ' .$u->borrower_personal_info->last_name,
+        $u->phone_number_verified,
+        $u->borrower_personal_info->date_of_birth,
+        $u->borrower_personal_info->provinces->name,
+        $u->borrower_personal_info->identity_number,
+        $u->borrower_personal_info->place_of_birth,
+        $u->email,
+        $u->borrower_personal_info->npwp_number,
+        true,
+        $uid
+        );
+    }
     public function requestRegistration(
         $fotoktp,
         $fotodiri,
@@ -79,7 +105,7 @@ class DigiSign {
         $data = [
                 'fotoktp' => $fotoktp,
                 'fotodiri' => $fotodiri,
-                'fotonpwp' => $fotonpwp,
+                'fotonpwp' => null,
                 'jsonfield' => json_encode([
                     'JSONFile' => [
                     'userid' => env('DIGISIGN_USER_ID'),
@@ -101,6 +127,7 @@ class DigiSign {
                 ]
             ])
         ];
+       
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',
@@ -108,9 +135,9 @@ class DigiSign {
         ])
         ->asMultipart()
         ->post('https://api.tandatanganku.com/REG-MITRA.html', $data);
-        $this->processResponseRegistration($client->body() , $uid , 'registration' , $email , $idktp , $tlp);
+        $this->processResponseRegistration($client->body() , $uid , 'registration' , $email , $idktp , $tlp , $nama);
     }
-    public function processResponseRegistration($body , $uid , $event , $email , $idktp , $tlp){
+    public function processResponseRegistration($body , $uid , $event , $email , $idktp , $tlp , $nama){
 
         $this->logs($body , $uid , $event);
         if(!Utils::tryJson($body)){
@@ -124,8 +151,8 @@ class DigiSign {
             case '00' :
                 // update status of lender
                 $this->verified_lender('register' , false , $uid , $email);
-                //$this->activation_account($email,$uid,$idktp);
-                $this->activate_account('waiting activate' , $email , $uid, $idktp,  $response , $tlp);
+                $this->lender_verification($uid);
+                $this->activate_account('waiting activate' , $email , $uid, $idktp,  $response , $tlp, $nama);
                 break;
             case '55' :
                 // SEND email to admin to check the token
@@ -173,12 +200,13 @@ class DigiSign {
             // $this->logs($body , $uid , 'registration');
         }
     }
-    public function activate_account($status , $email, $uid, $nik, $body , $phone = null){
+    public function activate_account($status , $email, $uid, $nik, $body , $phone = null , $nama){
         $data  =  [
             'status_activation' => $status,
             'uid' => $uid,
             'email' => $email,
             'nik' => $nik,
+            'full_name' => $nama,
             'created_at' => date('Y-m-d'),
             'phone_number' => $phone
         ];
@@ -318,7 +346,7 @@ class DigiSign {
     }
     public function upload_document($file, $document_id , $redirect, $brach, $sequence_option,$send_to , $req_sign,$uid ,$step){
         $data = [
-                'file' => $file,
+                'file' => fopen($file,'rb'),
                 'jsonfield' => json_encode([
                     'JSONFile' =>
                         [
@@ -332,18 +360,16 @@ class DigiSign {
                         ]
                     ])
                 ];
-        //print_r($data); exit;
-        // $client = Http::withHeaders([
-        //     'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
-        //     'Accept' => '*/*',
-        //     'Connection' => 'keep-alive'
-        // ])
-        // ->timeout(9000)
-        // ->asMultipart()
-        // ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
-        //print_r($client->body());
-        $response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
-        $document = $this->process_upload_file_response($response , $data , $uid , $step);
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->timeout(9000)
+        ->asMultipart()
+        ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
+        //$response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
+        $document = $this->process_upload_file_response( $client->body() , $data , $uid , $step);
         return $document;
         // if($document){
         //     $this->do_sign_the_document($document_id);
@@ -395,12 +421,10 @@ class DigiSign {
         if($document){
             $signers = [];
             foreach($JSonfield['JSONFile']['req-sign'] as $v){
-                $v['document_id'] = $JSonfield['JSONFile']['document_id'];
-                $v['email'] = $v['email_user'];
-                unset($v['email_user']);
-                $signers[] = $v;
-
-
+                $v['document_id'] = $JSonfield['JSONFile']['document_id'];   
+                $v['email'] = $v['email'];
+                //unset($v['email']);
+                $signers[] = $v;               
             }
             DigiSignDocumentSigners::insert($signers);
             return true;
@@ -414,28 +438,25 @@ class DigiSign {
             return ['status' => 'error' , 'document tidak ditemukan.'];
         }
         $data = [
-            'jsonfield' => [
+            'jsonfield' => json_encode([
                 'JSONFile' => [
                     'userid' => env('DIGISIGN_USER_ID'),
                     'document_id' => $document_id,
                     'email_user' => $email->email,
                     'view_only' => false
                 ]
-            ]
+            ])
         ];
-        echo json_encode($data);
-        // $client = Http::withHeaders([
-        //     'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
-        //     'Accept' => '*/*',
-        //     'Connection' => 'keep-alive'
-        // ])
-        // ->asMultipart()
-        // ->post('https://api.tandatanganku.com/gen/genSignPage.html', json_encode($data));
-        // $response = $client->body();
-        $response = '{ "JSONFile" : { "result":"00", "link":"https://wv.tandatanganku.com/viewpage.html?view=aO7%2B4ui1zFz%2BsbMl4nb%2BLPAC17uvhMHP Z%2FexPaVRXas8ZAbL%2FElzcV9JxlH5YI%2FuMHtrI3qre6N4AVnkDbQiL%2BTNp3sPsr76xPAsq3cFgbvIH 6xcgxJVruMaykkMMqC4bC3WMj%2FiAIM80B4yuuw6KQ%3D%3D"}}';
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive'
+        ])
+        ->asMultipart()
+        ->post('https://api.tandatanganku.com/gen/genSignPage.html', $data);
+        $response = $client->body();
         $link = $this->response_call_document_to_assign($response);
         return $link;
-        //$this->process_signers_callback($response , $data);
     }
 
     public function response_call_document_to_assign($response){
@@ -450,6 +471,17 @@ class DigiSign {
         return 'document/not-found';
     }
 
+    public function sign_document_callback($msg){
+        $response = $this->aes_128_ecb_decrypt($msg);
+        //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
+        $prc = $this->process_signers_callback($response , []);
+        if(!$prc){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public function process_signers_callback($response, $data){
         $res= json_decode($response , true);
         if(array_key_exists('result' , $res)){
@@ -462,12 +494,13 @@ class DigiSign {
                 if(!$document_signers){
                     return $this->signers_logs($response, $res);
                 }
-                DigiSignDocumentSigners::where('document_id' , $res['document_id'])->where('email' , $res['email_user'])->update(
-                    [
-                        'status_sign' => 'complete',
-                        'updated_at' => date('Y-m-d H:i:s')
-                    ]
-                );
+                $doc_signer = DigiSignDocumentSigners::where('document_id' , $res['document_id'])->where('email' , $res['email_user'])->first();
+                $doc_signer->status_sign = 'complete';
+                $doc_signer->updated_at =  date('Y-m-d H:i:s');
+                if(!$doc_signer->save()){
+                    $this->signers_logs($response, $res);
+                    return false;
+                }
                 if($res['status_document'] == 'complete'){
                     DigiSignDocument::where('document_id' , $res['document_id'])->update(
                         [
@@ -478,12 +511,16 @@ class DigiSign {
                     $updt_status_user = DigisignActivation::where('email' , $res['email_user'])->first();
                     if($updt_status_user){
                         $updt_status_user->status_agreement_sign = true;
-                        $updt_status_user->save();
+                        if(!$updt_status_user->save()){
+                            return false;
+                        }
+
                     }
                 }
             }
         }
-        return $this->signers_logs($response, $res);
+        $this->signers_logs($response, $res);
+        return true;
     }
     public function signers_logs($res , $data){
         DigiSignSignersLogs::create(

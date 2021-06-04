@@ -239,13 +239,13 @@ class HelpCreditScoring {
 
     public static function upload_image($storage_path, $file,$filename){
 
-        $bucket = Storage::disk('s3')->put('modoc/'.$storage_path.'' . $filename, file_get_contents($file));
+        // $bucket = Storage::disk('s3')->put('modoc/'.$storage_path.'' . $filename, file_get_contents($file));
 
-        if($bucket){
-            return 'https://'. env('AWS_BUCKET') .'.s3-'. env('AWS_DEFAULT_REGION').'.'.env('AWS_URI').'/ebagi'.$storage_path.$filename;
-        }else{
-            return false;
-        }
+        // if($bucket){
+        //     return 'https://'. env('AWS_BUCKET') .'.s3-'. env('AWS_DEFAULT_REGION').'.'.env('AWS_URI').'/ebagi'.$storage_path.$filename;
+        // }else{
+        //     return false;
+        // }
     }
 
     public static function upload_local_image($image){

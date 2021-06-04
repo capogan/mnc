@@ -40,12 +40,17 @@ class LenderIndividualController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
 
     public function test_request_register_data(){
-        $u = User::with('individuinfo')->where('id' , 128)->first();
+
+        $data = $this->store_data_to_digisign(149);
+        print_r($data);
+        return;
+
+        $u = User::with('individuinfo')->where('id' , 149)->first();
         
         if(!$u){
             return;
@@ -979,16 +984,16 @@ class LenderIndividualController extends Controller
 
     public function post_sign(Request $requests)
     {
+        $digisign = new DigiSign();
         $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
         if($dc){    
+            $endpoint = $digisign->do_sign_the_document($dc->document_id);
             return response()->json([
                 "status" => true,
-                'url' =>'/sign/document?dc='.Utils::encrypt($dc->document_id),
+                'url' => $endpoint,
                 "message" => 'Berhasil Ditandatangani',
             ]);
         }
-        User::where('id', Auth::id())->update(['step' => 5]);
-        //get user data
         $u = DigisignActivation::leftJoin('lender_individual_personal_info', 'lender_individual_personal_info.uid', 'digisign.uid')
             ->select(
                 'digisign.email',
@@ -1012,20 +1017,35 @@ class LenderIndividualController extends Controller
             'date_request_loan' => date('Y-m-d'),
             'individu' => $u,
         ];
-
         $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.register_lender_individu', $data)->save($pathDocument);
-
         $send_to = [
             [
-                'email_user' => $u->email,
+                'email' => $u->email,
                 'name' => $u->full_name
             ]
         ];
-        
+        $req_sign = [
+        [
+            'name' => $u->full_name,
+            'email' => $u->email,
+            'aksi_ttd' => 'ttd',
+            'kuser' => null,
+            'user' => 'ttd1',
+            'page' => '3',
+            'llx' => '12',
+            'lly' => '13',
+            'urx' => '34',
+            'ury' => '45',
+            'visible' => 1
+        ]
+    ];
         $uid =Auth::id();
-        $digisign = new DigiSign();
-        $endpoint = $digisign->upload_document($pathDocument , date('Y-m-d').'_'.uniqid().'_'.$uid ,true, 'Lender_Aggreement' ,false , $send_to, $send_to , $uid , 'registration');
+        $document_id = date('Y-m-d').'_'.uniqid().'_'.$uid;
+        $upload = $digisign->upload_document($pathDocument , $document_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $uid , 'registration');
+        if($upload == true){
+            $endpoint = $digisign->do_sign_the_document($document_id);
+        }
         return response()->json([
             "status" => true,
             'url' => $endpoint,

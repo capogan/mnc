@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BusinessInfo;
 use App\EmergencyContact;
+use App\Helpers\DigiSign;
 use App\PersonalInfo;
 use App\UsersFile;
 use Illuminate\Http\Request;
@@ -316,6 +317,8 @@ class UsersController extends Controller
                    DB::rollback();
                }
            }
+           $digisign = New DigiSign;
+           $digisign->checkrequestRegistration(Auth::id());
            $json = [
                "status"=> true,
                "message"=> 'Berkas berhasil di unggah',

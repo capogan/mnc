@@ -24,7 +24,7 @@
                                         <td>{{$item->business_info->business_name}}</td>
                                         <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
                                         <td>{{$item->status_title->title}}</td>
-                                        <td><a href="/portofolio/detail/{{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>
+                                        <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>    

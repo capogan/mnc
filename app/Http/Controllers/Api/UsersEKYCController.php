@@ -23,9 +23,6 @@ class UsersEKYCController extends Controller
 
     public function index(Request $request){
 
-        print_r($request->all());
-        print_r($request->getContent());
-        exit;
         $ekyc = UserEKYC::create([
             'callback'=>$request->getContent(),
             'created_at'=>date('Y-m-d'),
@@ -44,14 +41,43 @@ class UsersEKYCController extends Controller
                 ];
             }
         }
-        $digisign = new DigiSign;
-        $digisign->callback_activation($request->getContent() , $request->msg);
+        // $digisign = new DigiSign;
+        // $digisign->callback_activation($request->getContent() , $request->msg);
         return response()->json($json);
     }
 
     public function callback_activation(Request $request){
         $digisign = new DigiSign;
         $digisign->callback_activation($request->msg);
+    }
+
+    public function uploadDocumentest(){
+        $pathDocument = public_path() . '/upload/document/credit_aggreement/PendanaSatu_60a49a6f68b56.pdf';
+        $send_to = [
+            [
+                'email_user' => 'blueisland2838@gmail.com',
+                'name' => 'Lender Satu'
+            ]
+        ];
+        $req_sign = [
+            [
+                'name' => 'Lender Satu',
+                'email' => 'blueisland2838@gmail.com',
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd1',
+                'page' => '3',
+                'llx' => '12',
+                'lly' => '13',
+                'urx' => '34',
+                'ury' => '45',
+                'visible' => 1
+
+            ]
+        ];
+        $digisign = new DigiSign;
+        $endpoint = $digisign->upload_document($pathDocument , '12819280' ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , 128 , 'registration');
+
     }
 
     private function baseUrl()

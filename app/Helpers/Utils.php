@@ -55,6 +55,7 @@ class Utils {
         }
     }
     static function tryJson($str){
+        $str = trim($str);
         if (is_string($str) && ((substr($str, 0, 1) == '{' && substr($str, -1, 1) == '}') || (substr($str, 0, 1) == '[' && substr($str, -1, 1) == ']'))) {
 			//json
 			$obj = json_decode($str, true);
