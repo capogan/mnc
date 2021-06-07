@@ -6,11 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+//class User extends Authenticatable implements MustVerifyEmail
 class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
+    /**s
      * The attributes that are mass assignable.
      *
      * @var array
@@ -58,14 +59,14 @@ class User extends Authenticatable
                 ->with('individufile')
                 ->with('individualjob');
     }
-    
+
     public function digisignInfo(){
         return $this->hasOne(LenderDirectorData::class , 'uid' ,'id')->where('position' ,'0')
         ->with('provinces')
         ->with('cities')
         ->with('districts')
         ->with('villagess');
-        
+
     }
 
     public function lenderbusiness(){
@@ -118,7 +119,7 @@ class User extends Authenticatable
         ->with('districts')
         ->with('villagess');
     }
-    
+
 
 
 }
