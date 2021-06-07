@@ -44,6 +44,12 @@ class LoanRequest extends Model
         ->with('document');
     }
 
+    public function status_request()
+    {
+        return $this->hasOne(MasterLoanRequestStatus::class,'id' ,'status')
+        ->with('document');
+    }
+
 
 
 

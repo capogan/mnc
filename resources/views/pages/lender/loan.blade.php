@@ -9,14 +9,21 @@
                         <div class="card-body">
                             <div class="row column-custom">
                                 <div class="col-5">
-                                Status Pendanaan : 
+                                Status Pendanaan : {{$document->status}}
                                 </div>
                                 <div class="col-6">
                                 </div>
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                    Total Pembiayaan : 
+                                Borrower: {{$document->business_info->business_name}}
+                                </div>
+                                <div class="col-6">
+                                </div>
+                            </div>
+                            <div class="row column-custom">
+                                <div class="col-5">
+                                    No Invoice : {{$document->invoice_number}}
                                 </div>
                                 <div class="col-6">
                                     
@@ -24,7 +31,7 @@
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                    Nama Peminjam :
+                                    Total Pembiayaan : {{'Rp '.number_format($document->repayment, 0 , '.' ,',')}}
                                 </div>
                                 <div class="col-6">
                                     
@@ -32,7 +39,7 @@
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                    Tanggal Pengajuan Pendanaan :
+                                    Tanggal Pengajuan Pendanaan : {{date('Y-m-d' , strtotime($document->created_at))}}
                                 </div>
                                 <div class="col-6">
                                 </div>
@@ -66,25 +73,33 @@
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Dokumen</th>
+                                            <th>Nama</th>
                                             <th>Tanggal</th>
+                                            <th>Email</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-center">
-                                            <td>Lender</td>
-                                            <td>{{$document->loandocument->created_at}}</td>
-                                            <td>waiting</td>
-                                            <td><a href="/digisigngetdocument?doc={{ \App\Helpers\Utils::encrypt($document->loandocument->id)}}" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td>Borrower</td>
-                                            <td>{{$document->loandocument->created_at}}</td>
-                                            <td>waiting</td>
-                                            <td></td>
-                                        </tr>
+                                        @if ($document->loandocument)
+                                          @if ($document->loandocument->document)
+                                            @if ($document->loandocument->document->signers)
+                                                @foreach ($document->loandocument->document->signers as $item)
+                                                    <tr class="text-center">
+                                                        <td>{{$item->name}}{{$item->status}}</td>
+                                                        <td>{{ date('Y-m-d' , strtotime($document->loandocument->created_at)) }}</td>
+                                                        <td>{{$item->email}} </td>
+                                                        <td>{{$item->status_sign == '' ? 'waiting' : $item->status_sign}} </td>
+                                                        @if($item->status_sign != 'complete' && $item->email == Auth::user()->email)
+                                                            <td><a href="/digisigngetdocument?doc={{ \App\Helpers\Utils::encrypt($document->loandocument->id)}}" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
+                                                        @else
+                                                        <td></td>
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
+                                            @endif  
+                                          @endif  
+                                        @endif
                                     </tbody>
                                 </table>   
                             </div>

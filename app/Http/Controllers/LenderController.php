@@ -1038,6 +1038,7 @@ class LenderController extends Controller
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
             ->get();
         $document = LoanRequest::with('loandocument')->where('id' , $loan->id)->first();
+        //print_r($loan->toArray());exit;
         $data = [
             'no_invoice'    => $loan->invoice_number,
             'id_loan'       => $loan->id,
@@ -1237,7 +1238,7 @@ class LenderController extends Controller
             return;
         }
         $doc_id = Utils::decrypt($request->doc);
-        $document = RequestLoanDocument::select('document_id')->leftJoin('request_loan' , 'request_loan.id' ,'=','request_loan_document.request_loan_id')->where('request_loan.lender_uid' , Auth::id())->first();
+        $document = RequestLoanDocument::select('document_id')->leftJoin('request_loan' , 'request_loan.id' ,'=','request_loan_document.request_loan_id')->where('request_loan.lender_uid' , Auth::id())->where('request_loan_document.id' , $doc_id)->first();
         if(!$document){
             return abort('404');
         }
