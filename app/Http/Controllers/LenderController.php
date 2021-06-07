@@ -1236,11 +1236,7 @@ class LenderController extends Controller
         if(!isset($request->doc)){
             return;
         }
-        print_r($request->all());
         $doc_id = Utils::decrypt($request->doc);
-        echo $doc_id;
-
-        exit;
         $digisign = new DigiSign;
         $endpoint = $digisign->do_sign_the_document($doc_id);
         return redirect($endpoint);
