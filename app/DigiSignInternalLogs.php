@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DigiInternalSignLogs extends Model
+class DigiSignInternalLogs extends Model
 {
     protected $table = 'digisign_internal_logs';
     protected $fillable = [
