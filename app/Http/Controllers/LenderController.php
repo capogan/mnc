@@ -1237,8 +1237,12 @@ class LenderController extends Controller
             return;
         }
         $doc_id = Utils::decrypt($request->doc);
+        $document = RequestLoanDocument::select('document_id')->leftJoin('request_loan' , 'request_loan.id' ,'=','request_loan_document.request_loan_id')->where('request_loan.lender_uid' , Auth::id())->first();
+        if(!$document){
+            return abort('404');
+        }
         $digisign = new DigiSign;
-        $endpoint = $digisign->do_sign_the_document($doc_id);
+        $endpoint = $digisign->do_sign_the_document($document->document_id);
         return redirect($endpoint);
     }
 

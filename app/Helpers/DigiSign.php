@@ -454,7 +454,6 @@ class DigiSign {
         ->asMultipart()
         ->post('https://api.tandatanganku.com/gen/genSignPage.html', $data);
         $response = $client->body();
-        print_r($response); exit;
         $link = $this->response_call_document_to_assign($response);
         return $link;
     }
