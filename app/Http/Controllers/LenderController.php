@@ -823,10 +823,10 @@ class LenderController extends Controller
         $lender = User::where('id' ,Auth::id())
                     ->with('digisigndata')
                     ->first();
-        if(!$lender || !$borrower){
+        if(!$lender->digisigndata || !$borrower->digisigndata){
             return $json = [
                 "status"=> 'error',
-                "message"=> 'TIdak dapat didanai.',
+                "message"=> 'Pinjaman tidak dapat didanai.',
             ];
         }
         $data = [
