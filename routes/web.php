@@ -34,6 +34,7 @@ Route::get('/pinjam', function () {
 });
 
 Auth::routes();
+//Auth::routes(['verify' => true]);
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -92,7 +93,7 @@ Route::get('/profile/loan/detail/{invoice}', 'BorrowerController@loan_installmen
 Route::post('/add/personal/info', 'UsersController@add_personal_info')->name('add.personal.info');
 Route::post('/add/personal/business', 'UsersController@add_personal_business')->name('add.personal.info');
 Route::post('/upload/file', 'UsersController@upload_file')->name('upload.file.post');
-Route::get('/otp/verified', 'UsersController@otp_verified')->name('borrower.otp.verified');
+Route::get('/otp/verified', 'UsersController@otp_verified')->name('borrower.otp.verified')->middleware(['verified']);
 Route::post('/user/verified/otp', 'UsersController@validate_otp')->name('borrower.otp.validate');
 Route::post('/user/send/otp', 'UsersController@send_otp_again')->name('borrower.otp.send');
 

@@ -328,8 +328,8 @@ class UsersController extends Controller
    }
 
     public function add_personal_business(Request $request){
-        
-        
+
+
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
             // 'id_cap_of_business' => 'required',
@@ -376,7 +376,7 @@ class UsersController extends Controller
         }else{
 
             User::where('id' , Auth::id())->update(['step' => 3]);
-            
+
             $request->omset_value = str_replace('Rp' ,'' , $request->omset_value);
             $request->omset_value = str_replace('.' ,'' , $request->omset_value);
 
@@ -439,6 +439,7 @@ class UsersController extends Controller
     }
 
     public function otp_verified(){
+
         return view('auth.verified_otp');
     }
 

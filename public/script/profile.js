@@ -18,7 +18,7 @@ $(document).ready(function() {
             dataType:'json',
             success:function(response)
             {
-    
+
                 if(response.status == 'success'){
                     window.location.href = response.url;
                 }
@@ -32,7 +32,7 @@ $(document).ready(function() {
                     })
                 }
                 btn.attr("disabled", false);
-    
+
             }
         })
     });
@@ -344,7 +344,12 @@ function check_interest(period){
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data: {period : period, total_invoice:$('#request_loan_borrower').val(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        data: {
+            period : period,
+            total_invoice:$('#request_loan_borrower').val(),
+            invoice_number : $('#invoice_number').val() ,
+            identity_numbers_invoice :$('#identity_numbers_invoice').val(),
+           },
         dataType:'json',
         success:function(response)
         {
@@ -455,7 +460,14 @@ $(document).on('click' , '#request_loan_' , function(){
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data: {total_invoice:$('#request_loan_borrower').val(), period : $("#loan_period_value").text(), invoice_number : $('#invoice_number').val() , identity_numbers_invoice :$('#identity_numbers_invoice').val()},
+        data: {
+            total_invoice:$('#request_loan_borrower').val(),
+            period : $("#loan_period_value").text(),
+            invoice_number : $('#invoice_number').val() ,
+            identity_numbers_invoice :$('#identity_numbers_invoice').val(),
+            member_code :$('#member_code').val()
+
+        },
         dataType:'json',
         beforeSend:function(){
             //$("#request_loan_").html("Silahkan tunggu").append(" <i class=\"fa fa-circle-o-notch fa-spin\"></i>").attr("disabled",true);

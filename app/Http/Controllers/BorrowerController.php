@@ -41,7 +41,7 @@ class BorrowerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     public function my_profile(Request $request){
@@ -255,7 +255,7 @@ class BorrowerController extends Controller
             'invoice_number' => 'required|unique:request_loan',
             'identity_numbers_invoice'=> 'required',
             'period' => 'required',
-//            'member_code' => 'required',
+            'member_code' => 'required',
             'total_invoice' => 'required'
         ],
             [
@@ -272,7 +272,7 @@ class BorrowerController extends Controller
             'invoice_number' => $request->invoice_number,
             'identity_numbers_invoice' => $request->identity_numbers_invoice,
             'periode' => $request->period,
-//            'id_member_code' => $request->member_code
+            'id_member_code' => $request->member_code
         ];
 
         $period = $request->period;
@@ -390,7 +390,7 @@ class BorrowerController extends Controller
     }
 
     public function confirm(Request $request){
-        
+
         $id_loan = $request->id_loan;
         $number_status = $request->number_status;
 
@@ -439,7 +439,7 @@ class BorrowerController extends Controller
                     'id_status_payment'=>'1',
 
                 ]);
-                
+
             }
 
         }
