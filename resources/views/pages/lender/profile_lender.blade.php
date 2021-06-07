@@ -162,6 +162,29 @@
                                         <p><b>{{$profile->individuinfo->individubank->phone_number_register_in_bank}}</b></p>
                                     </div>
                                 </div>
+
+                                <div class="m-separator m-separator--dashed"></div>
+                                <div class="row font-custom">
+                                    <div class="col-md-12">
+                                        <h4>Informasi RDL</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Nomor Rekening</label>
+                                        <p><b>{{$profile->individuinfo->individubank->bank->bank_name}}</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Nama</label>
+                                        <p><b>{{$profile->individuinfo->individubank->account_number}}</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Nomor Telepon</label>
+                                        <p><b>{{$profile->individuinfo->individubank->account_name}}</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Tanggal Daftar</label>
+                                        <p><b>{{$profile->individuinfo->individubank->phone_number_register_in_bank}}</b></p>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

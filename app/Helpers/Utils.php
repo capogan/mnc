@@ -15,6 +15,7 @@ class Utils {
     protected const DEF_ENC_KEY = "SIAPFIRTSP2PINTHEWORLD";
 
     public static function decrypt($base64_text, $hex = false) {
+        $base64_text = str_replace(' ' , '+' , $base64_text);
         if ($hex) {
             $base64_text = hex2bin(strtolower($base64_text));
         }

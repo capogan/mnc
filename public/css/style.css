@@ -360,7 +360,7 @@ display: block; background: #dddddd; content: '';}*/
 #navigation li:hover>ul>li { height: 45px; }
 #navigation ul ul ul { margin-left: 100%; top: 0; }
 #navigation.align-right ul ul ul { margin-left: 0; margin-right: 100%; }
-#navigation ul ul li a { border-bottom: 1px solid rgba(222, 231, 242, 1); padding: 15px 15px 16px 15px; width: 180px; font-size: 17px; text-decoration: none; color: #66707f; font-weight: 500; background: #fff; text-align: center;}
+#navigation ul ul li a { border-bottom: 1px solid rgba(222, 231, 242, 1); padding: 15px 15px 16px 15px; width: 180px; font-size: 12px; text-decoration: none; color: #66707f; font-weight: 500; background: #fff; text-align: center;}
 #navigation ul ul li:last-child>a, .navigation ul ul li.last-item>a { border-bottom: 0; }
 #navigation ul ul li:hover>a, #navigation ul ul li a:hover { color: #f51f8a; background-color: #f4f6f8; }
 #navigation ul ul li.has-sub>a:after { position: absolute; top: 20px; right: 11px; width: 8px; height: 2px; display: block; background: #66707f; content: ''; }

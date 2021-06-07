@@ -125,6 +125,7 @@ Route::post('/lender/business/add', 'LenderController@information_business_add')
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
 Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
+Route::get('/profile/rdl', 'LenderController@rdl_account')->name('profile.lender.rdl.account');
 
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
 Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');
@@ -138,7 +139,7 @@ Route::post('/lender/register/agreement', 'LenderController@update_status_sign')
 Route::post('/request/to_fund/loan', 'LenderController@submit_request_loan')->name('profile.lender.sign');
 Route::get('/marketplace', 'LenderController@marketplace_agreement')->name('profile.lender.sign');
 Route::get('/portofolio', 'LenderController@portofolio')->name('profile.lender.sign');
-Route::get('//portofolio/detail', 'LenderController@portofolio_detail')->name('profile.lender.sign');
+Route::get('/portofolio/detail', 'LenderController@portofolio_detail')->name('profile.lender.sign');
 Route::post('/sign_document_fund_aggreement' , 'LenderController@lender_sign_document_fund_aggreement')->name('lender.sign.aggrement.fund');
 Route::get('/sign/success' , 'LenderController@sign_success')->name('lender.sign.aggrement.success');
 
@@ -159,12 +160,16 @@ Route::get('/profile/lender-individu/document/sme', 'LenderIndividualController@
 Route::post('/profile/lender-individu/document', 'LenderIndividualController@post_document')->name('profile.lender.individu.document.submit');
 Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController@post_document_sme')->name('profile.lender.individu.document.submit.sme');
 
+
 Route::post('/profile/lender-individu/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
+
+Route::get('/digisigngetdocument', 'LenderController@get_document_to_assign')->name('lender.document.get');
 
 
 Route::get('/profile/lender-individu/sign', 'LenderIndividualController@get_sign')->name('profile.lender.individu.sign');
 Route::post('/profile/lender-individu/sign', 'LenderIndividualController@post_sign')->name('profile.lender.individu.sign.submit');
 Route::get('/sign/document', 'DocumentController@document')->name('document.asign.agreement');
+
 
 Route::get('/myprofile', 'LenderController@myprofile')->name('myprofile.lender');
 

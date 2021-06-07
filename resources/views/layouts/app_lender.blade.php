@@ -50,7 +50,14 @@
                     <ul>
                             <li class="active"><a href="/" class="animsition-link">Home</a></li>
                         @if (Auth::check())
-                            <li><a href="/profile/lender" class="animsition-link">profile</a></li>
+                             {{-- <li><a href="/profile/lender" class="animsition-link">profile</a></li> --}}
+                            <li class="active"><a href="#" class="animsition-link">profile</a>
+                                <ul>
+                                    <li><a href="/profile/lender" >Profile</a></li>
+                                    <li><a href="/profile/rdl">Rekening Dana Lender</a></li>
+                                    
+                                </ul>
+                            </li>
                             <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
                             <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
                         @else

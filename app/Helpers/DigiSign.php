@@ -294,7 +294,6 @@ class DigiSign {
             ]
         );
     }
-
     public function callback_activation($msg){
         if(!isset($msg)){
             $this->logs_internal('' , 'Digisign call callback url without encript message.');

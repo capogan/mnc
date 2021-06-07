@@ -619,6 +619,7 @@ class LenderController extends Controller
          ]);
      }
 
+    
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         $editable = $this->editable_bio();
@@ -785,6 +786,7 @@ class LenderController extends Controller
         if(!isset($request->mark)){
             return abort('404');
         }
+        
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -811,7 +813,7 @@ class LenderController extends Controller
         if(!$loan){
             return $json = [
                 "status"=> 'error',
-                "message"=> 'TIdak dapat didanai.',
+                "message"=> 'Tidak dapat didanai.',
             ];
         }
         $borrower = User::where('id' , $loan->uid)
@@ -1021,6 +1023,7 @@ class LenderController extends Controller
         //print_r($portofolio->toArray()); exit;
         return view('pages.lender.portofolio',$this->merge_response($data, static::$CONFIG));
     }
+
     public function portofolio_detail(Request $request){
         if(!isset($request->p)){
             return abort('404');
@@ -1029,7 +1032,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('id' ,Utils::decrypt($request->p))->where('lender_uid' , Auth::id())->first();
-        //print_r($loan); exit;
+       
         $loan_installments = LoanInstallment::
         leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
@@ -1228,4 +1231,37 @@ class LenderController extends Controller
             ];
         }
     }
+
+    public function get_document_to_assign(Request $request){
+        if(!isset($request->doc)){
+            return;
+        }
+        print_r($request->all());
+        $doc_id = Utils::decrypt($request->doc);
+        echo $doc_id;
+
+        exit;
+        $digisign = new DigiSign;
+        $endpoint = $digisign->do_sign_the_document($doc_id);
+        return redirect($endpoint);
+    }
+
+    public function rdl_account(){
+        $lender = LenderRDLAccountRegistered::select('lender_rdl_account.*' ,'lender_rdl_account_registered.account_number')->leftJoin('lender_rdl_account' ,'lender_rdl_account_registered.uid' , '=','lender_rdl_account.uid')->where('lender_rdl_account_registered.uid' , Auth::id())->first();
+        $msg = '';
+        if(!$lender){
+            $msg = 'Anda belum membuat akun RDL.';
+        }
+        $l_verification = LenderVerification::where('uid' , Auth::id())->first();
+        if(!$l_verification){
+            $msg = 'Akun kamu masih belum di setujui , silahkan kontak customer service kami jika terjadi kesalahan.';
+        }
+        $data = [
+            'account' => $lender,
+            'message' => $msg
+        ];
+        return view('pages.lender.rdl_info',$this->merge_response($data, static::$CONFIG));
+        
+    }
+
 }
