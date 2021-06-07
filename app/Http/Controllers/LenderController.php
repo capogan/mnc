@@ -247,8 +247,7 @@ class LenderController extends Controller
     }
 
     public function submit_director_data(Request $request){
-        $this->store_data_to_digisign(Auth::id());exit;
-       //print_r($request->all()); exit;
+        //$this->store_data_to_digisign(Auth::id());
 
        $is_ready_data = LenderDirectorData::where('uid' , Auth::id())->first();
        
