@@ -228,7 +228,7 @@ $(document).ready(function() {
             }
         })
     });
-
+    
     $("#btn_sign_agreement_lender_individu").on('click', function (event) {
         event.preventDefault();
         var btn = $("#btn_sign_agreement_lender_individu");
