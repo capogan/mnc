@@ -367,6 +367,7 @@ class DigiSign {
         ->timeout(9000)
         ->asMultipart()
         ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
+        print_r($client->body()); exit;
         //$response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
         $document = $this->process_upload_file_response( $client->body() , $data , $uid , $step);
         return $document;
