@@ -389,7 +389,7 @@ class DigiSign {
                 }
             }
         }else{
-            $this->upload_data_logs($res , $data , $uid);
+            $this->upload_data_logs2($res , $data , $uid);
         }
        
         return true;
@@ -400,6 +400,16 @@ class DigiSign {
                 'uid' => $uid,
                 'message' => $res['JSONFile']['notif'],
                 'response' => json_encode($res),
+                'created_at' => date('Y-m-d H:i:s')
+            ]
+        );
+    }
+    public function upload_data_logs2($res , $data , $uid){
+        DigiSignDocumentLogs::create(
+            [
+                'uid' => $uid,
+                'message' => $res,
+                'response' => $res,
                 'created_at' => date('Y-m-d H:i:s')
             ]
         );
