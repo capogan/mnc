@@ -388,8 +388,10 @@ class DigiSign {
                     return false;
                 }
             }
+        }else{
+            $this->upload_data_logs($res , $data , $uid);
         }
-        $this->upload_data_logs($res , $data , $uid);
+       
         return true;
     }
     public function upload_data_logs($res , $data , $uid){
