@@ -959,7 +959,7 @@ class LenderController extends Controller
             'date_request_loan' => date('Y-m-d'),
             'individu' => $u,
         ];
-        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
+        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->director_name . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.register_lender', $data)->save($pathDocument);
         $send_to = [
             [
