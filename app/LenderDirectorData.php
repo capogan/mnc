@@ -28,4 +28,8 @@ class LenderDirectorData extends Model
     {
         return $this->hasOne(Village::class , 'id' ,'village_id');
     }
+    public function digisign()
+    {
+        return $this->hasOne(DigisignActivation::class , 'uid' ,'uid');
+    }
 }

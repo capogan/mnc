@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DigisignActivation;
+use App\DigiSignDocument;
 use App\Helpers\BNI;
 use App\Helpers\DigiSign;
 use App\Helpers\LenderHelper;
@@ -931,6 +932,69 @@ class LenderController extends Controller
         );
     }
 
+
+    public function post_sign(Request $requests)
+    {
+        $digisign = new DigiSign();
+        $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
+        if($dc){    
+            $endpoint = $digisign->do_sign_the_document($dc->document_id);
+            return response()->json([
+                "status" => true,
+                'url' => $endpoint,
+                "message" => 'Berhasil Ditandatangani',
+            ]);
+        }
+        $u = LenderDirectorData::with('digisign')->where('uid' , Auth::id())->where('position' ,'0')->first();
+
+        if(!$u){
+            return response()->json([
+                "status" => false,
+                'url' => 'false',
+                "message" => 'Dokumen tidak tersedia.',
+            ]);
+        }
+        $data = [
+            'title' => 'PERJANJIAN KREDIT',
+            'date_request_loan' => date('Y-m-d'),
+            'individu' => $u,
+        ];
+        $pathDocument = public_path('upload/document/' . str_replace(' ', '', $u->full_name . '_' . uniqid()) . '.pdf');
+        PDF::loadView('agreement.register_lender', $data)->save($pathDocument);
+        $send_to = [
+            [
+                'email' => $u->digisign->email,
+                'name' => $u->director_name
+            ]
+        ];
+        $req_sign = [
+            [
+                'name' => $u->director_name,
+                'email' => $u->digisign->email,
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd1',
+                'page' => '3',
+                'llx' => '12',
+                'lly' => '13',
+                'urx' => '34',
+                'ury' => '45',
+                'visible' => 1
+            ]
+        ];
+        $uid =Auth::id();
+        $document_id = date('Y-m-d').'_'.uniqid().'_'.$uid;
+        $upload = $digisign->upload_document($pathDocument , $document_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $uid , 'registration');
+        if($upload == true){
+            $endpoint = $digisign->do_sign_the_document($document_id);
+        }
+        return response()->json([
+            "status" => true,
+            'url' => $endpoint,
+            "message" => 'Berhasil Ditandatangani',
+        ]);
+    }
+    
     public function upload_document_aggreement(Request $request){
         $lender = LenderBusiness::where('uid' , Auth::id())->first();
         $director_profile = LenderDirectorData::where('uid' , Auth::id())->where('position' ,'0')->first();
@@ -959,28 +1023,43 @@ class LenderController extends Controller
     }
 
     public function register_sign_aggrement(Request $request){
-        $verified_user = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
-        if($verified_user){
-            return redirect('lender/funding');
+
+        $active_lender = LenderHelper::active_lender();
+        if($active_lender){
+            return redirect('/myprofile');
         }
-        $check_status = AppPrivyID::where('uid' , Auth::id())
-                        ->whereIn('status' , ['registered' , 'verified'])
-                        ->count();
-        $allow_sign = false;
-        if(Auth::user()->level == 'business'){
-            if($check_status >= 2 ){
-                $allow_sign = true;
-            }
-        }else{
-            if($check_status > 0){
-                $allow_sign = true;
-            }
-        }
-        $data = [
-            'borrower_request' => [],
-            'allow_to_sign' => $allow_sign
-        ];
+        $u = User::select('id', 'step')->where('users.id', Auth::id())->first();
+        // if ($u->step != 4 && $u->step != 5) {
+        //     return $this->urlValidation($u);
+        // }
+        $data = array(
+            'sign_agreement' => DigisignActivation::where('uid' , Auth::id())->first(),
+            'type' => LenderIndividualPersonalInfo::select('lender_type')->where('uid' , Auth::id())->first()
+        );
         return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
+
+        // $verified_user = LenderVerification::where('uid' , Auth::id())->where('status' , 'verified')->first();
+        // if($verified_user){
+        //     return redirect('lender/funding');
+        // }
+        // $check_status = AppPrivyID::where('uid' , Auth::id())
+        //                 ->whereIn('status' , ['registered' , 'verified'])
+        //                 ->count();
+        // $allow_sign = true;
+        // if(Auth::user()->level == 'business'){
+        //     if($check_status >= 2 ){
+        //         $allow_sign = true;
+        //     }
+        // }else{
+        //     if($check_status > 0){
+        //         $allow_sign = true;
+        //     }
+        // }
+        // $data = [
+        //     'borrower_request' => [],
+        //     'allow_to_sign' => $allow_sign
+        // ];
+        // return view('pages.lender.sign_agreement',$this->merge_response($data, static::$CONFIG));
     }
 
     public function sign_success(){

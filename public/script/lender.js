@@ -50,7 +50,7 @@ $(document).ready(function() {
         $(this).prop('disabled', true);
         var token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: '/lender/register/dosign',
+            url: '/profile/lender-individu/sign',
             method:"POST",
             dataType : 'json',
             headers: {
@@ -229,6 +229,59 @@ $(document).ready(function() {
         })
     });
 
+    $("#btn_sign_agreement_lender_individu").on('click', function (event) {
+        event.preventDefault();
+        var btn = $("#btn_sign_agreement_lender_individu");
+        btn.attr("disabled", "disabled");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/profile/lender/sign',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            async: true,
+            data: {},
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                loading();
+            },
+            success: function (response) {
+                close_loading();
+                if (response.status == true) {
+                    text = 'Data berhasil ditambahkan'
+                    var title = 'Sukses';
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'Data Anda telah tersimpan',
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    // })
+                    window.location.href = response.url;
+                } else {
+                    var text = '';
+                    $.each(response.message, function (index, value) {
+                        text += '<p class="error"><i data-feather="x-square"></i> ' + value[0] + '</p>';
+                    });
+                    $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+                    window.scrollTo(500, 0);
+                    setTimeout(function () {
+                        $(".result-message").fadeOut("slow");
+                    }, 2000);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert_error();
+                close_loading();
+            }
+        })
+    });
 
     $("#form_lender_commisioner_information").on("submit", function(event) {
 

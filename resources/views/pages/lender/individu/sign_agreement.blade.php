@@ -108,7 +108,6 @@
                                                                 @if($sign_agreement->status_activation == 'active')
                                                                 <button type="button" class="btn btn-primary"
                                                                     id="btn_sign_agreement_lender_individu">Lanjutkan Proses Tanda Tangan</button>
-
                                                                 @endif
                                                             @else
                                                                 <div class="row">

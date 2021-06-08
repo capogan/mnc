@@ -171,6 +171,7 @@ Route::get('/profile/lender-individu/sign', 'LenderIndividualController@get_sign
 Route::post('/profile/lender-individu/sign', 'LenderIndividualController@post_sign')->name('profile.lender.individu.sign.submit');
 Route::get('/sign/document', 'DocumentController@document')->name('document.asign.agreement');
 
+Route::post('/profile/lender/sign', 'LenderController@post_sign')->name('profile.lender.individu.sign.submit');
 
 Route::get('/myprofile', 'LenderController@myprofile')->name('myprofile.lender');
 
