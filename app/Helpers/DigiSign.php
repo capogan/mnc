@@ -391,7 +391,7 @@ class DigiSign {
         }else{
             $this->upload_data_logs2($res , $data , $uid);
         }
-       $this->upload_data_logs2($response , $response , $uid);   
+        //$this->upload_data_logs2($response , $response , $uid);   
         return true;
     }
     public function upload_data_logs($res , $data , $uid){
@@ -481,6 +481,7 @@ class DigiSign {
                 }
             }
         }
+        $this->upload_data_logs2($response,$response ,'1');
         return 'document/not-found';
     }
 

@@ -937,6 +937,7 @@ class LenderController extends Controller
     {
         $digisign = new DigiSign();
         $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
+        //echo $dc->document_id; exit;
         if($dc){    
             $endpoint = $digisign->do_sign_the_document($dc->document_id);
             return response()->json([
