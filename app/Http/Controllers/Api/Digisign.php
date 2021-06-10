@@ -22,14 +22,15 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->sign_document_callback($request->msg);
-        if($res){
-            return redirect('sign/success');
-        }
-        $ekyc = UserEKYC::create([
+        UserEKYC::create([
             'callback'=>$request->msg,
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
+        if($res){
+            return redirect('sign/success');
+        }
+        
     }
 
     public function activation_callback(Request $request){
@@ -44,6 +45,11 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->callback_activation($request->msg);
+        UserEKYC::create([
+            'callback'=>$request->msg,
+            'created_at'=>date('Y-m-d'),
+            'updated_at'=>date('Y-m-d'),
+        ]);
         if($res){
             return redirect('sign/success');
         }
