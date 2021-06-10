@@ -30,8 +30,6 @@ class BNI
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
-        print_r($body);
-        print_r($response->body() ); exit;
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
         return $result;
     }
