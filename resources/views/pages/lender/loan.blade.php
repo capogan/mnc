@@ -9,7 +9,7 @@
                         <div class="card-body">
                             <div class="row column-custom">
                                 <div class="col-5">
-                                Status Pendanaan : {{$document->status}}
+                                {{-- Status Pendanaan : {{$document->status}} --}}
                                 </div>
                                 <div class="col-6">
                                 </div>
@@ -60,7 +60,7 @@
                             <div class="row">
                                 
                                 <div class="col-md-12">
-                                    <h4>Dokumen</h4>
+                                    <h4>Dokumen Perjanjian Pemberi Pinjaman dengan Penerima Pinjaman </h4>
                                     <div class="row column-custom">
                                         <div class="col-5">
                                             Status Dokumen : {{$document->loandocument->document->status_document}}
@@ -102,6 +102,43 @@
                                         @endif
                                     </tbody>
                                 </table>   
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="m-separator col-md-12 m-separator--dashed"></div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Dokumen Perjanjian Pemberi Pinjaman dengan Penyelenggara</h4>
+                                    <div class="row column-custom">
+                                        <div class="col-5">
+                                            Status Dokumen : {{$document->loandocument->document->status_document}}
+                                        </div>
+                                        <div class="col-6">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Tanggal</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td>2021-06-10</td>
+                                        <td>amalia@yahoo.com </td>
+                                        <td>waiting </td>
+                                        <td><a href="/digisigngetdocument?doc=p0bsc3B+yau3CdL93R7C2g==" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <br/>
                             <div class="row">

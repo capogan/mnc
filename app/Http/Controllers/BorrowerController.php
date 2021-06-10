@@ -28,6 +28,7 @@ use App\Dependents;
 use App\BecomePartner;
 use App\BuildingStatus;
 use App\Estabilished;
+use App\Helpers\DigiSign;
 use App\Legality;
 use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
@@ -356,24 +357,30 @@ class BorrowerController extends Controller
     }
 
     public function sign(Request $request){
-
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
         if($loan){
             if($loan->status != '19'){
                 return Redirect::to('/profile/transaction');
             }
-
             $data = [
-
                 'no_invoice'    => $request->invoice,
                 'id_loan'       => $loan->id,
             ];
             return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
-
         }else{
             abort(404, 'Page Not Found.');
         }
+    }
 
+    public function get_document_to_sign(Request $request){
+        $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
+                                ->where('request_loan.invoice_number' , $request->invoice)
+                                ->where('request_loan.uid' , Auth::id())
+                                ->where('request_loan.status' , '19')
+                                ->first();
+        $digisign = new DigiSign;
+        $endpoint = $digisign->do_sign_the_document( $loan_id->document_id);
+        print_r($endpoint);
     }
 
     public function congratulation(Request $request){

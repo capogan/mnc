@@ -10,6 +10,7 @@
                             <div class="text-center">
                             <h2>PERJANJIAN PINJAMAN</h2>
                             <h5>No : {{$no_invoice}}</h5>
+                            <input type="hidden" id="invoice_number" value="{{$no_invoice}}"/>
                             </div>
                             <p>Duis faucibus sed leo a maximus. Donec hendrerit velit lacus, eu molestie metus rutrum nonecenas quis purus bibendum arcu euismod elementum id in quam.</p>
                             <ul class=" bullet bullet-check-circle list-unstyled">
@@ -31,8 +32,7 @@
                                 <li>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting.</li>
 
                             </ul>
-                            <button type="submit" onclick="updated_status('{{$id_loan}}','28')" class="btn btn-primary btn-sm pull-left">KLIK untuk tanda tangan</button>
-
+                            <button type="button" id="request_file_assign" onclick="ssssssupdated_status('{{$id_loan}}','28')" class="btn btn-primary btn-sm pull-left">KLIK untuk tanda tangan</button>
                         </div>
                     </div>
                 </div>
