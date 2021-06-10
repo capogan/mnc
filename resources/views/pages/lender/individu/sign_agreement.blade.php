@@ -72,38 +72,22 @@
                                                             <input type="hidden" name="personal_id" id="personal_id"
                                                                 value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
                                                             <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
-                                                            <p class="lead">To make your home loan journey a smooth
-                                                                sail, in
-                                                                this article we will help you to know eligibility
-                                                                criteria,
-                                                                rates of interest, process, necessary documents,
-                                                                comparison
-                                                                and transfer for lowest rates. </p>
+                                                            <p class="lead">Tanda tangan Elektronik yang Mudah, Aman dan Terpercaya</p>
                                                             @if ($sign_agreement)
                                                                 <div class="row">
                                                                     <div
                                                                         class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p>Maecenas in ultricies sem. Nunc eget orci mi. Sed
-                                                                            porttitor lacus quis scelerisque dignissim.
-                                                                            Nullam
-                                                                            bibendum lputatesAliquam non mageselislacerat
-                                                                            sapien
-                                                                            dolor et dui.</p>
+                                                                        <p><b>Pemberitahuan</b> : Untuk penandatanganan dokumen secara elektronik kami menggunakan layanan pihak ketiga yaitu Digisign.</p>
                                                                     </div>
                                                                     <div
                                                                         class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p>Sed sit amet volutpat erat. Lorem ipsum dolor sit
-                                                                            amet lorem consectetur adipiscing elit. Nam
-                                                                            massa
-                                                                            ipsum, mollis et sit amet ullamcorque duraesent
-                                                                            nec
-                                                                            vehicula dolor. </p>
+                                                                        <p> Daftarkan diri anda untuk menikmati kemudahan dalam menandatangani dokumen elektronik</p>
                                                                     </div>
                                                                 </div>
                                                                 <hr>
                                                                 <p>Silahkan aktifasi akun digisign anda sebelum melakukan tanda tangan perjanjian.</p>
                                                                 @if($sign_agreement->status_activation != 'active')
-                                                                    <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Account</a>
+                                                                    <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Akun</a>
                                                                 @endif
                                                                 @if($sign_agreement->status_activation == 'active')
                                                                 <button type="button" class="btn btn-primary"
