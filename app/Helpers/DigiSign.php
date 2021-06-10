@@ -528,8 +528,15 @@ class DigiSign {
                         if(!$updt_status_user->save()){
                             return false;
                         }
-
+                        LenderVerification::where('uid' , $updt_status_user->uid)->update(
+                            [
+                                'status' => 'verified'
+                            ]
+                        );
                     }
+
+                    
+                    
                 }
             }
         }
