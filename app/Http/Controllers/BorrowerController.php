@@ -379,7 +379,7 @@ class BorrowerController extends Controller
                                 ->where('request_loan.status' , '19')
                                 ->first();
         $digisign = new DigiSign;
-        $endpoint = $digisign->do_sign_the_document( $loan_id->document_id);
+        $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
         print_r($endpoint);
     }
 

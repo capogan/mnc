@@ -460,6 +460,7 @@ class DigiSign {
                 ]
             ])
         ];
+        print_r($data); exit;
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',
@@ -481,7 +482,7 @@ class DigiSign {
                 }
             }
         }
-        //$this->upload_data_logs2($response,$response ,'1');
+        $this->upload_data_logs2($response,$response ,'1');
         return 'document/not-found';
     }
 
