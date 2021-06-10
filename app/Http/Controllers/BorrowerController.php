@@ -27,6 +27,7 @@ use App\CreditScore;
 use App\Dependents;
 use App\BecomePartner;
 use App\BuildingStatus;
+use App\DigisignActivation;
 use App\Estabilished;
 use App\Helpers\DigiSign;
 use App\Legality;
@@ -361,6 +362,16 @@ class BorrowerController extends Controller
         if($loan){
             if($loan->status != '19'){
                 return Redirect::to('/profile/transaction');
+            }
+            $status_activation = DigisignActivation::where('uid' , Auth::id())->first();
+            if(!$status_activation){
+                return abort(404, 'User belum terdaftar di digisign.');
+            }
+            if($status_activation->status_activation != 'active'){
+                $data = array(
+                    'sign_agreement' => DigisignActivation::where('uid' , Auth::id())->first(),
+                );
+                return view('pages.borrower.activation_digisign_account',$this->merge_response($data, static::$CONFIG));
             }
             $data = [
                 'no_invoice'    => $request->invoice,
