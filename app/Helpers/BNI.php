@@ -30,6 +30,8 @@ class BNI
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
+        print_r($body);
+        print_r($response->body() ); exit;
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
         return $result;
     }
@@ -105,13 +107,30 @@ class BNI
         $expiresIn = $res['expires_in'];
         $this->EXPIRES_AT =  date("Y-m-d H:i:s", strtotime("+$expiresIn seconds"));
     }
+    private function requestUUID(){
+        $number = "";
+        for($i = 0; $i < 4; $i++){
+            $chr = rand(0,3);
+            $str = "";
+            for($j = 0; $j < 4; $j ++){
+                if($j == $chr) {
+                    $str .= chr(rand(65, 90));
+                } else {
+                    $str .= rand(0,9);
+                }
+            }
+            $number .= (empty($number) ? $str : "".$str);
+        }
+
+        return $number;
+    }
 
     private function buildBody($data , $status)
     {
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => "29FCB72E71D34C48"
+            "requestUuid" => $this->requestUUID()
         ];
 
         $data["header"] = $header;
@@ -284,7 +303,7 @@ class BNI
 
     public function register_investor($endpoint, $uid)
     {
-        $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'register')->where('responseuuid' ,'29FCB72E71D34C48')->first();
+        $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'register')->first();
         if(!$u){
             $this->response_registered('User tidak ditemukan' , $uid);
             return false;

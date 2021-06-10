@@ -49,8 +49,35 @@
                                             <p>Unggah Foto Diri *</p>
                                         </div>
                                     </div>
-
                                     <div class="row mt-2">
+                                        <div class="col">
+                                            <div class="upload-file">
+                                                <div class="file-input">
+                                                    <input type="file" id="self_image" name="self_image" class="file">
+                                                    <label onclick="setup_webcam()">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="40" height="40" fill="white"
+                                                            class="bi bi-plus"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                        </svg>
+                                                        <span>Pilih Foto</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div id="my_selfie"></div>
+                                                <input type="button" value="Ambil Foto" id="snapshot" onClick="take_snapshot()" style="display:none">
+                                                <input type="button" value="Cancel" id="cancel_snapshot" onClick="cancel_snapshots()" style="display:none">
+                                            <div class="file_preview">
+                                                <img src="{{url('/')}}/{{$file->self_photo ?? '' }}" id="selfie_photo_preview" alt="" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {{-- <div class="row mt-2">
                                         <div class="col">
                                             <div class="upload-file">
                                                  <div class="file-input">
@@ -69,7 +96,7 @@
                                                 <img src="{{url('/')}}/{{$file->self_photo ?? '' }}" id="self_image_preview" alt="" style="width:100%">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="row mt-2">

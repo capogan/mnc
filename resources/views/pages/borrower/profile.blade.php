@@ -66,31 +66,84 @@
         <script src="{{ asset('/script/profile.js') }}"></script>
         <script src="{{asset('/js/calculator.js')}}"></script>
         <script src="{{asset('/js/simple-slider.js')}}"></script>
-
+        <script src="{{ asset('/js/webcam.min.js') }}"></script>
         <script>
             //$('select').select2();
         var inputs = document.querySelectorAll( '.file' );
 
         Array.prototype.forEach.call( inputs, function( input ) {
-        var label = input.nextElementSibling,
-                    labelVal = label.innerHTML;
+            var label = input.nextElementSibling,
+                        labelVal = label.innerHTML;
 
-        input.addEventListener( 'change', function( e ) {
-            var fileName = '';
+            input.addEventListener( 'change', function( e ) {
+                var fileName = '';
 
-            if ( this.files && this.files.length > 1 ) {
-            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-            } else {
-            fileName = e.target.value.split( '\\' ).pop();
-            }
+                if ( this.files && this.files.length > 1 ) {
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                } else {
+                fileName = e.target.value.split( '\\' ).pop();
+                }
 
-            if ( fileName ) {
-            label.querySelector( 'span' ).innerHTML = fileName;
-            } else {
-            label.innerHTML = labelVal;
-            }
+                if ( fileName ) {
+                label.querySelector( 'span' ).innerHTML = fileName;
+                } else {
+                label.innerHTML = labelVal;
+                }
+            });
         });
-});
+        Webcam.set({
+			width: 400,
+			height: 300,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+
+
+        function setup_webcam() {
+            $('#selfie_photo_preview').hide();
+			Webcam.attach( '#my_selfie' );
+            $('#snapshot').show();
+		}
+        function cancel_snapshots() {
+            Webcam.unfreeze();
+            $('#snapshot').show();
+            $('#cancel_snapshot').hide();
+        }
+		function take_snapshot() {
+			Webcam.snap( function(data_uri) {
+                var block = data_uri.split(";");
+                var contentType = block[0].split(":")[1];
+                var realData = block[1].split(",")[1];
+                var blob = b64toBlob(realData, contentType);
+                $('#selfie_photo_preview').attr('src' , data_uri);
+                $('#cancel_snapshot').show();
+                $('#snapshot').hide();
+			} );
+
+            Webcam.freeze();
+		}
+
+        function b64toBlob(b64Data, contentType, sliceSize) {
+                contentType = contentType || '';
+                sliceSize = sliceSize || 512;
+                var byteCharacters = atob(b64Data);
+                var byteArrays = [];
+
+                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                    var byteNumbers = new Array(slice.length);
+                    for (var i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+                    var byteArray = new Uint8Array(byteNumbers);
+
+                    byteArrays.push(byteArray);
+                }
+
+              var blob = new Blob(byteArrays, {type: contentType});
+              return blob;
+            }
     </script>
     <script>
         $(function () {
@@ -98,6 +151,7 @@
 })
 
     </script>
+
 
 @endsection
 @endsection

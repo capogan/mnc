@@ -1328,6 +1328,7 @@ class LenderController extends Controller
 
     public function rdl_account(){
         $lender = LenderRDLAccountRegistered::select('lender_rdl_account.*' ,'lender_rdl_account_registered.account_number')->leftJoin('lender_rdl_account' ,'lender_rdl_account_registered.uid' , '=','lender_rdl_account.uid')->where('lender_rdl_account_registered.uid' , Auth::id())->first();
+        //print_r($lender->toArray()); exit;
         $msg = '';
         if(!$lender){
             $msg = 'Anda belum membuat akun RDL.';

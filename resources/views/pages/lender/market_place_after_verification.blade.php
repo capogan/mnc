@@ -42,6 +42,7 @@
                                     <li>Imbal hasil : <b>{{number_format($item->interest_fee_amount , 0 ,'.' ,'.')}}</b></li>
                                     <li>Industri : <b>{{$item->business_info->income_factory->industry_sectore}}</b></li>
                                 </ul>
+                                <span style="color: red;font-size:10px;">{{$item->approve_reason_under_limit_scoring != '' ? '*'.$item->approve_reason_under_limit_scoring : ''}}</span>
                             </div>
                             <div class="lender-actions">
                                 <a href="/marketplace?mark={{ \App\Helpers\Utils::encrypt($item->id)}}" class="btn btn-default btn-block">Ajukan Pendanaan</a>

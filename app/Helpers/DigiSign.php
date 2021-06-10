@@ -481,7 +481,7 @@ class DigiSign {
                 }
             }
         }
-        $this->upload_data_logs2($response,$response ,'1');
+        //$this->upload_data_logs2($response,$response ,'1');
         return 'document/not-found';
     }
 

@@ -259,14 +259,27 @@ $('#file_upload_image').on('submit', function(event){
     btn.attr("disabled", "disabled");
 
     var token = $('meta[name="csrf-token"]').attr('content');
+    var block = $('#selfie_photo_preview').attr('src');
+    if(block == undefined){
+        block = $('#self_image_preview').attr('src').split(";");
+    }else{
+        block = $('#selfie_photo_preview').attr('src').split(";");
+    }
+   
+    var contentType = block[0].split(":")[1];
+    var realData = block[1].split(",")[1];
+    var blob = b64toBlob(realData, contentType);
 
+    var fd = new FormData(this);
+    fd.append("self_image", blob);
+    
     $.ajax({
         url:'/upload/file',
         method:"POST",
         headers: {
             'X-CSRF-TOKEN': token
         },
-        data:new FormData(this),
+        data:fd,
         cache:false,
         contentType: false,
         processData: false,

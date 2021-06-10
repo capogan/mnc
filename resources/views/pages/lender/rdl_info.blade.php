@@ -6,6 +6,7 @@
         <div class="col-md-12">
             <div class="wrapper-content bg-white ">
                 <div class="about-section pinside80">
+                    @if ($account)
                     <div class="row">
                         <div class="col-xl-12 ">
                             <h2 class="mb30 ">Informasi Rekening</h2>
@@ -67,6 +68,16 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="row">
+                        <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
+                            <div class="mb60 text-center section-title">
+                                <h1>{{$message}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @endif
                 </div>
                 <div class="cta-section pinside60  bg-white section-space40">
                     <div class=" ">
