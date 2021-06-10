@@ -353,8 +353,9 @@ $(document).on('click' , '#request_file_assign' , function(){
         },
         success: function (response) {
             if (response.status == true) {
-                //window.location.href = response.url;
-            } else {
+                window.location.href = response.url;
+            }else{
+                alert('Something wrong with this.');
             }
            // window.location.href = response.url;
         },

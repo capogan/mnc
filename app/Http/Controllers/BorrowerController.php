@@ -391,7 +391,12 @@ class BorrowerController extends Controller
                                 ->first();
         $digisign = new DigiSign;
         $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
-        print_r($endpoint);
+        return response()->json([
+            "status" => true,
+            'url' => $endpoint,
+            "message" => 'Berhasil Ditandatangani',
+        ]);
+       // print_r($endpoint);
     }
 
     public function congratulation(Request $request){
