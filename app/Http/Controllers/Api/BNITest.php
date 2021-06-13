@@ -28,7 +28,7 @@ class BNITest  extends Controller
             "motherMaidenName" => "R Harianja",
             "jobCode" => "01",
             "education" => "07",
-            "idNumber" => "3209310404930019",
+            "idNumber" => "331234766887878518",
             "idIssuingCity" => "Jakarta Barat",
             "idExpiryDate" => "26102099",
             "addressStreet" => "Jalan Mawar Melati",
