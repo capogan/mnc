@@ -13,11 +13,11 @@ class BNITest  extends Controller
     public function register(){
         $data = [
             "title" => "01",
-            "firstName" => "Ricat",
-            "middleName" => "",
+            "firstName" => "Richard",
+            "middleName" => "Juan",
             "lastName" => "Simbolon",
             "optNPWP" => "1",
-            "NPWPNum" => "0000000000000000",
+            "NPWPNum" => "999999999988888",
             "nationality" => "ID",
             "domicileCountry" => "ID",
             "religion" => "2",
@@ -25,10 +25,10 @@ class BNITest  extends Controller
             "birthDate" => "26111980",
             "gender" => "M",
             "isMarried" => "L",
-            "motherMaidenName" => "Ibu Ku",
+            "motherMaidenName" => "R Harianja",
             "jobCode" => "01",
             "education" => "07",
-            "idNumber" => "331234766887878518",
+            "idNumber" => "3209310404930019",
             "idIssuingCity" => "Jakarta Barat",
             "idExpiryDate" => "26102099",
             "addressStreet" => "Jalan Mawar Melati",
@@ -164,7 +164,7 @@ class BNITest  extends Controller
 
     public function login(){
         $bni = new BNI;
-        print_r($bni->login());
+        //print_r($bni->login());
     }
 
 }
