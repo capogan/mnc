@@ -20,61 +20,19 @@ class BNI
     private $ACCESS_TOKEN = "";
     private $EXPIRES_AT;
 
-    public function request($endpoint, $data , $uid)
-    {
-        $body = $this->buildBody($data , true);
-        if (time() >= strtotime($this->EXPIRES_AT)) {
-            $this->login();
-        }
-        $url = $this->BASE_URL . ":" . $this->HOST . $endpoint . "?access_token=" . $this->ACCESS_TOKEN;
-        $response = Http::withHeaders([
-            'X-API-Key' => $this->API_KEY
-        ])->post($url, $body);
-        $result = $this->process_register_account($response->body() , $uid , $body['request']);
-        return $result;
-    }
+    private $INQUIRY_ACCOUNT = "/p2pl/inquiry/account/info";
+    private $INQUIRY_BALANCE = "/p2pl/inquiry/account/balance";
+    private $INQUIRY_ACCOUNT_HISTORY = "/p2pl/inquiry/account/history";
+    private $INQUIRY_INTER_BANK_ACCOUNT = "/p2pl/inquiry/interbank/account";
+    private $PAYMENT_TRANSFER = "/p2pl/payment/transfer";
+    private $PAYMENT_STATUS = "/p2pl/inquiry/payment/status";
+    private $PAYMENT_CLEARING = "/p2pl/payment/clearing";
+    private $PAYMENT_RTGS = "/p2pl/payment/rtgs";
+    private $PAYMENT_INTERNET_BANK = "/p2pl/payment/interbank";
+
+
+
     
-
-    private function process_register_account($body , $uid , $data){
-        $this->request_log($body , $uid);
-        if(!Utils::tryJson($body)){
-            return;
-        }
-        $response = json_decode($body , true);
-        if(!array_key_exists('response' , $response)){
-            return false;
-        }
-        if(!array_key_exists('responseCode' , $response['response'])){
-            return false;
-        }
-        if($response['response']['responseCode'] == '0001'){
-            unset($data['header']);
-            $data['created_at'] = date('Y-m-d H:i:s');
-            LenderRDLAccount::updateorcreate(
-                [
-                    'uid' => $uid
-                ],$this->lowercasekeydata($data)
-            );
-            LenderRDLAccountRegistered::create(
-                [
-                    'uid'=> $uid,
-                    'responseuuid' => $response['response']['responseUuid'],
-                    'created_at' => date('Y-m-d'),
-                    'journalnum' => $response['response']['journalNum'],
-                    'cifnumber' => $response['response']['cifNumber'],
-                    'mobilephone' => $response['response']['mobilePhone'],
-                    'status' => 'register',
-                    'branchopening' => $response['response']['branchOpening'],
-                    'idnumber' => $response['response']['idNumber'],
-                    'customername' => $response['response']['customerName'],
-                ]
-            );
-        }else{
-            return false;
-        }
-
-        return true;
-    }
     public function lowercasekeydata($data){
         $result =[];
         foreach($data as $k=>$v){
@@ -82,7 +40,6 @@ class BNI
         }
         return $result;
     }
-
     private function request_log($response, $uid){
         LenderRDLAccountLogs::create([
             'response' => $response,
@@ -91,9 +48,7 @@ class BNI
         ]);
 
     }
-
-    private function login()
-    {
+    private function login(){
         $url = "/api/oauth/token";
         $response = Http::asForm()->withHeaders([
             'Authorization' => "Basic " . base64_encode($this->CLIENT_ID . ':' . $this->CLIENT_SECRET)
@@ -122,9 +77,7 @@ class BNI
 
         return $number;
     }
-
-    private function buildBody($data , $status)
-    {
+    private function buildBody($data , $status){
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
@@ -149,7 +102,22 @@ class BNI
         $request["request"]["header"]["signature"] = $signature;
         return $request;
     }
-
+    private function buildBodyPayload($data){
+        $header = [
+            'companyId' => $this->COMPANY_ID,
+            "parentCompanyId" => "",
+            "requestUuid" => $this->requestUUID()
+        ];
+        $data["header"] = $header;
+        $request["request"] = $data;
+        if ($this->HOST == "8067") {
+            $signature = $this->generateSignatureSandbox($request);
+        } else {
+            $signature = $this->generateSignature($request);
+        }
+        $request["request"]["header"]["signature"] = $signature;
+        return $request;
+    }
     private function data_validation($data){
         $data['title'] = $this->title_validation($data['title']);
         $data['NPWPNum'] = str_replace('-','' , preg_replace('/[^A-Za-z0-9\-]/', '', $data['NPWPNum']));
@@ -240,8 +208,6 @@ class BNI
             return '01';
         }
     }
-
-
     private function generateSignatureSandbox($data)
     {
         $url = "/api/jwtCreator";
@@ -259,7 +225,6 @@ class BNI
 
         return $res['signature'];
     }
-
     private function generateSignature($data)
     {
         // Create token header as a JSON string
@@ -298,7 +263,6 @@ class BNI
         $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
         return $jwt;
     }
-
     public function register_investor($endpoint, $uid)
     {
         $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'register')->first();
@@ -325,7 +289,61 @@ class BNI
         $result = $this->process_registered_account_number($response->body() , $uid, $u->cifnumber);
         return $result;
     }
+    // REGISTER INVESTORS
+    public function request($endpoint, $data , $uid){
+        $body = $this->buildBody($data , true);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $endpoint . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        $result = $this->process_register_account($response->body() , $uid , $body['request']);
+        return $result;
+    }
+    private function process_register_account($body , $uid , $data){
+        $this->request_log($body , $uid);
+        if(!Utils::tryJson($body)){
+            return;
+        }
+        $response = json_decode($body , true);
+        if(!array_key_exists('response' , $response)){
+            return false;
+        }
+        if(!array_key_exists('responseCode' , $response['response'])){
+            return false;
+        }
+        if($response['response']['responseCode'] == '0001'){
+            unset($data['header']);
+            $data['created_at'] = date('Y-m-d H:i:s');
+            LenderRDLAccount::updateorcreate(
+                [
+                    'uid' => $uid
+                ],$this->lowercasekeydata($data)
+            );
+            LenderRDLAccountRegistered::create(
+                [
+                    'uid'=> $uid,
+                    'responseuuid' => $response['response']['responseUuid'],
+                    'created_at' => date('Y-m-d'),
+                    'journalnum' => $response['response']['journalNum'],
+                    'cifnumber' => $response['response']['cifNumber'],
+                    'mobilephone' => $response['response']['mobilePhone'],
+                    'status' => 'register',
+                    'branchopening' => $response['response']['branchOpening'],
+                    'idnumber' => $response['response']['idNumber'],
+                    'customername' => $response['response']['customerName'],
+                ]
+            );
+        }else{
+            return false;
+        }
 
+        return true;
+    }
+
+    // REGISTER INVESTOR's ACCOUNT
     private function process_registered_account_number($body , $uid ,$cifNumber){
         $this->response_registered($body , $uid);
         if(!Utils::tryJson($body)){
@@ -349,10 +367,8 @@ class BNI
         }else{
             return false;
         }
-
         return true;
     }
-
     private function response_registered($body , $uid){
         LenderRDLAccountRegisteredLogs::create(
             [
@@ -363,4 +379,113 @@ class BNI
         );
     }
 
+    // INQUIRY REQUEST
+    public function inquiry_account_info($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // INQUIRY BALANCE
+    public function inquiry_balance($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_BALANCE . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    //ACCOUNT HISTORY
+    public function account_history($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_ACCOUNT_HISTORY . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // TRANSFER 
+    public function transfer($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_TRANSFER . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // CHECK PAYMENT STATUS
+    public function payment_status($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_STATUS . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // PAYMENT USING CLEARING
+    public function payment_clearing($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_CLEARING . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // PAYMENT USING RTGS
+    public function payment_rtgs($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_RTGS . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+    // INQUIRY INTERNATIONAL BANK
+    public function inquiry_interbank($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_INTER_BANK_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
+
+    // PAYMENT USING INTERBANK
+    public function payment_interbank($data){
+        $body = $this->buildBodyPayload($data);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_INTERNET_BANK . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+        print_r($response->body());
+    }
 }

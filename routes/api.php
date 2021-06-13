@@ -44,3 +44,15 @@ Route::get('/sign/callback', 'Api\Digisign@sign_callback')->name('user.digisign.
 Route::get('/activation/callback', 'Api\Digisign@activation_callback')->name('user.digisign.calback');
 
 
+Route::get('/bni/inquiry-account_info', 'Api\BNITest@inquiry_account_info');
+Route::get('/bni/inquiry-balance', 'Api\BNITest@inquiry_balance');
+Route::get('/bni/account-history', 'Api\BNITest@account_history');
+Route::get('/bni/transfer', 'Api\BNITest@transfer');
+Route::get('/bni/payment-status', 'Api\BNITest@payment_status');
+Route::get('/bni/payment-clearing', 'Api\BNITest@payment_clearing');
+Route::get('/bni/payment-rtgs', 'Api\BNITest@payment_rtgs');
+Route::get('/bni/interbank', 'Api\BNITest@inquiry_interbank');
+Route::get('/bni/payment-interbank', 'Api\BNITest@payment_interbank');
+
+
+

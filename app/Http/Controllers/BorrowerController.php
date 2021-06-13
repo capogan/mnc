@@ -230,12 +230,11 @@ class BorrowerController extends Controller
             }
         }
 
-        $loans =LoanRequest::
+        $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
-            ->select('request_loan.*','master_status_loan_request.title as status_title')
+            ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
+            ->select('request_loan.*','master_status_loan_request.title as status_title','request_loan_document.document_id')
             ->where('uid',$uid)->get();
-
-
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
