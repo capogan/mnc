@@ -20,6 +20,8 @@ class BNI
     private $ACCESS_TOKEN = "";
     private $EXPIRES_AT;
 
+    private $REGISTER = "/p2pl/register/investor";
+    private $REGISTER_ACCOUNT = "/p2pl/register/investor/account";
     private $INQUIRY_ACCOUNT = "/p2pl/inquiry/account/info";
     private $INQUIRY_BALANCE = "/p2pl/inquiry/account/balance";
     private $INQUIRY_ACCOUNT_HISTORY = "/p2pl/inquiry/account/history";
@@ -48,13 +50,14 @@ class BNI
         ]);
 
     }
-    private function login(){
+    public function login(){
         $url = "/api/oauth/token";
         $response = Http::asForm()->withHeaders([
             'Authorization' => "Basic " . base64_encode($this->CLIENT_ID . ':' . $this->CLIENT_SECRET)
         ])->post($this->BASE_URL . ":" . $this->HOST . $url, [
             'grant_type' => 'client_credentials',
         ]);
+        print_r($response->body());exit;
         $res = json_decode($response->body(), true);
         $this->ACCESS_TOKEN = $res['access_token'];
         $expiresIn = $res['expires_in'];
@@ -225,6 +228,7 @@ class BNI
 
         return $res['signature'];
     }
+
     private function generateSignature($data)
     {
         // Create token header as a JSON string
@@ -263,6 +267,7 @@ class BNI
         $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
         return $jwt;
     }
+
     public function register_investor($endpoint, $uid)
     {
         $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'register')->first();
@@ -302,6 +307,33 @@ class BNI
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
         return $result;
     }
+    // JUST FOR TEST
+    public function request_sit($data){
+        $body = $this->buildBodyPayload($data , true);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+       print_r($response->body());
+       
+    }
+
+    public function request_account_sit($data){
+        $body = $this->buildBodyPayload($data , true);
+        if (time() >= strtotime($this->EXPIRES_AT)) {
+            $this->login();
+        }
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        $response = Http::withHeaders([
+            'X-API-Key' => $this->API_KEY
+        ])->post($url, $body);
+       print_r($response->body());
+       
+    }
+
     private function process_register_account($body , $uid , $data){
         $this->request_log($body , $uid);
         if(!Utils::tryJson($body)){

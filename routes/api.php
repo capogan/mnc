@@ -43,7 +43,9 @@ Route::post('/ekycres', 'Api\UsersEKYCController@uploadDocumentest')->name('user
 Route::get('/sign/callback', 'Api\Digisign@sign_callback')->name('user.digisign.calback');
 Route::get('/activation/callback', 'Api\Digisign@activation_callback')->name('user.digisign.calback');
 
-
+Route::get('/bni/login', 'Api\BNITest@login');
+Route::get('/bni/register', 'Api\BNITest@register');
+Route::get('/bni/register/account', 'Api\BNITest@register_account');
 Route::get('/bni/inquiry-account_info', 'Api\BNITest@inquiry_account_info');
 Route::get('/bni/inquiry-balance', 'Api\BNITest@inquiry_balance');
 Route::get('/bni/account-history', 'Api\BNITest@account_history');
