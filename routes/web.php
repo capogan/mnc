@@ -68,6 +68,8 @@ Route::get('/profile/faktur', 'BorrowerController@my_profile_faktur')->name('bor
 Route::get('/profile/transaction', 'BorrowerController@my_profile_transaction')->name('borrower.personal.profile');
 Route::post('/borrower/submit/loan', 'BorrowerController@sumbit_loan')->name('submit.loan');
 Route::get('/profile/sign/{invoice}', 'BorrowerController@sign')->name('personal.sign');
+Route::post('/borrower/document/sign', 'BorrowerController@get_document_to_sign')->name('personal.sign.document');
+
 Route::get('/profile/congratulation/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.congratulation');
 Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');

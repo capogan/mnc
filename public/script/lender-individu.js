@@ -364,7 +364,7 @@ $(document).on('ready', function () {
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '/profile/lender-individu/activate_account',
+            url: '/profile/lender/activate_account',
             method: "POST",
             headers: {
                 'X-CSRF-TOKEN': token

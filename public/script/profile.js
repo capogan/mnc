@@ -339,6 +339,33 @@ $(document).on('change' , 'input[type="file"]' , function(){
     readURL(this , $(this).attr('id'));
 });
 
+$(document).on('click' , '#request_file_assign' , function(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url: '/borrower/document/sign',
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        data: {invoice : $('#invoice_number').val()},
+        beforeSend: function () {
+            
+        },
+        success: function (response) {
+            if (response.status == true) {
+                window.location.href = response.url;
+            }else{
+                alert('Something wrong with this.');
+            }
+           // window.location.href = response.url;
+        },
+        error: function (xhr, status, error) {
+           
+        }
+    })
+});
+
+
 function readURL(input , imagetarget) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

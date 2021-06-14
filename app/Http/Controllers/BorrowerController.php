@@ -27,7 +27,9 @@ use App\CreditScore;
 use App\Dependents;
 use App\BecomePartner;
 use App\BuildingStatus;
+use App\DigisignActivation;
 use App\Estabilished;
+use App\Helpers\DigiSign;
 use App\Legality;
 use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
@@ -228,12 +230,11 @@ class BorrowerController extends Controller
             }
         }
 
-        $loans =LoanRequest::
+        $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
-            ->select('request_loan.*','master_status_loan_request.title as status_title')
+            ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
+            ->select('request_loan.*','master_status_loan_request.title as status_title','request_loan_document.document_id')
             ->where('uid',$uid)->get();
-
-
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
@@ -356,24 +357,45 @@ class BorrowerController extends Controller
     }
 
     public function sign(Request $request){
-
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
         if($loan){
             if($loan->status != '19'){
                 return Redirect::to('/profile/transaction');
             }
-
+            $status_activation = DigisignActivation::where('uid' , Auth::id())->first();
+            if(!$status_activation){
+                return abort(404, 'User belum terdaftar di digisign.');
+            }
+            if($status_activation->status_activation != 'active'){
+                $data = array(
+                    'sign_agreement' => DigisignActivation::where('uid' , Auth::id())->first(),
+                );
+                return view('pages.borrower.activation_digisign_account',$this->merge_response($data, static::$CONFIG));
+            }
             $data = [
-
                 'no_invoice'    => $request->invoice,
                 'id_loan'       => $loan->id,
             ];
             return view('pages.borrower.sign',$this->merge_response($data, static::$CONFIG));
-
         }else{
             abort(404, 'Page Not Found.');
         }
+    }
 
+    public function get_document_to_sign(Request $request){
+        $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
+                                ->where('request_loan.invoice_number' , $request->invoice)
+                                ->where('request_loan.uid' , Auth::id())
+                                ->where('request_loan.status' , '19')
+                                ->first();
+        $digisign = new DigiSign;
+        $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
+        return response()->json([
+            "status" => true,
+            'url' => $endpoint,
+            "message" => 'Berhasil Ditandatangani',
+        ]);
+       // print_r($endpoint);
     }
 
     public function congratulation(Request $request){
