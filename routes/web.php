@@ -33,8 +33,8 @@ Route::get('/pinjam', function () {
     return view('pinjam');
 });
 
-Auth::routes();
-//Auth::routes(['verify' => true]);
+//Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/logout', function () {
     Auth::logout();
