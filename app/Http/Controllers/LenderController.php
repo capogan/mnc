@@ -43,7 +43,7 @@ class LenderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     public function editable_bio(){
@@ -251,7 +251,7 @@ class LenderController extends Controller
         //$this->store_data_to_digisign(Auth::id());
 
        $is_ready_data = LenderDirectorData::where('uid' , Auth::id())->first();
-       
+
         $validators = [
             'identity_number'       => ['required','min:16','max:16'],
             'director_name'         => 'required',
@@ -619,7 +619,7 @@ class LenderController extends Controller
          ]);
      }
 
-    
+
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         $editable = $this->editable_bio();
@@ -781,12 +781,12 @@ class LenderController extends Controller
         if(!$ready_rdl_account){
             $u = User::with('individuinfo')->where('id' , Auth::id())->first();
             $data = ['u' => $u , 'religion' => MasterReligion::get()];
-            return view('pages.lender.rdl_account', $data);    
+            return view('pages.lender.rdl_account', $data);
         }
         if(!isset($request->mark)){
             return abort('404');
         }
-        
+
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -819,7 +819,7 @@ class LenderController extends Controller
         $borrower = User::where('id' , $loan->uid)
                     ->with('digisigndata')
                     ->first();
-        
+
         $lender = User::where('id' ,Auth::id())
                     ->with('digisigndata')
                     ->first();
@@ -938,7 +938,7 @@ class LenderController extends Controller
         $digisign = new DigiSign();
         $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
         //echo $dc->document_id; exit;
-        if($dc){    
+        if($dc){
             $endpoint = $digisign->do_sign_the_document($dc->document_id);
             return response()->json([
                 "status" => true,
@@ -995,7 +995,7 @@ class LenderController extends Controller
             "message" => 'Berhasil Ditandatangani',
         ]);
     }
-    
+
     public function upload_document_aggreement(Request $request){
         $lender = LenderBusiness::where('uid' , Auth::id())->first();
         $director_profile = LenderDirectorData::where('uid' , Auth::id())->where('position' ,'0')->first();
@@ -1111,7 +1111,7 @@ class LenderController extends Controller
         ->with('business_info')
         ->with('scoring')
         ->where('id' ,Utils::decrypt($request->p))->where('lender_uid' , Auth::id())->first();
-       
+
         $loan_installments = LoanInstallment::
         leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
         where('id_request_loan',$loan->id)->orderBy('stages','ASC')
@@ -1133,7 +1133,7 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
-       
+
         $status_lender = LenderVerification::where('uid' , Auth::id())->first();
         if($status_lender){
             if($status_lender->status == 'reject'){
@@ -1164,7 +1164,7 @@ class LenderController extends Controller
             ->leftJoin('provinces' ,'lender_business.id_province' , 'provinces.id')
             ->leftJoin('lender_bank_info' , 'lender_bank_info.uid' , 'lender_business.uid')
             ->where('users.id', Auth::id())->first();
-            
+
             $other_data = User::with('commissioners')
             ->with('directors')
             ->with('document')
@@ -1177,8 +1177,8 @@ class LenderController extends Controller
             return view('pages.lender.profile_lender_business',$this->merge_response($data, static::$CONFIG));
 
         }
-        
-        
+
+
     }
 
     public function register_rdl_account(){
@@ -1242,7 +1242,7 @@ class LenderController extends Controller
         ];
         $bni = new BNI;
         $result = $bni->request("/p2pl/register/investor", $data, Auth::id());
-        
+
         if(!$result){
             $msg = [
                 'message' => 'Gagal meregistrasi akun RDL, Silahkan contact administrator'
@@ -1264,7 +1264,7 @@ class LenderController extends Controller
     }
 
     public function update_rdl_account(Request $request){
-       
+
         $validation = Validator::make($request->all(),
         [
                 'rt' => 'required|max:3',
@@ -1342,7 +1342,7 @@ class LenderController extends Controller
             'message' => $msg
         ];
         return view('pages.lender.rdl_info',$this->merge_response($data, static::$CONFIG));
-        
+
     }
 
 }

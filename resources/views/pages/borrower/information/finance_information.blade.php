@@ -1,3 +1,6 @@
+@section('css')
+    <link href="{{asset('css/transaction.css')}}" rel="stylesheet">
+@endsection
 <div class="tab-pane" id="invest" role="tabpanel">
     <div class="row">
         <div class="col">
@@ -12,23 +15,30 @@
                             <table class="table table-striped table-bordered mt-4">
                                 <thead>
                                     <tr>
-                                        <th>Nomor Invoice</th>
-                                        <th>Pinjaman diajukan</th>
+                                        <th>No Pengajuan</th>
+                                        <th>No Invoice</th>
+                                        <th>Nilai Pinjaman</th>
+                                        <th>Tanggal Pengajuan</th>
+                                        <th>Tanggal Pencairan</th>
+                                        <th>Tanggal Pelunasan</th>
                                         <th>Status Pinjaman</th>
-                                        <th>Tanggal Permintaan</th>
-                                        <th>Tanggal disetujui</th>
-                                        <th></th>
+                                        <th>Dokumen Perjanjian</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if($request_loan)
                                     @foreach($request_loan as $item)
                                         <tr>
+                                            <td>SIAP0000{{ $loop->iteration }}</td>
                                             <td>{{$item->invoice_number}}</td>
                                             <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
-                                            <td><span class="label label-warning">{{$item->status_title }}</span></td>
+
                                             <td>{{ Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->created_at)))}}</td>
                                             <td></td>
+                                            <td></td>
+                                            <td><span class="label label-warning">{{$item->status_title }}</span></td>
+
                                             @if($item->status == '19')
                                                 <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
                                             @elseif($item->status == '21')

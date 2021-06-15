@@ -1,0 +1,19 @@
+.table>thead>tr>th {
+    padding: 12px 26px 12px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    line-height: normal;
+}
+
+ul {
+    list-style-type: decimal;
+}
+li{
+    text-align: justify;
+}

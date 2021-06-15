@@ -24,7 +24,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
 
     }
 
@@ -439,6 +439,7 @@ class UsersController extends Controller
     }
 
     public function otp_verified(){
+
 
         return view('auth.verified_otp');
     }
