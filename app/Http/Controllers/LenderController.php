@@ -840,6 +840,7 @@ class LenderController extends Controller
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
 
+
         $create_borrower_file = $this->created_borrower_document($data , $borrower,$request->id);
         if(!$create_borrower_file){
             return $json = [
@@ -849,35 +850,35 @@ class LenderController extends Controller
         }
 
         $send_to = [
-            // [
-            //     'email' => $borrower->digisigndata->email,
-            //     'name' => $borrower->digisigndata->full_name
-            // ],
+            [
+                'email' => 'ogan@capioteknologi.co.id',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan'
+            ],
             [
                 'email' => $lender->digisigndata->email,
                 'name' => $lender->digisigndata->full_name
             ]
         ];
         $req_sign = [
-            // [
-            //     'name' => $borrower->digisigndata->full_name,
-            //     'email' => $borrower->digisigndata->email,
-            //     'aksi_ttd' => 'ttd',
-            //     'kuser' => null,
-            //     'user' => 'ttd2',
-            //     'page' => '4',
-            //     'llx' => '193',
-            //     'lly' => '13',
-            //     'urx' => '89.3',
-            //     'ury' => '192.3',
-            //     'visible' => 1
-            // ],
+            [
+                'name' => 'ogan@capioteknologi.co.id',
+                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd1',
+                'page' => '4',
+                'llx' => '193',
+                'lly' => '13',
+                'urx' => '89.3',
+                'ury' => '192.3',
+                'visible' => 1
+            ],
             [
                 'name' => $lender->digisigndata->full_name,
                 'email' => $lender->digisigndata->email,
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
-                'user' => 'ttd1',
+                'user' => 'ttd2',
                 'page' => '4',
                 'llx' => '430',
                 'lly' => '192.3',
@@ -900,7 +901,8 @@ class LenderController extends Controller
                 'document_id' => $doc_id,
                 'request_loan_id' => Utils::decrypt($request->id),
                 'created_at' => date('Y-m-d H:i:s'),
-                'status' => 'active'
+                'status' => 'active',
+                'type'=>'lender'
             ]
         );
         if(!$create_doc_aggreement){
@@ -951,7 +953,6 @@ class LenderController extends Controller
             ];
         }
     }
-
 
 
     public function loan_request_log($json , $created_by , $status){
