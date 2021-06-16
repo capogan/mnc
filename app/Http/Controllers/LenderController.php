@@ -839,16 +839,7 @@ class LenderController extends Controller
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
-
-
-        $create_borrower_file = $this->created_borrower_document($data , $borrower,$request->id);
-        if(!$create_borrower_file){
-            return $json = [
-                "status"=> 'error',
-                "message"=> 'Pinjaman tidak dapat didanai , terjadi kesalahan proses dokumen peminjam.',
-            ];
-        }
-
+        
         $send_to = [
             [
                 'email' => 'ogan@capioteknologi.co.id',
