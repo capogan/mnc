@@ -859,9 +859,9 @@ class LenderController extends Controller
                 'user' => 'ttd1',
                 'page' => '4',
                 'llx' => '193',
-                'lly' => '13',
-                'urx' => '89.3',
-                'ury' => '192.3',
+                'lly' => '196',
+                'urx' => '90',
+                'ury' => '267',
                 'visible' => 1
             ],
             [
@@ -871,10 +871,10 @@ class LenderController extends Controller
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '4',
-                'llx' => '430',
-                'lly' => '192.3',
-                'urx' => '330',
-                'ury' => '193.7',
+                'llx' => '429',
+                'lly' => '196',
+                'urx' => '331',
+                'ury' => '267',
                 'visible' => 1
             ]
         ];
