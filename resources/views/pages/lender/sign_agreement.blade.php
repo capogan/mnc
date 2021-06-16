@@ -1,5 +1,12 @@
 @extends('layouts.app_lender')
 @section('content')
+<style>
+
+    .lead{
+        text-align: justify;
+    }
+
+</style>
 
 <div class="container containers-with-margin">
         <div class="row">
@@ -58,36 +65,14 @@
                                                                 <input type="hidden" name="personal_id" id="personal_id"
                                                                     value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
                                                                 <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
-                                                                <p class="lead">To make your home loan journey a smooth
-                                                                    sail, in
-                                                                    this article we will help you to know eligibility
-                                                                    criteria,
-                                                                    rates of interest, process, necessary documents,
-                                                                    comparison
-                                                                    and transfer for lowest rates. </p>
+                                                                <p class="lead">TPT, Siap dalam menyediakan layanan tanda tangan Eletronik bekerja sama dengan Platform Digisign. sehingga dalam hal ini Anda diharuskan untuk melakukan pendaftaran pada platform Digisign.</p>
                                                                 @if ($sign_agreement)
-                                                                    <div class="row">
-                                                                        <div
-                                                                            class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                            <p>Maecenas in ultricies sem. Nunc eget orci mi. Sed
-                                                                                porttitor lacus quis scelerisque dignissim.
-                                                                                Nullam
-                                                                                bibendum lputatesAliquam non mageselislacerat
-                                                                                sapien
-                                                                                dolor et dui.</p>
-                                                                        </div>
-                                                                        <div
-                                                                            class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                            <p>Sed sit amet volutpat erat. Lorem ipsum dolor sit
-                                                                                amet lorem consectetur adipiscing elit. Nam
-                                                                                massa
-                                                                                ipsum, mollis et sit amet ullamcorque duraesent
-                                                                                nec
-                                                                                vehicula dolor. </p>
-                                                                        </div>
-                                                                    </div>
+
+                                                                        <p class="lead">Persiapkan Ponsel anda. karena anda di haruskan memasukan kode OTP sebagai tanda verifikasi.
+                                                                            (dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP)
+                                                                        </p>
+
                                                                     <hr>
-                                                                    <p>Silahkan aktifasi akun digisign anda sebelum melakukan tanda tangan perjanjian.</p>
                                                                     @if($sign_agreement->status_activation != 'active')
                                                                         <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Account</a>
                                                                     @endif

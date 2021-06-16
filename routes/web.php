@@ -202,6 +202,8 @@ Route::get('laporan-pdf','MasterController@generatePDF');
 Route::get('/digisign/request', 'LenderIndividualController@test_request_register_data');
 
 
+Route::get('/lender/dashboard', 'LenderController@dashboard')->name('lender.dashboard');
+
 
 
 Route::get('agreement/lender','LenderController@aggreement_lender');
