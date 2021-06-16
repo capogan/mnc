@@ -254,6 +254,7 @@
                                                             <div class="col">
                                                                 <h6>Nomor Rekening Dana Lender<span>*</span></h6>
                                                                 <input type="text"  class="form-control" placeholder="Contoh : 126812912371" id="rek_dana_lender" name="rek_lender" value="{{isset($lender_profile->rdl_number) ? $lender_profile->rdl_number : ''}}">
+                                                                <label style="font-size:8pt;color: red;text-align: justify">Bila Anda belum memiliki akun RDL pada bank BNI, Anda dapat menghubungi layanan customer service kami atau Bank BNI cabang terdekat.</label>
                                                             </div>
                                                         </div>
                                                         @if($editable == true)

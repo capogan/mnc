@@ -238,14 +238,9 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row mt-4" id="sme_resident">
-                                                            <div class="col">
                                                                 <h6>Status Tempat Tinggal <span>*</span></h6>
                                                                 <select class="form-control" id="status_of_residence"
-                                                                    name="status_of_residence">
+                                                                        name="status_of_residence">
                                                                     <option value="">Pilih Status Tempat Tinggal</option>
                                                                     @foreach ($status_of_residence as $val)
                                                                         @if (isset($lender_individual_personal_info->status_of_residence))
@@ -259,7 +254,9 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                        </div>
 
+                                                        <div class="row mt-4" id="sme_resident">
                                                             <div class="col">
                                                                 <h6>Nomor NPWP <span>*</span></h6>
                                                                 <div class="form-group input-group">
@@ -268,20 +265,15 @@
                                                                         value="{{ isset($lender_individual_personal_info->no_npwp) ? $lender_individual_personal_info->no_npwp : '' }}">
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="row mt-4" id="sme_cc">
                                                             <div class="col">
                                                                 <h6>Jumlah Kartu Kredit <span>*</span></h6>
                                                                 <div class="form-group input-group">
                                                                     <input type="number" class="form-control group3"
-                                                                        placeholder="Jumlah Kartu Kredit"
-                                                                        id="total_credit_card" name="total_credit_card"
-                                                                        value="{{ isset($lender_individual_personal_info->total_credit_card) ? $lender_individual_personal_info->total_credit_card : '' }}">
+                                                                           placeholder="Jumlah Kartu Kredit"
+                                                                           id="total_credit_card" name="total_credit_card"
+                                                                           value="{{ isset($lender_individual_personal_info->total_credit_card) ? $lender_individual_personal_info->total_credit_card : '' }}">
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="col">
                                                             </div>
                                                         </div>
 

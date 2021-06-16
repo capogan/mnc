@@ -40,7 +40,7 @@ class LenderIndividualController extends Controller
 
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
 
@@ -51,7 +51,7 @@ class LenderIndividualController extends Controller
         return;
 
         $u = User::with('individuinfo')->where('id' , 149)->first();
-        
+
         if(!$u){
             return;
         }
@@ -138,7 +138,7 @@ class LenderIndividualController extends Controller
         //print_r($callback_signers);
     }
 
-   
+
 
 
     public function urlValidation($u)
@@ -771,7 +771,7 @@ class LenderIndividualController extends Controller
 
             $this->store_data_to_digisign(Auth::id());
             DB::commit();
-            
+
         } catch (Exception $e) {
             $json = [
                 "status" => false,
@@ -986,7 +986,7 @@ class LenderIndividualController extends Controller
     {
         $digisign = new DigiSign();
         $dc = DigiSignDocument::where('uid' , Auth::id())->where('step' ,'registration')->first();
-        if($dc){    
+        if($dc){
             $endpoint = $digisign->do_sign_the_document($dc->document_id);
             return response()->json([
                 "status" => true,
@@ -1054,7 +1054,7 @@ class LenderIndividualController extends Controller
     }
 
     public function activation_account_digisign(){
-        
+
         $u = DigisignActivation::where('uid' , Auth::id())->first();
         $digisign = new DigiSign;
         $digisign->activation_account($u->email, Auth::id() , $u->nik);

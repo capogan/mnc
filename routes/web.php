@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/digisign/request', 'LenderIndividualController@test_request_register_data');
+
 
 Route::get('/', function () {
     return view('home');
@@ -33,8 +33,8 @@ Route::get('/pinjam', function () {
     return view('pinjam');
 });
 
-Auth::routes();
-//Auth::routes(['verify' => true]);
+//Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -198,6 +198,8 @@ Route::get('/get/city','MasterController@get_city')->name('city');
 Route::get('/get/district','MasterController@get_district')->name('district');
 Route::get('/get/villages','MasterController@get_villages')->name('get_villages');
 Route::get('laporan-pdf','MasterController@generatePDF');
+
+Route::get('/digisign/request', 'LenderIndividualController@test_request_register_data');
 
 
 
