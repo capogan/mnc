@@ -850,6 +850,7 @@ class LenderController extends Controller
                 'name' => $lender->digisigndata->full_name
             ]
         ];
+        
         $req_sign = [
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
@@ -858,10 +859,10 @@ class LenderController extends Controller
                 'kuser' => null,
                 'user' => 'ttd1',
                 'page' => '4',
-                'llx' => '193',
+                'llx' => '90',
                 'lly' => '196',
-                'urx' => '90',
-                'ury' => '267',
+                'urx' => '191',
+                'ury' => '270',
                 'visible' => 1
             ],
             [
@@ -871,10 +872,10 @@ class LenderController extends Controller
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '4',
-                'llx' => '429',
+                'llx' => '329',
                 'lly' => '196',
-                'urx' => '331',
-                'ury' => '267',
+                'urx' => '430',
+                'ury' => '270',
                 'visible' => 1
             ]
         ];
