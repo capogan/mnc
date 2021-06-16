@@ -97,11 +97,11 @@
                                 </div>
                                 <div class="col">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffff" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
-</svg>
-</div>
-</div>
-</a>
+                                      <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                                    </svg>
+                                    </div>
+                                    </div>
+                                    </a>
 
                                 <ul>
                                     <li><a href="/lender/dashboard" title="Home page 1" class="animsition-link">Dashboard</a></li>
@@ -109,9 +109,9 @@
                                     <li><a href="/logout" title="Home page 3" class="animsition-link">Keluar</a></li>
 
                                 </ul>
-                            </li>
-                        </ul>
-                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                 @else
                 <div class="row mt-3">
                     <div class="btn-action">

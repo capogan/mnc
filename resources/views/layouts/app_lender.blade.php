@@ -15,6 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/2.1.0/select2.css" rel="stylesheet" />
 
 
+
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.css')}}">
     <!-- Google Fonts -->
     <link
@@ -35,52 +36,97 @@
     <div>
         <div class="row pl-5">
             <div class="col-sm-1.1">
+                <!-- logo -->
+
                 <div class="logo p-2 mt-2">
-                <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
+                    <a href="/"><img src="/images/Artboard_2.png" class="saturate"></a>
+
+
                 </div>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-1 mt-2">
                 <div class="logo p-2">
                     <img src="/images/ojk3.png" alt="Logo">
-                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span>
+                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-55px;font-size: 11pt; margin-top:10px">TKB90 100%</span>
                 </div>
             </div>
-            <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
+            <!-- logo -->
+            <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12">
                 <div id="navigation" class="p-2">
+                    <!-- navigation start-->
                     <ul>
-                            <li class="active"><a href="/" class="animsition-link">Home</a></li>
+                        <li class="active"><a href="/" class="animsition-link">Home</a>
+
                         @if (Auth::check())
-                             {{-- <li><a href="/profile/lender" class="animsition-link">profile</a></li> --}}
-                            <li class="active"><a href="#" class="animsition-link">profile</a>
+                            <li><a href="/profile" class="animsition-link">Profile</a>
+                            </li>
+                        @else
+                            <li><a href="/lender" class="animsition-link">Pendanaan</a>
+                            </li>
+                            <li><a href="/pinjam" class="animsition-link">Peminjam</a>
+                            </li>
+                        @endif
+
+                        <li class="active"><a href="/" class="animsition-link">Perusahaan</a>
+                            <ul>
+                                <li><a href="/tentang-kami" class="animsition-link">Tentang Kami</a>
+                                <li><a href="/kegiatan" class="animsition-link">Kegiatan</a>
+                            </ul>
+                        <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a>
+
+
+                    </ul>
+                </div>
+                <!-- /.navigation start-->
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block">
+            @if (Auth::check())
+
+
+                <!--<div class="btn-action">
+                        <a href="/logout" class="btn btn-danger">Keluar</a>
+                    </div>-->
+                    <div id="navigation">
+                        <ul>
+                            <li class="active"><a href="#" class="animsition-link">
+                                    <div class="row">
+                                        <div class="col-md-9 justify-content-end">
+                                            <p class="text-right">
+                                                {{Auth::user()->name}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffff" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+
                                 <ul>
-                                    <li><a href="/profile/lender" >Profile</a></li>
-                                    <li><a href="/profile/rdl">Rekening Dana Lender</a></li>
+                                    <li><a href="/lender/dashboard" title="Home page 1" class="animsition-link">Dashboard</a></li>
+                                    <li><a href="#" title="Home page 2" class="animsition-link">Profile</a> </li>
+                                    <li><a href="/logout" title="Home page 3" class="animsition-link">Keluar</a></li>
 
                                 </ul>
                             </li>
-                            <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
-                            <li><a href="/portofolio" class="animsition-link">Portofolio</a></li>
-                        @else
-                            <li><a href="/register/lender" class="animsition-link">Pendanaan</a></li>
-                            <li><a href="/register/borrower" class="animsition-link">Peminjam</a></li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 d-none d-xl-block d-lg-block mt-3">
-                @if (Auth::check())
-                    <div class="btn-action">
-                        <a href="/logout" class="btn btn-danger">KELUAR</a> </div>
+                        </ul>
                     </div>
                 @else
-                    <div class="btn-action">
-                        <a href="/login" class="btn btn-danger">MASUK</a> </div>
+                    <div class="row mt-3">
+                        <div class="btn-action">
+                            <a href="/login" class="btn btn-danger">MASUK</a>
+                        </div>
                     </div>
                 @endif
-
             </div>
+
+
+
         </div>
+
     </div>
+</div>
 </div>
 @yield('content')
 
