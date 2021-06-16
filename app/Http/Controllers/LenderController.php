@@ -1345,4 +1345,12 @@ class LenderController extends Controller
 
     }
 
+
+    public function dashboard(){
+        $data = array(
+            'provinces' => Province::get(),
+        );
+        return view('pages.lender.dashboard',$this->merge_response($data, static::$CONFIG));
+    }
+
 }

@@ -26,7 +26,7 @@
     <!-- Flaticon -->
     <link href="{{asset('css/flaticon.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/simple-slider.css')}}">
-
+    @yield('css')
     <title>SIAP</title>
 
 </head>
@@ -42,7 +42,7 @@
             <div class="col-sm-1">
                 <div class="logo p-2">
                     <img src="/images/ojk3.png" alt="Logo">
-                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span> 
+                    <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-50px;font-size: 11pt; margin-top:10px">TKB90 100%</span>
                 </div>
             </div>
             <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
@@ -55,7 +55,7 @@
                                 <ul>
                                     <li><a href="/profile/lender" >Profile</a></li>
                                     <li><a href="/profile/rdl">Rekening Dana Lender</a></li>
-                                    
+
                                 </ul>
                             </li>
                             <li><a href="/lender/funding" class="animsition-link">Pendanaan</a></li>
