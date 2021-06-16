@@ -485,7 +485,7 @@ class DigiSign {
     }
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
-        //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
+        $response = '{"document_id":"20210616_60c9eb367c05b_184","status_document":"complete","result":"00","email_user":"mario@yahoo.com","notif":"Sukses"}';
         $prc = $this->process_signers_callback($response , []);
         if(!$prc){
             return false;
@@ -502,7 +502,6 @@ class DigiSign {
                                     ->where('digisign_document_signers.document_id' , $res['document_id'])
                                     ->where('digisign_document.status_document' , '!=' , 'complete')
                                     ->first();
-                
                 if(!$document_signers){
                     return $this->signers_logs($response, $res);
                 }
@@ -520,8 +519,8 @@ class DigiSign {
                     // if borrower sign
                     $type = DigiSignDocument::select('request_loan_document.request_loan_id')
                     ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
-                    ->where('document_id' , $res['document_id'])
-                    ->where('branch' , 'Borrower_Aggreement')->first();
+                    ->where('digisign_document.document_id' , $res['document_id'])
+                    ->where('digisign_document.branch' , 'Borrower_Aggreement')->first();
                     if($type){
                         $this->update_request_loan_status($type->request_loan_id);
                     }else{
