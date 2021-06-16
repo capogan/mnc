@@ -830,39 +830,39 @@ class LenderController extends Controller
             ];
         }
         $data = [
-            'title' => 'PERJANJIAN KREDIT',
-            'date_request_loan' => date('Y-m-d'),
+            'title' => 'PERJANJIAN PENGGUNAAN LAYANAN P2P LENDING',
+            'date_request_loan' => date('d m Y'),
             'borrower' => $borrower,
             'lender' => $lender,
             'loan' => $loan
         ];
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
-        PDF::loadView('agreement.credit_agreement', $data)->save($pathDocument);
+        PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
         $send_to = [
-            [
-                'email' => $borrower->digisigndata->email,
-                'name' => $borrower->digisigndata->full_name
-            ],
+            // [
+            //     'email' => $borrower->digisigndata->email,
+            //     'name' => $borrower->digisigndata->full_name
+            // ],
             [
                 'email' => $lender->digisigndata->email,
                 'name' => $lender->digisigndata->full_name
             ]
         ];
         $req_sign = [
-            [
-                'name' => $borrower->digisigndata->full_name,
-                'email' => $borrower->digisigndata->email,
-                'aksi_ttd' => 'ttd',
-                'kuser' => null,
-                'user' => 'ttd2',
-                'page' => '4',
-                'llx' => '12',
-                'lly' => '13',
-                'urx' => '34',
-                'ury' => '45',
-                'visible' => 1
-            ],
+            // [
+            //     'name' => $borrower->digisigndata->full_name,
+            //     'email' => $borrower->digisigndata->email,
+            //     'aksi_ttd' => 'ttd',
+            //     'kuser' => null,
+            //     'user' => 'ttd2',
+            //     'page' => '4',
+            //     'llx' => '12',
+            //     'lly' => '13',
+            //     'urx' => '34',
+            //     'ury' => '45',
+            //     'visible' => 1
+            // ],
             [
                 'name' => $lender->digisigndata->full_name,
                 'email' => $lender->digisigndata->email,
@@ -1346,11 +1346,21 @@ class LenderController extends Controller
     }
 
 
-    public function dashboard(){
+
+    public function dashboard()
+    {
         $data = array(
             'provinces' => Province::get(),
         );
-        return view('pages.lender.dashboard',$this->merge_response($data, static::$CONFIG));
+        return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
+    }
+    public function aggreement_lender(){
+
+    }
+
+    public function aggreement_borrower(){
+
+
     }
 
 }

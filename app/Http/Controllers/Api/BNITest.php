@@ -55,7 +55,7 @@ class BNITest  extends Controller
         $data = [
             "cifNumber" => "9100749959",
             "accountType" => "RDL",
-            "currency" => "IDR",
+            "currency" => "AUD",
             "openAccountReason" => "2",
             "sourceOfFund" => "1",
             "branchId" => "0259"
@@ -65,21 +65,21 @@ class BNITest  extends Controller
     }
     public function inquiry_account_info(){
         $data = [
-            "accountNumber" => "114476287"
+            "accountNumber" => "0115476117"
         ];
         $bni = new BNI;
         print_r($bni->inquiry_account_info($data));
     }
     public function inquiry_balance(){
         $data = [
-            "accountNumber" => "0115476117"
+            "accountNumber" => "9881045044352004"
         ];
         $bni = new BNI;
         print_r($bni->inquiry_balance($data));
     }
     public function account_history(){
         $data = [
-            "accountNumber" => "0115476117"
+            "accountNumber" => "0315617904"
         ];
         $bni = new BNI;
         print_r($bni->account_history($data));
@@ -87,8 +87,8 @@ class BNITest  extends Controller
 
     public function transfer(){
         $data = [
-            "accountNumber" => "0115476117",
-            "beneficiaryAccountNumber"=>"0115471119",
+            "accountNumber" => "0317448636",
+            "beneficiaryAccountNumber"=>"0316029783",
             "currency"=>"IDR",
             "amount"=>"11500",
             "remark"=>"Test P2PL"
@@ -99,7 +99,7 @@ class BNITest  extends Controller
 
     public function payment_status(){
         $data = [
-            "requestedUuid"=>"E8C6E0027F6E429F"
+            "requestedUuid"=>"5415C150FF7111E9"
         ];
         $bni = new BNI;
         print_r($bni->payment_status($data));
@@ -107,14 +107,14 @@ class BNITest  extends Controller
 
     public function payment_rtgs(){
         $data = [
-            "accountNumber" => "0115476117",
-            "beneficiaryAccountNumber"=>"3333333333",
+            "accountNumber" => "0116724773",
+            "beneficiaryAccountNumber"=>"123456",
             "beneficiaryAddress1"=>"Jakarta",
             "beneficiaryAddress2"=>"",
             "beneficiaryBankCode" => "CENAIDJA",
             "beneficiaryName" =>"Panji Samudra",
             "currency" => "IDR",
-            "amount" => "150000000",
+            "amount" => "500000",
             "remark" => "Test rtgs",
             "chargingType" =>"OUR"
         ];
@@ -124,14 +124,14 @@ class BNITest  extends Controller
 
     public function payment_clearing(){
         $data = [
-            "accountNumber" => "0115476117",
-            "beneficiaryAccountNumber" => "3333333333",
+            "accountNumber" => "0116724773",
+            "beneficiaryAccountNumber" => "123456",
             "beneficiaryAddress1"=>"Jakarta",
             "beneficiaryAddress2"=>"",
             "beneficiaryBankCode"=>"140397",
             "beneficiaryName"=>"Panji Samudra",
             "currency"=>"IDR",
-            "amount"=>"15000",
+            "amount"=>"5000000000",
             "remark"=>"Test kliring",
             "chargingType"=>"OUR"
         ];
@@ -141,9 +141,9 @@ class BNITest  extends Controller
 
     public function inquiry_interbank(){
         $data = [
-            "accountNumber" => "0316031099",
-            "beneficiaryBankCode" => "014",
-            "beneficiaryAccountNumber" => "01400000"
+            "accountNumber" => "0115476117",
+            "beneficiaryBankCode" => "002",
+            "beneficiaryAccountNumber" => "00200000"
         ];
         $bni = new BNI;
         print_r($bni->inquiry_interbank($data));
@@ -151,10 +151,10 @@ class BNITest  extends Controller
 
     public function payment_interbank(){
         $data = [
-            "accountNumber" => "0316031099",
-            "beneficiaryAccountNumber"=>"01400000",
+            "accountNumber" => "0115476117",
+            "beneficiaryAccountNumber"=>"00200000",
             "beneficiaryAccountName"=>"Bpk HANS",
-            "beneficiaryBankCode"=>"014",
+            "beneficiaryBankCode"=>"002",
             "beneficiaryBankName"=>"BANK BCA",
             "amount"=>"15000"
         ];

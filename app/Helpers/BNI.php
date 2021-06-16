@@ -108,7 +108,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => $this->requestUUID()
+            "requestUuid" => "FAD9D7E0FEBF11E9"
         ];
         $data["header"] = $header;
         $request["request"] = $data;
@@ -327,6 +327,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -418,6 +419,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -430,6 +432,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_BALANCE . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -442,6 +445,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_ACCOUNT_HISTORY . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -454,6 +458,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_TRANSFER . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -466,6 +471,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_STATUS . "?access_token=" . $this->ACCESS_TOKEN;
+        print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -478,6 +484,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_CLEARING . "?access_token=" . $this->ACCESS_TOKEN;
+         //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -490,6 +497,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_RTGS . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -502,6 +510,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_INTER_BANK_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
@@ -515,6 +524,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_INTERNET_BANK . "?access_token=" . $this->ACCESS_TOKEN;
+        //print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
