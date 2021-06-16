@@ -442,7 +442,7 @@ class BorrowerController extends Controller
         ];
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
-        PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
+        PDF::loadView('agreement.credit_agreement_borrower', $data)->save($pathDocument);
 
         $send_to = [
             [
