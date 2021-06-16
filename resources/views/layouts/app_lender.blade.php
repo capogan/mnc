@@ -53,6 +53,7 @@
                              {{-- <li><a href="/profile/lender" class="animsition-link">profile</a></li> --}}
                             <li class="active"><a href="#" class="animsition-link">profile</a>
                                 <ul>
+                                    <li><a href="/lender/dashboard">Dashboard</a></li>
                                     <li><a href="/profile/lender" >Profile</a></li>
                                     <li><a href="/profile/rdl">Rekening Dana Lender</a></li>
 
