@@ -26,20 +26,13 @@
                                                             <input type="hidden" name="personal_id" id="personal_id"
                                                                 value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
                                                             <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
-                                                            <p class="lead">Tanda tangan Elektronik yang Mudah, Aman dan Terpercaya</p>
+                                                            <p class="lead">PT, Siap dalam menyediakan layanan tanda tangan Eletronik bekerja sama dengan Platform Digisign. sehingga dalam hal ini Anda diharuskan untuk melakukan pendaftaran pada platform Digisign.</p>
                                                             @if ($sign_agreement)
-                                                                <div class="row">
-                                                                    <div
-                                                                        class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p><b>Pemberitahuan</b> : Untuk penandatanganan dokumen secara elektronik kami menggunakan layanan pihak ketiga yaitu Digisign.</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p> Daftarkan diri anda untuk menikmati kemudahan dalam menandatangani dokumen elektronik</p>
-                                                                    </div>
-                                                                </div>
+                                                                <p class="lead">Persiapkan Ponsel anda. karena anda di haruskan memasukan kode OTP sebagai tanda verifikasi.
+                                                                    (dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP)
+                                                                </p>
                                                                 <hr>
-                                                                <p>Silahkan aktifasi akun digisign anda sebelum melakukan tanda tangan perjanjian.</p>
+
                                                                 <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Akun</a>
                                                             @else
                                                                 <div class="row">
