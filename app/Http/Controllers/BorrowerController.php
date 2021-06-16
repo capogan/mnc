@@ -36,6 +36,7 @@ use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
 use App\RequestFunding;
 use App\RequestLoanDocument;
+use PDF;
 
 class BorrowerController extends Controller
 {
@@ -231,7 +232,6 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
-
         $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
@@ -393,20 +393,21 @@ class BorrowerController extends Controller
                                 ->where('request_loan.uid' , Auth::id())
                                 ->where('request_loan.status' , '19')
                                 ->first();
-
-        $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->id)->where('status','active')->first();
+        $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->request_loan_id)->where('status','active')->where('type' ,'borrower')->first();
         if(!$doc_){
-            $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->id);
+            $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->request_loan_id);
+            $document_id = $upload_document;
             if(!$upload_document){
-                 return $json = [
+                return $json = [
                     "status"=> 'error',
                     "message"=> 'Tidak dapat didanai.',
                 ];
             }
+        }else{
+            $document_id = $doc_->document_id;
         }
-
         $digisign = new DigiSign;
-        $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
+        $endpoint = $digisign->do_sign_the_document($document_id);
         return response()->json([
             "status" => true,
             'url' => $endpoint,
@@ -416,11 +417,11 @@ class BorrowerController extends Controller
     }
 
     public static function upload_document_agreeement_for_borrower($loan_id){
+      
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '19')->where('id' , $loan_id)->first();
-
         if(!$loan){
             return false;
         }
@@ -435,7 +436,7 @@ class BorrowerController extends Controller
             return false;
         }
         $data = [
-            'title' => 'PERJANJIAN PENGGUNAAN LAYANAN P2P LENDING',
+            'title' => 'PERJANJIAN KREDIT',
             'date_request_loan' => date('d m Y'),
             'borrower' => $borrower,
             'lender' => $lender,
@@ -443,7 +444,7 @@ class BorrowerController extends Controller
         ];
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
-        PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
+        PDF::loadView('agreement.credit_agreement_borrower', $data)->save($pathDocument);
 
         $send_to = [
             [
@@ -457,16 +458,16 @@ class BorrowerController extends Controller
         ];
         $req_sign = [
             [
-                'name' => 'ogan@capioteknologi.co.id',
-                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
-                'kuser' => null,
+                'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
-                'page' => '4',
-                'llx' => '193',
-                'lly' => '13',
-                'urx' => '89.3',
-                'ury' => '192.3',
+                'page' => '5',
+                'llx' => '105',
+                'lly' => '517',
+                'urx' => '210',
+                'ury' => '584',
                 'visible' => 1
             ],
             [
@@ -475,11 +476,11 @@ class BorrowerController extends Controller
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
                 'user' => 'ttd2',
-                'page' => '4',
-                'llx' => '430',
-                'lly' => '192.3',
-                'urx' => '330',
-                'ury' => '193.7',
+                'page' => '5',
+                'llx' => '355',
+                'lly' => '517',
+                'urx' => '457',
+                'ury' => '585',
                 'visible' => 1
             ]
         ];
@@ -501,7 +502,7 @@ class BorrowerController extends Controller
         if(!$create_doc_aggreement){
             return false;
         }
-       return true;
+       return $doc_id;
     }
 
     public function congratulation(Request $request){

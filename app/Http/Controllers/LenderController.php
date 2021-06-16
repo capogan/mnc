@@ -839,16 +839,7 @@ class LenderController extends Controller
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
-
-
-        $create_borrower_file = $this->created_borrower_document($data , $borrower,$request->id);
-        if(!$create_borrower_file){
-            return $json = [
-                "status"=> 'error',
-                "message"=> 'Pinjaman tidak dapat didanai , terjadi kesalahan proses dokumen peminjam.',
-            ];
-        }
-
+        
         $send_to = [
             [
                 'email' => 'ogan@capioteknologi.co.id',
@@ -859,18 +850,19 @@ class LenderController extends Controller
                 'name' => $lender->digisigndata->full_name
             ]
         ];
+        
         $req_sign = [
             [
-                'name' => 'ogan@capioteknologi.co.id',
-                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
-                'kuser' => null,
+                'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '4',
-                'llx' => '193',
-                'lly' => '13',
-                'urx' => '89.3',
-                'ury' => '192.3',
+                'llx' => '90',
+                'lly' => '196',
+                'urx' => '191',
+                'ury' => '270',
                 'visible' => 1
             ],
             [
@@ -880,10 +872,10 @@ class LenderController extends Controller
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '4',
-                'llx' => '430',
-                'lly' => '192.3',
-                'urx' => '330',
-                'ury' => '193.7',
+                'llx' => '329',
+                'lly' => '196',
+                'urx' => '430',
+                'ury' => '270',
                 'visible' => 1
             ]
         ];

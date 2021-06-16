@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\LenderVerification;
+use App\LoanRequest;
 use App\User;
 class DigiSign {
     const DUMMY_RESPONSE = '{"JSONFile":{"data":{"name":true,"birthplace":true,"birthdate":true,"address":"T***N W***A A**I B**K 1"},"result":"00","notif":"Pendaftaran berhasil, silahkan check email untuk aktivasi akun anda."}}';
@@ -484,7 +485,7 @@ class DigiSign {
     }
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
-        //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
+        //$response = '{"document_id":"20210616_60c9eb367c05b_184","status_document":"complete","result":"00","email_user":"mario@yahoo.com","notif":"Sukses"}';
         $prc = $this->process_signers_callback($response , []);
         if(!$prc){
             return false;
@@ -504,6 +505,7 @@ class DigiSign {
                 if(!$document_signers){
                     return $this->signers_logs($response, $res);
                 }
+                
                 $doc_signer = DigiSignDocumentSigners::where('document_id' , $res['document_id'])->where('email' , $res['email_user'])->first();
                 $doc_signer->status_sign = 'complete';
                 $doc_signer->updated_at =  date('Y-m-d H:i:s');
@@ -511,34 +513,44 @@ class DigiSign {
                     $this->signers_logs($response, $res);
                     return false;
                 }
-                if($res['status_document'] == 'complete'){
-                    DigiSignDocument::where('document_id' , $res['document_id'])->update(
-                        [
-                            'status_document' => 'completed',
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ]
-                    );
-                    $updt_status_user = DigisignActivation::where('email' , $res['email_user'])->first();
-                    if($updt_status_user){
-                        $updt_status_user->status_agreement_sign = true;
-                        if(!$updt_status_user->save()){
-                            return false;
-                        }
-                        // LenderVerification::where('uid' , $updt_status_user->uid)->update(
-                        //     [
-                        //         'status' => 'verified'
-                        //     ]
-                        // );
-                    }
 
-                    
-                    
+                
+                if($res['status_document'] == 'complete'){
+                    // if borrower sign
+                    $type = DigiSignDocument::select('request_loan_document.request_loan_id')
+                    ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
+                    ->where('digisign_document.document_id' , $res['document_id'])
+                    ->where('digisign_document.branch' , 'Borrower_Aggreement')->first();
+                    if($type){
+                        $this->update_request_loan_status($type->request_loan_id);
+                    }else{
+                        DigiSignDocument::where('document_id' , $res['document_id'])->update(
+                        [
+                                'status_document' => 'completed',
+                                'updated_at' => date('Y-m-d H:i:s')
+                            ]
+                        );
+                        $updt_status_user = DigisignActivation::where('email' , $res['email_user'])->first();
+                        if($updt_status_user){
+                            $updt_status_user->status_agreement_sign = true;
+                            if(!$updt_status_user->save()){
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
         }
         $this->signers_logs($response, $res);
         return true;
     }
+
+    public function update_request_loan_status($loan_id){
+        $loan = LoanRequest::where('id' , $loan_id)->first();
+        $loan->status = '28';
+        $loan->save();
+    }
+
     public function signers_logs($res , $data){
         DigiSignSignersLogs::create(
             [
