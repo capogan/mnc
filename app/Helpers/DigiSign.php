@@ -322,7 +322,6 @@ class DigiSign {
         $encrypted = $msg; //urldecode($msg);
         return openssl_decrypt(base64_decode($encrypted), 'aes-128-ecb', 'Qd6iiPGAAYnqOfqo', OPENSSL_RAW_DATA);
     }
-
     public static function update_data($newemail , $email , $newphone, $phone , $uid){
         $data = [
             'userid' => env('DIGISIGN_USER_ID'),
@@ -471,7 +470,6 @@ class DigiSign {
         $link = $this->response_call_document_to_assign($response);
         return $link;
     }
-
     public function response_call_document_to_assign($response){
         $res= json_decode($response , true);
         if(array_key_exists('JSONFile' , $res)){
@@ -484,7 +482,6 @@ class DigiSign {
         $this->upload_data_logs2($response,$response ,'1');
         return 'document/not-found';
     }
-
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
         //$response = '{"document_id":"2021-05-27_60af751516472_142","status_document":"complete","result":"00","email_user":"blueisland2838@gmail.com","notif":"Sukses"}';
@@ -495,7 +492,6 @@ class DigiSign {
             return true;
         }
     }
-
     public function process_signers_callback($response, $data){
         $res= json_decode($response , true);
         if(array_key_exists('result' , $res)){
@@ -595,4 +591,6 @@ class DigiSign {
         $response = '{"document_id":"2021-05-08_001","status_document":"complete","result":"00","email_user":"tangan2@gmail.com","notif":"Sukses"}';
         $this->process_signers_callback($response , $data);
     }
+
+
 }
