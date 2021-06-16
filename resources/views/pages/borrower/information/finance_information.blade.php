@@ -29,28 +29,29 @@
                                 <tbody>
                                     @if($request_loan)
                                     @foreach($request_loan as $item)
-                                        <tr>
-                                            <td>SIAP0000{{ $loop->iteration }}</td>
-                                            <td>{{$item->invoice_number}}</td>
-                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
+                                        @if($item->type == 'borrower' || $item->type == '')
+                                            <tr>
+                                                <td>SIAP0000{{ $loop->iteration }}</td>
+                                                <td>{{$item->invoice_number}}</td>
+                                                <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
 
-                                            <td>{{ Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->created_at)))}}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><span class="label label-warning">{{$item->status_title }}</span></td>
+                                                <td>{{ Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->created_at)))}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><span class="label label-warning">{{$item->status_title }}</span></td>
 
-                                            @if($item->status == '19')
-                                                <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
-                                            @elseif($item->status == '21')
-                                                <td><a  href="/profile/loan/detail/{{$item->invoice_number}}" class="btn btn-default btn-xs"> detail </a></td>
-                                            @elseif($item->status == '27')
-                                                <td><button onclick="updated_status('{{$item->id}}','21')" href="#" class="btn btn-primary btn-xs"> Klik jika sudah diterima </button></td>
-                                            @elseif($item->status == '28')
-                                                <td><a href="/profile/congratulation/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Konfirmasi </a></td>
-                                            @else
-                                                <td><button  href="#" class="btn btn-default btn-xs"> detail </button></td>
+                                                @if($item->status == '19')
+                                                    <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
+                                                @elseif($item->status == '21')
+                                                    <td><a  href="/profile/loan/detail/{{$item->invoice_number}}" class="btn btn-default btn-xs"> detail </a></td>
+                                                @elseif($item->status == '27')
+                                                    <td><button onclick="updated_status('{{$item->id}}','21')" href="#" class="btn btn-primary btn-xs"> Klik jika sudah diterima </button></td>
+                                                @elseif($item->status == '28')
+                                                    <td><a href="/profile/congratulation/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Konfirmasi </a></td>
+                                                @else
+                                                    <td><button  href="#" class="btn btn-default btn-xs"> detail </button></td>
+                                                @endif
                                             @endif
-
 
                                         </tr>
                                         @endforeach
