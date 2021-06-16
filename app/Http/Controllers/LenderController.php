@@ -851,8 +851,8 @@ class LenderController extends Controller
         ];
         $req_sign = [
             [
-                'name' => 'ogan@capioteknologi.co.id',
-                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
                 'user' => 'ttd1',
