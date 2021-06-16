@@ -74,16 +74,9 @@
                                                             <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
                                                             <p class="lead">Tanda tangan Elektronik yang Mudah, Aman dan Terpercaya</p>
                                                             @if ($sign_agreement)
-                                                                <div class="row">
-                                                                    <div
-                                                                        class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p><b>Pemberitahuan</b> : Untuk penandatanganan dokumen secara elektronik kami menggunakan layanan pihak ketiga yaitu Digisign.</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12">
-                                                                        <p> Daftarkan diri anda untuk menikmati kemudahan dalam menandatangani dokumen elektronik</p>
-                                                                    </div>
-                                                                </div>
+                                                                <p class="lead">Persiapkan Ponsel anda. karena anda di haruskan memasukan kode OTP sebagai tanda verifikasi.
+                                                                    (dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP)
+                                                                </p>
                                                                 <hr>
                                                                 <p>Silahkan aktifasi akun digisign anda sebelum melakukan tanda tangan perjanjian.</p>
                                                                 @if($sign_agreement->status_activation != 'active')
