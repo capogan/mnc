@@ -12,7 +12,7 @@
                     <div class="scrollable">
                         <div class="card-body">
                             <div class="text-center">
-                            <h2>TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h2>
+                            <h2>KETENTUAN TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h2>
 
                             <input type="hidden" id="invoice_number" value="{{$no_invoice}}"/>
                             </div>

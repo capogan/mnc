@@ -13,7 +13,7 @@
 
                         <div class="card-body">
                             <div class="text-center">
-                            <h2>TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h2>
+                            <h2>KETENTUAN TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h2>
 
                             </div>
                             <p>PT. sistem informasi dan aplikasi pembiayaan [SIAP] menerapkan tanda tangan digital dalam setiap penandatanganan perjanjian pinjam meminjam uang dalam layanan SIAP.</p>
