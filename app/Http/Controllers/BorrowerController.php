@@ -30,10 +30,12 @@ use App\BuildingStatus;
 use App\DigisignActivation;
 use App\Estabilished;
 use App\Helpers\DigiSign;
+use App\Helpers\Utils;
 use App\Legality;
 use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
 use App\RequestFunding;
+use App\RequestLoanDocument;
 
 class BorrowerController extends Controller
 {
@@ -235,6 +237,7 @@ class BorrowerController extends Controller
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
             ->select('request_loan.*','master_status_loan_request.title as status_title','request_loan_document.document_id')
             ->where('uid',$uid)->get();
+        
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
@@ -383,11 +386,25 @@ class BorrowerController extends Controller
     }
 
     public function get_document_to_sign(Request $request){
+        // check if document exists
+        
         $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
                                 ->where('request_loan.invoice_number' , $request->invoice)
                                 ->where('request_loan.uid' , Auth::id())
                                 ->where('request_loan.status' , '19')
                                 ->first();
+
+        $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->id)->where('status','active')->first();
+        if(!$doc_){
+            $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->id);
+            if(!$upload_document){
+                 return $json = [
+                    "status"=> 'error',
+                    "message"=> 'Tidak dapat didanai.',
+                ];
+            }
+        }
+
         $digisign = new DigiSign;
         $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
         return response()->json([
@@ -396,6 +413,95 @@ class BorrowerController extends Controller
             "message" => 'Berhasil Ditandatangani',
         ]);
        // print_r($endpoint);
+    }
+
+    public static function upload_document_agreeement_for_borrower($loan_id){
+        $loan = LoanRequest::with('personal_info')
+        ->with('business_info')
+        ->with('scoring')
+        ->where('status' , '19')->where('id' , $loan_id)->first();
+
+        if(!$loan){
+            return false;
+        }
+        $borrower = User::where('id' , $loan->uid)
+                    ->with('digisigndata')
+                    ->first();
+
+        $lender = User::where('id' ,Auth::id())
+                    ->with('digisigndata')
+                    ->first();
+        if(!$lender->digisigndata || !$borrower->digisigndata){
+            return false;
+        }
+        $data = [
+            'title' => 'PERJANJIAN PENGGUNAAN LAYANAN P2P LENDING',
+            'date_request_loan' => date('d m Y'),
+            'borrower' => $borrower,
+            'lender' => $lender,
+            'loan' => $loan
+        ];
+
+        $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
+        PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
+
+        $send_to = [
+            [
+                'email' => 'ogan@capioteknologi.co.id',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan'
+            ],
+            [
+                'email' => $borrower->digisigndata->email,
+                'name' => $borrower->digisigndata->full_name
+            ]
+        ];
+        $req_sign = [
+            [
+                'name' => 'ogan@capioteknologi.co.id',
+                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd1',
+                'page' => '4',
+                'llx' => '193',
+                'lly' => '13',
+                'urx' => '89.3',
+                'ury' => '192.3',
+                'visible' => 1
+            ],
+            [
+                'name' => $borrower->digisigndata->full_name,
+                'email' => $borrower->digisigndata->email,
+                'aksi_ttd' => 'ttd',
+                'kuser' => null,
+                'user' => 'ttd2',
+                'page' => '4',
+                'llx' => '430',
+                'lly' => '192.3',
+                'urx' => '330',
+                'ury' => '193.7',
+                'visible' => 1
+            ]
+        ];
+        $doc_id = date('Ymd').'_'.uniqid().'_'.$borrower->id;
+        $digisign = new DigiSign;
+        $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Borrower_Aggreement' ,false , $send_to, $req_sign , $borrower->id , 'credit_agreement');
+        if(!$response){
+            return false;
+        }
+        $create_doc_aggreement = RequestLoanDocument::create(
+            [
+                'document_id' => $doc_id,
+                'request_loan_id' => $loan_id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'status' => 'active',
+                'type'=>'borrower'
+            ]
+        );
+        if(!$create_doc_aggreement){
+            return false;
+        }
+       return true;
     }
 
     public function congratulation(Request $request){
