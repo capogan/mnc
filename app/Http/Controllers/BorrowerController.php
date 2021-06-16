@@ -36,6 +36,7 @@ use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
 use App\RequestFunding;
 use App\RequestLoanDocument;
+use PDF;
 
 class BorrowerController extends Controller
 {
@@ -393,18 +394,16 @@ class BorrowerController extends Controller
                                 ->where('request_loan.uid' , Auth::id())
                                 ->where('request_loan.status' , '19')
                                 ->first();
-
-        $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->id)->where('status','active')->first();
+        $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->request_loan_id)->where('status','active')->where('type' ,'borrower')->first();
         if(!$doc_){
-            $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->id);
+            $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->request_loan_id);
             if(!$upload_document){
-                 return $json = [
+                return $json = [
                     "status"=> 'error',
                     "message"=> 'Tidak dapat didanai.',
                 ];
             }
         }
-
         $digisign = new DigiSign;
         $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
         return response()->json([
@@ -416,11 +415,11 @@ class BorrowerController extends Controller
     }
 
     public static function upload_document_agreeement_for_borrower($loan_id){
+      
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
         ->where('status' , '19')->where('id' , $loan_id)->first();
-
         if(!$loan){
             return false;
         }
@@ -457,8 +456,8 @@ class BorrowerController extends Controller
         ];
         $req_sign = [
             [
-                'name' => 'ogan@capioteknologi.co.id',
-                'email' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
+                'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
                 'user' => 'ttd1',

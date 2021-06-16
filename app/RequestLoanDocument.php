@@ -8,7 +8,7 @@ class RequestLoanDocument extends Model
 {
     protected $table = 'request_loan_document';
     protected $fillable = [
-        'id','document_id','request_loan_id','created_at','updated_at','status','reason'
+        'id','document_id','request_loan_id','created_at','updated_at','status','reason','type'
     ];
 
     public function document()
