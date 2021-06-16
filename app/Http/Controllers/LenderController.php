@@ -839,6 +839,16 @@ class LenderController extends Controller
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
+
+
+        $create_borrower_file = $this->created_borrower_document($data , $borrower,$request->id);
+        if(!$create_borrower_file){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'Pinjaman tidak dapat didanai , terjadi kesalahan proses dokumen peminjam.',
+            ];
+        }
+
         $send_to = [
             [
                 'email' => 'ogan@capioteknologi.co.id',
@@ -923,6 +933,27 @@ class LenderController extends Controller
             "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
         ];
     }
+
+    public static function created_borrower_document($data , $lender ,$id){
+        $pathDocument = public_path('upload/document/credit_aggreement/borrower/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
+        PDF::loadView('agreement.credit_agreement_borrower', $data)->save($pathDocument);
+        $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
+        $create_doc_aggreement = RequestLoanDocument::create(
+            [
+                'document_id' => $doc_id,
+                'request_loan_id' => Utils::decrypt($id),
+                'created_at' => date('Y-m-d H:i:s'),
+                'status' => 'active'
+            ]
+        );
+        if(!$create_doc_aggreement){
+            return $json = [
+                "status"=> 'error',
+                "message"=> 'Upload document gagal.',
+            ];
+        }
+    }
+
 
     public function loan_request_log($json , $created_by , $status){
         $data = array(
@@ -1351,8 +1382,15 @@ class LenderController extends Controller
 
     public function dashboard()
     {
+        $uid =  Auth::user()->id;
         $data = array(
-            'provinces' => Province::get(),
+            'loan_macet' => LoanRequest::
+                select('request_loan.*','personal_business.business_name')->
+                leftJoin('personal_business' ,'personal_business.uid' , 'request_loan.uid')
+                ->where('lender_uid',$uid)->where('status','24')->get(),
+            'loan_terlambat' => LoanRequest::where('lender_uid',$uid)->where('status','23')->get(),
+            'loan_lunas' => LoanRequest::where('lender_uid',$uid)->where('status','25')->get(),
+            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->get(),
         );
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }
