@@ -847,7 +847,7 @@ class LenderController extends Controller
                 "message"=> 'Pinjaman tidak dapat didanai , terjadi kesalahan proses dokumen peminjam.',
             ];
         }
-        
+
         $send_to = [
             // [
             //     'email' => $borrower->digisigndata->email,
@@ -951,7 +951,7 @@ class LenderController extends Controller
             ];
         }
     }
-    
+
 
 
     public function loan_request_log($json , $created_by , $status){
@@ -1381,8 +1381,15 @@ class LenderController extends Controller
 
     public function dashboard()
     {
+        $uid =  Auth::user()->id;
         $data = array(
-            'provinces' => Province::get(),
+            'loan_macet' => LoanRequest::
+                select('request_loan.*','personal_business.business_name')->
+                leftJoin('personal_business' ,'personal_business.uid' , 'request_loan.uid')
+                ->where('lender_uid',$uid)->where('status','24')->get(),
+            'loan_terlambat' => LoanRequest::where('lender_uid',$uid)->where('status','23')->get(),
+            'loan_lunas' => LoanRequest::where('lender_uid',$uid)->where('status','25')->get(),
+            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->get(),
         );
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }

@@ -4,6 +4,16 @@
      .nav-link {
         color: #000000;
     }
+
+     table {
+         display: block;
+         overflow-x: auto;
+         white-space: nowrap;
+     }
+    td{
+        text-align: center;
+    }
+
 </style>
     <div class="container containers-with-margin">
         <div class="row mt-4">
@@ -19,9 +29,6 @@
                                 <a class="nav-link" id="tab-2" data-toggle="tab" href="#service2" role="tab" aria-controls="education" aria-selected="false"><i class="fa fa-clock-o fa-lg"></i><p>Keterlambatan</p></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-3" data-toggle="tab" href="#service3" role="tab" aria-controls="experience" aria-selected="false"><i class="fa fa-ban fa-lg"></i><p>Belum Lunas</p></a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" id="tab-4" data-toggle="tab" href="#service4" role="tab" aria-controls="tab-4" aria-selected="true"><i class="fa fa-thumbs-o-up fa-lg"></i><p>Sudah Dikembalikan</p></a>
                             </li>
                             <li class="nav-item">
@@ -34,96 +41,110 @@
                                     <table id="tb_dashboard" class="table table-striped table-bordered mt-4">
                                         <thead>
                                         <th style="width: 2px;">No</th>
-                                        <th>Nomor Invoice</th>
-                                        <th>Borrower</th>
-                                        <th>Jumlah Pinjaman</th>
-                                        <th>Status</th>
+                                        <th>No Pendanaan</th>
+                                        <th>ID Peminjam</th>
+                                        <th>Nama Usaha Peminjam</th>
+                                        <th>Nilai Pinjaman</th>
+                                        <th>Nilai Pengembalian</th>
+                                        <th>Detail Cicilan</th>
+                                        <th>Tanggal Pencairan</th>
+                                        <th>Tanggal Jatuh Tempo</th>
+                                        <th>Tanggal Pembayaran</th>
+                                        <th>Lihat perjanjian</th>
                                         </thead>
                                         <tbody>
-                                        {{--                            @foreach($portofolio as $index => $item)--}}
-                                        {{--                                <tr>--}}
-                                        {{--                                    <td>{{$index + 1}}</td>--}}
-                                        {{--                                    <td>{{ $item->invoice_number}}</td>--}}
-                                        {{--                                    <td>{{$item->business_info->business_name}}</td>--}}
-                                        {{--                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>--}}
-                                        {{--                                    <td>{{$item->status_title->title}}</td>--}}
-                                        {{--                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
-                                        {{--                                </tr>--}}
-                                        {{--                            @endforeach--}}
+                                            @foreach($loan_macet as $index => $item)
+                                                <tr>
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{ $item->invoice_number}}</td>
+                                                    <td>{{$item->uid}}</td>
+                                                    <td>{{$item->business_name}}</td>
+                                                    <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
+                                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
+                                                    <td>{{$item->loan_period}} Hari</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+{{--                                                    <td>{{$item->status_title->title}}</td>--}}
+{{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                             </div>
 
                             <div role="tabpanel" class="tab-pane fade" id="service2">
 
-                                    <table id="tb_dashboard" class="table table-striped table-bordered mt-4">
-                                        <thead>
-                                        <th style="width: 2px;">No</th>
-                                        <th>Nomor Invoice</th>
-                                        <th>Borrower</th>
-                                        <th>Jumlah Pinjaman</th>
-                                        <th>Status</th>
-                                        </thead>
-                                        <tbody>
-                                        {{--                            @foreach($portofolio as $index => $item)--}}
-                                        {{--                                <tr>--}}
-                                        {{--                                    <td>{{$index + 1}}</td>--}}
-                                        {{--                                    <td>{{ $item->invoice_number}}</td>--}}
-                                        {{--                                    <td>{{$item->business_info->business_name}}</td>--}}
-                                        {{--                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>--}}
-                                        {{--                                    <td>{{$item->status_title->title}}</td>--}}
-                                        {{--                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
-                                        {{--                                </tr>--}}
-                                        {{--                            @endforeach--}}
-                                        </tbody>
-                                    </table>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane fade" id="service3">
                                 <table id="tb_dashboard" class="table table-striped table-bordered mt-4">
                                     <thead>
                                     <th style="width: 2px;">No</th>
-                                    <th>Nomor Invoice</th>
-                                    <th>Borrower</th>
-                                    <th>Jumlah Pinjaman</th>
-                                    <th>Status</th>
+                                    <th>No Pendanaan</th>
+                                    <th>ID Peminjam</th>
+                                    <th>Nama Usaha Peminjam</th>
+                                    <th>Nilai Pinjaman</th>
+                                    <th>Nilai Pengembalian</th>
+                                    <th>Detail Cicilan</th>
+                                    <th>Tanggal Pencairan</th>
+                                    <th>Tanggal Jatuh Tempo</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    <th>Lihat perjanjian</th>
                                     </thead>
                                     <tbody>
-                                    {{--                            @foreach($portofolio as $index => $item)--}}
-                                    {{--                                <tr>--}}
-                                    {{--                                    <td>{{$index + 1}}</td>--}}
-                                    {{--                                    <td>{{ $item->invoice_number}}</td>--}}
-                                    {{--                                    <td>{{$item->business_info->business_name}}</td>--}}
-                                    {{--                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>--}}
-                                    {{--                                    <td>{{$item->status_title->title}}</td>--}}
-                                    {{--                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
-                                    {{--                                </tr>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach($loan_macet as $index => $item)
+                                        <tr>
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{ $item->invoice_number}}</td>
+                                            <td>{{$item->uid}}</td>
+                                            <td>{{$item->business_name}}</td>
+                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
+                                            <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
+                                            <td>{{$item->loan_period}} Hari</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            {{--                                                    <td>{{$item->status_title->title}}</td>--}}
+                                            {{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
 
                             <div role="tabpanel" class="tab-pane fade" id="service4">
                                 <table id="tb_dashboard" class="table table-striped table-bordered mt-4">
                                     <thead>
                                     <th style="width: 2px;">No</th>
-                                    <th>Nomor Invoice</th>
-                                    <th>Borrower</th>
-                                    <th>Jumlah Pinjaman</th>
-                                    <th>Status</th>
+                                    <th>No Pendanaan</th>
+                                    <th>ID Peminjam</th>
+                                    <th>Nama Usaha Peminjam</th>
+                                    <th>Nilai Pinjaman</th>
+                                    <th>Nilai Pengembalian</th>
+                                    <th>Detail Cicilan</th>
+                                    <th>Tanggal Pencairan</th>
+                                    <th>Tanggal Jatuh Tempo</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    <th>Lihat perjanjian</th>
                                     </thead>
                                     <tbody>
-                                    {{--                            @foreach($portofolio as $index => $item)--}}
-                                    {{--                                <tr>--}}
-                                    {{--                                    <td>{{$index + 1}}</td>--}}
-                                    {{--                                    <td>{{ $item->invoice_number}}</td>--}}
-                                    {{--                                    <td>{{$item->business_info->business_name}}</td>--}}
-                                    {{--                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>--}}
-                                    {{--                                    <td>{{$item->status_title->title}}</td>--}}
-                                    {{--                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
-                                    {{--                                </tr>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach($loan_macet as $index => $item)
+                                        <tr>
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{ $item->invoice_number}}</td>
+                                            <td>{{$item->uid}}</td>
+                                            <td>{{$item->business_name}}</td>
+                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
+                                            <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
+                                            <td>{{$item->loan_period}} Hari</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            {{--                                                    <td>{{$item->status_title->title}}</td>--}}
+                                            {{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -132,22 +153,35 @@
                                 <table id="tb_dashboard" class="table table-striped table-bordered mt-4">
                                     <thead>
                                     <th style="width: 2px;">No</th>
-                                    <th>Nomor Invoice</th>
-                                    <th>Borrower</th>
-                                    <th>Jumlah Pinjaman</th>
-                                    <th>Status</th>
+                                    <th>No Pendanaan</th>
+                                    <th>ID Peminjam</th>
+                                    <th>Nama Usaha Peminjam</th>
+                                    <th>Nilai Pinjaman</th>
+                                    <th>Nilai Pengembalian</th>
+                                    <th>Detail Cicilan</th>
+                                    <th>Tanggal Pencairan</th>
+                                    <th>Tanggal Jatuh Tempo</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    <th>Lihat perjanjian</th>
                                     </thead>
                                     <tbody>
-                                    {{--                            @foreach($portofolio as $index => $item)--}}
-                                    {{--                                <tr>--}}
-                                    {{--                                    <td>{{$index + 1}}</td>--}}
-                                    {{--                                    <td>{{ $item->invoice_number}}</td>--}}
-                                    {{--                                    <td>{{$item->business_info->business_name}}</td>--}}
-                                    {{--                                    <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>--}}
-                                    {{--                                    <td>{{$item->status_title->title}}</td>--}}
-                                    {{--                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
-                                    {{--                                </tr>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach($loan_macet as $index => $item)
+                                        <tr>
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{ $item->invoice_number}}</td>
+                                            <td>{{$item->uid}}</td>
+                                            <td>{{$item->business_name}}</td>
+                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
+                                            <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
+                                            <td>{{$item->loan_period}} Hari</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            {{--                                                    <td>{{$item->status_title->title}}</td>--}}
+                                            {{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
