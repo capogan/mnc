@@ -202,5 +202,6 @@ Route::get('laporan-pdf','MasterController@generatePDF');
 
 
 
-
+Route::get('agreement/lender','LenderController@aggreement_lender');
+Route::get('agreement/borrower','LenderController@aggreement_borrower');
 
