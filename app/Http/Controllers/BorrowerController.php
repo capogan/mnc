@@ -397,15 +397,18 @@ class BorrowerController extends Controller
         $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->request_loan_id)->where('status','active')->where('type' ,'borrower')->first();
         if(!$doc_){
             $upload_document = $this->upload_document_agreeement_for_borrower($loan_id->request_loan_id);
+            $document_id = $upload_document;
             if(!$upload_document){
                 return $json = [
                     "status"=> 'error',
                     "message"=> 'Tidak dapat didanai.',
                 ];
             }
+        }else{
+            $document_id = $doc_->document_id;
         }
         $digisign = new DigiSign;
-        $endpoint = $digisign->do_sign_the_document($loan_id->document_id);
+        $endpoint = $digisign->do_sign_the_document($document_id);
         return response()->json([
             "status" => true,
             'url' => $endpoint,
@@ -434,7 +437,7 @@ class BorrowerController extends Controller
             return false;
         }
         $data = [
-            'title' => 'PERJANJIAN PENGGUNAAN LAYANAN P2P LENDING',
+            'title' => 'PERJANJIAN KREDIT',
             'date_request_loan' => date('d m Y'),
             'borrower' => $borrower,
             'lender' => $lender,
@@ -461,11 +464,11 @@ class BorrowerController extends Controller
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
                 'user' => 'ttd1',
-                'page' => '4',
-                'llx' => '193',
-                'lly' => '13',
-                'urx' => '89.3',
-                'ury' => '192.3',
+                'page' => '5',
+                'llx' => '105',
+                'lly' => '517',
+                'urx' => '210',
+                'ury' => '584',
                 'visible' => 1
             ],
             [
@@ -474,11 +477,11 @@ class BorrowerController extends Controller
                 'aksi_ttd' => 'ttd',
                 'kuser' => null,
                 'user' => 'ttd2',
-                'page' => '4',
-                'llx' => '430',
-                'lly' => '192.3',
-                'urx' => '330',
-                'ury' => '193.7',
+                'page' => '5',
+                'llx' => '355',
+                'lly' => '517',
+                'urx' => '457',
+                'ury' => '585',
                 'visible' => 1
             ]
         ];
@@ -500,7 +503,7 @@ class BorrowerController extends Controller
         if(!$create_doc_aggreement){
             return false;
         }
-       return true;
+       return $doc_id;
     }
 
     public function congratulation(Request $request){

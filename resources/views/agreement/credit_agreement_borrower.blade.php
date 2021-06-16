@@ -54,7 +54,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
 </p>
 <p>Para Pihak telah setuju dan sepakat untuk mengikatkan diri ke dalam Perjanjian Kredit ini dengan syarat dan ketentuan sebagai berikut:</p>
 <ol type="I">
-    <li><b>Defenisi</b>
+    <li><b>Defenisi</b><br>
         <p>Dalam Perjanjian ini:</p>
         <ol>
             <li><b>Para Pemberi Pinjaman</b> berarti pihak yang memberikan Fasilitas Kredit kepada Penerima Pinjaman melalui Layanan P2P Lending yang dikelola oleh Penyelenggara, termasuk di dalamnya Pemberi Pinjaman.</li>
@@ -65,7 +65,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
             <li><b>Fasilitas Kredit</b> berarti jumlah pinjaman yang terkumpul dan disetujui oleh Para Pemberi Pinjaman untuk dapat dipinjamkan ke Penerima Pinjaman.</li>
         </ol>
     </li>
-    <li><b>Penyelenggara Layanan P2P Lending</b>
+    <li><b>Penyelenggara Layanan P2P Lending</b><br>
         <ol>
             <li>Penyelenggara melalui Portal menyediakan Layanan P2P Lending yang memfasilitasi Para Pemberi Pinjaman dan Penerima Pinjaman untuk melakukan transaksi pinjam meminjam uang berbasis teknologi informasi.</li>
             <li>Informasi terkait peluang pemberian Fasilitas Kredit yang tercantum di Portal berasal dan disediakan oleh Penerima Pinjaman. </li>
@@ -75,7 +75,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
         </ol>
     </li>
 
-    <li><b>Akses</b>
+    <li><b>Akses</b><br>
         <ol>
             <li>Pemberi Pinjaman dapat mengakses Portal menggunakan username dan kata sandi (password) yang dibuat oleh Pemberi Pinjaman. Selama username dan kata sandi (password) digunakan, Penyelenggara dapat beramsusi bahwa Pemberi Pinjaman sendiri yang mengakses Portal.</li>
             <li>Pemberi Pinjaman tidak diperbolehkan memberikan username dan kata sandi (password) kepada pihak lain, apabila Pemberi Pinjaman melanggar ketentuan ini, Pemberi Pinjaman bertanggung jawab sepenuhnya atas tindakan yang dilakukan pihak lain menggunakan username dan kata sandi (password).</li>
@@ -139,8 +139,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
             </li>
         </ol>
     </li>
-    <li>
-        <b>Penggunaan Dana</b>
+    <li><b>Penggunaan Dana</b><br>
         <ol>
             <li>Fasilitas Kredit hanya dapat digunakan untuk ____________________________________________________</li>
             <li>Penerima Pinjaman wajib memberikan laporan berkala terkait penggunaan Fasilitas Kredit.
@@ -148,11 +147,11 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
         </ol>
     </li>
     <li>
-        <b>Biaya untuk Penyelenggara</b>
+        <b>Biaya untuk Penyelenggara</b><br>
         <p>Penerima Pinjaman wajib membayar kepada Penyelenggara biaya penggunaan Layanan P2P Lending melalui Portal sebesar.
            Pembayaran atas biaya tersebut akan dilakukan secara langsung dengan cara memotong jumlah pencairan Fasilitas Kredit oleh Penyelenggara. Penerima Pinjaman dengan ini memberikan hak, kuasa dan otorisasi kepada Penyelenggara untuk melakukan pemotongan tersebut.</p>
     </li>
-    <li><b>Pembayaran</b>
+    <li><b>Pembayaran</b><br>
         <ol>
             <li>Penerima Pinjaman wajib melakukan pembayaran kewajibannya berdasarkan Perjanjian ini secara tepat waktu.
             </li>
@@ -163,7 +162,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
         </ol>
 
     </li>
-    <li><b>Pembayaran dipercepat</b>
+    <li><b>Pembayaran dipercepat</b><br>
         <ol>
             <li>Dalam hal Penerima Pinjaman bermaksud melakukan pembayaran dipercepat sebelum berakhirnya tenor Fasilitas Kredit, Penerima Pinjaman wajib memberikan pemberitahuan tertulis kepada Penyelenggara paling lambat 14 (empat belas) hari kalender sebelumnya.
             </li>
@@ -172,26 +171,26 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
         </ol>
 
     </li>
-    <li><b>Pajak</b>
+    <li><b>Pajak</b><br>
         <p>Segala kewajiban perpajakan yang timbul sehubungan dengan pelaksanaan Perjanjian ini akan menjadi beban dan tanggung jawab masing-masing Pihak sesuai dengan ketentuan peraturan perpajakan yang berlaku.
         </p>
     </li>
-    <li><b>Penagihan</b>
+    <li><b>Penagihan</b><br>
         <p>Penerima Pinjaman mengakui bahwa Para Pemberi Pinjaman telah menunjuk Penyelenggara sebagainya kuasanya berdasarkan Perjanjian Penggunaan Layanan P2P Lending, termasuk tetapi tidak terbatas kepada melakukan penagihan dan mengajukan tindakan hukum yang diperlukan untuk melinduni kepentingan Para Pemberi Pinjaman.
             Apabila Penerima Pinjaman gagal melakukan suatu pembayaran dalam waktu yang ditentukan, maka Penerima Pinjaman dengan ini memberi hak, kuasa dan otoritasi kepada Para Pemberi Pinjaman atau Penyelenggara untuk melakukan segala tindakan yang diperlukan untuk memperoleh pelunasan atas Fasilitas Kredit yang belum dilunasi.
             </p>
     </li>
-    <li><b>Pengakhiran</b>
+    <li><b>Pengakhiran</b><br>
         <p>Para Pemberi Pinjaman berhak untuk mengakhiri Perjanjian ini dan meminta pembayaran dipercepat jika: (i) Penerima Pinjaman gagal membayar satu satu kewajiban pembayaran berdasarkan Perjanjian ini; dan (ii) kondisi finansial Penerima Pinjaman memburuk dan membahayakan pelaksanaan pembayaran kembali Fasilitas Kredit kepada Para Pemberi Pinjaman.
         </p>
     </li>
-    <li><b>Batasan Tanggung Jawab</b>
+    <li><b>Batasan Tanggung Jawab</b><br>
         <p>
             Penyelenggara tidak bertanggung jawab atas kerugian baik kerugian langsung maupun tidak langsung yang di derita oleh Pemberi Pinjaman sehubungan dengan pemberian pinjaman atas Fasilitas Kredit kepada Penerima Pinjaman.
             </p>
     </li>
     <li>
-        <b>Data Rahasia</b>
+        <b>Data Rahasia</b><br>
         <p>Pemberi Pinjaman dengan ini memberikan otorisasi dan kuasa kepada Penyelenggara untuk mengumpulkan, mengolah, menganalisa dan mengungkap informasi terkait identitas Pemberi Pinjaman ataupun transaksi pemberian pinjaman oleh Pemberi Pinjaman, termasuk tetapi tidak terbatas kepada:
         </p>
         <ol>
@@ -204,7 +203,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
     </li>
 
     <li>
-        <b>Perubahan Para Pihak</b>
+        <b>Perubahan Para Pihak</b><br>
         <ol>
             <li>Pemberi Pinjaman dapat, tanpa memberikan pemberitahuan sebelumnya kepada Penerima Pinjaman, mengalihkan hak dan kewajibannya berdasarkan Perjanjian ini kepada pihak lain (“Pemberi Pinjaman Baru”).
             </li>
@@ -217,7 +216,8 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
         </ol>
     </li>
 
-    <li><b>Korespondensi</b></li>
+    <li><b>Korespondensi</b>
+    <br>
     <p>
         Setiap komunikasi yang akan dilakukan berdasarkan atau berkaitan dengan Perjanjian ini harus dilakukan secara tertulis melalui pos, fax, email atau komunikasi elektronik lainnya yang disetujui oleh Para Pihak.
     </p>
@@ -228,6 +228,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
     <p>PT Sistem Informasi Aplikasi Pembiayaan</p>
     <p>MNC Financial Center Lantai 10</p>
     <p>Jl. Kebon Sirih No. 21-27</p>
+    <br>
     <table>
         <tr>
             <td>U.p</td>
@@ -245,7 +246,7 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
             <td>____________________________</td>
         </tr>
     </table>
-
+    <br>
     <p class="underline">Kepada Pemberi Pinjaman</p>
     <table>
         <tr>
@@ -264,17 +265,21 @@ yang bertindak untuk dan atas nama Para Pemberi Pinjaman.
             <td>____________________________</td>
         </tr>
     </table>
-    <li><b>Ketidakabsahan Sebagian</b>
-        <p>Jika suatu ketentuan dalam Perjanjian ini menjadi bertentangan dengan hukum, tidak sah atau tidak dapat dilaksanakan berdasarkan suatu peraturan perundang-undangan yang berlaku, maka hal tersebut tidak akan mempengaruhi legalitas, keabsahan atau keberlakukan ketentuan lain dari Perjanjian ini.</p>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br>
     </li>
-    <li><b>Hukum Yang Mengatur</b>
+    <li><b>Ketidakabsahan Sebagian</b><br>
+        <p>Jika suatu ketentuan dalam Perjanjian ini menjadi bertentangan dengan hukum, tidak sah atau tidak dapat dilaksanakan berdasarkan suatu peraturan perundang-undangan yang berlaku, maka hal tersebut tidak akan mempengaruhi legalitas, keabsahan atau keberlakukan ketentuan lain dari Perjanjian ini.</p>
+        
+    </li>
+    <li><b>Hukum Yang Mengatur</b><br>
         <p>Perjanjian ini diatur dan wajib ditafsirkan berdasarkan hukum dan peraturan perundang-undangan yang berlaku di Republik Indonesia.</p>
     </li>
+    
     <li><b>Perselisihan Sengketa</b>
         <p>Setiap gugatan, klaim atau perselisihan yang timbul dari atau sehubungan dengan Perjanjian ini akan diselesaikan melalui persidangan di Pengadilan Negeri Jakarta Pusat.</p>
         <p>Demikianlah Perjanjian ini ditandatangani secara elektronik dan akan mempunyai kekuatan hukum yang sama apabila Perjanjian ditandatangani secara langsung (tanda tangan basah).</p>
-        <br>
-        <br>
+        
         <table style="width: 100%">
             <tr>
                 <td>Penyelenggara selaku kuasa, untuk dan atas nama Para Pemberi Pinjaman
