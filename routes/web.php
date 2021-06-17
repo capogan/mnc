@@ -32,6 +32,9 @@ Route::get('/kegiatan', function () {
 Route::get('/pinjam', function () {
     return view('pinjam');
 });
+Route::get('/faq', function () {
+    return view('faq');
+});
 
 //Auth::routes();
 Auth::routes(['verify' => true]);
