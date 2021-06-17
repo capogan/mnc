@@ -856,7 +856,7 @@ class LenderController extends Controller
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
-                'kuser' => null,
+                'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '4',
                 'llx' => '90',

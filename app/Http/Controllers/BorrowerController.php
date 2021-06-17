@@ -232,7 +232,6 @@ class BorrowerController extends Controller
                 return Redirect::to('/otp/verified');
             }
         }
-
         $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
@@ -462,7 +461,7 @@ class BorrowerController extends Controller
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
                 'aksi_ttd' => 'ttd',
-                'kuser' => null,
+                'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '5',
                 'llx' => '105',
