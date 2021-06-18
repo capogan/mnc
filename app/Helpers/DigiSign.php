@@ -162,6 +162,7 @@ class DigiSign {
             // $this->logs($body , $uid , 'registration');
         }
     }
+
     public function activation_account($email , $uid , $nik){
         $data = [
             'jsonfield' => json_encode([
@@ -178,7 +179,7 @@ class DigiSign {
         ])
         ->asMultipart()
         ->post('https://api.tandatanganku.com/gen/genACTPage.html', $data);
-        //print_r($client->body()); exit;
+        print_r($client->body()); exit;
         $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
 
     }

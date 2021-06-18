@@ -339,6 +339,25 @@ $(document).on('change' , 'input[type="file"]' , function(){
     readURL(this , $(this).attr('id'));
 });
 
+$(document).on('click' , '#activate_account_dgsign' , function(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url: '/account/activate_account',
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        beforeSend: function () {  
+        },
+        success: function (response) {
+           
+        },
+        error: function (xhr, status, error) {
+           
+        }
+    })
+});
+
 $(document).on('click' , '#request_file_assign' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({

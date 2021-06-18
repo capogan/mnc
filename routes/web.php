@@ -169,6 +169,8 @@ Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController
 
 Route::post('/profile/lender-individu/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
 
+Route::post('/account/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
+
 Route::get('/digisigngetdocument', 'LenderController@get_document_to_assign')->name('lender.document.get');
 
 
