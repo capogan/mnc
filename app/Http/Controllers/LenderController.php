@@ -863,7 +863,7 @@ class LenderController extends Controller
                 'lly' => '196',
                 'urx' => '191',
                 'ury' => '270',
-                'visible' => 1
+                'visible' => "1"
             ],
             [
                 'name' => $lender->digisigndata->full_name,
@@ -876,7 +876,7 @@ class LenderController extends Controller
                 'lly' => '196',
                 'urx' => '430',
                 'ury' => '270',
-                'visible' => 1
+                'visible' => "1"
             ]
         ];
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
