@@ -250,6 +250,17 @@ $(document).on('ready', function () {
             },
             success: function (response) {
                 console.log(response);
+                if(response.status == 'true'){
+                    window.location.href = response.link;
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Gagal saat aktivasi akun',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
                
             },
             error: function (xhr, status, error) {
