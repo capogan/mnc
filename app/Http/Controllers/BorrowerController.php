@@ -473,7 +473,7 @@ class BorrowerController extends Controller
             [
                 'name' => $borrower->digisigndata->full_name,
                 'email' => $borrower->digisigndata->email,
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'mt',
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '5',
