@@ -251,8 +251,8 @@ $(document).on('ready', function () {
             },
             success: function (response) {
                 console.log(response.status);
-                if(response.status == 'true'){
-                    window.location.href = response.link;
+                if(response.status == true){
+                    window.location.href = response.url;
                 }else{
                     Swal.fire({
                         position: 'top-end',
