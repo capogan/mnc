@@ -237,6 +237,25 @@ $(document).on('ready', function () {
             }
         })
     });
+    
+    $(document).on('click' , '#activate_account_dgsign' , function(){
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/account/activate_account',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            beforeSend: function () {  
+            },
+            success: function (response) {
+               
+            },
+            error: function (xhr, status, error) {
+               
+            }
+        })
+    });
 
     $("#form_individual_lender_documents_sme").on("submit", function (event) {
         event.preventDefault();
