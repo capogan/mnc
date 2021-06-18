@@ -338,18 +338,30 @@ $("#loan_period").bind(
 $(document).on('change' , 'input[type="file"]' , function(){
     readURL(this , $(this).attr('id'));
 });
-
 $(document).on('click' , '#activate_account_dgsign' , function(){
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url: '/account/activate_account',
         method: "POST",
+        dataType: 'json',
         headers: {
             'X-CSRF-TOKEN': token
         },
         beforeSend: function () {  
         },
         success: function (response) {
+            console.log(response.status);
+            if(response.status == true){
+                window.location.href = response.url;
+            }else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Gagal saat aktivasi akun',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
            
         },
         error: function (xhr, status, error) {
