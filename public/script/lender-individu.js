@@ -249,6 +249,7 @@ $(document).on('ready', function () {
             beforeSend: function () {  
             },
             success: function (response) {
+                console.log(response);
                
             },
             error: function (xhr, status, error) {
