@@ -243,6 +243,7 @@ $(document).on('ready', function () {
         $.ajax({
             url: '/account/activate_account',
             method: "POST",
+            dataType: 'json',
             headers: {
                 'X-CSRF-TOKEN': token
             },
