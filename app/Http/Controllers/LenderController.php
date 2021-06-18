@@ -855,7 +855,7 @@ class LenderController extends Controller
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'at',
                 'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '4',
@@ -868,7 +868,7 @@ class LenderController extends Controller
             [
                 'name' => $lender->digisigndata->full_name,
                 'email' => $lender->digisigndata->email,
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'mt',
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '4',
