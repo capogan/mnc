@@ -460,7 +460,7 @@ class BorrowerController extends Controller
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'at',
                 'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '5',
@@ -473,7 +473,7 @@ class BorrowerController extends Controller
             [
                 'name' => $borrower->digisigndata->full_name,
                 'email' => $borrower->digisigndata->email,
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'mt',
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '5',
