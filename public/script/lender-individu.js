@@ -249,7 +249,7 @@ $(document).on('ready', function () {
             beforeSend: function () {  
             },
             success: function (response) {
-                console.log(response);
+                console.log(response.status);
                 if(response.status == 'true'){
                     window.location.href = response.link;
                 }else{
