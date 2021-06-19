@@ -33,7 +33,8 @@
                                                                 </p>
                                                                 <hr>
 
-                                                                <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Akun</a>
+                                                                <a href="#" id="activate_account_dgsign" type="button" class="btn btn-primary">Aktivasi Akun</a>
+                                                                {{-- <a href="{{$sign_agreement->link_activation}}" id="activate_account_dgsign" type="button" class="btn btn-primary">Aktivasi Akun</a> --}}
                                                             @else
                                                                 <div class="row">
                                                                     <div class="alert alert-success" role="alert">

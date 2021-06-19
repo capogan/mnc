@@ -162,6 +162,7 @@ class DigiSign {
             // $this->logs($body , $uid , 'registration');
         }
     }
+
     public function activation_account($email , $uid , $nik){
         $data = [
             'jsonfield' => json_encode([
@@ -179,7 +180,8 @@ class DigiSign {
         ->asMultipart()
         ->post('https://api.tandatanganku.com/gen/genACTPage.html', $data);
         //print_r($client->body()); exit;
-        $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
+        $link = $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
+        return $link;
 
     }
     public function processResponseActivation($body , $uid , $email , $nik, $event){
@@ -191,13 +193,15 @@ class DigiSign {
         switch($response['JSONFile']['result']){
             case '00' :
                 // update status of lender
-                //$this->activate_account('waiting activate' , $email , $uid, $nik,  $response['JSONFile']['link']);
+                    return ['status' => true , 'link' => $response['JSONFile']['link']];
                 break;
             case '55' :
+                return  ['status' => false , 'link' => ''];;
                 // SEND email to admin to check the token
                 break;
             default :
-                return;
+                return  ['status' => false , 'link' => ''];;
+                
             // $this->logs($body , $uid , 'registration');
         }
     }

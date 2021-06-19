@@ -72,7 +72,12 @@
                                 <li><a href="/tentang-kami" class="animsition-link">Tentang Kami</a>
                                 <li><a href="/kegiatan" class="animsition-link">Kegiatan</a>
                             </ul>
+
                         <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a>
+                            <ul>
+                                <li><a href="/faq" class="animsition-link">FAQ</a>
+                            </ul>
+                        {{-- <li class="active"><a href="#" class="animsition-link">Pusat Bantuan</a> --}}
 
 
                     </ul>

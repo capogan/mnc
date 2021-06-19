@@ -74,7 +74,7 @@
 
                                                                     <hr>
                                                                     @if($sign_agreement->status_activation != 'active')
-                                                                        <a href="{{$sign_agreement->link_activation}}" type="button" class="btn btn-primary">Aktivasi Account</a>
+                                                                        <a href="#" id="activate_account_dgsign" type="button" class="btn btn-primary">Aktivasi Akun</a>
                                                                     @endif
                                                                     @if($sign_agreement->status_activation == 'active')
                                                                         <button type="button" class="btn btn-primary"

@@ -237,6 +237,38 @@ $(document).on('ready', function () {
             }
         })
     });
+    
+    $(document).on('click' , '#activate_account_dgsign' , function(){
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/account/activate_account',
+            method: "POST",
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            beforeSend: function () {  
+            },
+            success: function (response) {
+                console.log(response.status);
+                if(response.status == true){
+                    window.location.href = response.url;
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Gagal saat aktivasi akun',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+               
+            },
+            error: function (xhr, status, error) {
+               
+            }
+        })
+    });
 
     $("#form_individual_lender_documents_sme").on("submit", function (event) {
         event.preventDefault();

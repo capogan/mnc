@@ -855,7 +855,7 @@ class LenderController extends Controller
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'at',
                 'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '4',
@@ -863,12 +863,12 @@ class LenderController extends Controller
                 'lly' => '196',
                 'urx' => '191',
                 'ury' => '270',
-                'visible' => 1
+                'visible' => "1"
             ],
             [
                 'name' => $lender->digisigndata->full_name,
                 'email' => $lender->digisigndata->email,
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'mt',
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '4',
@@ -876,7 +876,7 @@ class LenderController extends Controller
                 'lly' => '196',
                 'urx' => '430',
                 'ury' => '270',
-                'visible' => 1
+                'visible' => "1"
             ]
         ];
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;

@@ -134,21 +134,22 @@
                 </div>
                 <div class="row">
                     <p style="text-align: justify;">PT SIAP ( Sistem Informasi dan Pembiayaan) adalah perusahaan yang bernaung di bawah MNC Financial Services bergerak dibidang Peer-to-Peer (P2P) Lending 
-berbasis teknologi Informasi dengan brand SIAPDANAIN.
-SIAPDANAIN berfokus pada industri produktif di Indonesia, mempertemukan Pemodal dengan para pebisnis mikro dan kecil lokal melalui 
-pinjaman modal produktif dengan risiko terukur yang berdampak sosial. 
-Melalui pendanaan di SIAP Danain, kita membantu membangun akses permodalan untuk kesejahteraan pebisnis lokal</p>
+                        berbasis teknologi Informasi dengan brand SIAPDANAIN.
+                        SIAPDANAIN berfokus pada industri produktif di Indonesia, mempertemukan Pemodal dengan para pebisnis mikro dan kecil lokal melalui 
+                        pinjaman modal produktif dengan risiko terukur yang berdampak sosial. 
+                        Melalui pendanaan di SIAP Danain, kita membantu membangun akses permodalan untuk kesejahteraan pebisnis lokal</p>
                 </div>
             </div>        
         </div>
+
         <div class="row mt-5 justify-content-center align-items-center">
             <h2>VISI Kami</h2>
-            </div>
-            <div class="row justify-content-center align-items-center"> 
+        </div>
+        <div class="row justify-content-center align-items-center"> 
             <p class="text-center">Menciptakan kesejahteraan bagi pebisnis mikro dan kecil lokal Indonesia</p>
         </div>
+
         <div class="row mt-5">
-            
             <div class="col">
                 <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
                  <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
@@ -157,21 +158,174 @@ Melalui pendanaan di SIAP Danain, kita membantu membangun akses permodalan untuk
                 <p>Menjadi market leader di Indonesia dan go global</p>
                </div>
             </div>
-                <div class="col">
-                    <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
-                        <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
-                        <h2 class="capital-title">QUALITY</h2>
-                        <!-- <a href="#" class="btn-link">Lorem Ipsum</a>-->
-                       
-                       
-                        <p>Membangun kultur kerja yang berkualitas dalam bekerja.</p>
-                      
-                        
-                         </div>
+            
+            <div class="col">
+                <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                    <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                    <h2 class="capital-title">QUALITY</h2>
+                    <!-- <a href="#" class="btn-link">Lorem Ipsum</a>-->
+                    <p>Membangun kultur kerja yang berkualitas dalam bekerja.</p>
                     </div>
                 </div>
+            </div>
         </div>
         
+    <div class="row mt-5 justify-content-center align-items-center">
+        <h2>Team Kami</h2>
+    </div>
+    <div class="row justify-content-center align-items-center"> 
+        <p class="text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, magni? Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit. Totam numquam cupiditate fuga fugit eveniet sint qui illo ullam distinctio omnis?</p>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-11 offset-2">
+            <h1>Board of Directors</h1></div>
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Direktur 1</h5>
+            <h2 class="capital-title">Direktur Utama</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, incidunt.</p>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Direktur 2</h5>
+            <h2 class="capital-title">Direktur</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, similique.</p>
+            </div>
+        </div>    
+        
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Direktur 3</h5>
+            <h2 class="capital-title">Direktur</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, mollitia.</p>
+            </div>
+        </div> 
+
+        <div class="col-11 offset-2">
+            <h1>Board of Commisioners</h1></div>
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Komisaris 1</h5>
+            <h2 class="capital-title">Komisaris Utama</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, incidunt.</p>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Komisaris 2</h5>
+            <h2 class="capital-title">Komisaris</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, similique.</p>
+            </div>
+        </div>    
+        
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Komisaris 3</h5>
+            <h2 class="capital-title">Komisaris</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, mollitia.</p>
+            </div>
+        </div> 
+    </div>
+
+
+    <div class="row mt-5 justify-content-center align-items-center">
+        <h2>Pemeggang Saham</h2>
+    </div>
+    <div class="row justify-content-center align-items-center"> 
+        <p class="text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, magni? Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit. Totam numquam cupiditate fuga fugit eveniet sint qui illo ullam distinctio omnis?</p>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-11 offset-1">
+            <h1>Board of Commisioners</h1></div>
+        <div class="col-5">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr.Pemeggang Saham </h5>
+            <h2 class="capital-title">PT. Pemeggang Saham 1</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, incidunt.</p>
+            </div>
+        </div>   
+        
+        <div class="col-5">
+            <div class="bg-white bg-boxshadow pinside40 outline text-center mb30" >
+                <div class="mb40"> <i class="icon-users icon-2x icon-default"></i></div>
+                <h5>Mr. Pemeggang Saham 2</h5>
+            <h2 class="capital-title">PT. Pemeggang Saham 2</h2>
+            <!-- <a href="#" class="btn-link">Lorem Ipsum</a>--> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, mollitia.</p>
+            </div>
+        </div> 
+    </div>
+
+    <div class="row mt-5 justify-content-center align-items-center">
+        <h2>Laporan Keuangan</h2>
+    </div>
+    <div class="row justify-content-center align-items-center"> 
+        <p class="text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, magni? Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit. Totam numquam cupiditate fuga fugit eveniet sint qui illo ullam distinctio omnis?</p>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline mb30" >
+            <div class="row">
+                <div class="col-3">
+                    <i class="icon-money icon-2x icon-default"></i>
+                </div>
+                <div class="col">
+                <h5>Laporan </h5>
+                <h2 class="capital-title">Laporan Keuangan 2021</h2>
+                </div>
+            </div>
+            </div>
+        </div>   
+
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline mb30" >
+            <div class="row">
+                <div class="col-3">
+                    <i class="icon-money icon-2x icon-default"></i>
+                </div>
+                <div class="col">
+                <h5>Laporan </h5>
+                <h2 class="capital-title">Laporan Keuangan 2022</h2>
+                </div>
+            </div>
+            </div>
+        </div>   
+
+        <div class="col-3">
+            <div class="bg-white bg-boxshadow pinside40 outline mb30" >
+            <div class="row">
+                <div class="col-3">
+                    <i class="icon-money icon-2x icon-default"></i>
+                </div>
+                <div class="col">
+                <h5>Laporan </h5>
+                <h2 class="capital-title">Laporan Keuangan 2023</h2>
+                </div>
+            </div>
+            </div>
+        </div>   
+    </div>
+
     </div>
  
 @section('js')

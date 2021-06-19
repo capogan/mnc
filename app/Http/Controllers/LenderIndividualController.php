@@ -1057,6 +1057,11 @@ class LenderIndividualController extends Controller
 
         $u = DigisignActivation::where('uid' , Auth::id())->first();
         $digisign = new DigiSign;
-        $digisign->activation_account($u->email, Auth::id() , $u->nik);
+        $link = $digisign->activation_account($u->email, Auth::id() , $u->nik);
+        return response()->json([
+            "status" => true,
+            'url' => $link['link'],
+            "message" => 'Berhasil Ditandatangani',
+        ]);
     }
 }
