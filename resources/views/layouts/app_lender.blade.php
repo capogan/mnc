@@ -54,7 +54,11 @@
                             <li class="active"><a href="#" class="animsition-link">profile</a>
                                 <ul>
                                     <li><a href="/lender/dashboard">Dashboard</a></li>
+                                    @if(Auth::user()->group == 'business')
                                     <li><a href="/profile/lender" >Profile</a></li>
+                                    @else
+                                        <li><a href="/profile/lender-individual" >Profile</a></li>
+                                    @endif
                                     <li><a href="/profile/rdl">Rekening Dana Lender</a></li>
 
                                 </ul>
