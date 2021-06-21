@@ -53,9 +53,9 @@ class MasterController extends Controller
 
     public function send_email(Request $request){
 
-        $nama = "Wildan Fuady";
+        $name = "Wildan Fuady";
         $email = "djersey18@gmail.com";
-        $kirim = Mail::to($email)->send(new SendMail($nama));
+        $kirim = Mail::to($email)->send(new SendMail($name));
 
         if($kirim){
             echo "Email telah dikirim";
