@@ -8,6 +8,8 @@ use App\Models\Regency;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class MasterController extends Controller
@@ -47,4 +49,18 @@ class MasterController extends Controller
         $pdf = PDF::loadView('agreement.loan', $data);
         return $pdf->stream();
     }
+
+
+    public function send_email(Request $request){
+
+        $nama = "Wildan Fuady";
+        $email = "djersey18@gmail.com";
+        $kirim = Mail::to($email)->send(new SendMail($nama));
+
+        if($kirim){
+            echo "Email telah dikirim";
+        }
+    }
+
+
 }
