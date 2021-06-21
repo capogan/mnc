@@ -64,13 +64,13 @@
                                                         <div class="row">
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
-                                                                    Periode Pinjaman</span>
+                                                                    <span>Nilai Pembayaran Pembelian</span>
                                                                     <h4 class="pull-right load-load" id="invoice_loan_">0</h4>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
-                                                                   Nilai Pembayaran Pembelian</span>
+                                                                    Periode Pinjaman</span>
                                                                     <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
                                                                 </div>
                                                             </div>
