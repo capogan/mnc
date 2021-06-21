@@ -65,7 +65,8 @@
 
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
-                                                                    Periode Pinjaman</span>
+                                                                    Periode Pinjaman (hari)</span>
+                                                                    <span class="pull-right"  id="loan_period_value">14</span>
                                                                     <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
                                                                 </div>
                                                             </div>
