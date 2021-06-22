@@ -14,6 +14,12 @@ class Digisign  extends Controller
         $validator = Validator::make( $request->all(), [
             'msg' => 'required'
         ]);
+        UserEKYC::create([
+            'callback'=>$request->msg,
+            'created_at'=>date('Y-m-d'),
+            'updated_at'=>date('Y-m-d'),
+        ]);
+        
         if($validator->fails()) {
             return  [
                 "status"=> false,
