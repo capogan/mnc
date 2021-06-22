@@ -5,7 +5,9 @@ use App\Helpers\DigiSign as HelpersDigiSign;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\UserEKYC;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class Digisign  extends Controller
@@ -51,11 +53,13 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->callback_activation($request->msg);
-        if(array_key_exists('document_id' , $res)){
-
+        $user = User::where('email' ,$res['data']['email_user'])->first();
+        if($user->group == 'borrower'){
+            return redirect('/profile/transaction');
         }else{
-            
+            return redirect('/myprofile');
         }
+        
         // UserEKYC::create([
         //     'callback'=>$request->msg,
         //     'created_at'=>date('Y-m-d'),
