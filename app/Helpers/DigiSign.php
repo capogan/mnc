@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\LenderVerification;
 use App\LoanRequest;
 use App\RequestLoanDocument;
+use App\RequestLoanInstallments;
 use App\User;
 class DigiSign {
     const DUMMY_RESPONSE = '{"JSONFile":{"data":{"name":true,"birthplace":true,"birthdate":true,"address":"T***N W***A A**I B**K 1"},"result":"00","notif":"Pendaftaran berhasil, silahkan check email untuk aktivasi akun anda."}}';
@@ -559,10 +560,53 @@ class DigiSign {
         }else{
             $status = '21';
             // Go to pinjaman aktif;
+            $this->create_cicilan($loan->request_loan_id);
         }
         $loan = LoanRequest::where('id' , $loan->request_loan_id)->first();
         $loan->status = $status;
         $loan->save();
+    }
+
+    public function create_cicilan($loan_id){
+        $id_loan = $loan_id;
+        $loan = LoanRequest::where('id',$id_loan)->first();
+        $periode = $loan->periode;
+        $loan_amount = $loan->loan_amount;
+        if($periode == '14')
+        {
+            $amount = $loan_amount / 2 ;
+            $x = 3;
+        }else{
+            $amount = $loan_amount / 4 ;
+            $x = 5;
+        }
+
+        for ($row = 1; $row < $x; $row++){
+            $startDate = time();
+            $due_date = "";
+            if($row == 1){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+7 day', $startDate));
+            }else if($row == 2){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+14 day', $startDate));
+            }else if($row == 3){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+21 day', $startDate));
+            }
+            else if($row == 4){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+28 day', $startDate));
+            }
+            RequestLoanInstallments::create([
+                'id_request_loan'=>$id_loan,
+                'stages'=>$row,
+                'amount'=>$amount,
+                'due_date_payment'=>$due_date,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'id_status_payment'=>'1',
+
+            ]);
+
+        }
+
     }
 
     public function signers_logs($res , $data){
