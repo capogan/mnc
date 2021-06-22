@@ -879,6 +879,7 @@ class LenderController extends Controller
                 'visible' => "1"
             ]
         ];
+        //print_r();
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
         $digisign = new DigiSign;
         $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $lender->id , 'credit_agreement');
