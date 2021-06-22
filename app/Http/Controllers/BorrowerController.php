@@ -236,10 +236,13 @@ class BorrowerController extends Controller
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
             ->leftJoin('digisign_document','digisign_document.document_id' , 'request_loan_document.document_id')
-            ->select('request_loan.*','master_status_loan_request.title as status_title')
+            ->select('request_loan.*','master_status_loan_request.title as status_title','digisign_document.uid as doc_uid')
             ->where('request_loan.uid',$uid)
+            ->distinct('request_loan.id')
+            //->groupBy('')
             //->where('digisign_document.uid',$uid)
             ->get();
+        //print_r($loans->toArray());exit;
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
