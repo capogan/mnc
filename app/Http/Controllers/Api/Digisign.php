@@ -51,18 +51,23 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->callback_activation($request->msg);
-        UserEKYC::create([
-            'callback'=>$request->msg,
-            'created_at'=>date('Y-m-d'),
-            'updated_at'=>date('Y-m-d'),
-        ]);
+        if(array_key_exists('document_id' , $res)){
+
+        }else{
+            
+        }
+        // UserEKYC::create([
+        //     'callback'=>$request->msg,
+        //     'created_at'=>date('Y-m-d'),
+        //     'updated_at'=>date('Y-m-d'),
+        // ]);
         if($res){
             return redirect('sign/success');
         }
-        $ekyc = UserEKYC::create([
-            'callback'=>$request->msg,
-            'created_at'=>date('Y-m-d'),
-            'updated_at'=>date('Y-m-d'),
-        ]);
+        // $ekyc = UserEKYC::create([
+        //     'callback'=>$request->msg,
+        //     'created_at'=>date('Y-m-d'),
+        //     'updated_at'=>date('Y-m-d'),
+        // ]);
     }
 }

@@ -302,7 +302,7 @@ class DigiSign {
     public function callback_activation($msg){
         if(!isset($msg)){
             $this->logs_internal('' , 'Digisign call callback url without encript message.');
-            return;
+            return ['status' => false , 'data' => []];
         }
         $data = $this->aes_128_ecb_decrypt($msg);
         $acc = json_decode($data , true);
@@ -310,6 +310,7 @@ class DigiSign {
             $u_acc = DigisignActivation::where('email' , $acc['email_user'])->first();
             if(!$u_acc){
                 $this->logs_internal($data , 'User with criteria not found after received callback from Digisign.');
+                return ['status' => false , 'data' => []];
             }
             $u_acc->status_activation = 'active';
             $u_acc->updated_at = date('Y-m-d H:i:s');
@@ -318,9 +319,11 @@ class DigiSign {
                 $this->logs($data,$u_acc->uid , 'activation');
                 $this->verified_lender('register' , false , $u_acc->uid);
             }else{
+                return ['status' => false , 'data' => $acc];
                 $this->logs_internal($acc , 'User with this criteria can/\'t. updated.');
             }
         }
+        return ['status' => true , 'data' => $acc];
     }
     public function aes_128_ecb_decrypt($msg){
         //$msg2='lyCQTnTnUio4pMyP4wB1PAzvNXHF6Dpd1I2dVVJWOsMylzR099wacLjoa%2ByHglI4FZtHUwSsQXEh%0AyDLuPArgMDJ%2FOlhjI8ghho1di9gxDAL%2FTl4Np8IxTZASE71nYafV';
