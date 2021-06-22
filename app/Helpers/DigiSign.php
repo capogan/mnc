@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\LenderVerification;
 use App\LoanRequest;
+use App\RequestLoanDocument;
 use App\User;
 class DigiSign {
     const DUMMY_RESPONSE = '{"JSONFile":{"data":{"name":true,"birthplace":true,"birthdate":true,"address":"T***N W***A A**I B**K 1"},"result":"00","notif":"Pendaftaran berhasil, silahkan check email untuk aktivasi akun anda."}}';
@@ -492,6 +493,7 @@ class DigiSign {
     }
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
+        //print_r($response);exit;
         //$response = '{"document_id":"20210616_60c9eb367c05b_184","status_document":"complete","result":"00","email_user":"mario@yahoo.com","notif":"Sukses"}';
         $prc = $this->process_signers_callback($response , []);
         if(!$prc){
@@ -520,16 +522,15 @@ class DigiSign {
                     $this->signers_logs($response, $res);
                     return false;
                 }
-
-                
                 if($res['status_document'] == 'complete'){
                     // if borrower sign
-                    $type = DigiSignDocument::select('request_loan_document.request_loan_id')
-                    ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
-                    ->where('digisign_document.document_id' , $res['document_id'])
-                    ->where('digisign_document.branch' , 'Borrower_Aggreement')->first();
+                    // $type = DigiSignDocument::select('request_loan_document.request_loan_id')
+                    // ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
+                    // ->where('digisign_document.document_id' , $res['document_id'])->first();
+                    $type = RequestLoanDocument::where('document_id' , $res['document_id'])->first();
+                    //print_r($type); exit;
                     if($type){
-                        $this->update_request_loan_status($type->request_loan_id);
+                        $this->update_request_loan_status($type);
                     }else{
                         DigiSignDocument::where('document_id' , $res['document_id'])->update(
                         [
@@ -552,9 +553,15 @@ class DigiSign {
         return true;
     }
 
-    public function update_request_loan_status($loan_id){
-        $loan = LoanRequest::where('id' , $loan_id)->first();
-        $loan->status = '28';
+    public function update_request_loan_status($loan){
+        if($loan->type == 'lender'){
+            $status = '29';
+        }else{
+            $status = '21';
+            // Go to pinjaman aktif;
+        }
+        $loan = LoanRequest::where('id' , $loan->request_loan_id)->first();
+        $loan->status = $status;
         $loan->save();
     }
 

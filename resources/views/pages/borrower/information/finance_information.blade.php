@@ -40,12 +40,10 @@
                                                 <td></td>
                                                 <td><span class="label label-warning">{{$item->status_title }}</span></td>
 
-                                                @if($item->status == '19')
-                                                    <td><a id="btnsign" href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
+                                                @if($item->status == '27')
+                                                    <td><a id="document_borrower_sign"  href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
                                                 @elseif($item->status == '21')
                                                     <td><a  href="/profile/loan/detail/{{$item->invoice_number}}" class="btn btn-default btn-xs"> detail </a></td>
-                                                @elseif($item->status == '27')
-                                                    <td><button onclick="updated_status('{{$item->id}}','21')" href="#" class="btn btn-primary btn-xs"> Klik jika sudah diterima </button></td>
                                                 @elseif($item->status == '28')
                                                     <td><a href="/profile/congratulation/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Konfirmasi </a></td>
                                                 @else
