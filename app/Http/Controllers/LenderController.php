@@ -879,7 +879,7 @@ class LenderController extends Controller
                 'visible' => "1"
             ]
         ];
-        //print_r();
+        
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
         $digisign = new DigiSign;
         $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $lender->id , 'credit_agreement');
@@ -889,6 +889,7 @@ class LenderController extends Controller
                 "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
             ];
         }
+        
         $create_doc_aggreement = RequestLoanDocument::create(
             [
                 'document_id' => $doc_id,
