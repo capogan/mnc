@@ -166,7 +166,7 @@
                                                                 <input type="text"  class="form-control" placeholder="Akta perubahan terakhir & tanggal" id="akta_perubahan" name="akta_perubahan" value="{{isset($lender_profile->last_akta_perubahan) ? $lender_profile->last_akta_perubahan : ''}}">
                                                             </div>
                                                             <div class="col">
-                                                                <h6>Nomor pengesahaan KEMENKUMHAM AHU </h6>
+                                                                <h6>Nomor pengesahaan perubahan KEMENKUMHAM AHU </h6>
                                                                 <input type="text"  class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="letter_change_pengesahan_kemenkunham" name="letter_change_pengesahan_kemenkunham" value="{{isset($lender_profile->letter_change_pengesahan_kemenkunham) ? $lender_profile->letter_change_pengesahan_kemenkunham : ''}}">
                                                             </div>
                                                         </div>
