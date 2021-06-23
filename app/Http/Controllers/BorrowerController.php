@@ -235,9 +235,14 @@ class BorrowerController extends Controller
         $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
-            ->select('request_loan.*','master_status_loan_request.title as status_title','request_loan_document.document_id')
-            ->where('uid',$uid)->get();
-        
+            ->leftJoin('digisign_document','digisign_document.document_id' , 'request_loan_document.document_id')
+            ->select('request_loan.*','master_status_loan_request.title as status_title','digisign_document.uid as doc_uid')
+            ->where('request_loan.uid',$uid)
+            ->distinct('request_loan.id')
+            //->groupBy('')
+            //->where('digisign_document.uid',$uid)
+            ->get();
+        //print_r($loans->toArray());exit;
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
@@ -361,8 +366,9 @@ class BorrowerController extends Controller
 
     public function sign(Request $request){
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        //print_r($loan->toArray());exit;
         if($loan){
-            if($loan->status != '19'){
+            if($loan->status != '27'){
                 return Redirect::to('/profile/transaction');
             }
             $status_activation = DigisignActivation::where('uid' , Auth::id())->first();
@@ -391,7 +397,7 @@ class BorrowerController extends Controller
         $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
                                 ->where('request_loan.invoice_number' , $request->invoice)
                                 ->where('request_loan.uid' , Auth::id())
-                                ->where('request_loan.status' , '19')
+                                ->where('request_loan.status' , '27')
                                 ->first();
         $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->request_loan_id)->where('status','active')->where('type' ,'borrower')->first();
         if(!$doc_){
@@ -421,7 +427,7 @@ class BorrowerController extends Controller
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '19')->where('id' , $loan_id)->first();
+        ->where('status' , '27')->where('id' , $loan_id)->first();
         if(!$loan){
             return false;
         }
@@ -592,6 +598,8 @@ class BorrowerController extends Controller
 
         return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));
     }
+
+   
 
 
 
