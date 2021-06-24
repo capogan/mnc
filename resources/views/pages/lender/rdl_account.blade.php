@@ -22,7 +22,7 @@
                                 <div class="row mt-5">
                                     <div class="col">
                                         <h6>Nama Lengkap<span>*</span></h6>
-                                        <input type="email"  class="form-control" placeholder="Nama Lengkap" value="{{$u->individuinfo->full_name ? $u->individuinfo->full_name : ''}}" disabled>
+                                        <input type="email"  class="form-control" placeholder="Nama Lengkap" value="{{$u->individuinfo ? $u->individuinfo->full_name : ''}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-5">
