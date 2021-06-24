@@ -49,13 +49,14 @@ class Digisign  extends Controller
         $digisign = new HelpersDigiSign;
         $res = $digisign->callback_activation($request->msg);
         $user = User::where('email' ,$res['data']['email_user'])->first();
-
-        if(!$user || $user->group == 'borrower'){
+        if(!$user){
+            return redirect('/myprofile');
+        }
+        if($user->group == 'borrower'){
             return redirect('/profile/transaction');
         }else{
             return redirect('/myprofile');
         }
-
 
         // UserEKYC::create([
         //     'callback'=>$request->msg,
