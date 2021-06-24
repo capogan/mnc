@@ -30,8 +30,10 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->sign_document_callback($request->msg);
-        
-        if($res){
+       
+        if($res != '' || $res != null){
+            return redirect($res);
+        }else{
             return redirect('sign/success');
         }
     }
