@@ -17,7 +17,7 @@
                                 <p class="lead">Anda belum memiliki akun RDL (Rekening Dana Lender). Untuk Membuat rekening, silahkan isi data tambahn dan klik "Daftarkan Akun"</p>
                             </div>
                             <div class="result-message"></div>
-                            @if($u->individuinfo->full_name)
+
                             <form id="form_additional_rdl" method="POST"  autocomplete="off">
                                 <div class="row mt-5">
                                     <div class="col">
@@ -62,7 +62,7 @@
                                 </div>
                                 <br/>
                             </form>
-                            @endif
+
                             <div class="row mt-12 text-center">
                                 <div class="col">
                                     <button type="button" class="btn btn-primary" id="create_rdl_account_">Daftarkan Akun</button>
