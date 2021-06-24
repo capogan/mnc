@@ -109,8 +109,8 @@
                                     </a>
 
                                 <ul>
-                                    <li><a href="/lender/dashboard" title="Home page 1" class="animsition-link">Dashboard</a></li>
-                                    <li><a href="#" title="Home page 2" class="animsition-link">Profile</a> </li>
+                                    <li><a href="/" title="Home page 1" class="animsition-link">Dashboard</a></li>
+                                    <li><a href="/profile" title="Home page 2" class="animsition-link">Profile</a> </li>
                                     <li><a href="/logout" title="Home page 3" class="animsition-link">Keluar</a></li>
 
                                 </ul>

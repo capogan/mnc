@@ -2,9 +2,10 @@
 @section('content')
 <div class="container containers-with-margin">
     <div class="row">
-        
+        <br/>
+        <br/>
         <div class="col-md-12">
-            <div class="wrapper-content bg-white ">
+            <div class="wrapper-content">
                 <div class="about-section pinside80">
                     @if ($account)
                     <div class="row">
@@ -77,15 +78,17 @@
                         </div>
                     </div>
                     @else
-                        <div class="row">
-                            <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
-                                <div class="mb60 text-center section-title">
-                                    <h1>{{$message}}</h1>
-                                </div>
+                    <div class="row" style="margin-top: 100px!important">
+                        <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
+                            <div class="mb60 text-center section-title">
+                                <h1>{{$message}}</h1>
+                                <a href="/lender/business/rdl" class="btn-link">Buat Akun RDL</a> </div>
                             </div>
                         </div>
-                    @endif
+                    </div>
+                @endif
                 </div>
+                @if ($account)
                 <div class="cta-section pinside60  bg-white section-space40">
                     <div class=" ">
                         <div class="row">
@@ -123,11 +126,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="alert dager"> {{$message}} </div>
         </div>
     </div>
 </div>

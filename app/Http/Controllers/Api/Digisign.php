@@ -21,7 +21,7 @@ class Digisign  extends Controller
             'created_at'=>date('Y-m-d'),
             'updated_at'=>date('Y-m-d'),
         ]);
-
+        
         if($validator->fails()) {
             return  [
                 "status"=> false,
@@ -30,7 +30,7 @@ class Digisign  extends Controller
         }
         $digisign = new HelpersDigiSign;
         $res = $digisign->sign_document_callback($request->msg);
-
+        
         if($res){
             return redirect('sign/success');
         }
@@ -49,15 +49,12 @@ class Digisign  extends Controller
         $digisign = new HelpersDigiSign;
         $res = $digisign->callback_activation($request->msg);
         $user = User::where('email' ,$res['data']['email_user'])->first();
-        if(!$user){
-            return redirect('/myprofile');
-        }
         if($user->group == 'borrower'){
             return redirect('/profile/transaction');
         }else{
             return redirect('/myprofile');
         }
-
+        
         // UserEKYC::create([
         //     'callback'=>$request->msg,
         //     'created_at'=>date('Y-m-d'),
@@ -72,4 +69,5 @@ class Digisign  extends Controller
         //     'updated_at'=>date('Y-m-d'),
         // ]);
     }
+    
 }

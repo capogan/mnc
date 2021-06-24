@@ -529,7 +529,7 @@ class DigiSign {
                     // ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
                     // ->where('digisign_document.document_id' , $res['document_id'])->first();
                     $type = RequestLoanDocument::where('document_id' , $res['document_id'])->first();
-                    //print_r($type); exit;
+                    
                     if($type){
                         $this->update_request_loan_status($type);
                     }else{
@@ -555,12 +555,13 @@ class DigiSign {
     }
 
     public function update_request_loan_status($loan){
-        if($loan->type == 'lender'){
+
+        if(trim($loan->type) === 'lender'){
             $status = '29';
         }else{
             $status = '21';
             // Go to pinjaman aktif;
-            $this->create_cicilan($loan->request_loan_id);
+           $this->create_cicilan($loan->request_loan_id);
         }
         $loan = LoanRequest::where('id' , $loan->request_loan_id)->first();
         $loan->status = $status;
@@ -604,6 +605,8 @@ class DigiSign {
                 'id_status_payment'=>'1',
 
             ]);
+            $loan->disbursment_date = date('Y-m-d H:i:s');
+            $loan->save();
 
         }
 
