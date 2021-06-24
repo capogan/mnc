@@ -21,7 +21,7 @@
                                         <th>Tanggal Pengajuan</th>
                                         <th>Tanggal Pencairan</th>
                                         {{-- <th>Tanggal Pelunasan</th> --}}
-                                        <th>Status Pinjaman</th>
+                                        <th>Status<br/>Pinjaman</th>
                                         <th>Dokumen Perjanjian</th>
 
                                     </tr>
@@ -41,7 +41,7 @@
                                                 <td><span class="label label-warning">{{$item->status_title }}</span></td>
 
                                                 @if($item->status == '27')
-                                                    <td><a id="document_borrower_sign"  href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Tanda tangan <br> perjanjian </a></td>
+                                                    <td><a id="document_borrower_sign"  href="/profile/sign/{{$item->invoice_number}}" class="btn btn-default btn-xs"> Silahkan Tanda <br> Tangan </a></td>
                                                 @elseif($item->status == '21')
                                                     <td><a  href="/profile/loan/detail/{{$item->invoice_number}}" class="btn btn-default btn-xs"> detail </a></td>
                                                 @elseif($item->status == '28')
