@@ -133,6 +133,7 @@ Route::post('/lender/business/add', 'LenderController@information_business_add')
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
 Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
+
 Route::get('/profile/rdl', 'LenderController@rdl_account')->name('profile.lender.rdl.account');
 
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
@@ -154,6 +155,9 @@ Route::get('/sign/success' , 'LenderController@sign_success')->name('lender.sign
 // RDL ACCOUNT
 Route::get('/lender/rdl/account/registered' , 'LenderController@register_rdl_account')->name('lender.sign.aggrement.success');
 Route::POST('/lender/update/rdl_account' , 'LenderController@update_rdl_account')->name('lender.update.rdl.account');
+
+Route::POST('/lender/update/rdl_account_business' , 'LenderController@update_rdl_account_business')->name('lender.update.rdl.account');
+
 
 // END RDL ACCOUNT
 
