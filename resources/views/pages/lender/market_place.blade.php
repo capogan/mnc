@@ -23,7 +23,7 @@
                                 <div class="error-ctn text-center">
                                     <h2 class="msg">Maaf</h2>
                                     <h1 class="error-title mb40">Proses Verifikasi</h1>
-                                    <p class="mb40">Status akun kamu masih dalam proses. Kami akan menghubungi Anda jika proses verifikasi telah berhasil</p>
+                                    <p class="mb40">Status akun Anda masih dalam proses. Kami akan menghubungi Anda jika proses verifikasi telah berhasil</p>
                                     <a href="index.html" class="btn btn-default text-center">kembali ke Beranda</a>
                                 </div>
                             </div>
