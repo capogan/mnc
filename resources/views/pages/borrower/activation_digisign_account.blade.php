@@ -28,9 +28,11 @@
                                                             <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
                                                             <p class="lead">PT, Siap dalam menyediakan layanan tanda tangan Eletronik bekerja sama dengan Platform Digisign. sehingga dalam hal ini Anda diharuskan untuk melakukan pendaftaran pada platform Digisign.</p>
                                                             @if ($sign_agreement)
+                                                                <center>
                                                                 <p class="lead">Persiapkan Ponsel anda. karena anda di haruskan memasukan kode OTP sebagai tanda verifikasi.
-                                                                    (dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP)
+                                                                    (<b>dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP</b>)
                                                                 </p>
+                                                                </center>
                                                                 <hr>
 
                                                                 <a href="#" id="activate_account_dgsign" type="button" class="btn btn-primary">Aktivasi Akun</a>
