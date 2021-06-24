@@ -64,7 +64,7 @@
                                                                     value="{{ isset($sign_agreement->lender_type) ? $sign_agreement->lender_type : '' }}">
                                                                 <input type="hidden" name="personal_id" id="personal_id"
                                                                     value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
-                                                                <h1>KETENTUAN TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h1>
+                                                                <h2>KETENTUAN TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h2>
                                                                 <p class="lead">PT, Siap dalam menyediakan layanan tanda tangan Eletronik bekerja sama dengan Platform Digisign. sehingga dalam hal ini Anda diharuskan untuk melakukan pendaftaran pada platform Digisign.</p>
                                                                 @if ($sign_agreement)
 
