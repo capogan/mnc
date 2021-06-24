@@ -21,7 +21,7 @@
                                         <th>Tanggal Pengajuan</th>
                                         <th>Tanggal Pencairan</th>
                                         {{-- <th>Tanggal Pelunasan</th> --}}
-                                        <th>Status Pinjaman</th>
+                                        <th>Status<br/>Pinjaman</th>
                                         <th>Dokumen Perjanjian</th>
 
                                     </tr>
