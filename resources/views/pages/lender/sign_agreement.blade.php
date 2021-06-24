@@ -79,6 +79,7 @@
                                                                             <li>Baca dan pelajari secara baik semua isi dari perjanjian yang akan di tanda tangani.</li>
                                                                             <li>Persiapkan Ponsel anda. karena anda akan di haruskan memasukan kode OTP sebagai tanda verifikasi. (dilarang memberikan informasi tentang kode OTP kepada siapapun. termaksud seseorang yang mengatasnamakan PT. SIAP</li>
                                                                         </ul>
+
                                                                     <hr>
                                                                     @if($sign_agreement->status_activation != 'active')
                                                                         <a href="#" id="activate_account_dgsign" type="button" class="btn btn-primary">Aktivasi Akun</a>
