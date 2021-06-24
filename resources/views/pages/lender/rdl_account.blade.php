@@ -10,18 +10,19 @@
             <div class="wrapper-content bg-white ">
                 <div class="about-section pinside40">
                     <div class="row">
-                        
+
                         <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
                             <div class="text-center">
                                 <h2>Rekening Dana Lender (RDL)</h2>
                                 <p class="lead">Anda belum memiliki akun RDL (Rekening Dana Lender). Untuk Membuat rekening, silahkan isi data tambahn dan klik "Daftarkan Akun"</p>
                             </div>
                             <div class="result-message"></div>
+                            @if($u->individuinfo->full_name)
                             <form id="form_additional_rdl" method="POST"  autocomplete="off">
                                 <div class="row mt-5">
                                     <div class="col">
                                         <h6>Nama Lengkap<span>*</span></h6>
-                                        <input type="email"  class="form-control" placeholder="Nama Lengkap" value="{{$u->individuinfo->full_name}}" disabled>
+                                        <input type="email"  class="form-control" placeholder="Nama Lengkap" value="{{$u->individuinfo->full_name ? $u->individuinfo->full_name : ''}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-5">
@@ -61,6 +62,7 @@
                                 </div>
                                 <br/>
                             </form>
+                            @endif
                             <div class="row mt-12 text-center">
                                 <div class="col">
                                     <button type="button" class="btn btn-primary" id="create_rdl_account_">Daftarkan Akun</button>
