@@ -604,6 +604,8 @@ class DigiSign {
                 'id_status_payment'=>'1',
 
             ]);
+            $loan->disbursment_date = date('Y-m-d H:i:s');
+            $loan->save();
 
         }
 

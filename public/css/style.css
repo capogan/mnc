@@ -1456,4 +1456,6 @@ input:focus + label {
     font-size: 13px;
     text-align: justify;
 }
-
+.table-custom-fo-twelve thead>tr>th , .table-custom-fo-twelve tbody>tr{
+  font-size: 12px !important;
+}

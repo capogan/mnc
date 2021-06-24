@@ -586,17 +586,57 @@ class BorrowerController extends Controller
     public function loan_installments(Request $request){
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
-        $loan_installments = LoanInstallment::
-        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
-        where('id_request_loan',$loan->id)->orderBy('stages','ASC')
+        $loan_installments = RequestLoanInstallments::
+        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')
+        ->where('id_request_loan',$loan->id)
+        ->select('request_loan_installments.*','master_status_payment.status_name')
+        ->orderBy('stages','ASC')
             ->get();
         $data = [
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,
             'loan_installments'=>$loan_installments
         ];
+        
 
         return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));
+    }
+
+    public function repayment(Request $request){
+        //print_r($request->all());
+        $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
+        ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
+        ->where('request_loan.uid' , Auth::id())
+        ->first();
+
+        $get_user = PersonalInfo::select('personal_info.*')
+                    ->where('personal_info.uid',Auth::id())->first();
+
+        if(!$detail){
+            return abort('404' , 'data cicilan tidak ditemukan.');
+        }
+        $data = [
+            'repayment' => $detail,
+            'va' => '239012380912',
+            'personal' => $get_user
+        ];
+        //print_r($data);exit;
+
+        return view('pages.borrower.repayment', $this->merge_response($data, static::$CONFIG));
+    }
+
+    public function repayment_request(Request $request){
+        $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
+        ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
+        ->where('request_loan.uid' , Auth::id())
+        ->first();
+
+        if(!$detail){
+            return json_encode(['status'=> false, 'message'=> 'Pinjaman tidak ditemukan.']);
+        }
+
+        // ra
+
     }
 
    

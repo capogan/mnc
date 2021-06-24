@@ -36,6 +36,29 @@ $(document).ready(function() {
             }
         })
     });
+
+    $(document).on('click', '.repayment_request', function() {
+        var id = $(this.attr('chars'));
+        var btn = $(this);
+        btn.attr("disabled", true);
+
+        Swal.fire({
+            title: 'Konfirmasi',
+            showDenyButton: true,
+            text :'Akun virtual yang muncul hanya berlaku 6 jam , Silahkan melakukan pembayaran secepatnya.',
+            showCancelButton: true,
+            confirmButtonText: `Lanjutkan`,
+            denyButtonText: `Batal`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                request_repayment(id);
+            } else if (result.isDenied) {
+                Swal.fire('Batal melakukan pembayaran', '', 'info')
+            }
+        })
+    })
+
 });
 
 $(document).on('change', '.btn-file :file', function() {
@@ -791,6 +814,27 @@ function updated_status(id,number_status){
              close_loading();
          }
      })
+}
+
+function request_repayment(id){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/repayment/request',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        dataType:'json',
+        data:{
+            id:id,
+        },
+        success:function(response)
+        {
+           window.location.reload();
+        },
+        error: function() {
+        }
+    })
 }
 
 

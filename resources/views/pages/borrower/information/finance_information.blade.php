@@ -20,7 +20,7 @@
                                         <th>Nilai Pinjaman</th>
                                         <th>Tanggal Pengajuan</th>
                                         <th>Tanggal Pencairan</th>
-                                        <th>Tanggal Pelunasan</th>
+                                        {{-- <th>Tanggal Pelunasan</th> --}}
                                         <th>Status Pinjaman</th>
                                         <th>Dokumen Perjanjian</th>
 
@@ -36,8 +36,8 @@
                                                 <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
 
                                                 <td>{{ Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->created_at)))}}</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $item->disbursment_date ? Utils::date_in_indonesia(date('Y-m-d' , strtotime($item->disbursment_date))) : '-'}}</td>
+                                                {{-- <td></td> --}}
                                                 <td><span class="label label-warning">{{$item->status_title }}</span></td>
 
                                                 @if($item->status == '27')
