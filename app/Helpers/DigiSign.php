@@ -529,7 +529,6 @@ class DigiSign {
                     // ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
                     // ->where('digisign_document.document_id' , $res['document_id'])->first();
                     $type = RequestLoanDocument::where('document_id' , $res['document_id'])->first();
-                    //print_r($type); exit;
                     if($type){
                         $this->update_request_loan_status($type);
                     }else{
