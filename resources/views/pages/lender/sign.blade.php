@@ -26,7 +26,7 @@
                                 <li>Baca dan pelajari secara baik semua isi dari perjanjian yang akan di tanda tangani.</li>
                                 <li>Persiapkan Ponsel anda. karena anda akan di haruskan memasukan kode OTP sebagai tanda verifikasi. (dilarang memberikan informasi tentang kode OTP kepada siapapun. termaksud seseorang yang mengatasnamakan PT. SIAP</li>
                             </ul>
-                            <button id="lender_sign_aggreement_of_fund" data-content="{{$id_loan}}" class="btn btn-primary btn-sm pull-left">Proses Pinjaman</button>
+                            <button id="lender_sign_aggreement_of_fund" data-content="{{$id_loan}}" class="btn btn-primary btn-sm pull-left">Proses Tanda Tangan</button>
 
                     </div>
                 </div>
