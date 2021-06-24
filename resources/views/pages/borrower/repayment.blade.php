@@ -59,11 +59,15 @@
                                                 <td><b>{{$repayment->loan_period}} Hari</b></td>
                                             </tr>
                                             <tr>
+                                                <td>Cicilan Ke-</td>
+                                                <td><b>{{$repayment->stages}} </b></td>
+                                            </tr>
+                                            <tr>
                                                 <td>Jumlah cicilan</td>
                                                 <td><b>Rp {{number_format($repayment->amount ,0 ,'.','.')}} </b></td>
                                             </tr>
                                             <tr>
-                                                <td>Jumplah permbayaran</td>
+                                                <td>Jumlah permbayaran</td>
                                                 <td><b>Rp {{number_format($repayment->amount ,0 ,'.','.')}}</b></td>
                                             </tr>
                                             <tr>
