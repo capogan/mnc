@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="error-img mb60">
-                                    <img src="{{asset('images/error-img.png')}}" class="" alt="">
+                                    <img src="<?php echo (asset('images/waiting_logo.png')); ?>" class="" alt="">
                                 </div>
                                 <div class="error-ctn text-center">
                                     <h2 class="msg">Maaf</h2>
