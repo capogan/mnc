@@ -78,8 +78,8 @@ Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.c
 Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 Route::get('/profile/loan/detail/{invoice}', 'BorrowerController@loan_installments')->name('loan.detail');
 
-Route::get('/repayment', 'BorrowerController@repayment')->name('loan.detail');
-Route::post('/repayment/request', 'BorrowerController@repayment_request')->name('loan.detail');
+Route::get('/repayment', 'BorrowerController@repayment')->name('repayment.detail');
+Route::post('/repayment/request', 'BorrowerController@repayment_request')->name('repayment.request');
 //................................................................
 //................SSSSSS...............................SSSSSS.....
 //.UUUU...UUUU...SSSSSSSS...SEEEEEEEEEE.ERRRRRRRRR....SSSSSSSS....

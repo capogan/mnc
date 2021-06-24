@@ -36,6 +36,7 @@ use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
 use App\RequestFunding;
 use App\RequestLoanDocument;
+use App\RequestLoanInstallmentsVa;
 use PDF;
 
 class BorrowerController extends Controller
@@ -603,22 +604,28 @@ class BorrowerController extends Controller
     }
 
     public function repayment(Request $request){
-        //print_r($request->all());
+        
         $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
         ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
         ->where('request_loan.uid' , Auth::id())
+        ->select('request_loan_installments.*','request_loan.id as req_loan_id','request_loan.repayment','request_loan.invoice_number','request_loan.loan_period')
         ->first();
+        //print_r($detail); exit;
 
         $get_user = PersonalInfo::select('personal_info.*')
                     ->where('personal_info.uid',Auth::id())->first();
 
+        
         if(!$detail){
             return abort('404' , 'data cicilan tidak ditemukan.');
         }
+        $va = RequestLoanInstallmentsVa::where('status' , 'active')->where('id_installment' , $detail->id)->first();
+
         $data = [
             'repayment' => $detail,
-            'va' => '239012380912',
-            'personal' => $get_user
+            'va' => $va,
+            'personal' => $get_user,
+            'installment' => $request->installment
         ];
         //print_r($data);exit;
 
@@ -627,18 +634,51 @@ class BorrowerController extends Controller
 
     public function repayment_request(Request $request){
         $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
-        ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
+        ->where('request_loan_installments.id' , Utils::decrypt($request->id))
         ->where('request_loan.uid' , Auth::id())
+        ->select('request_loan_installments.*','request_loan.id as req_loan_id','request_loan.repayment','request_loan.invoice_number','request_loan.loan_period')
         ->first();
-
         if(!$detail){
             return json_encode(['status'=> false, 'message'=> 'Pinjaman tidak ditemukan.']);
         }
+        $if_exist = RequestLoanInstallmentsVa::where('id_installment' , $detail->id)->where('status' , 'active')->exists();
 
+        if($if_exist){
+            return json_encode(['status'=> false, 'message'=> 'Akun virtual masih dapat digunakan']);
+        }
+        $create_va = RequestLoanInstallmentsVa::create(
+            [
+                'id_installment' => $detail->id,
+                'status' => 'active',
+                'total_payment' => $detail->amount,
+                'va_number' => $this->generate_va(),
+                'created_at' => date('Y-m-d H:i:s')
+            ]
+        );
+        if(!$create_va){
+            return json_encode(['status'=> false, 'message'=> 'Error saat generate va.']);
+        }
+        return json_encode(['status'=> true, 'message'=> 'Berhasil']);
         // ra
 
     }
+    public function generate_va(){
+        $number = "";
+        for($i = 0; $i < 4; $i++){
+            $chr = rand(0,3);
+            $str = "";
+            for($j = 0; $j < 4; $j ++){
+                if($j == $chr) {
+                    $str .= mt_rand(0,9);
+                } else {
+                    $str .= rand(0,9);
+                }
+            }
+            $number .= (empty($number) ? $str : "".$str);
+        }
 
+        return $number;
+    }
    
 
 
