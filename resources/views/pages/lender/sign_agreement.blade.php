@@ -64,12 +64,13 @@
                                                                     value="{{ isset($sign_agreement->lender_type) ? $sign_agreement->lender_type : '' }}">
                                                                 <input type="hidden" name="personal_id" id="personal_id"
                                                                     value="{{ isset($sign_agreement->personal_id) ? $sign_agreement->personal_id : '' }}"> --}}
-                                                                <h1>SYARAT DAN KETENTUAN LAYANAN PENGGUNAAN SIAP</h1>
+                                                                <h1>KETENTUAN TANDA TANGAN DIGITAL PADA PERJANJIAN PINJAMAN</h1>
                                                                 <p class="lead">PT, Siap dalam menyediakan layanan tanda tangan Eletronik bekerja sama dengan Platform Digisign. sehingga dalam hal ini Anda diharuskan untuk melakukan pendaftaran pada platform Digisign.</p>
                                                                 @if ($sign_agreement)
 
-                                                                        <p class="lead">Persiapkan Ponsel anda. karena anda di haruskan memasukan kode OTP sebagai tanda verifikasi.
-                                                                            (dilarang memberikan informasi tentang kode OTP kepada siapapun. termasuk seseorang yang mengatasnamakan PT. SIAP)
+                                                                        <p class="lead">PT. sistem informasi dan aplikasi pembiayaan [SIAP] menerapkan tanda tangan digital dalam setiap penandatanganan perjanjian pinjam meminjam uang dalam layanan SIAP.
+                                                                            PT. SIAP menyediakan layanan tanda tangan elektronik yang baik dan berkualitas dalam membantu interaksi dengan peminjam dan pemberi pinjamannya.
+                                                                            Berikut ini adalah Informasi tentang Tanda Tangan Digital ;
                                                                         </p>
 
                                                                     <hr>
