@@ -778,15 +778,18 @@ class LenderController extends Controller
 
     public function marketplace_agreement(Request $request){
         $ready_rdl_account = LenderRDLAccountRegistered::where('uid', Auth::id())->where('status', 'active')->exists();
-        if(!$ready_rdl_account){
-            $u = User::with('individuinfo')->where('id' , Auth::id())->first();
-            $data = ['u' => $u , 'religion' => MasterReligion::get()];
-            return view('pages.lender.rdl_account', $data);
+        if(Auth::user()->level != 'business'){
+            if(!$ready_rdl_account){
+                $u = User::with('individuinfo')->where('id' , Auth::id())->first();
+                $data = ['u' => $u , 'religion' => MasterReligion::get()];
+                return view('pages.lender.rdl_account', $data);
+            }
         }
+        
         if(!isset($request->mark)){
             return abort('404');
         }
-
+        
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
