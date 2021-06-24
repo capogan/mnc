@@ -165,7 +165,7 @@
                                     <th>Lihat perjanjian</th>
                                     </thead>
                                     <tbody>
-                                    @foreach($loan_macet as $index => $item)
+                                    @foreach($loan_aktif as $index => $item)
                                         <tr>
                                             <td>{{$index + 1}}</td>
                                             <td>{{ $item->invoice_number}}</td>

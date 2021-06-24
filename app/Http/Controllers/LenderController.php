@@ -1394,6 +1394,10 @@ class LenderController extends Controller
     public function rdl_account_business(){
         $u = User::with('individuinfo')->where('id' , Auth::id())->first();
         $data = ['u' => $u , 'religion' => MasterReligion::get()];
+        if(Auth::user()->level == 'individu'){
+            return view('pages.lender.rdl_account', $data);
+        }
+        
         return view('pages.lender.rdl_account_business', $data);
     }
 
@@ -1446,8 +1450,12 @@ class LenderController extends Controller
                 ->where('lender_uid',$uid)->where('status','24')->get(),
             'loan_terlambat' => LoanRequest::where('lender_uid',$uid)->where('status','23')->get(),
             'loan_lunas' => LoanRequest::where('lender_uid',$uid)->where('status','25')->get(),
-            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->get(),
+            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get()
         );
+
+        // $x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
+        // print_r($x);
+        // exit;
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }
     public function aggreement_lender(){

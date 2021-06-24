@@ -135,6 +135,7 @@ Route::post('/lender/register/director', 'LenderController@submit_director_data'
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
 
 Route::get('/profile/rdl', 'LenderController@rdl_account')->name('profile.lender.rdl.account');
+Route::get('/lender/business/rdl', 'LenderController@rdl_account_business')->name('profile.lender.rdl.account');
 
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
 Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');

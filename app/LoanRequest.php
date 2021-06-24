@@ -50,6 +50,10 @@ class LoanRequest extends Model
         ->with('document');
     }
 
+    public function loan_installment(){
+        return $this->hasMany(RequestLoanInstallments::class,'id_request_loan' ,'id');
+    }
+
 
 
 

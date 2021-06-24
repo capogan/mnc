@@ -82,7 +82,7 @@
                         <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12">
                             <div class="mb60 text-center section-title">
                                 <h1>{{$message}}</h1>
-                                <a id="topUpSaldo" href="/lender/business/rdl" class="btn-link">Buat Akun RDL</a> </div>
+                                <a href="/lender/business/rdl" class="btn-link">Buat Akun RDL</a> </div>
                             </div>
                         </div>
                     </div>
