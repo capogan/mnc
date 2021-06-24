@@ -89,8 +89,13 @@
                                                         <td>{{$item->name}}{{$item->status}}</td>
                                                         <td>{{ date('Y-m-d' , strtotime($document->loandocument->created_at)) }}</td>
                                                         <td>{{$item->email}} </td>
-                                                        <td>{{$item->status_sign == '' ? 'waiting' : $item->status_sign}} </td>
-                                                        @if($item->status_sign != 'complete' && $item->email == Auth::user()->email)
+                                                        @if($item->email == 'ogan@capioteknologi.co.id')
+                                                            <td>complete</td>
+                                                        @else
+                                                            <td>{{$item->status_sign == '' ? 'waiting' : $item->status_sign}} </td>
+                                                        @endif
+                                                        
+                                                        @if($item->status_sign != 'complete' && $item->email != 'ogan@capioteknologi.co.id')
                                                             <td><a href="/digisigngetdocument?doc={{ \App\Helpers\Utils::encrypt($document->loandocument->id)}}" class="btn btn-primary btn-xs"> Tanda tangani dokumen </a></td>
                                                         @else
                                                         <td></td>
