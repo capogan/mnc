@@ -31,7 +31,11 @@
                                             <td>{{$val->date_payment}}</td>
                                             <td>{{Utils::date_in_indonesia($val->due_date_payment)}}</td>
                                             <td>{{$val->status_name}}</td>
-                                            <td><a href="/repayment?installment={{ \App\Helpers\Utils::encrypt($val->id)}}" class="btn btn-success btn-xs"> Bayar </a></td>
+                                            <td>
+                                                @if($val->id_status_payment != 5)
+                                                 <a href="/repayment?installment={{ \App\Helpers\Utils::encrypt($val->id)}}" class="btn btn-success btn-xs"> Bayar </a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

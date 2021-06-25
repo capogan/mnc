@@ -494,16 +494,11 @@ class DigiSign {
     }
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
-        //print_r($response);exit;
-        //$response = '{"document_id":"20210616_60c9eb367c05b_184","status_document":"complete","result":"00","email_user":"mario@yahoo.com","notif":"Sukses"}';
         $prc = $this->process_signers_callback($response , []);
-        if(!$prc){
-            return false;
-        }else{
-            return true;
-        }
+        return $prc;
     }
     public function process_signers_callback($response, $data){
+        $url = '';
         $res= json_decode($response , true);
         if(array_key_exists('result' , $res)){
             if($res['result'] == '00'){
@@ -528,10 +523,10 @@ class DigiSign {
                     // $type = DigiSignDocument::select('request_loan_document.request_loan_id')
                     // ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
                     // ->where('digisign_document.document_id' , $res['document_id'])->first();
-                    $type = RequestLoanDocument::where('document_id' , $res['document_id'])->first();
-                    
+                    $type = RequestLoanDocument::select('request_loan_document.*','request_loan.invoice_number' )->leftJoin('request_loan' ,'request_loan.id' ,'=' ,'request_loan_document.request_loan_id')->where('document_id' , $res['document_id'])->first();
+                    //print_r($type);exit;
                     if($type){
-                        $this->update_request_loan_status($type);
+                        $url = $this->update_request_loan_status($type);
                     }else{
                         DigiSignDocument::where('document_id' , $res['document_id'])->update(
                         [
@@ -551,21 +546,24 @@ class DigiSign {
             }
         }
         $this->signers_logs($response, $res);
-        return true;
+        return $url;
     }
 
     public function update_request_loan_status($loan){
 
         if(trim($loan->type) === 'lender'){
             $status = '29';
+            $url = '/lender/dashboard';
         }else{
             $status = '21';
+            $url = '/profile/loan/detail/'.$loan->invoice_number;
             // Go to pinjaman aktif;
            $this->create_cicilan($loan->request_loan_id);
         }
         $loan = LoanRequest::where('id' , $loan->request_loan_id)->first();
         $loan->status = $status;
         $loan->save();
+        return $url;
     }
 
     public function create_cicilan($loan_id){
@@ -605,10 +603,11 @@ class DigiSign {
                 'id_status_payment'=>'1',
 
             ]);
-            $loan->disbursment_date = date('Y-m-d H:i:s');
-            $loan->save();
+            
 
         }
+        $loan->disbursment_date = date('Y-m-d H:i:s');
+        $loan->save();
 
     }
 
