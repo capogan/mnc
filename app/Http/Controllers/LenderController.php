@@ -1163,7 +1163,11 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
-
+        if(Auth::user()->group == 'borrower'){
+            return redirect('/profile/transaction');
+        }else{
+            return redirect('/myprofile');
+        }
         $status_lender = LenderVerification::where('uid' , Auth::id())->first();
         if($status_lender){
             if($status_lender->status == 'reject'){

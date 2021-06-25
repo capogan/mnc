@@ -309,7 +309,7 @@ class DigiSign {
         $data = $this->aes_128_ecb_decrypt($msg);
         $acc = json_decode($data , true);
         if($acc['result'] == '00'){
-            $u_acc = DigisignActivation::where('email' , $acc['email_user'])->first();
+            $u_acc = DigisignActivation::where('email' , $acc['email_user'])->where('status_activation' ,'!=', 'active')->first();
             if(!$u_acc){
                 $this->logs_internal($data , 'User with criteria not found after received callback from Digisign.');
                 return ['status' => false , 'data' => []];
