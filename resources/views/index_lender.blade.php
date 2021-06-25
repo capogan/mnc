@@ -3,9 +3,9 @@
 @section('content')
   <div class="slider" id="slider">
         <!-- slider -->
-         <div class="slider-img"><img src="images/banner_baru.png" alt="Borrow - Loan Company Website Template" class="">
-           <div class="row ml-5">
-                <div class="col ml-5">
+         <div class="slider-img" style="margin-top: 80px;"><img src="images/Aset SIAP - Banner 1.png" alt="Borrow - Loan Company Website Template" class="">
+           <div class="row" style="margin-top: -120px; margin-left: 80px;">
+                <div class="col">
                     <div class="slider-captions">
                         <!-- slider-captions -->
                        
@@ -18,31 +18,35 @@
            
         </div>
         <div>
-             <div class="slider-img"><img src="images/banner_baru_2.png" alt="Borrow - Loan Company Website Template" >
+             <div class="slider-img" style="margin-top: 98px;"><img src="images/Aset SIAP - Banner 2.png" alt="Borrow - Loan Company Website Template" >
                 <div class="container">
-                    <div class=" col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
-                        <div class="slider-captions">
-                            <!-- slider-captions -->
-                           
-                             <a href="/login" class="btn btn-default">Login</a> 
-                        <a href="/register/lender" class="btn btn-default">Register</a> 
-                            </div>
-                        <!-- /.slider-captions -->
+                    <div class="row" style="margin-top: -120px; margin-left: -90px;">
+                        <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
+                            <div class="slider-captions">
+                                <!-- slider-captions -->
+                               
+                                 <a href="/login" class="btn btn-default">Login</a> 
+                                <a href="/register/lender" class="btn btn-default">Register</a> 
+                                </div>
+                            <!-- /.slider-captions -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <div class="slider-img"><img src="images/banner_baru_3.png" alt="Borrow - Loan Company Website Template" class="" >
+            <div class="slider-img" style="margin-top: 98px;"><img src="images/Aset SIAP - Banner 3.png" alt="Borrow - Loan Company Website Template" class="" >
                 <div class="container">
-                    <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
-                        <div class="slider-captions">
-                            <!-- slider-captions -->
-                          
-                             <a href="/login" class="btn btn-default">Login</a> 
-                        <a href="/register/lender" class="btn btn-default">Register</a> 
-                            </div>
-                        <!-- /.slider-captions -->
+                    <div class="row" style="margin-left: -90px; padding-top: -100px;">
+                        <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12 m-0">
+                            <div class="slider-captions">
+                                <!-- slider-captions -->
+                              
+                                    {{-- <a href="/login" class="btn btn-default">Login</a> 
+                                    <a href="/register/lender" class="btn btn-default">Register</a>  --}}
+                                </div>
+                            <!-- /.slider-captions -->
+                        </div>
                     </div>
                 </div>
             </div>

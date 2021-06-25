@@ -1,56 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .modal{
-            /*display: block !important; !* I added this to see the modal, you don't need this *!*/
-        }
-        /* Important part */
-        .modal-dialog{
-            overflow-y: initial !important
-        }
-        .modal-body{
-            height: 80vh;
-            overflow-y: auto;
-        }
-        .modal-disclamer{
-            font-size:11pt;
-            text-align:justify
-        }
-    </style>
-    <div class="hero-section">
-        <div class="container">
-            <div class="row">
-                <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12 ">
-                    <div class="hero-tab-block">
+      <div class="slider" id="slider">
+        <!-- slider -->
+       <div class="slider-img" style="margin-top: 80px;"><img src="images/Aset SIAP - Banner 1.png" alt="Borrow - Loan Company Website Template" class="">
+            <div class="container">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="slider-captions">
+                        <!-- slider-captions -->
+                       
+                        
+                        </div>
+                    <!-- /.slider-captions -->
+                </div>
+            </div>
+        </div>
+        <div>
+             <div class="slider-img" style="margin-top: 99px;"><img src="images/Aset SIAP - Banner 2.png" alt="Borrow - Loan Company Website Template" class="" >
+                <div class="container">
+                    <div class=" col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
+                        <div class="slider-captions">
+                            <!-- slider-captions -->
+                            
+                            </div>
+                        <!-- /.slider-captions -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="slider-img" style="margin-top: 98px;"><img src="images/Aset SIAP - Banner 3.png" alt="Borrow - Loan Company Website Template" class="" >
+                <div class="container">
+                    <div class="col-xl-6 col-lg-6 col-md-12  col-sm-12 col-12">
+                        <div class="slider-captions">
+                            <!-- slider-captions -->
+                           
+                            </div>
+                        <!-- /.slider-captions -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
+    
     <div class="container">
         <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
+            {{-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt40">
                 <div class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li><a href="index.html">Home</a></li>
 
                     </ol>
                 </div>
-            </div>
+            </div> --}}
         </div>
-        <div class="row mt-5 mb-5">
+        <div class="row my-5">
             <div class="row">
-                <div class="col">
+                <div class="col-5">
 
 
-                    <img src="/images/Artborad2.png" alt="Borrow - Loan Company Website Template" class="icon-ttg-layanan">
+                    <img src="/images/Aset SIAP - P2P Logo.png" alt="Borrow - Loan Company Website Template" class="icon-ttg-layanan">
                 </div>
-                <div class="col">
+                <div class="col offset-1">
                     <div class="row">
                         <h2>TENTANG LAYANAN</h2>
                     </div>
@@ -70,7 +81,6 @@
 
     </div>
 
-    </div>
     <div class="container text-center mt-5">
         <h3>Partner Kami</h3>
 
@@ -86,6 +96,7 @@
 
                         </div>
                     </div>
+                    
                     <div class="carousel-item">
                         <div class="col-md-4">
 
@@ -100,7 +111,26 @@
                         <div class="col-md-4">
 
 
+                            <img class="img-fluid" src="/images/DigiSign Logo.png">
+
+
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+
+
                             <img class="img-fluid" src="/images/FM.png">
+
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+
+
+                            <img class="img-fluid" src="/images/Flash Mobile Logo.png">
 
                         </div>
                     </div>
@@ -121,8 +151,8 @@
     </div>
     <div class="section-space80 bg-gradient call-to-action">
         <div class="container">
-            <div class="row">
-                <div class=" offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="row justify-content-center">
+                {{-- <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
                     <div class="text-center">
                         <!-- section title start-->
                         <h1 class="text-white">ESCROW</h1>
@@ -130,6 +160,11 @@
 
                     </div>
                     <!-- /.section title start-->
+                </div> --}}
+                <div class="col-10 text-center">
+                    <h1 class="text-white">ESCROW</h1>
+                    <h4 class="text-white">Escrow merupakan pihak ketiga yang ditunjuk dan bertindak sebagai pemelihara/perwakilan untuk dokumen dan dana-dana sepanjang proses penyerahan hak milik pemberi pinjaman ke penerima pinjaman atau selama penggantian struktur kepemilikan.Escrow account atau rekening Bersama dikelola oleh agen yang berperan mengamankan aset berupa uang yang telah disetorkan oleh pihak penerima pinjaman untuk nantinya diserahkan kepada pihak pemberi pinjaman yang terlibat dalan transaksi secara online.</h4>
+                    <p style="font-size: 10%"></p>
                 </div>
             </div>
         </div>
@@ -193,7 +228,7 @@
         </div>
     </div>
 
-    {{--    <div class="bg-dark-blue section-space20">--}}
+      {{--    <div class="bg-dark-blue section-space20">--}}
     {{--        <div class="container">--}}
     {{--            <div class="row">--}}
     {{--                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">--}}
@@ -500,106 +535,78 @@
     {{--        </div>--}}
     {{--    </div>--}}
 
-    <div class="modal fade" id="disclamer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Perhatian</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <ol class="modal-disclamer">
-                                <li  class="">Layanan Pinjam Meminjam Berbasis Teknologi Informasi merupakan kesepakatan perdata antara Pemberi Pinjaman dengan Penerima Pinjaman, sehingga segala risiko yang timbul dari kesepakatan tersebut ditanggung sepenuhnya oleh masing-masing pihak.</li>
-                                <li  class="">Risiko kredit atau gagal bayar ditanggung sepenuhnya oleh Pemberi Pinjaman. Tidak ada lembaga atau otoritas negara yang bertanggung jawab atas risiko gagal bayar ini.</li>
-                                <li  class="">Penyelenggara dengan persetujuan dari masing-masing Pengguna (Pemberi Pinjaman dan/atau Penerima Pinjaman) mengakses, memperoleh, menyimpan, mengelola, dan/atau menggunakan data pribadi Pengguna ("Pemanfaatan Data") pada atau di dalam benda, perangkat elektronik (termasuk smartphone atau telepon seluler), perangkat keras (hardware) maupun lunak (software), dokumen elektronik, aplikasi atau sistem elektronik milik Pengguna atau yang dikuasai Pengguna, dengan memberitahukan tujuan, batasan, dan mekanisme Pemanfaatan Data tersebut kepada Pengguna yang bersangkutan sebelum memperoleh persetujuan yang dimaksud.</li>
-                                <li  class="">Pemberi Pinjaman yang belum memiliki pengetahuan dan pengalaman pinjam meminjam, disarankan untuk tidak menggunakan layanan ini.</li>
-                                <li  class="">Penerima Pinjaman harus mempertimbangkan tingkat bunga pinjaman dan biaya lainnya sesuai dengan kemampuan dalam melunasi pinjaman.</li>
-                                <li  class="">Setiap kecurangan tercatat secara digital di dunia maya dan dapat diketahui masyarakat luas di media sosial.</li>
-                                <li  class="">Pengguna harus membaca dan memahami informasi ini sebelum membuat keputusan menjadi Pemberi Pinjaman atau Penerima Pinjaman. </li>
-                                <li  class="">Pemerintah yaitu dalam hal ini Otoritas Jasa Keuangan, tidak bertanggung jawab atas setiap pelanggaran atau ketidakpatuhan oleh Pengguna, baik Pemberi Pinjaman maupun Penerima Pinjaman (baik karena kesengajaan atau kelalaian Pengguna) terhadap ketentuan peraturan perundang-undangan maupun kesepakatan atau perikatan antara Penyelenggara dengan Pemberi Pinjaman dan/atau Penerima Pinjaman.</li>
-                                <li  class="">Setiap transaksi dan kegiatan pinjam meminjam atau pelaksanaan kesepakatan mengenai pinjam meminjam antara atau yang melibatkan Penyelenggara, Pemberi Pinjaman, dan/atau Penerima Pinjaman wajib dilakukan melalui escrow account dan virtual account sebagaimana yang diwajibkan berdasarkan Peraturan Otoritas Jasa Keuangan Nomor 77/POJK.01/2016 tentang Layanan Pinjam Meminjam Uang Berbasis Teknologi Informasi dan pelanggaran atau ketidakpatuhan terhadap ketentuan tersebut merupakan bukti telah terjadinya pelanggaran hukum oleh Penyelenggara sehingga Penyelenggara wajib menanggung ganti rugi yang diderita oleh masing-masing Pengguna sebagai akibat langsung dari pelanggaran hukum tersebut di atas tanpa mengurangi hak Pengguna yang menderita kerugian menurut Kitab Undang-Undang Hukum Perdata.</li>
-                                <li  class="">SIAP merupakan badan hukum yang didirikan berdasarkan Hukum Republik Indonesia. Berdiri sebagai perusahaan yang telah diatur oleh dan dalam pengawasan Otoritas Jasa Keuangan (OJK) di Indonesia, Perusahaan menyediakan layanan interfacing  sebagai penghubung pihak yang memberikan pinjaman dan pihak yang membutuhkan pinjaman meliputi pendanaan dari individu, organisasi, maupun badan hukum kepada individu atau badan hukum tertentu. Perusahaan tidak menyediakan segala bentuk saran atau rekomendasi pendanaan terkait pilihan-pilihan dalam situs ini.</li>
-                                <li  class="">Isi dan materi yang tersedia pada situs <b>siap.id</b> dimaksudkan untuk memberikan informasi dan tidak dianggap sebagai sebuah penawaran, permohonan, undangan, saran, maupun rekomendasi untuk menginvestasikan sekuritas, produk pasar modal, atau jasa keuangan lainya. Perusahaan dalam memberikan jasanya hanya terbatas pada fungsi administratif.</li>
-                                <li  class="">Pendanaan dan pinjaman yang ditempatkan di rekening siap adalah tidak dan tidak akan dianggap sebagai simpanan yang diselenggarakan oleh Perusahaan seperti diatur dalam Peraturan Perundang-Undangan tentang Perbankan di Indonesia. Perusahaan atau setiap Direktur, Pegawai, Karyawan, Wakil, Afiliasi, atau Agen-Agennya tidak memiliki tanggung jawab terkait dengan setiap gangguan atau masalah yang terjadi atau yang dianggap terjadi yang disebabkan oleh minimnya persiapan atau publikasi dari materi yang tercantum pada situs Perusahaan.</li>
-                            </ol>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="close_disclamer">Saya Mengerti</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 @section('js')
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            if(getCookie('disclaimer') != 'true'){
-                $('#disclamer_modal').modal({backdrop: 'static', keyboard: false})
-            }
-            $(document).on('click','#close_disclamer' , function(){
-                setCookie('disclaimer','true',1);
-            })
-        });
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+<script src="js/jquery.nice-select.min.js"></script>
+<script>
+    $(document).ready(function() {
+        if(getCookie('disclaimer') != 'true'){
+            $('#disclamer_modal').modal({backdrop: 'static', keyboard: false})
         }
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-        function checkCookie() {
-            var user = getCookie("username");
-            if (user != "") {
-                alert("Welcome again " + user);
-            } else {
-                user = prompt("Please enter your name:", "");
-                if (user != "" && user != null) {
-                    setCookie("username", user, 365);
-                }
-            }
-        }
-    </script>
-    <script>
-        $('#recipeCarousel').carousel({
-            interval: 10000
+        $(document).on('click','#close_disclamer' , function(){
+            setCookie('disclaimer','true',1);
         })
-        $('.carousel .carousel-item').each(function(){
-            var minPerSlide = 3;
-            var next = $(this).next();
+    });
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    function checkCookie() {
+        var user = getCookie("username");
+        if (user != "") {
+            alert("Welcome again " + user);
+        } else {
+            user = prompt("Please enter your name:", "");
+            if (user != "" && user != null) {
+                setCookie("username", user, 365);
+            }
+        }
+    }
+</script>
+<script>
+    $('#recipeCarousel').carousel({
+        interval: 10000
+    })
+    $('.carousel .carousel-item').each(function(){
+        var minPerSlide = 3;
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+        for (var i=0;i<minPerSlide;i++) {
+            next=next.next();
             if (!next.length) {
                 next = $(this).siblings(':first');
             }
             next.children(':first-child').clone().appendTo($(this));
-            for (var i=0;i<minPerSlide;i++) {
-                next=next.next();
-                if (!next.length) {
-                    next = $(this).siblings(':first');
-                }
-                next.children(':first-child').clone().appendTo($(this));
-            }
-        });
-        $("#close_disclamer").click(function(){
-            $('#disclamer_modal').modal('hide');
-        })
-    </script>
+        }
+    });
+    $("#close_disclamer").click(function(){
+        $('#disclamer_modal').modal('hide');
+    })
+</script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/slider-carousel.js')}}"></script>
+    <script src="{{asset('js/service-carousel.js')}}"></script>
 
 @endsection
 @endsection
