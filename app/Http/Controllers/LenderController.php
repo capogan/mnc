@@ -69,7 +69,7 @@ class LenderController extends Controller
         $editable = $this->editable_bio();
         $data = array(
             'provinces' => Province::get(),
-            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
+            'lender_profile' => User::select('users.name as lender_name','lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
             ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
             ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
             ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
@@ -137,7 +137,7 @@ class LenderController extends Controller
             'bank'                      => 'required',
             'rek_number'                => 'required',
             'rek_name'                  => 'required',
-            'rek_lender'                => 'required',
+//            'rek_lender'                => 'required',
         ],
         [
             'name_of_bussiness.required'    => 'Nama Usaha tidak boleh kosong',
@@ -162,7 +162,7 @@ class LenderController extends Controller
             'bank.required'                      => 'Bank harus dipilih',
             'rek_number.required'                => 'Nomor rekening tidak boleh kosong',
             'rek_name.required'                  => 'Nama rekening tidak boleh kosong',
-            'rek_lender.required'                => 'Nomor rekening lender tidak boleh kosong',
+//            'rek_lender.required'                => 'Nomor rekening lender tidak boleh kosong',
 
         ]);
 
@@ -785,11 +785,11 @@ class LenderController extends Controller
                 return view('pages.lender.rdl_account', $data);
             }
         }
-        
+
         if(!isset($request->mark)){
             return abort('404');
         }
-        
+
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -842,7 +842,7 @@ class LenderController extends Controller
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
-        
+
         $send_to = [
             [
                 'email' => 'ogan@capioteknologi.co.id',
@@ -853,7 +853,7 @@ class LenderController extends Controller
                 'name' => $lender->digisigndata->full_name
             ]
         ];
-        
+
         $req_sign = [
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
@@ -882,7 +882,7 @@ class LenderController extends Controller
                 'visible' => "1"
             ]
         ];
-        
+
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
         $digisign = new DigiSign;
         $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $lender->id , 'credit_agreement');
@@ -892,7 +892,7 @@ class LenderController extends Controller
                 "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
             ];
         }
-        
+
         $create_doc_aggreement = RequestLoanDocument::create(
             [
                 'document_id' => $doc_id,
@@ -1397,7 +1397,7 @@ class LenderController extends Controller
         if(Auth::user()->level == 'individu'){
             return view('pages.lender.rdl_account', $data);
         }
-        
+
         return view('pages.lender.rdl_account_business', $data);
     }
 
@@ -1432,7 +1432,7 @@ class LenderController extends Controller
             'account' => $lender,
             'message' => $msg,
             'status' => $status
-            
+
         ];
         return view('pages.lender.rdl_info',$this->merge_response($data, static::$CONFIG));
 
