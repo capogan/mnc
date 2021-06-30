@@ -164,7 +164,7 @@ class BNITest  extends Controller
 
     public function login(){
         $bni = new BNI;
-        //print_r($bni->login());
+        print_r($bni->login());
     }
 
 }

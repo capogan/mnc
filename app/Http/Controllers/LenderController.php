@@ -34,6 +34,7 @@ use App\LenderRDLAccountRegistered;
 use App\MasterReligion;
 use App\Providers\DigiSignServiceProvider;
 use App\RequestLoanDocument;
+use App\RequestLoanInstallments;
 
 class LenderController extends Controller
 {
@@ -1163,8 +1164,6 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
-
-        
         if(Auth::user()->group == 'borrower'){
             return redirect('/profile/transaction');
         }
@@ -1447,6 +1446,18 @@ class LenderController extends Controller
     public function dashboard()
     {
         $uid =  Auth::user()->id;
+        //$loan - LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
+        $active = RequestLoanInstallments::
+                  leftJoin('request_loan','request_loan.id' ,'request_loan_installments.id_request_loan')
+                  ->leftJoin('request_loan_installment_va','request_loan_installments.id' , 'request_loan_installment_va.id_installment')
+                  ->where('request_loan.lender_uid' , Auth::id())
+                  ->where('request_loan.status' ,'21')
+                  ->whereIn('request_loan_installments.id_status_payment' , ['1','2'])
+                  ->select('request_loan_installments.*' ,'request_loan.invoice_number','request_loan.disbursment_date','request_loan.due_date_payment','request_loan.status' ,'loan_period')
+                  ->with('payment_status')
+                  ->with('paymentva')
+                  ->get();
+       
         $data = array(
             'loan_macet' => LoanRequest::
                 select('request_loan.*','personal_business.business_name')->
@@ -1457,9 +1468,8 @@ class LenderController extends Controller
             'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get()
         );
 
-        // $x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
-        // print_r($x);
-        // exit;
+        //$x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
+       
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }
     public function aggreement_lender(){

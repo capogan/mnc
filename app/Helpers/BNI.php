@@ -16,7 +16,7 @@ class BNI
     private $API_KEY = "7dcadd68-6bbb-462e-a28e-f06c9bd7c231";
     private $CLIENT_ID = "f94a5de7-243c-424a-bd46-42fcdd095621";
     private $CLIENT_SECRET = "aa5596e4-5782-4329-b69d-38eacd1a05ba";
-    private $COMPANY_ID = "SIAPDANAIN";
+    private $COMPANY_ID = "SIAP";
     private $ACCESS_TOKEN = "";
     private $EXPIRES_AT;
 
@@ -50,7 +50,7 @@ class BNI
         ]);
 
     }
-    private function login(){
+    public function login(){
         $url = "/api/oauth/token";
         $response = Http::asForm()->withHeaders([
             'Authorization' => "Basic " . base64_encode($this->CLIENT_ID . ':' . $this->CLIENT_SECRET)
