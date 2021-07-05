@@ -448,36 +448,38 @@ class LenderController extends Controller
     }
 
     public function store_data_to_digisign_commisionare($uid){
-        $u = User::with('digisignInfo')->where('id' , $uid)->first();
+        $u = User::with('digisignInfocommisioner')->where('id' , $uid)->first();
         if(!$u){
             return;
         }
-        if(!$u->digisigninfo){
+        
+        if(!$u->digisignInfocommisioner){
             return ;
         }
-        if(!$u->digisigninfo->provinces && !$u->digisigninfo->cities && !$u->digisigninfo->distritcs && !$u->digisigninfo->villages){
+        //print_r($u->digisignInfocommisioner->provinces); exit;
+        if(!$u->digisignInfocommisioner->provinces && !$u->digisignInfocommisioner->cities && !$u->digisignInfocommisioner->distritcs && !$u->digisignInfocommisioner->villages){
             return ;
         }
         $path = public_path() . '/upload/lender/file';
         $digisign =new DigiSign;
         $digisign->requestRegistration(
-            $path .'/'. $u->digisigninfo->identity_photo,
-            $path .'/'. $u->digisigninfo->self_photo,
-            $path .'/'. $u->digisigninfo->npwp_image,
-            $u->digisigninfo->address,
-            $u->digisigninfo->gender,
-            $u->digisigninfo->districts->name,
-            $u->digisigninfo->villagess->name,
-            $u->digisigninfo->kodepos,
-            $u->digisigninfo->cities->name,
-            $u->digisigninfo->director_name,
-            $u->phone_number_verified,
-            $u->digisigninfo->director_dob,
-            $u->digisigninfo->provinces->name,
-            $u->digisigninfo->director_nik,
-            $u->digisigninfo->director_pob,
-            $u->digisigninfo->director_email,
-            $u->digisigninfo->no_npwp,
+            $path .'/'. $u->digisignInfocommisioner->identity_photo,
+            $path .'/'. $u->digisignInfocommisioner->self_photo,
+            $path .'/'. $u->digisignInfocommisioner->npwp_image,
+            $u->digisignInfocommisioner->address,
+            $u->digisignInfocommisioner->gender,
+            $u->digisignInfocommisioner->districts->name,
+            $u->digisignInfocommisioner->villagess->name,
+            $u->digisignInfocommisioner->kodepos,
+            $u->digisignInfocommisioner->cities->name,
+            $u->digisignInfocommisioner->commissioner_name,
+            $u->digisignInfocommisioner->commissioner_phone_number,
+            $u->digisignInfocommisioner->commissioner_dob,
+            $u->digisignInfocommisioner->provinces->name,
+            $u->digisignInfocommisioner->commissioner_nik,
+            $u->digisignInfocommisioner->commissioner_pob,
+            $u->digisignInfocommisioner->commissioner_email,
+            $u->digisignInfocommisioner->commissioner_npwp,
             true,
             $uid
         );
@@ -643,7 +645,7 @@ class LenderController extends Controller
                 );
 
                 if($i == 0){
-                    //$this->store_data_to_digisign(Auth::id());
+                    $this->store_data_to_digisign(Auth::id());
                 }
              }
              $i++;
