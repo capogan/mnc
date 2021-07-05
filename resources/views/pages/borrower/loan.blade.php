@@ -5,7 +5,7 @@
     <div class="container containers-with-margin">
         <div class="row mt-4">
             <div class="col-xl-12 ">
-                
+
                 <div class="card bg-light">
                         <div class="card-body">
                             <h4> Detail cicilan</h4>

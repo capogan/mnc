@@ -507,7 +507,7 @@ class LenderController extends Controller
         );
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
-    
+
     public function submit_commisioner_data(Request $request){
         //print_r($request->all()); exit;
          $validators = [
@@ -657,7 +657,7 @@ class LenderController extends Controller
      }
 
 
-    
+
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         $editable = $this->editable_bio();
@@ -823,11 +823,11 @@ class LenderController extends Controller
                 return view('pages.lender.rdl_account', $data);
             }
         }
-        
+
         if(!isset($request->mark)){
             return abort('404');
         }
-        
+
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -880,7 +880,7 @@ class LenderController extends Controller
 
         $pathDocument = public_path('upload/document/credit_aggreement/' . str_replace(' ', '', $data['title'] . '_' . uniqid()) . '.pdf');
         PDF::loadView('agreement.credit_agreement_lender', $data)->save($pathDocument);
-        
+
         $send_to = [
             [
                 'email' => 'ogan@capioteknologi.co.id',
@@ -891,7 +891,7 @@ class LenderController extends Controller
                 'name' => $lender->digisigndata->full_name
             ]
         ];
-        
+
         $req_sign = [
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
@@ -920,7 +920,7 @@ class LenderController extends Controller
                 'visible' => "1"
             ]
         ];
-        
+
         $doc_id = date('Ymd').'_'.uniqid().'_'.$lender->id;
         $digisign = new DigiSign;
         $response = $digisign->upload_document($pathDocument , $doc_id ,true, 'Lender_Aggreement' ,false , $send_to, $req_sign , $lender->id , 'credit_agreement');
@@ -930,7 +930,7 @@ class LenderController extends Controller
                 "message"=> 'Error ketika menyimpan data, silahkan coba beberapa saat lagi.',
             ];
         }
-        
+
         $create_doc_aggreement = RequestLoanDocument::create(
             [
                 'document_id' => $doc_id,
@@ -1437,7 +1437,7 @@ class LenderController extends Controller
         if(Auth::user()->level == 'individu'){
             return view('pages.lender.rdl_account', $data);
         }
-        
+
         return view('pages.lender.rdl_account_business', $data);
     }
 
@@ -1472,7 +1472,7 @@ class LenderController extends Controller
             'account' => $lender,
             'message' => $msg,
             'status' => $status
-            
+
         ];
         return view('pages.lender.rdl_info',$this->merge_response($data, static::$CONFIG));
 
@@ -1494,19 +1494,44 @@ class LenderController extends Controller
                   ->with('payment_status')
                   ->with('paymentva')
                   ->get();
-       
+
         $data = array(
-            'loan_macet' => LoanRequest::
-                select('request_loan.*','personal_business.business_name')->
-                leftJoin('personal_business' ,'personal_business.uid' , 'request_loan.uid')
-                ->where('lender_uid',$uid)->where('status','24')->get(),
-            'loan_terlambat' => LoanRequest::where('lender_uid',$uid)->where('status','23')->get(),
-            'loan_lunas' => LoanRequest::where('lender_uid',$uid)->where('status','25')->get(),
-            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get()
+            'loan_macet' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','8')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_terlambat' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','3')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_lunas' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','5')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_aktif' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+                        leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+                        leftJoin('users' ,'users.id','request_loan.uid')->
+                        leftJoin('personal_business' ,'personal_business.uid','users.id')
+            ->where('request_loan.lender_uid',$uid)
+            ->where('request_loan_installments.id_status_payment','1')
+            ->orderBy('request_loan_installments.stages','ASC')
+            ->get()
         );
 
         //$x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
-       
+
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }
     public function aggreement_lender(){
