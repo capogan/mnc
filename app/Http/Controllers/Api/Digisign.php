@@ -54,7 +54,7 @@ class Digisign  extends Controller
         if($user->group == 'borrower'){
             return redirect('/profile/transaction');
         }else{
-            return redirect('/myprofile');
+            return redirect('/profile/lender/register/sign');
         }
         
         // UserEKYC::create([
