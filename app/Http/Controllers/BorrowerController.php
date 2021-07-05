@@ -394,7 +394,7 @@ class BorrowerController extends Controller
 
     public function get_document_to_sign(Request $request){
         // check if document exists
-        
+
         $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
                                 ->where('request_loan.invoice_number' , $request->invoice)
                                 ->where('request_loan.uid' , Auth::id())
@@ -424,7 +424,7 @@ class BorrowerController extends Controller
     }
 
     public static function upload_document_agreeement_for_borrower($loan_id){
-      
+
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
@@ -598,13 +598,13 @@ class BorrowerController extends Controller
             'id_loan'       => $loan->id,
             'loan_installments'=>$loan_installments
         ];
-        
+
 
         return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));
     }
 
     public function repayment(Request $request){
-        
+
         $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
         ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
         ->where('request_loan.uid' , Auth::id())
@@ -615,10 +615,22 @@ class BorrowerController extends Controller
         $get_user = PersonalInfo::select('personal_info.*')
                     ->where('personal_info.uid',Auth::id())->first();
 
-        
+//        echo "<pre>";
+//        print_r($detail);
+//        die();
         if(!$detail){
             return abort('404' , 'data cicilan tidak ditemukan.');
         }
+
+        $previous_stage = $detail->stages - 1 ;
+
+
+        $check_previous_payment = RequestLoanInstallments::where('id_request_loan',$detail->id_request_loan)->where('stages',$previous_stage)->first();
+
+        if($check_previous_payment->id_status_payment != '5'){
+            return redirect()->route( 'error.page' )->with( [ 'invoice_number' => $detail->invoice_number ] );
+        }
+
         $va = RequestLoanInstallmentsVa::where('status' , 'active')->where('id_installment' , $detail->id)->first();
 
         $data = [
@@ -627,7 +639,6 @@ class BorrowerController extends Controller
             'personal' => $get_user,
             'installment' => $request->installment
         ];
-        //print_r($data);exit;
 
         return view('pages.borrower.repayment', $this->merge_response($data, static::$CONFIG));
     }
@@ -679,7 +690,7 @@ class BorrowerController extends Controller
 
         return $number;
     }
-   
+
 
 
 

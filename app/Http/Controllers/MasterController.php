@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Mail;
 
 class MasterController extends Controller
 {
+    static $CONFIG = [
+        "title" => "Error",
+    ];
     public function get_city(Request $request){
 
         $states = Regency::where("province_id",$request->province_id)
@@ -60,6 +63,15 @@ class MasterController extends Controller
         if($kirim){
             echo "Email telah dikirim";
         }
+    }
+
+    public function error_page(){
+        $invoice_number = session()->get( 'invoice_number' );
+        $data = [
+            'invoice_number' => $invoice_number,
+        ];
+//        return view('error');
+        return view('error', $this->merge_response($data, static::$CONFIG));
     }
 
 
