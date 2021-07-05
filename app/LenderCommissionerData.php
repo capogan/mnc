@@ -31,4 +31,5 @@ class LenderCommissionerData extends Model
     {
         return $this->hasOne(DigisignActivation::class , 'uid' ,'uid');
     }
+    
 }

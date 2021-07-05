@@ -71,5 +71,46 @@ class Digisign  extends Controller
         //     'updated_at'=>date('Y-m-d'),
         // ]);
     }
+
+    public function test_commissionare($uid =226 ){
+        $u = User::with('digisignInfocommisioner')->where('id' , $uid)->first();
+        if(!$u){
+            return;
+        }
+        
+        if(!$u->digisignInfocommisioner){
+            return ;
+        }
+        //print_r($u->digisignInfocommisioner->provinces); exit;
+        if(!$u->digisignInfocommisioner->provinces && !$u->digisignInfocommisioner->cities && !$u->digisignInfocommisioner->distritcs && !$u->digisignInfocommisioner->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/file';
+        $digisign =new HelpersDigiSign;
+        $digisign->requestRegistration(
+            $path .'/'. $u->digisignInfocommisioner->identity_photo,
+            $path .'/'. $u->digisignInfocommisioner->self_photo,
+            $path .'/'. $u->digisignInfocommisioner->npwp_image,
+            $u->digisignInfocommisioner->address,
+            $u->digisignInfocommisioner->gender,
+            $u->digisignInfocommisioner->districts->name,
+            $u->digisignInfocommisioner->villagess->name,
+            $u->digisignInfocommisioner->kodepos,
+            $u->digisignInfocommisioner->cities->name,
+            $u->digisignInfocommisioner->commissioner_name,
+            $u->digisignInfocommisioner->commissioner_phone_number,
+            $u->digisignInfocommisioner->commissioner_dob,
+            $u->digisignInfocommisioner->provinces->name,
+            $u->digisignInfocommisioner->commissioner_nik,
+            $u->digisignInfocommisioner->commissioner_pob,
+            $u->digisignInfocommisioner->commissioner_email,
+            $u->digisignInfocommisioner->commissioner_npwp,
+            true,
+            $uid
+        );
+
+        print_r($digisign); exit;
+
+    }
     
 }

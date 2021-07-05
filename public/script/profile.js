@@ -4,6 +4,13 @@ $(document).ready(function() {
         placeholder: "Pilih Kategori Industri",
         allowClear: true
     });
+
+    $('.currency-format').each(function(){
+        var number = $(this).val();
+        var rupiah = formatRupiah(number , '');
+        $(this).val(rupiah);
+    });
+
     $(document).on( 'click' , '#lender_sign_aggreement_of_fund' , function(){
         btn = $(this);
         btn.attr("disabled", true);
@@ -140,6 +147,14 @@ $(document).on('keyup' , '#omset_value' , function(){
     var rupiah = formatRupiah(number , '');
     $(this).val(rupiah);
 });
+
+$(document).on('keyup' , '.currency-format' , function(){
+    var number = $(this).val();
+    var rupiah = formatRupiah(number , '');
+    $(this).val(rupiah);
+});
+
+
 $(document).on('keyup' , '#asset_value' , function(){
     var number = $(this).val();
     var rupiah = formatRupiah(number , '');
@@ -212,6 +227,7 @@ $('#personal_info_form').on('submit', function(event){
 
 
 $('#form_borrower_business_information').on('submit', function(event){
+
     event.preventDefault();
     var btn = $("#btn_update_voucher");
     btn.attr("disabled", "disabled");

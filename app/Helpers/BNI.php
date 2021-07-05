@@ -50,7 +50,7 @@ class BNI
         ]);
 
     }
-    public function login(){
+    private function login(){
         $url = "/api/oauth/token";
         $response = Http::asForm()->withHeaders([
             'Authorization' => "Basic " . base64_encode($this->CLIENT_ID . ':' . $this->CLIENT_SECRET)

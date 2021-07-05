@@ -447,6 +447,42 @@ class LenderController extends Controller
         );
     }
 
+    public function store_data_to_digisign_commisionare($uid){
+        $u = User::with('digisignInfo')->where('id' , $uid)->first();
+        if(!$u){
+            return;
+        }
+        if(!$u->digisigninfo){
+            return ;
+        }
+        if(!$u->digisigninfo->provinces && !$u->digisigninfo->cities && !$u->digisigninfo->distritcs && !$u->digisigninfo->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/file';
+        $digisign =new DigiSign;
+        $digisign->requestRegistration(
+            $path .'/'. $u->digisigninfo->identity_photo,
+            $path .'/'. $u->digisigninfo->self_photo,
+            $path .'/'. $u->digisigninfo->npwp_image,
+            $u->digisigninfo->address,
+            $u->digisigninfo->gender,
+            $u->digisigninfo->districts->name,
+            $u->digisigninfo->villagess->name,
+            $u->digisigninfo->kodepos,
+            $u->digisigninfo->cities->name,
+            $u->digisigninfo->director_name,
+            $u->phone_number_verified,
+            $u->digisigninfo->director_dob,
+            $u->digisigninfo->provinces->name,
+            $u->digisigninfo->director_nik,
+            $u->digisigninfo->director_pob,
+            $u->digisigninfo->director_email,
+            $u->digisigninfo->no_npwp,
+            true,
+            $uid
+        );
+    }
+
     public function commissioner(Request $request){
         $editable = $this->editable_bio();
         $step = LenderVerification::where('uid' , Auth::id())->first();
@@ -469,6 +505,7 @@ class LenderController extends Controller
         );
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
+    
     public function submit_commisioner_data(Request $request){
         //print_r($request->all()); exit;
          $validators = [
@@ -589,7 +626,7 @@ class LenderController extends Controller
                 if(array_key_exists('self_image'.$j, $request->all())){
                     if($request->hasFile('self_image'.$j)) {
                         $self_image= $request->file('self_image'.$j);
-                        $filename_self_image= 'commissaris_selfie_'.$j.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                        $filename_self_image= 'commissaris_selfie_'.$j.'_'.Auth::id().'_'.time(). '.jpeg';
                         $self_image->move($path, $filename_self_image);
                         $data['self_photo'] = $filename_self_image;
                     }
@@ -606,11 +643,8 @@ class LenderController extends Controller
                 );
 
                 if($i == 0){
-                    $privy = new PrivyID();
-                    $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'commissioner');
+                    //$this->store_data_to_digisign(Auth::id());
                 }
-
-
              }
              $i++;
          }
@@ -621,6 +655,7 @@ class LenderController extends Controller
      }
 
 
+    
     public function information_file(Request $request){
         $step = LenderVerification::where('uid' , Auth::id())->first();
         $editable = $this->editable_bio();

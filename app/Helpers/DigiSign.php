@@ -130,7 +130,7 @@ class DigiSign {
                 ]
             ])
         ];
-       
+       //print_r($data); exit;
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',

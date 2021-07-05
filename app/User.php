@@ -69,6 +69,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    public function digisignInfocommisioner(){
+        return $this->hasOne(LenderCommissionerData::class , 'uid' ,'id')->where('sequence' ,'0')
+        ->with('provinces')
+        ->with('cities')
+        ->with('districts')
+        ->with('villagess');
+
+    }
+
     public function lenderbusiness(){
         return $this->hasOne(LenderDirectorData::class , 'uid' ,'id')->where('position' ,'0')
         ->with('provinces')

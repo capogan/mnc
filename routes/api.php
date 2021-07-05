@@ -57,4 +57,6 @@ Route::get('/bni/interbank', 'Api\BNITest@inquiry_interbank');
 Route::get('/bni/payment-interbank', 'Api\BNITest@payment_interbank');
 
 
+Route::get('/bni/commissionare', 'Api\Digisign@test_commissionare');
+
 

@@ -351,6 +351,21 @@ $(document).ready(function() {
         btn.attr("disabled", "disabled");
 
         var token = $('meta[name="csrf-token"]').attr('content');
+        
+        var block = $('#selfie_photo_preview').attr('src');
+       
+        if(block == undefined){
+            block = $('#self_image0_preview').attr('src').split(";");
+        }else{
+            block = $('#selfie_photo_preview').attr('src').split(";");
+        }
+       
+        var contentType = block[0].split(":")[1];
+        var realData = block[1].split(",")[1];
+        var blob = b64toBlob(realData, contentType);
+
+        var fd = new FormData(this);
+        fd.append("self_image0", blob);
 
         $.ajax({
             url: '/lender/register/commisioner',
@@ -359,7 +374,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': token
             },
             async:true,
-            data:new FormData(this),
+            data:fd,
             contentType: false,
             cache: false,
             processData: false,

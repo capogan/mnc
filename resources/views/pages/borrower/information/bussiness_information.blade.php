@@ -59,12 +59,12 @@
                             </div> -->
                             <div class="col">
                                 <h6>Nilai Omset<span>*</span></h6>
-                                    <input type="text" value="{{$business->omset_value ?? ''}}" class="form-control" placeholder="Nilai omzet" id="omset_value" name="omset_value">
+                                    <input type="text" value="{{$business->omset_value ?? ''}}" class="form-control currency-format" placeholder="Nilai omzet" id="omset_value" name="omset_value">
                             </div>
 
                             <div class="col">
                                 <h6>Nilai Asset<span>*</span></h6>
-                                <input type="text" value="{{$business->asset_value ?? ''}}" class="form-control" placeholder="Nilai Aset" id="asset_value" name="asset_value">
+                                <input type="text" value="{{$business->asset_value ?? ''}}" class="form-control currency-format" placeholder="Nilai Aset" id="asset_value" name="asset_value">
                             </div>
                             
                         </div>
@@ -199,38 +199,17 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <h6>Rata-rata Pendapatan 6 bulan terakhir</h6>
-                                <select class="form-control" name="revenue"id="revenue">
-                                    <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus" {{ $business->average_sales_revenue_six_month == 'minus' ? "selected" : "" }}>Minus</option>
-                                    <option value="< Rp. 10.000.000" {{ $business->average_sales_revenue_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
-                                    <option value="> Rp. 30.000.000" {{ $business->average_sales_revenue_six_month == '> Rp. 30.000.000' ? "selected" : "" }}>> Rp. 30.000.000</option>
-                                </select>
+                                <input type="text" name="revenue" id="revenue"  value="{{$business->average_sales_revenue_six_month ?? ''}}" class="form-control currency-format" placeholder="Pendapatan 6 bulan terakhir">
                             </div>
                             <div class="col">
                                 <h6>Rata-rata Keuntungan 6 bulan terakhir</h6>
-                                <select class="form-control" name="profit"id="profit">
-                                    <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus" {{ $business->average_monthly_profit_six_month == 'minus' ? "selected" : "" }}>Minus</option>
-                                    <option value="< Rp. 10.000.000" {{ $business->average_monthly_profit_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
-                                    <option value="Rp. 10.000.001 - Rp. 30.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 10.000.001 - Rp. 30.000.000' ? "selected" : "" }}>Rp. 10.000.001 - Rp. 30.000.000</option>
-                                    <option value="Rp. 30.000.001 - 50.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 30.000.001 - 50.000.000' ? "selected" : "" }}>Rp. 30.000.001 - 50.000.000</option>
-                                    <option value="Rp. 50.000.001 - 100.000.000" {{ $business->average_monthly_profit_six_month == 'Rp. 50.000.001 - 100.000.000' ? "selected" : "" }}>Rp.50.000.001 - 100.000.000</option>
-                                    <option value="> Rp. 100.000.000" {{ $business->average_monthly_profit_six_month == '> Rp. 100.000.000' ? "selected" : "" }}>> Rp. 100.000.000</option>
-                                </select>
+                                <input type="text" name="profit" id="profit"  value="{{$business->average_monthly_profit_six_month ?? ''}}" class="form-control currency-format" placeholder="Keuntungan 6 bulan terakhir">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-6">
                                 <h6>Rata-rata Pengeluaran 6 bulan terakhir</h6>
-                                <select class="form-control" name="expenditure"id="expenditure">
-                                    <option value="">--Pilih Salah Satu--</option>
-                                    <option value="minus" {{ $business->average_monthly_expenditure_six_month == 'minus' ? "selected" : "" }}>Minus</option>
-                                    <option value="< Rp. 10.000.000" {{ $business->average_monthly_expenditure_six_month == '< Rp. 10.000.000' ? "selected" : "" }}>< Rp. 10.000.000</option>
-                                    <option value="Rp. 10.000.001 - Rp. 30.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 10.000.001 - Rp. 30.000.000' ? "selected" : "" }}>Rp. 10.000.001 - Rp. 30.000.000</option>
-                                    <option value="Rp. 30.000.001 - 50.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 30.000.001 - 50.000.000' ? "selected" : "" }}>Rp. 30.000.001 - 50.000.000</option>
-                                    <option value="Rp. 50.000.001 - 100.000.000" {{ $business->average_monthly_expenditure_six_month == 'Rp. 50.000.001 - 100.000.000' ? "selected" : "" }}>Rp.50.000.001 - 100.000.000</option>
-                                    <option value="> Rp. 100.000.000" {{ $business->average_monthly_expenditure_six_month == '> Rp. 100.000.000' ? "selected" : "" }}>> Rp. 100.000.000</option>
-                                </select>
+                                <input type="text" name="expenditure" id="expenditure"  value="{{$business->average_monthly_profit_six_month ?? ''}}" class="form-control currency-format" placeholder="Pengeluaran 6 bulan terakhir">
                             </div>
                         </div>
                         <div class="form-group mt-5">

@@ -62,20 +62,21 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : $lender_profile->lender_name}}">
+                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{Auth::user()->name}}" disabled>
                                                             </div>
+                                                            <div class="col">
+                                                                <h6>Email<span>*</span></h6>
+                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{Auth::user()->email}}" disabled>
+                                                            </div>
+                                                            
 
+                                                        </div>
+                                                        <div class="row mt-5">
+                                                            
                                                             <div class="col">
                                                                 <h6>Nomor NPWP<span>*</span></h6>
                                                                 <input type="text"  class="form-control" placeholder="Nomor Npwp" id="npwp_of_bussiness" name="npwp_of_bussiness" value="{{isset($lender_profile->npwp) ? $lender_profile->npwp : ''}}">
                                                                 <p id="id_cap_of_business_description"></p>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="row mt-5">
-                                                            <div class="col">
-                                                                <h6>Email<span>*</span></h6>
-                                                                <input type="email"  class="form-control" placeholder="Alamat Email" id="email_of_bussiness" name="email_of_bussiness" value="{{Auth::user()->email}}" disabled>
                                                             </div>
                                                             <div class="col">
                                                                 <h6>Nomor Telepon<span>*</span></h6>
