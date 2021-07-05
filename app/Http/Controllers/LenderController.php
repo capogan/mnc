@@ -1526,7 +1526,6 @@ class LenderController extends Controller
             ->where('request_loan_installments.id_status_payment','1')
             ->orderBy('request_loan_installments.stages','ASC')
             ->get()
-
         );
 
         //$x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
