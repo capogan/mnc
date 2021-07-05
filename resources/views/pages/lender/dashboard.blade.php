@@ -128,21 +128,19 @@
                                     <th>Lihat perjanjian</th>
                                     </thead>
                                     <tbody>
-                                    @foreach($loan_macet as $index => $item)
+                                    @foreach($loan_aktif as $index => $item)
                                         <tr>
                                             <td>{{$index + 1}}</td>
                                             <td>{{ $item->invoice_number}}</td>
-                                            <td>{{$item->uid}}</td>
-                                            <td>{{$item->business_name}}</td>
-                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
-                                            <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
-                                            <td>{{$item->loan_period}} Hari</td>
+                                            <td>{{ $item->uid}}</td>
+                                            <td>{{ $item->business_name}}</td>
+                                            <td>{{ $item->loan_amount}}</td>
+                                            <td>{{ $item->repayment}}</td>
+                                            <td>{{ $item->stages}}</td>
+                                            <td>{{ $item->disbursment_date}}</td>
+                                            <td>{{ $item->ddp}}</td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            {{--                                                    <td>{{$item->status_title->title}}</td>--}}
-                                            {{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -169,17 +167,15 @@
                                         <tr>
                                             <td>{{$index + 1}}</td>
                                             <td>{{ $item->invoice_number}}</td>
-                                            <td>{{$item->uid}}</td>
-                                            <td>{{$item->business_name}}</td>
-                                            <td>Rp {{ number_format(($item->loan_amount) ,0,',','.') }}</td>
-                                            <td>Rp {{ number_format(($item->repayment) ,0,',','.') }}</td>
-                                            <td>{{$item->loan_period}} Hari</td>
+                                            <td>{{ $item->uid}}</td>
+                                            <td>{{ $item->business_name}}</td>
+                                            <td>{{ $item->loan_amount}}</td>
+                                            <td>{{ $item->repayment}}</td>
+                                            <td>{{ $item->stages}}</td>
+                                            <td>{{ $item->disbursment_date}}</td>
+                                            <td>{{ $item->ddp}}</td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            {{--                                                    <td>{{$item->status_title->title}}</td>--}}
-                                            {{--                                                    <td><a href="/portofolio/detail?p={{ \App\Helpers\Utils::encrypt($item->id)}}" >detail</a></td>--}}
                                         </tr>
                                     @endforeach
                                     </tbody>
