@@ -16,7 +16,7 @@
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                Borrower: {{$document->business_info->business_name}}
+                                Peminjam: {{$document->business_info->business_name}}
                                 </div>
                                 <div class="col-6">
                                 </div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="row column-custom">
                                 <div class="col-5">
-                                    Tanggal Pengajuan Pendanaan : {{date('Y-m-d' , strtotime($document->created_at))}}
+                                    Tanggal Pengajuan Pendanaan : {{date('d-m-Y' , strtotime($document->created_at))}}
                                 </div>
                                 <div class="col-6">
                                 </div>
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-striped table-bordered">
+                                <table class="table table-custom-fo-twelve">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
@@ -119,7 +119,7 @@
                                         <div class="col-md-12">
                                             <h4>Detail Cicilan</h4>
                                         </div>
-                                        <table class="table table-striped table-bordered">
+                                        <table class="table table-striped table-bordered table-custom-fo-twelve">
                                             <thead>
                                             <tr>
                                                 <th>Nomor Invoice</th>

@@ -34,6 +34,7 @@ use App\LenderRDLAccountRegistered;
 use App\MasterReligion;
 use App\Providers\DigiSignServiceProvider;
 use App\RequestLoanDocument;
+use App\RequestLoanInstallments;
 
 class LenderController extends Controller
 {
@@ -69,7 +70,7 @@ class LenderController extends Controller
         $editable = $this->editable_bio();
         $data = array(
             'provinces' => Province::get(),
-            'lender_profile' => User::select('users.name as lender_name','lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
+            'lender_profile' => User::select('lender_business.*' , 'districts.name as districts_name' ,'regencies.name as regencies_name' ,'villages.name as villages_name' ,'provinces.name as provinces_name' ,'lender_bank_info.bank','lender_bank_info.rdl_number','lender_bank_info.rekening_name','lender_bank_info.rekening_number')
             ->leftJoin('lender_business' ,'lender_business.uid' , 'users.id')
             ->leftJoin('regencies' ,'lender_business.id_regency' , 'regencies.id')
             ->leftJoin('districts' ,'lender_business.id_district' , 'districts.id')
@@ -137,7 +138,7 @@ class LenderController extends Controller
             'bank'                      => 'required',
             'rek_number'                => 'required',
             'rek_name'                  => 'required',
-//            'rek_lender'                => 'required',
+            'rek_lender'                => 'required',
         ],
         [
             'name_of_bussiness.required'    => 'Nama Usaha tidak boleh kosong',
@@ -162,7 +163,7 @@ class LenderController extends Controller
             'bank.required'                      => 'Bank harus dipilih',
             'rek_number.required'                => 'Nomor rekening tidak boleh kosong',
             'rek_name.required'                  => 'Nama rekening tidak boleh kosong',
-//            'rek_lender.required'                => 'Nomor rekening lender tidak boleh kosong',
+            'rek_lender.required'                => 'Nomor rekening lender tidak boleh kosong',
 
         ]);
 
@@ -446,6 +447,44 @@ class LenderController extends Controller
         );
     }
 
+    public function store_data_to_digisign_commisionare($uid){
+        $u = User::with('digisignInfocommisioner')->where('id' , $uid)->first();
+        if(!$u){
+            return;
+        }
+        
+        if(!$u->digisignInfocommisioner){
+            return ;
+        }
+        //print_r($u->digisignInfocommisioner->provinces); exit;
+        if(!$u->digisignInfocommisioner->provinces && !$u->digisignInfocommisioner->cities && !$u->digisignInfocommisioner->distritcs && !$u->digisignInfocommisioner->villages){
+            return ;
+        }
+        $path = public_path() . '/upload/lender/file';
+        $digisign =new DigiSign;
+        $digisign->requestRegistration(
+            $path .'/'. $u->digisignInfocommisioner->identity_photo,
+            $path .'/'. $u->digisignInfocommisioner->self_photo,
+            $path .'/'. $u->digisignInfocommisioner->npwp_image,
+            $u->digisignInfocommisioner->address,
+            $u->digisignInfocommisioner->gender,
+            $u->digisignInfocommisioner->districts->name,
+            $u->digisignInfocommisioner->villagess->name,
+            $u->digisignInfocommisioner->kodepos,
+            $u->digisignInfocommisioner->cities->name,
+            $u->digisignInfocommisioner->commissioner_name,
+            $u->digisignInfocommisioner->commissioner_phone_number,
+            $u->digisignInfocommisioner->commissioner_dob,
+            $u->digisignInfocommisioner->provinces->name,
+            $u->digisignInfocommisioner->commissioner_nik,
+            $u->digisignInfocommisioner->commissioner_pob,
+            $u->digisignInfocommisioner->commissioner_email,
+            $u->digisignInfocommisioner->commissioner_npwp,
+            true,
+            $uid
+        );
+    }
+
     public function commissioner(Request $request){
         $editable = $this->editable_bio();
         $step = LenderVerification::where('uid' , Auth::id())->first();
@@ -468,6 +507,7 @@ class LenderController extends Controller
         );
         return view('pages.lender.information_commissioner',$this->merge_response($data, static::$CONFIG));
     }
+
     public function submit_commisioner_data(Request $request){
         //print_r($request->all()); exit;
          $validators = [
@@ -588,7 +628,7 @@ class LenderController extends Controller
                 if(array_key_exists('self_image'.$j, $request->all())){
                     if($request->hasFile('self_image'.$j)) {
                         $self_image= $request->file('self_image'.$j);
-                        $filename_self_image= 'commissaris_selfie_'.$j.'_'.Auth::id().'_'.time(). '.' . $self_image->getClientOriginalExtension();
+                        $filename_self_image= 'commissaris_selfie_'.$j.'_'.Auth::id().'_'.time(). '.jpeg';
                         $self_image->move($path, $filename_self_image);
                         $data['self_photo'] = $filename_self_image;
                     }
@@ -605,11 +645,8 @@ class LenderController extends Controller
                 );
 
                 if($i == 0){
-                    $privy = new PrivyID();
-                    $privy->requestRegistration($item['email'],$item['phone_number'], $path.'/'.$filename_identity,$path.'/'.$filename_self_image,$item['identity_number'],$item['director_name'],$item['dob'],Auth::id() , 'commissioner');
+                    $this->store_data_to_digisign(Auth::id());
                 }
-
-
              }
              $i++;
          }
@@ -618,6 +655,7 @@ class LenderController extends Controller
              "message"=> 'Data Personal berhasil di tambahkan',
          ]);
      }
+
 
 
     public function information_file(Request $request){
@@ -1163,7 +1201,9 @@ class LenderController extends Controller
     }
 
     public function myprofile(){
-
+        if(Auth::user()->group == 'borrower'){
+            return redirect('/profile/transaction');
+        }
         $status_lender = LenderVerification::where('uid' , Auth::id())->first();
         if($status_lender){
             if($status_lender->status == 'reject'){
@@ -1443,19 +1483,55 @@ class LenderController extends Controller
     public function dashboard()
     {
         $uid =  Auth::user()->id;
+        //$loan - LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
+        $active = RequestLoanInstallments::
+                  leftJoin('request_loan','request_loan.id' ,'request_loan_installments.id_request_loan')
+                  ->leftJoin('request_loan_installment_va','request_loan_installments.id' , 'request_loan_installment_va.id_installment')
+                  ->where('request_loan.lender_uid' , Auth::id())
+                  ->where('request_loan.status' ,'21')
+                  ->whereIn('request_loan_installments.id_status_payment' , ['1','2'])
+                  ->select('request_loan_installments.*' ,'request_loan.invoice_number','request_loan.disbursment_date','request_loan.due_date_payment','request_loan.status' ,'loan_period')
+                  ->with('payment_status')
+                  ->with('paymentva')
+                  ->get();
+
         $data = array(
-            'loan_macet' => LoanRequest::
-                select('request_loan.*','personal_business.business_name')->
-                leftJoin('personal_business' ,'personal_business.uid' , 'request_loan.uid')
-                ->where('lender_uid',$uid)->where('status','24')->get(),
-            'loan_terlambat' => LoanRequest::where('lender_uid',$uid)->where('status','23')->get(),
-            'loan_lunas' => LoanRequest::where('lender_uid',$uid)->where('status','25')->get(),
-            'loan_aktif' => LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get()
+            'loan_macet' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','8')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_terlambat' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','3')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_lunas' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+            leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+            leftJoin('users' ,'users.id','request_loan.uid')->
+            leftJoin('personal_business' ,'personal_business.uid','users.id')
+                ->where('request_loan.lender_uid',$uid)
+                ->where('request_loan_installments.id_status_payment','5')
+                ->orderBy('request_loan_installments.stages','ASC')
+                ->get(),
+            'loan_aktif' => RequestLoanInstallments::select('request_loan_installments.*','request_loan_installments.due_date_payment as ddp','request_loan.*','personal_business.business_name')->
+                        leftJoin('request_loan' ,'request_loan.id' , 'request_loan_installments.id_request_loan')->
+                        leftJoin('users' ,'users.id','request_loan.uid')->
+                        leftJoin('personal_business' ,'personal_business.uid','users.id')
+            ->where('request_loan.lender_uid',$uid)
+            ->where('request_loan_installments.id_status_payment','1')
+            ->orderBy('request_loan_installments.stages','ASC')
+            ->get()
         );
 
-        // $x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
-        // print_r($x);
-        // exit;
+        //$x = LoanRequest::where('lender_uid',$uid)->where('status','21')->with('loan_installment')->get();
+
         return view('pages.lender.dashboard', $this->merge_response($data, static::$CONFIG));
     }
     public function aggreement_lender(){

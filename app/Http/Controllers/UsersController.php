@@ -329,7 +329,6 @@ class UsersController extends Controller
 
     public function add_personal_business(Request $request){
 
-
         $validation = Validator::make($request->all(), [
             'name_of_bussiness' => 'required',
             // 'id_cap_of_business' => 'required',

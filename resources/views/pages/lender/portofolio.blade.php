@@ -5,7 +5,7 @@
         <div class="col-xl-12 ">
             <div class="card bg-light">
                     <div class="card-body">
-                        <table class="table table-striped table-bordered mt-4">
+                        <table class="table table-striped table-bordered mt-4 table-custom-fo-twelve">
                             <thead>
                             <tr>
                                 <td style="width: 2px;">No</td>
@@ -39,3 +39,5 @@
     <script src="{{ asset('/script/profile.js') }}"></script>
 @endsection
 @endsection
+
+

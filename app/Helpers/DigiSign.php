@@ -130,7 +130,7 @@ class DigiSign {
                 ]
             ])
         ];
-       
+       //print_r($data); exit;
         $client = Http::withHeaders([
             'Authorization' => 'Bearer '.env('DIGISIGN_TOKEN'),
             'Accept' => '*/*',
@@ -309,7 +309,7 @@ class DigiSign {
         $data = $this->aes_128_ecb_decrypt($msg);
         $acc = json_decode($data , true);
         if($acc['result'] == '00'){
-            $u_acc = DigisignActivation::where('email' , $acc['email_user'])->first();
+            $u_acc = DigisignActivation::where('email' , $acc['email_user'])->where('status_activation' ,'!=', 'active')->first();
             if(!$u_acc){
                 $this->logs_internal($data , 'User with criteria not found after received callback from Digisign.');
                 return ['status' => false , 'data' => []];
@@ -376,13 +376,8 @@ class DigiSign {
         ->timeout(9000)
         ->asMultipart()
         ->post('https://api.tandatanganku.com/SendDocMitraAT.html', $data);
-        //print_r($client->body()); exit;
-        //$response = '{"JSONFile":{ "result":"00", "notif":"upload data sukses."}}';
         $document = $this->process_upload_file_response( $client->body() , $data , $uid , $step);
         return $document;
-        // if($document){
-        //     $this->do_sign_the_document($document_id);
-        // }
     }
     public function process_upload_file_response($response , $data , $uid ,$step){
         $res = json_decode($response , true);
@@ -399,8 +394,7 @@ class DigiSign {
             }
         }else{
             $this->upload_data_logs2($res , $data , $uid);
-        }
-        //$this->upload_data_logs2($response , $response , $uid);   
+        }  
         return true;
     }
     public function upload_data_logs($res , $data , $uid){

@@ -220,3 +220,8 @@ Route::get('/lender/dashboard', 'LenderController@dashboard')->name('lender.dash
 Route::get('agreement/lender','LenderController@aggreement_lender');
 Route::get('agreement/borrower','LenderController@aggreement_borrower');
 Route::get('/send-email','MasterController@send_email');
+
+Route::get('/error/page','MasterController@error_page')->name('error.page');
+
+
+
