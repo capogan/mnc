@@ -346,7 +346,7 @@
                                                                                 <p>Unggah Foto Diri *</p>
                                                                             </div>
                                                                         </div>
-                                                                        
+
                                                                         <div class="row mt-2">
                                                                             <div class="col">
                                                                                 <div class="upload-file">

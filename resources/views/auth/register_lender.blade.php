@@ -7,7 +7,7 @@
                 <div class="col-6 offset-3">
                     <div class="card border-0 pt-4 mt-5" style="border-radius: 15px; box-shadow: 4px 4px 20px rgb(224, 223, 223);">
                         <div class="col-12">
-                            <h4 class="card-title text-center">Buat Aku</h4>
+                            <h4 class="card-title text-center">Buat Akun</h4>
                             <p class="text-center">Silahkan Membuat Akun anda</p>
                         </div>
 

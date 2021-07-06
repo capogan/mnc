@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\LenderVerification;
 use App\LoanRequest;
+use App\RequestLoanDocument;
+use App\RequestLoanInstallments;
 use App\User;
 class DigiSign {
     const DUMMY_RESPONSE = '{"JSONFile":{"data":{"name":true,"birthplace":true,"birthdate":true,"address":"T***N W***A A**I B**K 1"},"result":"00","notif":"Pendaftaran berhasil, silahkan check email untuk aktivasi akun anda."}}';
@@ -162,6 +164,7 @@ class DigiSign {
             // $this->logs($body , $uid , 'registration');
         }
     }
+
     public function activation_account($email , $uid , $nik){
         $data = [
             'jsonfield' => json_encode([
@@ -179,7 +182,8 @@ class DigiSign {
         ->asMultipart()
         ->post('https://api.tandatanganku.com/gen/genACTPage.html', $data);
         //print_r($client->body()); exit;
-        $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
+        $link = $this->processResponseActivation($client->body(), $uid ,$email,$nik,'activation');
+        return $link;
 
     }
     public function processResponseActivation($body , $uid , $email , $nik, $event){
@@ -191,13 +195,15 @@ class DigiSign {
         switch($response['JSONFile']['result']){
             case '00' :
                 // update status of lender
-                //$this->activate_account('waiting activate' , $email , $uid, $nik,  $response['JSONFile']['link']);
+                    return ['status' => true , 'link' => $response['JSONFile']['link']];
                 break;
             case '55' :
+                return  ['status' => false , 'link' => ''];;
                 // SEND email to admin to check the token
                 break;
             default :
-                return;
+                return  ['status' => false , 'link' => ''];;
+                
             // $this->logs($body , $uid , 'registration');
         }
     }
@@ -298,7 +304,7 @@ class DigiSign {
     public function callback_activation($msg){
         if(!isset($msg)){
             $this->logs_internal('' , 'Digisign call callback url without encript message.');
-            return;
+            return ['status' => false , 'data' => []];
         }
         $data = $this->aes_128_ecb_decrypt($msg);
         $acc = json_decode($data , true);
@@ -306,6 +312,7 @@ class DigiSign {
             $u_acc = DigisignActivation::where('email' , $acc['email_user'])->first();
             if(!$u_acc){
                 $this->logs_internal($data , 'User with criteria not found after received callback from Digisign.');
+                return ['status' => false , 'data' => []];
             }
             $u_acc->status_activation = 'active';
             $u_acc->updated_at = date('Y-m-d H:i:s');
@@ -314,9 +321,11 @@ class DigiSign {
                 $this->logs($data,$u_acc->uid , 'activation');
                 $this->verified_lender('register' , false , $u_acc->uid);
             }else{
+                return ['status' => false , 'data' => $acc];
                 $this->logs_internal($acc , 'User with this criteria can/\'t. updated.');
             }
         }
+        return ['status' => true , 'data' => $acc];
     }
     public function aes_128_ecb_decrypt($msg){
         //$msg2='lyCQTnTnUio4pMyP4wB1PAzvNXHF6Dpd1I2dVVJWOsMylzR099wacLjoa%2ByHglI4FZtHUwSsQXEh%0AyDLuPArgMDJ%2FOlhjI8ghho1di9gxDAL%2FTl4Np8IxTZASE71nYafV';
@@ -485,15 +494,11 @@ class DigiSign {
     }
     public function sign_document_callback($msg){
         $response = $this->aes_128_ecb_decrypt($msg);
-        //$response = '{"document_id":"20210616_60c9eb367c05b_184","status_document":"complete","result":"00","email_user":"mario@yahoo.com","notif":"Sukses"}';
         $prc = $this->process_signers_callback($response , []);
-        if(!$prc){
-            return false;
-        }else{
-            return true;
-        }
+        return $prc;
     }
     public function process_signers_callback($response, $data){
+        $url = '';
         $res= json_decode($response , true);
         if(array_key_exists('result' , $res)){
             if($res['result'] == '00'){
@@ -513,16 +518,15 @@ class DigiSign {
                     $this->signers_logs($response, $res);
                     return false;
                 }
-
-                
                 if($res['status_document'] == 'complete'){
                     // if borrower sign
-                    $type = DigiSignDocument::select('request_loan_document.request_loan_id')
-                    ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
-                    ->where('digisign_document.document_id' , $res['document_id'])
-                    ->where('digisign_document.branch' , 'Borrower_Aggreement')->first();
+                    // $type = DigiSignDocument::select('request_loan_document.request_loan_id')
+                    // ->leftJoin('request_loan_document' ,'request_loan_document.document_id','=','digisign_document.document_id')
+                    // ->where('digisign_document.document_id' , $res['document_id'])->first();
+                    $type = RequestLoanDocument::select('request_loan_document.*','request_loan.invoice_number' )->leftJoin('request_loan' ,'request_loan.id' ,'=' ,'request_loan_document.request_loan_id')->where('document_id' , $res['document_id'])->first();
+                    //print_r($type);exit;
                     if($type){
-                        $this->update_request_loan_status($type->request_loan_id);
+                        $url = $this->update_request_loan_status($type);
                     }else{
                         DigiSignDocument::where('document_id' , $res['document_id'])->update(
                         [
@@ -542,13 +546,69 @@ class DigiSign {
             }
         }
         $this->signers_logs($response, $res);
-        return true;
+        return $url;
     }
 
-    public function update_request_loan_status($loan_id){
-        $loan = LoanRequest::where('id' , $loan_id)->first();
-        $loan->status = '28';
+    public function update_request_loan_status($loan){
+
+        if(trim($loan->type) === 'lender'){
+            $status = '29';
+            $url = '/lender/dashboard';
+        }else{
+            $status = '21';
+            $url = '/profile/loan/detail/'.$loan->invoice_number;
+            // Go to pinjaman aktif;
+           $this->create_cicilan($loan->request_loan_id);
+        }
+        $loan = LoanRequest::where('id' , $loan->request_loan_id)->first();
+        $loan->status = $status;
         $loan->save();
+        return $url;
+    }
+
+    public function create_cicilan($loan_id){
+        $id_loan = $loan_id;
+        $loan = LoanRequest::where('id',$id_loan)->first();
+        $periode = $loan->periode;
+        $loan_amount = $loan->loan_amount;
+        if($periode == '14')
+        {
+            $amount = $loan_amount / 2 ;
+            $x = 3;
+        }else{
+            $amount = $loan_amount / 4 ;
+            $x = 5;
+        }
+
+        for ($row = 1; $row < $x; $row++){
+            $startDate = time();
+            $due_date = "";
+            if($row == 1){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+7 day', $startDate));
+            }else if($row == 2){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+14 day', $startDate));
+            }else if($row == 3){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+21 day', $startDate));
+            }
+            else if($row == 4){
+                $due_date =   date('Y-m-d H:i:s', strtotime('+28 day', $startDate));
+            }
+            RequestLoanInstallments::create([
+                'id_request_loan'=>$id_loan,
+                'stages'=>$row,
+                'amount'=>$amount,
+                'due_date_payment'=>$due_date,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'id_status_payment'=>'1',
+
+            ]);
+            
+
+        }
+        $loan->disbursment_date = date('Y-m-d H:i:s');
+        $loan->save();
+
     }
 
     public function signers_logs($res , $data){

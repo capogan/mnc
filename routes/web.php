@@ -77,6 +77,8 @@ Route::post('/profile/received', 'BorrowerController@confirm')->name('personal.c
 Route::get('/profile/loan/installment/{invoice}', 'BorrowerController@congratulation')->name('personal.congratulation');
 Route::get('/profile/loan/detail/{invoice}', 'BorrowerController@loan_installments')->name('loan.detail');
 
+Route::get('/repayment', 'BorrowerController@repayment')->name('repayment.detail');
+Route::post('/repayment/request', 'BorrowerController@repayment_request')->name('repayment.request');
 //................................................................
 //................SSSSSS...............................SSSSSS.....
 //.UUUU...UUUU...SSSSSSSS...SEEEEEEEEEE.ERRRRRRRRR....SSSSSSSS....
@@ -130,7 +132,9 @@ Route::post('/lender/business/add', 'LenderController@information_business_add')
 Route::get('/lender/funding', 'LenderController@market_place')->name('profile.lender.information.market.place');
 Route::post('/lender/register/director', 'LenderController@submit_director_data')->name('profile.lender.information.market.place');
 Route::get('/lender/profiles', 'LenderController@profile')->name('profile.lender.information');
+
 Route::get('/profile/rdl', 'LenderController@rdl_account')->name('profile.lender.rdl.account');
+Route::get('/lender/business/rdl', 'LenderController@rdl_account_business')->name('profile.lender.rdl.account');
 
 Route::post('/lender/register/commisioner', 'LenderController@submit_commisioner_data')->name('profile.lender.commisioner');
 Route::post('/lender/submit/attachment/', 'LenderController@submit_attachment_data')->name('profile.lender.attachment');
@@ -152,6 +156,9 @@ Route::get('/sign/success' , 'LenderController@sign_success')->name('lender.sign
 Route::get('/lender/rdl/account/registered' , 'LenderController@register_rdl_account')->name('lender.sign.aggrement.success');
 Route::POST('/lender/update/rdl_account' , 'LenderController@update_rdl_account')->name('lender.update.rdl.account');
 
+Route::POST('/lender/update/rdl_account_business' , 'LenderController@update_rdl_account_business')->name('lender.update.rdl.account');
+
+
 // END RDL ACCOUNT
 
 Route::get('/profile/lender-individu', 'LenderIndividualController@index')->name('profile.lender.individu');
@@ -167,6 +174,8 @@ Route::post('/profile/lender-individu/document/sme', 'LenderIndividualController
 
 
 Route::post('/profile/lender-individu/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
+
+Route::post('/account/activate_account', 'LenderIndividualController@activation_account_digisign')->name('profile.lender.individu.activate.account');
 
 Route::get('/digisigngetdocument', 'LenderController@get_document_to_assign')->name('lender.document.get');
 
@@ -210,4 +219,4 @@ Route::get('/lender/dashboard', 'LenderController@dashboard')->name('lender.dash
 
 Route::get('agreement/lender','LenderController@aggreement_lender');
 Route::get('agreement/borrower','LenderController@aggreement_borrower');
-
+Route::get('/send-email','MasterController@send_email');

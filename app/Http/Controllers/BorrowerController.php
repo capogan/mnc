@@ -36,6 +36,7 @@ use App\TotalEmployee;
 use Illuminate\Support\Facades\Redirect;
 use App\RequestFunding;
 use App\RequestLoanDocument;
+use App\RequestLoanInstallmentsVa;
 use PDF;
 
 class BorrowerController extends Controller
@@ -235,9 +236,14 @@ class BorrowerController extends Controller
         $loans = LoanRequest::
             leftJoin('master_status_loan_request' ,'request_loan.status','=','master_status_loan_request.id')
             ->leftJoin('request_loan_document' ,'request_loan.id','=','request_loan_document.request_loan_id')
-            ->select('request_loan.*','master_status_loan_request.title as status_title','request_loan_document.document_id')
-            ->where('uid',$uid)->get();
-        
+            ->leftJoin('digisign_document','digisign_document.document_id' , 'request_loan_document.document_id')
+            ->select('request_loan.*','master_status_loan_request.title as status_title','digisign_document.uid as doc_uid')
+            ->where('request_loan.uid',$uid)
+            ->distinct('request_loan.id')
+            //->groupBy('')
+            //->where('digisign_document.uid',$uid)
+            ->get();
+        //print_r($loans->toArray());exit;
         $data = [
             'header_section' => 'step5',
             'page' => 'pages.borrower.information.finance_information',
@@ -361,8 +367,9 @@ class BorrowerController extends Controller
 
     public function sign(Request $request){
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
+        //print_r($loan->toArray());exit;
         if($loan){
-            if($loan->status != '19'){
+            if($loan->status != '27'){
                 return Redirect::to('/profile/transaction');
             }
             $status_activation = DigisignActivation::where('uid' , Auth::id())->first();
@@ -391,7 +398,7 @@ class BorrowerController extends Controller
         $loan_id = LoanRequest::leftJoin('request_loan_document' ,'request_loan.id' ,'request_loan_document.request_loan_id')
                                 ->where('request_loan.invoice_number' , $request->invoice)
                                 ->where('request_loan.uid' , Auth::id())
-                                ->where('request_loan.status' , '19')
+                                ->where('request_loan.status' , '27')
                                 ->first();
         $doc_ = RequestLoanDocument::where('request_loan_id' , $loan_id->request_loan_id)->where('status','active')->where('type' ,'borrower')->first();
         if(!$doc_){
@@ -421,7 +428,7 @@ class BorrowerController extends Controller
         $loan = LoanRequest::with('personal_info')
         ->with('business_info')
         ->with('scoring')
-        ->where('status' , '19')->where('id' , $loan_id)->first();
+        ->where('status' , '27')->where('id' , $loan_id)->first();
         if(!$loan){
             return false;
         }
@@ -460,7 +467,7 @@ class BorrowerController extends Controller
             [
                 'name' => 'PT Sistem Informasi Aplikasi Pembiayaan',
                 'email' => 'ogan@capioteknologi.co.id',
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'at',
                 'kuser' => 'GGqw3jVUeCXsnQC1',
                 'user' => 'ttd1',
                 'page' => '5',
@@ -473,7 +480,7 @@ class BorrowerController extends Controller
             [
                 'name' => $borrower->digisigndata->full_name,
                 'email' => $borrower->digisigndata->email,
-                'aksi_ttd' => 'ttd',
+                'aksi_ttd' => 'mt',
                 'kuser' => null,
                 'user' => 'ttd2',
                 'page' => '5',
@@ -580,18 +587,99 @@ class BorrowerController extends Controller
     public function loan_installments(Request $request){
 
         $loan = LoanRequest::where('invoice_number',$request->invoice)->first();
-        $loan_installments = LoanInstallment::
-        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')->
-        where('id_request_loan',$loan->id)->orderBy('stages','ASC')
+        $loan_installments = RequestLoanInstallments::
+        leftJoin('master_status_payment' ,'request_loan_installments.id_status_payment','=','master_status_payment.id')
+        ->where('id_request_loan',$loan->id)
+        ->select('request_loan_installments.*','master_status_payment.status_name')
+        ->orderBy('stages','ASC')
             ->get();
         $data = [
             'no_invoice'    => $request->invoice,
             'id_loan'       => $loan->id,
             'loan_installments'=>$loan_installments
         ];
+        
 
         return view('pages.borrower.loan',$this->merge_response($data, static::$CONFIG));
     }
+
+    public function repayment(Request $request){
+        
+        $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
+        ->where('request_loan_installments.id' , Utils::decrypt($request->installment))
+        ->where('request_loan.uid' , Auth::id())
+        ->select('request_loan_installments.*','request_loan.id as req_loan_id','request_loan.repayment','request_loan.invoice_number','request_loan.loan_period')
+        ->first();
+        //print_r($detail); exit;
+
+        $get_user = PersonalInfo::select('personal_info.*')
+                    ->where('personal_info.uid',Auth::id())->first();
+
+        
+        if(!$detail){
+            return abort('404' , 'data cicilan tidak ditemukan.');
+        }
+        $va = RequestLoanInstallmentsVa::where('status' , 'active')->where('id_installment' , $detail->id)->first();
+
+        $data = [
+            'repayment' => $detail,
+            'va' => $va,
+            'personal' => $get_user,
+            'installment' => $request->installment
+        ];
+        //print_r($data);exit;
+
+        return view('pages.borrower.repayment', $this->merge_response($data, static::$CONFIG));
+    }
+
+    public function repayment_request(Request $request){
+        $detail = RequestLoanInstallments::join('request_loan' , 'request_loan.id' ,'=','request_loan_installments.id_request_loan')
+        ->where('request_loan_installments.id' , Utils::decrypt($request->id))
+        ->where('request_loan.uid' , Auth::id())
+        ->select('request_loan_installments.*','request_loan.id as req_loan_id','request_loan.repayment','request_loan.invoice_number','request_loan.loan_period')
+        ->first();
+        if(!$detail){
+            return json_encode(['status'=> false, 'message'=> 'Pinjaman tidak ditemukan.']);
+        }
+        $if_exist = RequestLoanInstallmentsVa::where('id_installment' , $detail->id)->where('status' , 'active')->exists();
+
+        if($if_exist){
+            return json_encode(['status'=> false, 'message'=> 'Akun virtual masih dapat digunakan']);
+        }
+        $create_va = RequestLoanInstallmentsVa::create(
+            [
+                'id_installment' => $detail->id,
+                'status' => 'active',
+                'total_payment' => $detail->amount,
+                'va_number' => $this->generate_va(),
+                'created_at' => date('Y-m-d H:i:s')
+            ]
+        );
+        if(!$create_va){
+            return json_encode(['status'=> false, 'message'=> 'Error saat generate va.']);
+        }
+        return json_encode(['status'=> true, 'message'=> 'Berhasil']);
+        // ra
+
+    }
+    public function generate_va(){
+        $number = "";
+        for($i = 0; $i < 4; $i++){
+            $chr = rand(0,3);
+            $str = "";
+            for($j = 0; $j < 4; $j ++){
+                if($j == $chr) {
+                    $str .= mt_rand(0,9);
+                } else {
+                    $str .= rand(0,9);
+                }
+            }
+            $number .= (empty($number) ? $str : "".$str);
+        }
+
+        return $number;
+    }
+   
 
 
 

@@ -28,6 +28,35 @@ $(document).ready(function() {
 
         modal.modal("show");
     });
+
+    $(document).on('click' , '#create_rdl_account_business' , function(){
+        var modal = bootbox.dialog({
+            message: "Klik lanjutkan untuk melanjutkan proses pembuatan RDL.",
+            title: "Buat Akun RDL",
+            buttons: [
+                {
+                    label: "Cancel",
+                    className: "btn btn-default pull-left",
+                    callback: function() {
+                    }
+                },
+                {
+                    label: "Lanjutkan",
+                    className: "btn btn-primary pull-left",
+                    callback: function() {
+                        submit_rdl_account_business();
+                        //window.location.href = "/lender/rdl/account/registered";
+                    }
+                }
+            ],
+            show: false,
+            onEscape: function() {
+                modal.modal("hide");
+            }
+        });
+
+        modal.modal("show");
+    });
     
     $(document).on('click' , '#sign_agreement_' , function(){
         var token = $('meta[name="csrf-token"]').attr('content');
@@ -225,6 +254,37 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 alert_error();
                 close_loading();
+            }
+        })
+    });
+    $(document).on('click' , '#activate_account_dgsign' , function(){
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/account/activate_account',
+            method: "POST",
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            beforeSend: function () {  
+            },
+            success: function (response) {
+                console.log(response.status);
+                if(response.status == true){
+                    window.location.href = response.url;
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Gagal saat aktivasi akun',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+               
+            },
+            error: function (xhr, status, error) {
+               
             }
         })
     });
@@ -784,6 +844,37 @@ function submit_rdl_account(){
             'X-CSRF-TOKEN': token
         },
         url:'/lender/update/rdl_account',
+        type:"POST",
+        dataType:'json',
+        data: $('#form_additional_rdl').serialize(),
+        success:function(res){
+            if(res.status ==true){
+                window.location.href = "/lender/rdl/account/registered";
+            }
+            var text = '';
+            $.each(res.message, function( index, value ) {
+                text += '<p class="error"><i data-feather="x-square"></i> '+ value[0]+'</p>';
+            });
+            $(".result-message").addClass('alert alert-danger').html(text).fadeIn();
+            window.scrollTo(500, 0);
+            setTimeout(function() {
+                $(".result-message").fadeOut("slow");
+            }, 2000);
+        },
+        error: function(xhr, status, error) {
+            
+        }
+    })
+
+}
+
+function submit_rdl_account_business(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        url:'/lender/update/rdl_account_business',
         type:"POST",
         dataType:'json',
         data: $('#form_additional_rdl').serialize(),

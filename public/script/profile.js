@@ -36,6 +36,30 @@ $(document).ready(function() {
             }
         })
     });
+
+    $(document).on('click', '#repayment_request', function() {
+        var id = $(this).attr('chars');
+        var btn = $(this);
+        btn.attr("disabled", true);
+
+        Swal.fire({
+            title: 'Konfirmasi',
+            showDenyButton: true,
+            text :'Akun virtual yang muncul hanya berlaku 6 jam , Silahkan melakukan pembayaran secepatnya.',
+            confirmButtonText: `Lanjutkan`,
+            denyButtonText: `Batal`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                request_repayment(id);
+            } else if (result.isDenied) {
+                Swal.fire('Batal melakukan pembayaran', '', 'info')
+                btn.attr("disabled", false);
+
+            }
+        })
+    })
+
 });
 
 $(document).on('change', '.btn-file :file', function() {
@@ -337,6 +361,37 @@ $("#loan_period").bind(
 
 $(document).on('change' , 'input[type="file"]' , function(){
     readURL(this , $(this).attr('id'));
+});
+$(document).on('click' , '#activate_account_dgsign' , function(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url: '/account/activate_account',
+        method: "POST",
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        beforeSend: function () {  
+        },
+        success: function (response) {
+            console.log(response.status);
+            if(response.status == true){
+                window.location.href = response.url;
+            }else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Gagal saat aktivasi akun',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+           
+        },
+        error: function (xhr, status, error) {
+           
+        }
+    })
 });
 
 $(document).on('click' , '#request_file_assign' , function(){
@@ -760,6 +815,35 @@ function updated_status(id,number_status){
              close_loading();
          }
      })
+}
+
+function request_repayment(id){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    console.log(id);
+    $.ajax({
+        url:'/repayment/request',
+        method:"POST",
+        headers: {
+            'X-CSRF-TOKEN': token
+        },
+        dataType:'json',
+        data:{
+            id:id,
+        },
+        success:function(response)
+        {
+            console.log(response);
+            if(response.status === true){
+                window.location.reload();
+            }else{
+                Swal.fire(response.message, '', 'info')
+                $('#repayment_request').attr("disabled", false);
+            }
+           
+        },
+        error: function() {
+        }
+    })
 }
 
 

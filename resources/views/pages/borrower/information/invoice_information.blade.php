@@ -46,28 +46,38 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="row">
-                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                        <div class="bg-light pinside40 outline">
-                                                            <span>Total Pinjaman</span>
-                                                            <strong>
-                                                                <span class="pull-right" id="la_value">0</span></strong>
-                                                                <input type="text" data-slider="true" id="value_loan" value="30000" data-slider-range="100000,100000" data-slider-step="100000" data-slider-snap="true" id="la">
-                                                            <hr>
-                                                            <span>Peride Pinjaman<strong>
-                                                                <span class="pull-right"  id="loan_period_value">14</span> </strong>
-                                                            </span>
-                                                                <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
-                                                            <hr>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+{{--                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">--}}
+{{--                                                        <div class="bg-light pinside40 outline">--}}
+{{--                                                            <span>Total Pinjaman</span>--}}
+{{--                                                            <strong>--}}
+{{--                                                                <span class="pull-right" id="la_value">0</span></strong>--}}
+{{--                                                                <input type="text" data-slider="true" id="value_loan" value="30000" data-slider-range="100000,100000" data-slider-step="100000" data-slider-snap="true" id="la">--}}
+{{--                                                            <hr>--}}
+{{--                                                            <span>Peride Pinjaman<strong>--}}
+{{--                                                                <span class="pull-right"  id="loan_period_value">14</span> </strong>--}}
+{{--                                                            </span>--}}
+{{--                                                                <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">--}}
+{{--                                                            <hr>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                                         <div class="row">
+
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">
-                                                                   Nilai Pembayaran Pembelian</span>
+                                                                    Periode Pinjaman (hari)</span>
+                                                                    <span class="pull-right"  id="loan_period_value">14</span>
+                                                                    <input type="text" data-slider="true" value="14" data-slider-range="14,28" data-slider-step="14" data-slider-snap="true" id="loan_period">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <div class="bg-light pinside30 outline">
+                                                                    <span>Nilai Pembayaran Pembelian</span>
                                                                     <h4 class="pull-right load-load" id="invoice_loan_">0</h4>
                                                                 </div>
                                                             </div>
+
 
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                                 <div class="bg-light pinside30 outline">

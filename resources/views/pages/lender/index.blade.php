@@ -62,7 +62,7 @@
                                                         <div class="row mt-5">
                                                             <div class="col">
                                                                 <h6>Nama Perusahaan {{$lender_profile->lender_business}}<span>*</span></h6>
-                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : ''}}">
+                                                                <input type="text"  class="form-control" placeholder="Nama Perusahaan" id="name_of_bussiness" name="name_of_bussiness" value="{{isset($lender_profile->business_name) ? $lender_profile->business_name : $lender_profile->lender_name}}">
                                                             </div>
 
                                                             <div class="col">
@@ -166,7 +166,7 @@
                                                                 <input type="text"  class="form-control" placeholder="Akta perubahan terakhir & tanggal" id="akta_perubahan" name="akta_perubahan" value="{{isset($lender_profile->last_akta_perubahan) ? $lender_profile->last_akta_perubahan : ''}}">
                                                             </div>
                                                             <div class="col">
-                                                                <h6>Nomor pengesahaan KEMENKUMHAM AHU </h6>
+                                                                <h6>Nomor pengesahaan perubahan KEMENKUMHAM AHU </h6>
                                                                 <input type="text"  class="form-control" placeholder="Nomor pengesahaan KEMENKUMHAM AHU" id="letter_change_pengesahan_kemenkunham" name="letter_change_pengesahan_kemenkunham" value="{{isset($lender_profile->letter_change_pengesahan_kemenkunham) ? $lender_profile->letter_change_pengesahan_kemenkunham : ''}}">
                                                             </div>
                                                         </div>
@@ -252,7 +252,7 @@
                                                             </div>
 
                                                             <div class="col">
-                                                                <h6>Nomor Rekening Dana Lender<span>*</span></h6>
+                                                                <h6>Nomor Rekening Dana Lender</h6>
                                                                 <input type="text"  class="form-control" placeholder="Contoh : 126812912371" id="rek_dana_lender" name="rek_lender" value="{{isset($lender_profile->rdl_number) ? $lender_profile->rdl_number : ''}}">
                                                                 <label style="font-size:8pt;color: red;text-align: justify">Bila Anda belum memiliki akun RDL pada bank BNI, Anda dapat menghubungi layanan customer service kami atau Bank BNI cabang terdekat.</label>
                                                             </div>

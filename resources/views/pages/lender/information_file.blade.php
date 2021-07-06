@@ -89,6 +89,7 @@
                                                                 </div>
 
                                                             </div>
+
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
@@ -104,11 +105,16 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <h3>Akta Pendirian</h3>
+                                                        <hr>
+                                                        <div class="row">
 
                                                             <div class="col-xl-6">
+
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokumen TDP * (maks: 1 Mb)</h6>
+                                                                    <h6>Akta Pendirian * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="tdp" name="tdp" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
@@ -124,7 +130,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen kta Pendirian & Pengesahaan AHU * (maks: 1 Mb)</h6>
+                                                                    <h6> Pengesahaan AHU * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                     <input type="file" id="doc_kta" name="doc_kta" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
@@ -136,14 +142,17 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
-
+                                                        </div>
+                                                        <h3>Akta Perubahan</h3>
+                                                        <hr>
+                                                        <div class="row">
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Dokumen akta Perubahan Terakhir & Pengesahaan AHU (maks: 1 Mb)</h6>
+                                                                        <h6>Akta Perubahan Terakhir(maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
-                                                                    <input type="file" id="doc_last_ahu" name="doc_last_ahu" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
+                                                                        <input type="file" id="doc_last_ahu" name="doc_last_ahu" class="file" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;">
                                                                     </div>
                                                                     @if(isset($attachment))
                                                                         <div class="col-12">
@@ -156,10 +165,10 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen Struktur Organisasi Perusahaan (maks: 1 Mb)</h6>
+                                                                        <h6> Pengesahaan AHU (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
-                                                                    <input type="file" id="organizational_structure" name="organizational_structure" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;"  class="file">
+                                                                        <input type="file" id="organizational_structure" name="organizational_structure" style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;"  class="file">
                                                                     </div>
                                                                     @if(isset($attachment))
                                                                         <div class="col-12">
@@ -168,14 +177,18 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
-
+                                                        </div>
+                                                        <h3>Dokumen Laporan Keuangan</h3>
+                                                        <label>Satu Tahun Terakhir</label>
+                                                        <hr>
+                                                        <div class="row">
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Neraca (maks: 1 Mb)</h6>
+                                                                        <h6> Neraca (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
-                                                                    <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="balance_report" name="balance_report" class="file">
+                                                                        <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="balance_report" name="balance_report" class="file">
                                                                     </div>
                                                                     @if(isset($attachment))
                                                                         <div class="col-12">
@@ -184,14 +197,13 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6> Dokumen Laporan Arus Kas * (maks: 1 Mb)</h6>
+                                                                        <h6> Dokumen Laporan Arus Kas * (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
-                                                                    <input type="file" id="cash_flow" name="cash_flow" class="file"  style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
+                                                                        <input type="file" id="cash_flow" name="cash_flow" class="file"  style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" >
                                                                     </div>
 
                                                                     @if(isset($attachment))
@@ -205,7 +217,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form-group m-form__group row">
                                                                     <label for="example-text-input" class="col-12 col-form-label">
-                                                                    <h6>Laporan Laba Rugi* (maks: 1 Mb)</h6>
+                                                                        <h6>Laporan Laba Rugi* (maks: 1 Mb)</h6>
                                                                     </label>
                                                                     <div class="col-12">
                                                                         <input style="width: 100% !important;opacity: initial;    z-index: 9999;margin-left: 18px;" type="file" id="loss_profit" name="loss_profit" class="file">
@@ -217,8 +229,13 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
-
                                                         </div>
+
+
+
+
+
+
                                                         @if($editable == true)
                                                         <div class="form-group mt-5">
                                                             <button type="submit" data-text="Selesai" class="btn btn-primary btn-block"> Selesai </button>
