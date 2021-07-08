@@ -6,50 +6,53 @@ use App\Helpers\DigiSign as HelpersDigiSign;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\User;
 
 class BNITest  extends Controller
 {
-    public function register(){
+    public function register(Request $request){
+
+        $u = User::with('individuinfo')->where('id' , $request->id)->first();
         $data = [
-            "title" => "01",
-            "firstName" => "Richard",
-            "middleName" => "Juan",
-            "lastName" => "Simbolon",
+            "title" => $u->individuinfo->gender,
+            "firstName" => "",
+            "middleName" => "",
+            "lastName" =>$u->individuinfo->full_name,
             "optNPWP" => "1",
-            "NPWPNum" => "999999999988888",
+            "NPWPNum" => $u->individuinfo->no_npwp,
             "nationality" => "ID",
             "domicileCountry" => "ID",
-            "religion" => "2",
-            "birthPlace" => "Semarang",
-            "birthDate" => "26111980",
-            "gender" => "M",
-            "isMarried" => "L",
-            "motherMaidenName" => "R Harianja",
-            "jobCode" => "01",
-            "education" => "07",
-            "idNumber" => "312234766887878519",
-            "idIssuingCity" => "Jakarta Barat",
+            "religion" => $u->individuinfo->religion,
+            "birthPlace" => $u->individuinfo->pob,
+            "birthDate" => $u->individuinfo->dob,
+            "gender" => $u->individuinfo->gender,
+            "isMarried" => $u->individuinfo->married_status,
+            "motherMaidenName" => $u->individuinfo->mother_name,
+            "jobCode" => "99",
+            "education" => $u->individuinfo->education,
+            "idNumber" => $u->individuinfo->identity_number,
+            "idIssuingCity" => $u->individuinfo->cities->name,
             "idExpiryDate" => "26102099",
-            "addressStreet" => "Jalan Mawar Melati",
-            "addressRtRwPerum" => "003009Sentosa",
-            "addressKel" => "Cengkareng Barat",
-            "addressKec" => "Cengkareng/Jakarta Barat",
-            "zipCode" => "11730",
-            "homePhone1" => "021",
-            "homePhone2" => "745454545",
+            "addressStreet" => $u->individuinfo->full_address,
+            "addressRtRwPerum" => $u->individuinfo->rt.$u->individuinfo->rw.$u->individuinfo->perum,
+            "addressKel" => $u->individuinfo->districts->name,
+            "addressKec" => $u->individuinfo->villagess->name,
+            "zipCode" => $u->individuinfo->kodepos,
+            "homePhone1" => "",
+            "homePhone2" => "",
             "officePhone1" => "",
             "officePhone2" => "",
-            "mobilePhone1" => "0812",
-            "mobilePhone2" => "323232",
+            "mobilePhone1" => $u->phone_number_verified,
+            "mobilePhone2" => $u->phone_number_verified,
             "faxNum1" => "",
             "faxNum2" => "",
-            "email" => "richard@yahoo.com",
+            "email" => $u->email,
             "monthlyIncome" => "8000000",
             "branchOpening" => "0259"
         ];
         $bni = new BNI;
-        print_r($bni->request_sit($data));
+        $result = $bni->request($data , $request->id);
+       
     }
     public function register_account(){
         $data = [

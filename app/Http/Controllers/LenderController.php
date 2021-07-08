@@ -1312,7 +1312,7 @@ class LenderController extends Controller
         ];
         $bni = new BNI;
         $result = $bni->request("/p2pl/register/investor", $data, Auth::id());
-
+        
         if(!$result){
             $msg = [
                 'message' => 'Gagal meregistrasi akun RDL, Silahkan contact administrator'

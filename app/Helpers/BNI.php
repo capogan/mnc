@@ -294,15 +294,17 @@ class BNI
         return $result;
     }
     // REGISTER INVESTORS
-    public function request($endpoint, $data , $uid){
+    public function request($data , $uid){
         $body = $this->buildBody($data , true);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();
         }
-        $url = $this->BASE_URL . ":" . $this->HOST . $endpoint . "?access_token=" . $this->ACCESS_TOKEN;
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER . "?access_token=" . $this->ACCESS_TOKEN;
+        print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
+        print_r($response->body());
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
         return $result;
     }
