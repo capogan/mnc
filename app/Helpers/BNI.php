@@ -58,7 +58,7 @@ class BNI
             'grant_type' => 'client_credentials',
         ]);
         $res = json_decode($response->body(), true);
-        //print_r($res); exit;
+        print_r($res); exit;
         $this->ACCESS_TOKEN = $res['access_token'];
         $expiresIn = $res['expires_in'];
         $this->EXPIRES_AT =  date("Y-m-d H:i:s", strtotime("+$expiresIn seconds"));
