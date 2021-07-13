@@ -59,12 +59,9 @@ class BNITest  extends Controller
         $bni = new BNI;
         $bni->register_investor($request->id);
     }
-    public function inquiry_account_info(){
-        $data = [
-            "accountNumber" => "0115476117"
-        ];
+    public function inquiry_account_info(Request $request){
         $bni = new BNI;
-        print_r($bni->inquiry_account_info($data));
+        $bni->inquiry_account_info($request->id);
     }
     public function inquiry_balance(){
         $data = [

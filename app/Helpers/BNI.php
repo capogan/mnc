@@ -296,9 +296,9 @@ class BNI
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         
-        print_r($response->body());
-        echo '<br>';
-        print_r(json_encode($body));
+        // print_r($response->body());
+        // echo '<br>';
+        // print_r(json_encode($body));
 
         $result = $this->process_registered_account_number($response->body() , $uid, $u->cifnumber);
         return $result;
@@ -434,17 +434,26 @@ class BNI
     }
 
     // INQUIRY REQUEST
-    public function inquiry_account_info($data){
+    public function inquiry_account_info($uid){
+        $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'active')->first();
+        if(!$u){
+            $this->response_registered('User tidak ditemukan' , $uid);
+            return false;
+        }
+        $data = [
+            "accountNumber" =>$u->account_number
+        ];
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->INQUIRY_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
-        //print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         print_r($response->body());
+        echo '<br>';
+        print_r(json_encode($body));
     }
     // INQUIRY BALANCE
     public function inquiry_balance($data){
