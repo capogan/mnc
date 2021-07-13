@@ -55,11 +55,12 @@ class BNI
     private function login(){
         $url = "/api/oauth/token";
         $response = Http::asForm()->withHeaders([
-            'Authorization' => "Basic " . base64_encode($this->CLIENT_ID . ':' . $this->CLIENT_SECRET)
+            'Authorization' => "Basic " . base64_encode('3b2b44d6-3334-4b0d-bcd4-26b97d529900' . ':' . '1111e9e3-ca9b-4a96-b167-d1498b6e947e')
         ])->post($this->BASE_URL . ":" . $this->HOST . $url, [
             'grant_type' => 'client_credentials',
         ]);
         $res = json_decode($response->body(), true);
+        echo 'as';
         print_r($res); exit;
         $this->ACCESS_TOKEN = $res['access_token'];
         $expiresIn = $res['expires_in'];
