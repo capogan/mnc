@@ -271,7 +271,7 @@ class BNI
         return $jwt;
     }
 
-    public function register_investor($endpoint, $uid)
+    public function register_investor($uid)
     {
         $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'register')->first();
         if(!$u){
@@ -279,21 +279,27 @@ class BNI
             return false;
         }
         $data = [
-            "cifNumber" =>$u->cifnumber,
-            "accountType"=> "RDL",
-            "currency"=> "IDR",
-            "openAccountReason"=> "2",
-            "sourceOfFund"=> "1",
-            "branchId"=> "0259"
-        ]; 
+            "cifNumber" => '123456789',
+            "accountType" => "RDL",
+            "currency" => "USD",
+            "openAccountReason" => "2",
+            "sourceOfFund" => "1",
+            "branchId" => trim($u->branchopening)
+        ];
+        
         $body = $this->buildBody($data , false);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();
         }
-        $url = $this->BASE_URL . ":" . $this->HOST . $endpoint . "?access_token=" . $this->ACCESS_TOKEN;
+        $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
+        
+        print_r($response->body());
+        echo '<br>';
+        print_r(json_encode($body));
+
         $result = $this->process_registered_account_number($response->body() , $uid, $u->cifnumber);
         return $result;
     }
@@ -332,16 +338,7 @@ class BNI
     }
 
     public function request_account_sit($data){
-        echo '{
-            "response": {
-              "responseCode": "0001",
-              "responseMessage": "Request has been processed successfully",
-              "responseTimestamp": "2021-07-13 13:10:59.903",
-              "responseUuid": "8O43580K84Y974L6",
-              "journalNum": "260744",
-              "accountNumber": "1000079198"
-            }
-          }';exit;
+        
         $body = $this->buildBodyPayload($data , true);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();

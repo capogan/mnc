@@ -56,22 +56,8 @@ class BNITest  extends Controller
        
     }
     public function register_account(Request $request){
-        $user = LenderRDLAccountRegistered::where('uid' , $request->id)->where('status' , 'register')->first();
-        //print_r($user); exit;
-        if(!$user){
-            return 'User not found;';
-        }
-        $data = [
-            "cifNumber" => trim($user->cifnumber),
-            "accountType" => "RDL",
-            "currency" => "USD",
-            "openAccountReason" => "2",
-            "sourceOfFund" => "1",
-            "branchId" => trim($user->branchopening)
-        ];
-       // print_r($data); exit;
         $bni = new BNI;
-        $bni->request_account_sit($data);
+        $bni->register_investor($request->id);
     }
     public function inquiry_account_info(){
         $data = [
