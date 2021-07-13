@@ -56,6 +56,7 @@ class BNITest  extends Controller
        
     }
     public function register_account(Request $request){
+        echo '{"response":{"responseCode":"0001","responseMessage":"Request has been processed successfully","responseTimestamp":"2021-07-13 12:40:49.835","responseUuid":"S586E24688Y7530N","journalNum":"260625","accountNumber":"1000079187"}}'; exit;
         $user = LenderRDLAccountRegistered::where('uid' , $request->id)->where('status' , 'register')->first();
         //print_r($user); exit;
         if(!$user){
@@ -71,7 +72,7 @@ class BNITest  extends Controller
         ];
        // print_r($data); exit;
         $bni = new BNI;
-        print_r($bni->request_account_sit($data));
+        $bni->request_account_sit($data);
     }
     public function inquiry_account_info(){
         $data = [
