@@ -59,6 +59,7 @@ class BNI
         ])->post($this->BASE_URL . ":" . $this->HOST . $url, [
             'grant_type' => 'client_credentials',
         ]);
+        print_r($response->body()); exit;
         $res = json_decode($response->body(), true);
         print_r($res); exit;
         $this->ACCESS_TOKEN = $res['access_token'];
