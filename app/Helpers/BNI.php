@@ -59,9 +59,7 @@ class BNI
         ])->post($this->BASE_URL . ":" . $this->HOST . $url, [
             'grant_type' => 'client_credentials',
         ]);
-        print_r($response->body()); exit;
         $res = json_decode($response->body(), true);
-        print_r($res); exit;
         $this->ACCESS_TOKEN = $res['access_token'];
         $expiresIn = $res['expires_in'];
         $this->EXPIRES_AT =  date("Y-m-d H:i:s", strtotime("+$expiresIn seconds"));
@@ -304,7 +302,7 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER . "?access_token=" . $this->ACCESS_TOKEN;
-        //print_r(json_encode($body));exit;
+        print_r(json_encode($body));exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
