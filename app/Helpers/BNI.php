@@ -112,7 +112,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => "FAD9D7E0FEBF11E9"
+            "requestUuid" => $this->requestUUID()
         ];
         $data["header"] = $header;
         $request["request"] = $data;
@@ -337,11 +337,13 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER_ACCOUNT . "?access_token=" . $this->ACCESS_TOKEN;
-        //print_r(json_encode($body));exit;
+        print_r(json_encode($body));
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
        print_r($response->body());
+       echo '<br>';
+       print_r(json_encode($body));
        
     }
 

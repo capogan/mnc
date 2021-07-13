@@ -6,6 +6,7 @@ use App\Helpers\DigiSign as HelpersDigiSign;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\LenderRDLAccountRegistered;
 use App\User;
 
 class BNITest  extends Controller
@@ -54,14 +55,19 @@ class BNITest  extends Controller
         $result = $bni->request($data , $request->id);
        
     }
-    public function register_account(){
+    public function register_account(Request $request){
+        $user = LenderRDLAccountRegistered::where('uid' , $request->id)->where('status' , 'register')->first();
+        //print_r($user); exit;
+        if(!$user){
+            return 'User not found;';
+        }
         $data = [
-            "cifNumber" => "9100749959",
+            "cifNumber" => $user->cifnumber,
             "accountType" => "RDL",
-            "currency" => "AUD",
+            "currency" => "IDR",
             "openAccountReason" => "2",
             "sourceOfFund" => "1",
-            "branchId" => "0259"
+            "branchId" => $user->branchopening
         ];
         $bni = new BNI;
         print_r($bni->request_account_sit($data));
