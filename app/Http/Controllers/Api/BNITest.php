@@ -62,13 +62,14 @@ class BNITest  extends Controller
             return 'User not found;';
         }
         $data = [
-            "cifNumber" => $user->cifnumber,
+            "cifNumber" => trim($user->cifnumber),
             "accountType" => "RDL",
             "currency" => "IDR",
             "openAccountReason" => "2",
             "sourceOfFund" => "1",
-            "branchId" => $user->branchopening
+            "branchId" => trim($user->branchopening)
         ];
+       // print_r($data); exit;
         $bni = new BNI;
         print_r($bni->request_account_sit($data));
     }
