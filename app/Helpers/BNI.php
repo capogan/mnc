@@ -279,9 +279,9 @@ class BNI
             return false;
         }
         $data = [
-            "cifNumber" => '123456789',
+            "cifNumber" => trim($u->cifnumber),
             "accountType" => "RDL",
-            "currency" => "USD",
+            "currency" => "AUD",
             "openAccountReason" => "2",
             "sourceOfFund" => "1",
             "branchId" => trim($u->branchopening)
