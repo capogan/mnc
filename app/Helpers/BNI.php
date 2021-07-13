@@ -304,13 +304,17 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->REGISTER . "?access_token=" . $this->ACCESS_TOKEN;
-        //print_r(json_encode($body));exit;
+        
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         print_r($response->body());
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
+        echo '<br>';
+        print_r(json_encode($body));
         return $result;
+
+        
     }
     // JUST FOR TEST
     public function request_sit($data){
