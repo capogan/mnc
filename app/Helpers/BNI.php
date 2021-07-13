@@ -332,6 +332,16 @@ class BNI
     }
 
     public function request_account_sit($data){
+        echo '{
+            "response": {
+              "responseCode": "0001",
+              "responseMessage": "Request has been processed successfully",
+              "responseTimestamp": "2021-07-13 13:10:59.903",
+              "responseUuid": "8O43580K84Y974L6",
+              "journalNum": "260744",
+              "accountNumber": "1000079198"
+            }
+          }';exit;
         $body = $this->buildBodyPayload($data , true);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();
