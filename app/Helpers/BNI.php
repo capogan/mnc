@@ -13,7 +13,7 @@ class BNI
 
     private $BASE_URL = "https://apidev.bni.co.id";
     private $HOST = "8065";
-    private $API_KEY = "7dcadd68-6bbb-462e-a28e-f06c9bd7c231";
+    private $API_KEY = "3b2b44d6-3334-4b0d-bcd4-26b97d529900";
 
     private $CLIENT_ID = "168a4545-f1a0-4bda-a6b1-7dce0556ef31";
     private $CLIENT_SECRET = "a867d3ec-29e7-4e5c-9d40-4c21b55645db";
