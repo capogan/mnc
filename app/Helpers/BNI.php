@@ -310,7 +310,7 @@ class BNI
         ])->post($url, $body);
         print_r($response->body());
         $result = $this->process_register_account($response->body() , $uid , $body['request']);
-        
+        echo '<br>';
         print_r(json_encode($body));
         return $result;
 
