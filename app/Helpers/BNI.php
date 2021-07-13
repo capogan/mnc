@@ -14,6 +14,8 @@ class BNI
     private $BASE_URL = "https://apidev.bni.co.id";
     private $HOST = "8065";
     private $API_KEY = "3b2b44d6-3334-4b0d-bcd4-26b97d529900";
+    private $API_KEY_SECRET = "1111e9e3-ca9b-4a96-b167-d1498b6e947e";
+    
 
     private $CLIENT_ID = "168a4545-f1a0-4bda-a6b1-7dce0556ef31";
     private $CLIENT_SECRET = "a867d3ec-29e7-4e5c-9d40-4c21b55645db";
@@ -255,7 +257,7 @@ class BNI
         $signature = hash_hmac(
             'sha256',
             $base64UrlHeader . "." . $base64UrlPayload,
-            $this->API_KEY,
+            $this->API_KEY_SECRET,
             true
         );
         // Encode Signature to Base64Url String
