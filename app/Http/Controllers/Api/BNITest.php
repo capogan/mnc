@@ -56,7 +56,6 @@ class BNITest  extends Controller
        
     }
     public function register_account(Request $request){
-        echo '{"response":{"responseCode":"0001","responseMessage":"Request has been processed successfully","responseTimestamp":"2021-07-13 12:40:49.835","responseUuid":"S586E24688Y7530N","journalNum":"260625","accountNumber":"1000079187"}}'; exit;
         $user = LenderRDLAccountRegistered::where('uid' , $request->id)->where('status' , 'register')->first();
         //print_r($user); exit;
         if(!$user){
@@ -65,7 +64,7 @@ class BNITest  extends Controller
         $data = [
             "cifNumber" => trim($user->cifnumber),
             "accountType" => "RDL",
-            "currency" => "IDR",
+            "currency" => "USD",
             "openAccountReason" => "2",
             "sourceOfFund" => "1",
             "branchId" => trim($user->branchopening)
