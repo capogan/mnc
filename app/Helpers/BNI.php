@@ -512,7 +512,7 @@ class BNI
             "accountNumber" => "315591246",
             "beneficiaryAccountNumber"=>$u->account_number,
             "currency"=>"USD",
-            "amount"=>"1000",
+            "amount"=>"100",
             "remark"=>"Test P2PL"
         ];
 
