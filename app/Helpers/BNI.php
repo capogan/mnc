@@ -463,7 +463,7 @@ class BNI
             return false;
         }
         $data = [
-            "accountNumber" => $u->account_number
+            "accountNumber" => '8450000000000006'
         ];
 
         $body = $this->buildBodyPayload($data);
