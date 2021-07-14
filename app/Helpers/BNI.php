@@ -555,6 +555,8 @@ class BNI
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         print_r($response->body());
+        echo '<br>';
+        print_r(json_encode($body));
     }
     // PAYMENT USING RTGS
     public function payment_rtgs($data){

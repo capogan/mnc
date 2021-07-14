@@ -112,6 +112,7 @@ class BNITest  extends Controller
             "beneficiaryAddress1"=>"Jakarta",
             "beneficiaryAddress2"=>"",
             "beneficiaryBankCode"=>"20307",
+            "beneficiaryName"=>"Panji Samudra",
             "currency"=>"IDR",
             "amount"=>"5000000000",
             "remark"=>"Test kliring",
