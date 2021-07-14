@@ -512,7 +512,7 @@ class BNI
             "accountNumber" =>'8450000000000006',
             "beneficiaryAccountNumber"=>'0316029783',
             "currency"=>"IDR",
-            "amount"=>"10",
+            "amount"=>"1000",
             "remark"=>"Test P2PL"
         ];
 
