@@ -510,7 +510,7 @@ class BNI
         
         $data = [
             "accountNumber" =>'0317246673',
-            "beneficiaryAccountNumber"=> '8450000000000006',
+            "beneficiaryAccountNumber"=> '9880045044352004',
             "currency"=>"IDR",
             "amount"=>"1000",
             "remark"=>"Test P2PL"
