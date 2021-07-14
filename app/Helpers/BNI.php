@@ -486,7 +486,7 @@ class BNI
             return false;
         }
         $data = [
-            "accountNumber" => '0317246677'
+            "accountNumber" => '0315617904'
         ];
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {
