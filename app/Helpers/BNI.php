@@ -536,7 +536,6 @@ class BNI
             $this->login();
         }
         $url = $this->BASE_URL . ":" . $this->HOST . $this->PAYMENT_STATUS . "?access_token=" . $this->ACCESS_TOKEN;
-        print_r(json_encode($body)); exit;
         $response = Http::withHeaders([
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
