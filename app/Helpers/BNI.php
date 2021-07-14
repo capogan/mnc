@@ -486,7 +486,7 @@ class BNI
             return false;
         }
         $data = [
-            "accountNumber" => '0315617904'
+            "accountNumber" => $u->account_number
         ];
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {
@@ -501,7 +501,21 @@ class BNI
         print_r(json_encode($body));
     }
     // TRANSFER 
-    public function transfer($data){
+    public function transfer($uid){
+        $u  = LenderRDLAccountRegistered::where('uid' , $uid)->where('status' , 'active')->first();
+        if(!$u){
+            $this->response_registered('User tidak ditemukan' , $uid);
+            return false;
+        }
+        
+        $data = [
+            "accountNumber" => $u->account_number,
+            "beneficiaryAccountNumber"=>"0316029783",
+            "currency"=>"IDR",
+            "amount"=>"11500",
+            "remark"=>"Test P2PL"
+        ];
+
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {
             $this->login();

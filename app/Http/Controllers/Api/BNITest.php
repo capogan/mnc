@@ -74,16 +74,10 @@ class BNITest  extends Controller
         $bni->account_history($request->id);
     }
 
-    public function transfer(){
-        $data = [
-            "accountNumber" => "0317448636",
-            "beneficiaryAccountNumber"=>"0316029783",
-            "currency"=>"IDR",
-            "amount"=>"11500",
-            "remark"=>"Test P2PL"
-        ];
+    public function transfer(Request $request){
+        
         $bni = new BNI;
-        print_r($bni->transfer($data));
+        $bni->transfer($request->id);
     }
 
     public function payment_status(){
