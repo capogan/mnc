@@ -509,7 +509,7 @@ class BNI
         }
         
         $data = [
-            "accountNumber" =>'8150000000000111',
+            "accountNumber" =>'0317116246',
             "beneficiaryAccountNumber"=> '0316029783',
             "currency"=>"IDR",
             "amount"=>"1000",
