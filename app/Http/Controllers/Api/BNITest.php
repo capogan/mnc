@@ -107,19 +107,18 @@ class BNITest  extends Controller
 
     public function payment_clearing(){
         $data = [
-            "accountNumber" => "0116724773",
+            "accountNumber" => "1000079187",
             "beneficiaryAccountNumber" => "123456",
             "beneficiaryAddress1"=>"Jakarta",
             "beneficiaryAddress2"=>"",
-            "beneficiaryBankCode"=>"140397",
-            "beneficiaryName"=>"Panji Samudra",
+            "beneficiaryBankCode"=>"20307",
             "currency"=>"IDR",
             "amount"=>"5000000000",
             "remark"=>"Test kliring",
             "chargingType"=>"OUR"
         ];
         $bni = new BNI;
-        print_r($bni->payment_clearing($data));
+        $bni->payment_clearing($data);
     }
 
     public function inquiry_interbank(){
