@@ -68,12 +68,10 @@ class BNITest  extends Controller
         $bni = new BNI;
         $bni->inquiry_balance($request->id);
     }
-    public function account_history(){
-        $data = [
-            "accountNumber" => "0315617904"
-        ];
+    public function account_history(Request $request){
+        
         $bni = new BNI;
-        print_r($bni->account_history($data));
+        $bni->account_history($request->id);
     }
 
     public function transfer(){
