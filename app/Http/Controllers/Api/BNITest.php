@@ -151,7 +151,7 @@ class BNITest  extends Controller
             "beneficiaryAccountName"=>"Bpk HANS",
             "beneficiaryBankCode"=>"542",
             "beneficiaryBankName"=>"PT. BANK ARTOS INDONESIA",
-            "amount"=>"15000"
+            "amount"=>"150000"
         ];
         $bni = new BNI;
         $bni->payment_interbank($data);
