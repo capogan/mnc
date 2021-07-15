@@ -82,7 +82,7 @@ class BNITest  extends Controller
 
     public function payment_status(){
         $data = [
-            "requestedUuid"=>"5D726Y9631L50M57"
+            "requestedUuid"=>"0U98374FN5232W98"
         ];
         $bni = new BNI;
         $bni->payment_status($data);
