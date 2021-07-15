@@ -136,8 +136,8 @@ class BNITest  extends Controller
 
     public function inquiry_interbank(){
         $data = [
-            "accountNumber" => "0116724773",
-            "beneficiaryBankCode" => "002",
+            "accountNumber" => "0315617904",
+            "beneficiaryBankCode" => "542",
             "beneficiaryAccountNumber" => "11223344"
         ];
         $bni = new BNI;
@@ -146,10 +146,10 @@ class BNITest  extends Controller
 
     public function payment_interbank(){
         $data = [
-            "accountNumber" => "0116724773",
+            "accountNumber" => "0315617904",
             "beneficiaryAccountNumber"=>"0011223344",
             "beneficiaryAccountName"=>"TUMPAL YAN RAYMOND TEST",
-            "beneficiaryBankCode"=>"002",
+            "beneficiaryBankCode"=>"542",
             "beneficiaryBankName"=>"BCA",
             "amount"=>"150000"
         ];
