@@ -107,7 +107,7 @@ class BNITest  extends Controller
 
     public function payment_clearing(){
         $data = [
-            "accountNumber" => "0315617904",
+            "accountNumber" => "0317246677",
             "beneficiaryAccountNumber" => "123456",
             "beneficiaryAddress1"=>"Jakarta",
             "beneficiaryAddress2"=>"",
