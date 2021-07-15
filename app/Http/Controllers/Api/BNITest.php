@@ -102,7 +102,7 @@ class BNITest  extends Controller
         //     "chargingType" =>"BEN"
         // ];
         $data = [
-            "accountNumber" => "0317116246",
+            "accountNumber" => "1000079187",
             "beneficiaryAccountNumber"=>"987654321",
             "beneficiaryBankCode" => "BRINIDJA",
             "beneficiaryAddress1"=>"Jakarta",
