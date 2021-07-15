@@ -137,24 +137,24 @@ class BNITest  extends Controller
     public function inquiry_interbank(){
         $data = [
             "accountNumber" => "0115476117",
-            "beneficiaryBankCode" => "002",
-            "beneficiaryAccountNumber" => "00200000"
+            "beneficiaryBankCode" => "542",
+            "beneficiaryAccountNumber" => "11223344"
         ];
         $bni = new BNI;
-        print_r($bni->inquiry_interbank($data));
+        $bni->inquiry_interbank($data);
     }
 
     public function payment_interbank(){
         $data = [
-            "accountNumber" => "0115476117",
-            "beneficiaryAccountNumber"=>"00200000",
+            "accountNumber" => "1000079187",
+            "beneficiaryAccountNumber"=>"11223344",
             "beneficiaryAccountName"=>"Bpk HANS",
-            "beneficiaryBankCode"=>"002",
-            "beneficiaryBankName"=>"BANK BCA",
+            "beneficiaryBankCode"=>"542",
+            "beneficiaryBankName"=>"PT. BANK ARTOS INDONESIA",
             "amount"=>"15000"
         ];
         $bni = new BNI;
-        print_r($bni->payment_interbank($data));
+        $bni->payment_interbank($data);
     }
 
     public function login(){
