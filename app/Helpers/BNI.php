@@ -112,7 +112,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => '5D726Y9631L50M57'
+            "requestUuid" => $this->requestUUID()
         ];
         $data["header"] = $header;
         $request["request"] = $data;
@@ -570,6 +570,8 @@ class BNI
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         print_r($response->body());
+        echo '<br>';
+        print_r(json_encode($body));
     }
     // INQUIRY INTERNATIONAL BANK
     public function inquiry_interbank($data){

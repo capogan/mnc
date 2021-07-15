@@ -90,19 +90,16 @@ class BNITest  extends Controller
 
     public function payment_rtgs(){
         $data = [
-            "accountNumber" => "0116724773",
-            "beneficiaryAccountNumber"=>"123456",
-            "beneficiaryAddress1"=>"Jakarta",
-            "beneficiaryAddress2"=>"",
-            "beneficiaryBankCode" => "CENAIDJA",
-            "beneficiaryName" =>"Panji Samudra",
+            "accountNumber" => "1000079187",
+            "beneficiaryAccountNumber"=>"987654321",
+            "beneficiaryBankCode" => "BRINIDJA",
             "currency" => "IDR",
-            "amount" => "500000",
+            "amount" => "110000000",
             "remark" => "Test rtgs",
-            "chargingType" =>"OUR"
+            "chargingType" =>"BEN"
         ];
         $bni = new BNI;
-        print_r($bni->payment_rtgs($data));
+        $bni->payment_rtgs($data);
     }
 
     public function payment_clearing(){
