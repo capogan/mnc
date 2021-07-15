@@ -89,10 +89,25 @@ class BNITest  extends Controller
     }
 
     public function payment_rtgs(){
+        // $data = [
+        //     "accountNumber" => "0116724773",
+        //     "beneficiaryAccountNumber"=>"987654321",
+        //     "beneficiaryAddress1"=>"Jakarta",
+        //     "beneficiaryAddress2"=>"",
+        //     "beneficiaryBankCode" => "BRINIDJA",
+        //     "beneficiaryName" =>"Panji Samudra",
+        //     "currency" => "IDR",
+        //     "amount" => "500000",
+        //     "remark" => "Test rtgs",
+        //     "chargingType" =>"BEN"
+        // ];
         $data = [
             "accountNumber" => "1000079187",
             "beneficiaryAccountNumber"=>"987654321",
             "beneficiaryBankCode" => "BRINIDJA",
+            "beneficiaryAddress1"=>"Jakarta",
+            "beneficiaryAddress2"=>"",
+            "beneficiaryName" =>"Panji Samudra",
             "currency" => "IDR",
             "amount" => "110000000",
             "remark" => "Test rtgs",
@@ -100,6 +115,8 @@ class BNITest  extends Controller
         ];
         $bni = new BNI;
         $bni->payment_rtgs($data);
+        $bni = new BNI;
+        print_r($bni->payment_rtgs($data));
     }
 
     public function payment_clearing(){
