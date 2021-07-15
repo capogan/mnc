@@ -114,7 +114,7 @@ class BNITest  extends Controller
             "beneficiaryBankCode"=>"20307",
             "beneficiaryName"=>"Panji Samudra",
             "currency"=>"IDR",
-            "amount"=>"500000000",
+            "amount"=>"50000000",
             "remark"=>"Test kliring",
             "chargingType"=>"OUR"
         ];
