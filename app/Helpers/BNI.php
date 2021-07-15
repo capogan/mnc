@@ -573,7 +573,7 @@ class BNI
         echo '<br>';
         print_r(json_encode($body));
     }
-    // INQUIRY INTERNATIONAL BANK
+    // INQUIRY INTERBANK
     public function inquiry_interbank($data){
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {

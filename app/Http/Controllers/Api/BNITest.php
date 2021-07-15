@@ -137,7 +137,7 @@ class BNITest  extends Controller
     public function inquiry_interbank(){
         $data = [
             "accountNumber" => "1000079187",
-            "beneficiaryBankCode" => "014",
+            "beneficiaryBankCode" => "542",
             "beneficiaryAccountNumber" => "11223344"
         ];
         $bni = new BNI;
