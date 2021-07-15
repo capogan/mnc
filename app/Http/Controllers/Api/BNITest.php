@@ -146,11 +146,11 @@ class BNITest  extends Controller
 
     public function payment_interbank(){
         $data = [
-            "accountNumber" => "1000079187",
+            "accountNumber" => "0116724773",
             "beneficiaryAccountNumber"=>"0011223344",
             "beneficiaryAccountName"=>"SARI ANGGRAINI",
-            "beneficiaryBankCode"=>"542",
-            "beneficiaryBankName"=>"BANK JAGO",
+            "beneficiaryBankCode"=>"002",
+            "beneficiaryBankName"=>"BANK BRI",
             "amount"=>"150000"
         ];
         $bni = new BNI;
