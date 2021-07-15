@@ -112,7 +112,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => $this->requestUUID()
+            "requestUuid" => '55T22K977F80F647'
         ];
         $data["header"] = $header;
         $request["request"] = $data;
