@@ -148,9 +148,9 @@ class BNITest  extends Controller
         $data = [
             "accountNumber" => "0116724773",
             "beneficiaryAccountNumber"=>"0011223344",
-            "beneficiaryAccountName"=>"SARI ANGGRAINI",
+            "beneficiaryAccountName"=>"TUMPAL YAN RAYMOND TEST",
             "beneficiaryBankCode"=>"002",
-            "beneficiaryBankName"=>"BANK BRI",
+            "beneficiaryBankName"=>"BCA",
             "amount"=>"150000"
         ];
         $bni = new BNI;
