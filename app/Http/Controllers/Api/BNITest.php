@@ -102,7 +102,7 @@ class BNITest  extends Controller
         //     "chargingType" =>"BEN"
         // ];
         $data = [
-            "accountNumber" => "0317246677",
+            "accountNumber" => "1000031361",
             "beneficiaryAccountNumber"=>"987654321",
             "beneficiaryBankCode" => "BRINIDJA",
             "beneficiaryAddress1"=>"Jakarta",
@@ -115,8 +115,6 @@ class BNITest  extends Controller
         ];
         $bni = new BNI;
         $bni->payment_rtgs($data);
-        $bni = new BNI;
-        print_r($bni->payment_rtgs($data));
     }
 
     public function payment_clearing(){
