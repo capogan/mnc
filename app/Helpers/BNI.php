@@ -441,7 +441,7 @@ class BNI
             return false;
         }
         $data = [
-            "accountNumber" =>'7000100000000011'
+            "accountNumber" =>$u->account_number
         ];
         $body = $this->buildBodyPayload($data);
         if (time() >= strtotime($this->EXPIRES_AT)) {
@@ -509,10 +509,10 @@ class BNI
         }
         
         $data = [
-            "accountNumber" => $u->account_number,
-            "beneficiaryAccountNumber"=> '315591246',
-            "currency"=>"USD",
-            "amount"=>"100",
+            "accountNumber" => '1000031361',
+            "beneficiaryAccountNumber"=> '0316029783',
+            "currency"=>"IDR",
+            "amount"=>"100000",
             "remark"=>"Test P2PL"
         ];
 
