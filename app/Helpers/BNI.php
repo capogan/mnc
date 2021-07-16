@@ -112,7 +112,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => $this->requestUUID()
+            "requestUuid" => '362A90R28T5227M8'
         ];
         $data["header"] = $header;
         $request["request"] = $data;
@@ -509,7 +509,7 @@ class BNI
         }
         
         $data = [
-            "accountNumber" => '0315617904',
+            "accountNumber" => $u->account_number,
             "beneficiaryAccountNumber"=> '0316029783',
             "currency"=>"IDR",
             "amount"=>"100000",
