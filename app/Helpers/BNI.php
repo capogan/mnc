@@ -112,7 +112,7 @@ class BNI
         $header = [
             'companyId' => $this->COMPANY_ID,
             "parentCompanyId" => "",
-            "requestUuid" => 'BBTS90S09G5227M8'
+            "requestUuid" => '25LM90S09G5227M8'
         ];
         $data["header"] = $header;
         $request["request"] = $data;
@@ -526,6 +526,7 @@ class BNI
             'X-API-Key' => $this->API_KEY
         ])->post($url, $body);
         print_r($response->body());
+        echo '<br>';
         print_r(json_encode($body));
     }
     // CHECK PAYMENT STATUS
