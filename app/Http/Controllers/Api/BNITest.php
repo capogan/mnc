@@ -78,6 +78,7 @@ class BNITest  extends Controller
         
         $bni = new BNI;
         $bni->transfer($request->id);
+        $bni->transfer($request->id);
     }
 
     public function payment_status(){
